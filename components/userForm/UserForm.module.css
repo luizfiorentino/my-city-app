@@ -1,5 +1,9 @@
 .main {
   margin: auto;
   width: 375px;
+  height: 100vh;
   border: 1px solid red;
+
+  background-image: url("../../pages/assets//images/bg-sidebar-mobile.svg");
+  background-repeat: no-repeat;
 }
