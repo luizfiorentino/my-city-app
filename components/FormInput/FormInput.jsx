@@ -3,9 +3,9 @@ import styles from "./FormInput.module.css";
 
 export default function FormInput(props) {
   return (
-    <div>
+    <div className={styles.main}>
       <label>{props.label}</label>
-      <input placeholder={props.placeHolder} />
+      <input className={styles.placeholder} placeholder={props.placeHolder} />
     </div>
   );
 }
