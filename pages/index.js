@@ -11,6 +11,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ data }) {
   console.log("data:", data);
+
+  const issues = data.issues.map((issue) => issue.description);
+  console.log("issues", issues);
   return (
     <>
       <Head>
@@ -22,7 +25,7 @@ export default function Home({ data }) {
       <main>
         <h1>My city app</h1>
 
-        <UserForm />
+        <UserForm issues={issues} />
       </main>
     </>
   );

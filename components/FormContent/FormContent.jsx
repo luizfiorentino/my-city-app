@@ -12,20 +12,6 @@ export default function FormContent() {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
 
-  //console.log("form", userName, description, location);
-
-  // const setInfos = (e) => {
-  //   setUserName
-  // }
-
-  //   const handleSubmit = (event) => {
-  //     // prevents the submit button from refreshing the page
-  //     event.preventDefault();
-  //     console.log(contactInfo);
-  //   };
-
-  // <form onSubmit={handleSubmit}>
-
   const issueRequest = async (req, res) => {
     try {
       const newIssue = await axios.post(`http://localhost:3000/api/issues`, {
@@ -44,6 +30,9 @@ export default function FormContent() {
     } catch (e) {
       console.log(e.message);
     }
+    setUserName("");
+    setDescription("");
+    setLocation("");
   };
 
   return (
