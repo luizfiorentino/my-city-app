@@ -3,10 +3,14 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import UserForm from "@/components/userForm/UserForm";
+// import { PrismaClient } from "@prisma/client";
+// export { PrismaClient } from "@prisma/client";
 
+// const prisma = new PrismaClient();
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ data }) {
+  console.log("data:", data);
   return (
     <>
       <Head>
@@ -17,8 +21,15 @@ export default function Home() {
       </Head>
       <main>
         <h1>My city app</h1>
+
         <UserForm />
       </main>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const response = await fetch(`http://localhost:3000/api/issues`);
+  const data = await response.json();
+  return { props: { data } };
 }
