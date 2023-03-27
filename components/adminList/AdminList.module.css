@@ -1,8 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800&family=Ubuntu:wght@300;400;700&display=swap");
+
 .main {
   margin: auto;
   width: 375px;
   height: 100vh;
   border: 1px solid red;
+  font-family: "League Spartan", sans-serif;
 
   background-repeat: no-repeat;
+}
+
+.issuesList {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }

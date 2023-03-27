@@ -1,3 +1,19 @@
 .main {
   padding: 0px 24px 32px;
 }
+
+.issues {
+  font-size: 24px;
+  line-height: 22px;
+  font-weight: 700;
+  letter-spacing: -0.75px;
+  color: #ffffff;
+}
+
+.total {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.1px;
+  color: #dfe3fa;
+}

@@ -1,0 +1,79 @@
+.main {
+  padding: 25px 24px 22px;
+  background-color: #1e2139;
+  border-radius: 8px;
+}
+.idAndName {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.contentAndStatus {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentAndStatusTop {
+  display: flex;
+  flex-direction: column;
+}
+
+.hash {
+  color: #7e88c3;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+}
+
+.id {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+}
+
+.nameAndDescription {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.1px;
+}
+
+.location {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.25px;
+  margin-top: 9px;
+}
+
+.status {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  color: #ff8f00;
+
+  display: flex;
+  align-items: center;
+
+  background-color: rgba(51, 214, 159, 0.06);
+  border-radius: 6px;
+  width: 104px;
+  max-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topicIcon {
+  width: 5px;
+  height: 5px;
+  background-color: #ff8f00;
+  border-radius: 999px;
+  display: flex;
+  margin-bottom: 2px;
+  margin-right: 3px;
+}

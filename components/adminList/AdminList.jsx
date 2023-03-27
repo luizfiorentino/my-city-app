@@ -9,13 +9,17 @@ export default function AdminList(props) {
     <div className={styles.main}>
       <AdminTopBar />
       <ReportsBar issues={props.issues} />
-      {props.data.map((issue) => (
-        <IssueCard
-          userName={issue.userName}
-          description={issue.description}
-          location={issue.location}
-        />
-      ))}
+      <div className={styles.issuesList}>
+        {props.data.map((issue) => (
+          <IssueCard
+            key={issue.id}
+            id={issue.id}
+            userName={issue.userName}
+            description={issue.description}
+            location={issue.location}
+          />
+        ))}
+      </div>
     </div>
   );
 }
