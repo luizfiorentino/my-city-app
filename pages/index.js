@@ -1,19 +1,18 @@
 import Head from "next/head";
-
+import { useState } from "react";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import UserForm from "@/components/userForm/UserForm";
-// import { PrismaClient } from "@prisma/client";
-// export { PrismaClient } from "@prisma/client";
+import AdminList from "@/components/adminList/AdminList";
 
-// const prisma = new PrismaClient();
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ data }) {
-  console.log("data:", data);
+  //console.log("data:", data);
+  const [adminMode, setAdminMode] = useState(false);
 
   const issues = data.issues.map((issue) => issue.description);
-  console.log("issues", issues);
+  //console.log("issues", issues);
   return (
     <>
       <Head>
@@ -23,9 +22,11 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>My city app</h1>
-
-        <UserForm issues={issues} />
+        <h1>My city app</h1>{" "}
+        <button onClick={() => setAdminMode(!adminMode)}>
+          {adminMode === false ? "admin mode" : "user mode"}
+        </button>
+        {adminMode === false ? <UserForm /> : <AdminList issues={issues} />}
       </main>
     </>
   );
