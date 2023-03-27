@@ -7,13 +7,16 @@ export default function FormInput(props) {
   //console.log("props", props);
   return (
     <div className={styles.main}>
-      <label>{props.label}</label>
-      <input
-        className={styles.placeholder}
-        placeholder={props.placeHolder}
-        value={props.value}
-        onChange={(e) => props.onChange(e)}
-      />
+      <label className={styles.label}>{props.label}</label>
+      <div className={styles.placeholder}>
+        {" "}
+        <input
+          placeholder={props.placeHolder}
+          value={props.value}
+          onChange={(e) => props.onChange(e)}
+          className={styles.phInner}
+        />
+      </div>
     </div>
   );
 }

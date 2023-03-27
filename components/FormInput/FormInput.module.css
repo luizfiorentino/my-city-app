@@ -5,6 +5,30 @@
 
 .placeholder {
   height: 40px;
-  border: 1px solid red;
+  border: 1px solid #d6d9e6;
   border-radius: 4px;
+
+  font-size: 15px;
+  /* color: #9699aa; */
+
+  line-height: 17px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-size: 12px;
+  color: #022959;
+  font-weight: 400;
+  line-height: 14px;
+  margin-bottom: 3px;
+}
+
+.phInner {
+  color: #9699aa;
+  opacity: 0.6;
+  margin-left: 16px;
+  background-color: #ffffff;
+  border: none;
 }

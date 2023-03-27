@@ -4,6 +4,7 @@ import FormHeader from "../FormHeader/FormHeader";
 import FormSubtitle from "../FormSubtitle/FormSubtitle";
 import FormInput from "../FormInput/FormInput";
 import Footer from "../Footer/Footer";
+import Button from "../Button/Button";
 
 import axios from "axios";
 
@@ -36,37 +37,37 @@ export default function FormContent() {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.mainInner}>
-        <div className={styles.header}>
-          <FormHeader />
-          <FormSubtitle />
+    <div className={styles.externalContainer}>
+      <div className={styles.main}>
+        <div className={styles.mainInner}>
+          <div className={styles.header}>
+            <FormHeader />
+            <FormSubtitle />
+          </div>
+          <div className={styles.inputFields}>
+            <FormInput
+              label="Name"
+              placeHolder="e.g. Mike Ness"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <FormInput
+              label="Description"
+              placeHolder="e.g. there is something..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <FormInput
+              label="Location"
+              placeHolder="e.g. Dijkstraat 123. Amsterdam"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+          </div>
         </div>
-        <div className={styles.inputFields}>
-          <FormInput
-            label="Name"
-            placeHolder="e.g. Mike Ness"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <FormInput
-            label="Description"
-            placeHolder="e.g. there is something..."
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <FormInput
-            label="Location"
-            placeHolder="e.g. Dijkstraat 123. Amsterdam"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </div>
-      </div>
-
-      <button onClick={issueRequest}>click</button>
-
-      <Footer />
+        <div className={styles.space}></div>
+      </div>{" "}
+      <Footer onClick={issueRequest} />
     </div>
   );
 }
