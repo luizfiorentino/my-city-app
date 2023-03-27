@@ -12,7 +12,7 @@ export default function Home({ data }) {
   const [adminMode, setAdminMode] = useState(false);
 
   const issues = data.issues.map((issue) => issue.description);
-  //console.log("issues", issues, "adminMode", adminMode);
+  console.log("issues", data, "adminMode", adminMode);
   return (
     <>
       <Head>
@@ -26,7 +26,11 @@ export default function Home({ data }) {
         <button onClick={() => setAdminMode(!adminMode)}>
           {adminMode === false ? "admin mode" : "user mode"}
         </button>
-        {adminMode === false ? <UserForm /> : <AdminList issues={issues} />}
+        {adminMode === false ? (
+          <UserForm />
+        ) : (
+          <AdminList data={data.issues} issues={issues} />
+        )}
         {/* <UserForm /> */}
       </main>
     </>
