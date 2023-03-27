@@ -1,0 +1,9 @@
+.main {
+  border-left: 1px solid #494e6e;
+}
+
+.image {
+  width: 32px;
+  border-radius: 999px;
+  margin: 20px;
+}
