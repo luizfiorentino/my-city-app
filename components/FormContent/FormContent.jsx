@@ -12,27 +12,21 @@ export default function FormContent() {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
 
-  const issueRequest = async (req, res) => {
+  const issueRequest = async () => {
     try {
-      const newIssue = await axios.post(`http://localhost:3000/api/issues`, {
+      const newIssue = await axios.post(`./api/issues`, {
         issue: {
           userName: userName,
           description: description,
           location: location,
         },
       });
-
-      // {"issue":{"userName":"Jonah Pineda", "description":"There is a lot of trash in the street", "location": "Beracostraat 40, Amsterdam"}}
-
-      return res
-        .status(201)
-        .json({ message: `Yep new issue in!`, newIssue: newIssue });
+      setUserName("");
+      setDescription("");
+      setLocation("");
     } catch (e) {
       console.log(e.message);
     }
-    setUserName("");
-    setDescription("");
-    setLocation("");
   };
 
   return (
