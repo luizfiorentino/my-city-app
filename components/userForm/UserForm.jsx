@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./UserForm.module.css";
 import FormContent from "../FormContent/FormContent";
-import image from "../../pages/assets/images/bg-sidebar-mobile.svg";
 import Footer from "../Footer/Footer";
 
 export default function UserForm() {
@@ -10,7 +9,7 @@ export default function UserForm() {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
 
-  const issueRequest = async (userName, description, location) => {
+  const issueRequest = async () => {
     try {
       const newIssue = await axios.post(`./api/issues`, {
         issue: {
@@ -19,6 +18,9 @@ export default function UserForm() {
           location: location,
         },
       });
+      setUserName("");
+      setDescription("");
+      setLocation("");
     } catch (e) {
       console.log(e.message);
     }
@@ -36,8 +38,8 @@ export default function UserForm() {
           location={location}
           setLocation={setLocation}
         />
+        <Footer onClick={issueRequest} />
       </div>
-      <Footer onClick={issueRequest} />
     </div>
   );
 }

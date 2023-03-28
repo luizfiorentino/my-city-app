@@ -1,6 +1,6 @@
 .main {
   font-size: 24px;
-  color: #022959;
+  color: var(--color--text-primary);
   font-weight: 700;
   line-height: 28px;
   margin-bottom: 9px;

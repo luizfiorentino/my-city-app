@@ -1,19 +1,16 @@
-import React, { useState } from "react";
 import styles from "./FormContent.module.css";
 import FormHeader from "../FormHeader/FormHeader";
 import FormSubtitle from "../FormSubtitle/FormSubtitle";
 import FormInput from "../FormInput/FormInput";
-import Footer from "../Footer/Footer";
 
-export default function FormContent(
-  issueRequest,
+export default function FormContent({
   userName,
   setUserName,
   description,
   setDescription,
   location,
-  setLocation
-) {
+  setLocation,
+}) {
   return (
     <div className={styles.formContent}>
       <FormHeader>Reports data</FormHeader>

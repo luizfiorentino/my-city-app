@@ -13,6 +13,8 @@
 }
 
 .form {
+  background-color: var(--color--bg-light);
+  padding-top: 24px;
 }
 
 .image {
