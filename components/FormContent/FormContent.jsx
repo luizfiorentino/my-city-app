@@ -4,7 +4,6 @@ import FormHeader from "../FormHeader/FormHeader";
 import FormSubtitle from "../FormSubtitle/FormSubtitle";
 import FormInput from "../FormInput/FormInput";
 import Footer from "../Footer/Footer";
-import Button from "../Button/Button";
 
 import axios from "axios";
 
