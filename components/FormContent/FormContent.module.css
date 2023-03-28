@@ -1,24 +1,5 @@
-.main {
-  padding: 0 16px;
-  background-color: #eff5ff;
-}
-
-.mainInner {
-  padding: 32px 24px;
+.formContent {
   background-color: #ffffff;
-  border-radius: 9px;
-}
-
-.header {
-  margin-bottom: 22px;
-}
-
-.inputFields {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.space {
-  min-height: 120px;
+  padding: 32px 24px;
+  margin: 0 16px;
 }
