@@ -8,10 +8,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function UserForm() {
-  const [userName, setUserName] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
-
   const formSchema = z.object({
     userName: z
       .string()
@@ -44,22 +40,19 @@ export default function UserForm() {
     resolver: zodResolver(formSchema),
   });
 
-  const issueRequest = async () => {
-    //event.preventDefault();
+  const issueRequest = async (data) => {
     try {
       const newIssue = await axios.post(`./api/issues`, {
         issue: {
-          userName: userName,
-          description: description,
-          location: location,
+          userName: data.userName,
+          description: data.description,
+          location: data.location,
         },
       });
-      setUserName("");
-      setDescription("");
-      setLocation("");
     } catch (e) {
       console.log(e.message);
     }
+    console.log("data", data);
   };
 
   return (
@@ -67,17 +60,11 @@ export default function UserForm() {
       <div className={styles.image}>{/* <img src={image.src} /> */}</div>
 
       <div className={styles.form}>
-        <form onSubmit={issueRequest}>
+        <form onSubmit={handleSubmit(issueRequest)}>
           <FormContent
-            userName={userName}
             userRegister={{ ...register("userName") }}
-            setUserName={setUserName}
-            description={description}
             descriptionRegister={{ ...register("description") }}
-            setDescription={setDescription}
-            location={location}
             locationRegister={{ ...register("location") }}
-            setLocation={setLocation}
             errors={errors}
           />
           <Footer onClick={issueRequest} />

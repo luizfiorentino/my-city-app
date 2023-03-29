@@ -8,12 +8,6 @@ export default function FormContent({
   userRegister,
   descriptionRegister,
   locationRegister,
-  userName,
-  setUserName,
-  description,
-  setDescription,
-  location,
-  setLocation,
 }) {
   return (
     <div className={styles.formContent}>
@@ -25,25 +19,25 @@ export default function FormContent({
       <FormInput
         label="Name"
         placeHolder="e.g. Mike Ness"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        errors={errors}
+        // value={userName}
+        // onChange={(e) => setUserName(e.target.value)}
+        error={errors.userName}
         register={userRegister}
       />
       <FormInput
         label="Description"
         placeHolder="e.g. there is something..."
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        errors={errors}
+        // value={description}
+        // onChange={(e) => setDescription(e.target.value)}
+        error={errors.description}
         register={descriptionRegister}
       />
       <FormInput
         label="Location"
         placeHolder="e.g. Dijkstraat 123. Amsterdam"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        errors={errors}
+        // value={location}
+        // onChange={(e) => setLocation(e.target.value)}
+        error={errors.location}
         register={locationRegister}
       />
     </div>
