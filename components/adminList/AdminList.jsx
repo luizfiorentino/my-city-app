@@ -7,6 +7,7 @@ export default function AdminList(props) {
   //console.log("props.issues", props.issues);
   return (
     <div className={styles.main}>
+      {props.issues ? undefined : <p>Problem with db</p>}
       <AdminTopBar />
       <ReportsBar issues={props.issues} />
       <div className={styles.issuesList}>

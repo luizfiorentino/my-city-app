@@ -28,6 +28,10 @@ export default function Home({ issues }) {
 }
 
 export async function getServerSideProps() {
-  const issues = await prisma.issue.findMany();
-  return { props: { issues: serialize(issues) } };
+  try {
+    const issues = await prisma.issue.findMany();
+    return { props: { issues: serialize(issues) } };
+  } catch (e) {
+    console.log("db error:", e);
+  }
 }
