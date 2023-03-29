@@ -9,11 +9,14 @@ export default function FormInput(props) {
     <>
       <label className={styles.label}>{props.label}</label>{" "}
       <input
+        type="text"
         placeholder={props.placeHolder}
         value={props.value}
         onChange={(e) => props.onChange(e)}
         className={styles.input}
+        {...props.register}
       />
+      {props.errors.userName && <p>{props.errors.userName.message}</p>}
     </>
   );
 }

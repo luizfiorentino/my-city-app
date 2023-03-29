@@ -4,6 +4,10 @@ import FormSubtitle from "../FormSubtitle/FormSubtitle";
 import FormInput from "../FormInput/FormInput";
 
 export default function FormContent({
+  errors,
+  userRegister,
+  descriptionRegister,
+  locationRegister,
   userName,
   setUserName,
   description,
@@ -23,18 +27,24 @@ export default function FormContent({
         placeHolder="e.g. Mike Ness"
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
+        errors={errors}
+        register={userRegister}
       />
       <FormInput
         label="Description"
         placeHolder="e.g. there is something..."
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        errors={errors}
+        register={descriptionRegister}
       />
       <FormInput
         label="Location"
         placeHolder="e.g. Dijkstraat 123. Amsterdam"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
+        errors={errors}
+        register={locationRegister}
       />
     </div>
   );
