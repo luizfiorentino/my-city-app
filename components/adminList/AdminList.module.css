@@ -15,3 +15,13 @@
   gap: 16px;
   margin-bottom: 105px;
 }
+
+@media screen and (min-width: 1440px) {
+  .main {
+    display: flex;
+  }
+
+  .barAndCardList {
+    padding: 77px 355px 0;
+  }
+}

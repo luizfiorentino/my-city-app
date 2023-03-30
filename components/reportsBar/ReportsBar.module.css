@@ -72,3 +72,15 @@
   letter-spacing: -0.1px;
   color: #dfe3fa;
 }
+
+@media screen and (min-width: 1440px) {
+  .main {
+    padding-bottom: 64px;
+  }
+  .issues {
+    font-size: 36px;
+    line-height: 33px;
+    letter-spacing: -1.13px;
+    margin-bottom: 6px;
+  }
+}

@@ -5,3 +5,10 @@
   background-color: #1e2139;
   margin-bottom: 32px;
 }
+
+@media screen and (min-width: 1440px) {
+  .main {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+}

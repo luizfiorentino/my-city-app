@@ -7,3 +7,16 @@
   border-radius: 999px;
   margin: 20px;
 }
+
+@media screen and (min-width: 1440px) {
+  .main {
+    border-left: none;
+    border-top: 1px solid #494e6e;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .image {
+    width: 40px;
+  }
+}
