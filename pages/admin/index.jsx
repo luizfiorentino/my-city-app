@@ -21,7 +21,7 @@ export default function Home({ issues }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>My city app</h1> <AdminList data={issues} issues={reports} />
+        <AdminList data={issues} issues={reports} />
       </main>
     </>
   );

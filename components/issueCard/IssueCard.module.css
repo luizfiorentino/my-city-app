@@ -1,22 +1,67 @@
-.main {
+.cardMain {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 140px;
+  width: 100%;
   padding: 25px 24px 22px;
   background-color: #1e2139;
   border-radius: 8px;
 }
-.idAndName {
-  display: flex;
-  justify-content: space-between;
+.id {
+  color: white;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 700;
   margin-bottom: 24px;
+  order: 1;
 }
 
-.contentAndStatus {
-  display: flex;
-  justify-content: space-between;
+.description {
+  color: #def3fa;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  margin-bottom: 9px;
+  order: 2;
 }
 
-.contentAndStatusTop {
-  display: flex;
-  flex-direction: column;
+.location {
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+
+  letter-spacing: -0.25px;
+  order: 3;
+}
+
+.userName {
+  color: white;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  margin-bottom: 24px;
+  align-self: flex-end;
+  order: 4;
+}
+
+.status {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  order: 5;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  color: #ff8f00;
+
+  background-color: rgba(51, 214, 159, 0.06);
+  border-radius: 6px;
+  /* width: 104px;
+  max-height: 40px; */
 }
 
 .hash {
@@ -27,48 +72,21 @@
   letter-spacing: -0.25px;
 }
 
-.id {
+/* .id {
   font-size: 15px;
   font-weight: 700;
   line-height: 15px;
   letter-spacing: -0.25px;
-}
+} */
 
-.nameAndDescription {
+/* .description {
   font-size: 13px;
   font-weight: 500;
   line-height: 15px;
   letter-spacing: -0.1px;
-}
+} */
 
-.location {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.25px;
-  margin-top: 9px;
-}
-
-.status {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 15px;
-  letter-spacing: -0.25px;
-  color: #ff8f00;
-
-  display: flex;
-  align-items: center;
-
-  background-color: rgba(51, 214, 159, 0.06);
-  border-radius: 6px;
-  width: 104px;
-  max-height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.topicIcon {
+/* .topicIcon {
   width: 5px;
   height: 5px;
   background-color: #ff8f00;
@@ -76,4 +94,4 @@
   display: flex;
   margin-bottom: 2px;
   margin-right: 3px;
-}
+} */
