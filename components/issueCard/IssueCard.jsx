@@ -10,7 +10,9 @@ export default function IssueCard(props) {
       <p className={styles.posted}>{props.date.substring(0, 9)}</p>{" "}
       <p className={styles.location}>{props.location}</p>
       <p className={styles.userName}>{props.userName}</p>
-      <p className={styles.status}>Submited</p>
+      <p className={styles.status}>
+        <span className={styles.topicIcon}>·</span>Submited
+      </p>
     </div>
   );
 }

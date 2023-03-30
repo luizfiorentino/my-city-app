@@ -2,7 +2,7 @@
 
 .main {
   margin: auto;
-  width: 375px;
+  /* width: 375px; */
   border: 1px solid red;
   font-family: "League Spartan", sans-serif;
   background-repeat: no-repeat;

@@ -73,24 +73,38 @@
   letter-spacing: -0.25px;
 }
 
-/* .id {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 15px;
-  letter-spacing: -0.25px;
-} */
-
-/* .description {
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 15px;
-  letter-spacing: -0.1px;
-} */
-
 .topicIcon {
-  width: 5px;
+  /* width: 5px;
   height: 5px;
   background-color: #ff8f00;
-  border-radius: 999px;
-  display: flex;
+  border-radius: 999px; */
+  margin-right: 5px;
+}
+
+@media screen and (min-width: 700px) {
+  .cardMain {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cardMain > * {
+    margin-bottom: 0;
+  }
+
+  .status,
+  .userName {
+    align-self: auto;
+  }
+
+  .userName {
+    order: 3;
+    flex-grow: 1;
+  }
+
+  .location {
+    order: 4;
+    flex-grow: 1;
+    text-align: end;
+  }
 }
