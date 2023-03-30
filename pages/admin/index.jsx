@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ issues }) {
   const reports = issues.map((issue) => issue.description);
+  console.log("issues=>", issues);
   return (
     <>
       <Head>

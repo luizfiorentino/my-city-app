@@ -17,7 +17,7 @@
   order: 1;
 }
 
-.description {
+.posted {
   color: #def3fa;
   font-weight: 500;
   font-size: 13px;
@@ -51,6 +51,7 @@
   padding: 14px 0 11px 0;
   text-align: center;
   align-self: flex-end;
+
   order: 5;
   font-size: 15px;
   font-weight: 700;
@@ -86,12 +87,10 @@
   letter-spacing: -0.1px;
 } */
 
-/* .topicIcon {
+.topicIcon {
   width: 5px;
   height: 5px;
   background-color: #ff8f00;
   border-radius: 999px;
   display: flex;
-  margin-bottom: 2px;
-  margin-right: 3px;
-} */
+}

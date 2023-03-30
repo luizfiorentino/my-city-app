@@ -15,6 +15,7 @@ export default function AdminList(props) {
           <IssueCard
             key={issue.id}
             id={issue.id}
+            date={issue.createdAt}
             userName={issue.userName}
             description={issue.description}
             location={issue.location}
