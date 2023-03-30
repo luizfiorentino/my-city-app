@@ -8,18 +8,20 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function UserForm() {
+  const [successRequest, setSuccessRequest] = useState(false);
+
   const formSchema = z.object({
     userName: z
       .string()
-      .min(2, "user name must have at least 2 characters")
+      .min(2, "user name must be at least 2 characters long")
       .max(255, "the provided user name contains too much characters"),
     description: z
       .string()
-      .min(10, "description must have at least 10 characters")
+      .min(10, "description must be at least 10 characters long")
       .max(255, "the provided description contains too much characters"),
     location: z
       .string()
-      .min(8, "location must have at least 8 characters")
+      .min(8, "location must be at least 8 characters long")
       .max(255, "the provided location contains too much characters"),
   });
 
@@ -49,11 +51,13 @@ export default function UserForm() {
           location: data.location,
         },
       });
+      // setSuccessRequest(true);
     } catch (e) {
       console.log(e.message);
     }
-    console.log("data", data);
   };
+
+  console.log("successRequest", successRequest);
 
   return (
     <div className={styles.main}>
@@ -70,6 +74,12 @@ export default function UserForm() {
           <Footer onClick={issueRequest} />
         </form>
       </div>
+      {/* {successRequest === true ? (
+        <>
+          <h3>Thanks for submitting your issue!</h3>
+          <button onClick={setSuccessRequest(false)}>Back</button>
+        </>
+      ) : undefined} */}
     </div>
   );
 }

@@ -7,3 +7,12 @@
   position: relative;
   bottom: 96px;
 }
+
+@media screen and (min-width: 1440px) {
+  .formContent {
+    bottom: 0;
+    margin-bottom: 44px;
+    margin-right: 44px;
+    padding-top: 16px;
+  }
+}

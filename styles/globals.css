@@ -45,6 +45,11 @@
   --color--text-primary: #022959;
 }
 
+.main {
+  background-color: var(--color--bg-light);
+  padding: 105px 250px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

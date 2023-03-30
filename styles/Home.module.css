@@ -1,10 +1,21 @@
 .main {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
-  min-height: 100vh;
+  min-height: 100vh; */
+}
+
+.externalContainer {
+  background-color: black;
+  padding: 105px 250px;
+}
+
+@media screen and (min-width: 1440px) {
+  .externalContainer {
+    background-color: var(--color--bg-light);
+  }
 }
 
 .description {
@@ -97,7 +108,7 @@
 
 .center::before,
 .center::after {
-  content: '';
+  content: "";
   left: 50%;
   position: absolute;
   filter: blur(45px);
@@ -125,7 +136,7 @@
 
 .thirteen::before,
 .thirteen::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
 }

@@ -23,8 +23,8 @@ export default function Home() {
 
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>My city app</h1> <UserForm />
+      <main className={styles.externalContainer}>
+        <UserForm />
       </main>
     </>
   );
