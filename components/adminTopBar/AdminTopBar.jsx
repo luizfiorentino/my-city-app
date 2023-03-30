@@ -7,7 +7,10 @@ export default function AdminTopBar() {
   return (
     <div className={styles.main}>
       <AdminTbIcon />
-      <Avatar />
+      <div className={styles.profile}>
+        <span className={styles.smallIcon}></span>
+        <Avatar />
+      </div>
     </div>
   );
 }
