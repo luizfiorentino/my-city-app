@@ -38,7 +38,7 @@ export default function UserForm() {
       description: "",
       location: "",
     },
-    mode: "all",
+    // mode: "all", --> don't use, it's users unfriendly
     resolver: zodResolver(formSchema),
   });
 
@@ -51,7 +51,11 @@ export default function UserForm() {
           location: data.location,
         },
       });
-      // setSuccessRequest(true);
+
+      setValue("userName", "");
+      setValue("description", "");
+      setValue("location", "");
+      setSuccessRequest(true);
     } catch (e) {
       console.log(e.message);
     }
@@ -74,12 +78,12 @@ export default function UserForm() {
           <Footer onClick={issueRequest} />
         </form>
       </div>
-      {/* {successRequest === true ? (
+      {successRequest === true ? (
         <>
           <h3>Thanks for submitting your issue!</h3>
-          <button onClick={setSuccessRequest(false)}>Back</button>
+          {/* <button onClick={setSuccessRequest(false)}>Back</button> */}
         </>
-      ) : undefined} */}
+      ) : undefined}
     </div>
   );
 }
