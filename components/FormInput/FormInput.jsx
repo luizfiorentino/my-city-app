@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./FormInput.module.css";
-import ErrorMessage from "../errorMessage/ErrorMessage";
+import ErrorMessage from "../statusMessage/StatusMessage";
 
 export default function FormInput(props) {
   return (

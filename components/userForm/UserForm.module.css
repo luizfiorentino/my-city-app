@@ -2,27 +2,37 @@
 
 .main {
   margin: auto;
-  width: 375px;
+  /* width: 375px; */
   font-family: "Ubuntu", sans-serif;
 }
 
 .form {
   background-color: var(--color--bg-light);
   padding-top: 24px;
+  min-height: 80vh;
 }
 
 .image {
   min-height: 172px;
   background-image: url("../../pages/assets//images/bg-sidebar-mobile.svg");
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
-@media screen and (min-width: 1440px) {
+/* .message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+@media screen and (min-width: 800px) {
   .main {
-    width: 940px;
-    height: 600px;
+    /* width: 940px;
+    height: 600px; */
+    max-width: 1024px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+
     background-color: white;
     padding: 16px;
   }
@@ -40,5 +50,6 @@
 
   .form {
     background-color: white;
+    margin: auto;
   }
 }

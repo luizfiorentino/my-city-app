@@ -8,13 +8,12 @@
 }
 
 .externalContainer {
-  background-color: black;
-  padding: 105px 250px;
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 800px) {
   .externalContainer {
     background-color: var(--color--bg-light);
+    padding: 48px 0px;
   }
 }
 

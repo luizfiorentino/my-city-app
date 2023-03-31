@@ -6,6 +6,7 @@ import Footer from "../Footer/Footer";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import StatusMessage from "../statusMessage/StatusMessage";
 
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
@@ -32,6 +33,7 @@ export default function UserForm() {
     getValues,
     setValues,
     setValue,
+    reset,
   } = useForm({
     defaultValues: {
       userName: "",
@@ -52,9 +54,11 @@ export default function UserForm() {
         },
       });
 
-      setValue("userName", "");
-      setValue("description", "");
-      setValue("location", "");
+      // setValue("userName", "");
+      // setValue("description", "");
+      // setValue("location", "");
+      reset();
+
       setSuccessRequest(true);
     } catch (e) {
       console.log(e.message);
@@ -68,22 +72,23 @@ export default function UserForm() {
       <div className={styles.image}>{/* <img src={image.src} /> */}</div>
 
       <div className={styles.form}>
-        <form onSubmit={handleSubmit(issueRequest)}>
-          <FormContent
-            userRegister={{ ...register("userName") }}
-            descriptionRegister={{ ...register("description") }}
-            locationRegister={{ ...register("location") }}
-            errors={errors}
-          />
-          <Footer onClick={issueRequest} />
-        </form>
+        {successRequest === false ? (
+          <form onSubmit={handleSubmit(issueRequest)}>
+            <FormContent
+              userRegister={{ ...register("userName") }}
+              descriptionRegister={{ ...register("description") }}
+              locationRegister={{ ...register("location") }}
+              errors={errors}
+            />
+
+            <Footer onClick={issueRequest} />
+          </form>
+        ) : (
+          <StatusMessage className={styles.successMessage} type="success">
+            Thanks for submitting your issue!
+          </StatusMessage>
+        )}
       </div>
-      {successRequest === true ? (
-        <>
-          <h3>Thanks for submitting your issue!</h3>
-          {/* <button onClick={setSuccessRequest(false)}>Back</button> */}
-        </>
-      ) : undefined}
     </div>
   );
 }
