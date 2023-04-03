@@ -2,7 +2,6 @@ import React, { use, useState } from "react";
 import styles from "./IssueCard.module.css";
 import arrowDown from "../../pages/assets/images/icon-arrow-down.svg";
 import Description from "../description/Description";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
@@ -29,7 +28,11 @@ export default function IssueCard(props) {
             alt="arrow down"
           />
         ) : (
-          <AiOutlineCloseCircle className={styles.closeIcon} />
+          <img
+            src={arrowDown.src}
+            className={`${styles.arrowDown} ${styles.arrowUp}`}
+            alt="arrow up"
+          />
         )}
       </div>{" "}
       {showDescription === false ? undefined : (

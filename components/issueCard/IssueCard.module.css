@@ -1,3 +1,15 @@
+@media screen and (max-width: 400px) {
+  .cardMain {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cardMain > * {
+    text-align: center;
+    width: 100%;
+  }
+}
+
 .cardMain {
   /* display: flex;
   flex-direction: column;
@@ -8,6 +20,7 @@
   padding: 25px 24px 22px;
   background-color: #1e2139;
   border-radius: 8px;
+  position: relative;
 }
 .id {
   color: white;
@@ -86,6 +99,14 @@
 .arrowDown {
   order: 6;
   max-width: 8px;
+  position: absolute;
+  left: calc(50% - 5px);
+  bottom: 10px;
+  transition: 0.3s;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
 }
 
 .description {
@@ -126,6 +147,7 @@
     flex-direction: row;
     align-items: center;
     gap: 20px;
+    position: static;
   }
 
   .cardMain > * {
@@ -150,6 +172,10 @@
 
   .closeIcon {
     align-self: auto;
+  }
+
+  .arrowDown {
+    position: static;
   }
 }
 @media screen and (min-width: 948px) {
