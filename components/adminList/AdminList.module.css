@@ -16,12 +16,13 @@
   margin-bottom: 105px;
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 800px) {
   .main {
     display: flex;
   }
 
   .barAndCardList {
-    padding: 77px 355px 0;
+    /* padding: 77px 355px 0; */
+    padding: 0;
   }
 }
