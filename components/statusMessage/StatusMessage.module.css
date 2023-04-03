@@ -1,0 +1,21 @@
+.message {
+  color: #ee374a;
+  margin-bottom: 1rem;
+  margin-left: 5px;
+  text-align: right;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 700;
+}
+
+.sucess {
+  color: green;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 800px) {
+  .message {
+    margin-bottom: 0;
+  }
+}

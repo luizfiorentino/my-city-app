@@ -1,0 +1,14 @@
+.main {
+  font-size: 24px;
+  color: var(--color--text-primary);
+  font-weight: 700;
+  line-height: 28px;
+  margin-bottom: 9px;
+}
+
+@media screen and (min-width: 800px) {
+  .main {
+    font-size: 32px;
+    margin-bottom: 11px;
+  }
+}

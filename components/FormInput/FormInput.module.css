@@ -1,0 +1,31 @@
+.label {
+  display: block;
+  font-size: 12px;
+  color: #022959;
+  font-weight: 400;
+  line-height: 14px;
+  margin-bottom: 3px;
+}
+
+.input {
+  padding: 12px 16px;
+  width: 100%;
+  color: #022959;
+  /* opacity: 0.6; */
+
+  background-color: #ffffff;
+  border: 1px solid #9699aa;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+@media screen and (min-width: 800px) {
+  .input {
+    padding: 15px 16px;
+    margin-bottom: 24px;
+  }
+
+  .label {
+    margin-bottom: 8px;
+  }
+}

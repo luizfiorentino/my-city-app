@@ -1,0 +1,17 @@
+.main {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: right;
+  padding: 16px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .main {
+    margin-right: 84px;
+    position: static;
+    padding: 0;
+  }
+}
