@@ -62,6 +62,7 @@
 
   background-color: rgba(51, 214, 159, 0.06);
   border-radius: 6px;
+  margin-bottom: 10px;
   /* width: 104px;
   max-height: 40px; */
 }
@@ -82,12 +83,37 @@
   margin-right: 5px;
 }
 
+.arrowDown {
+  order: 6;
+  max-width: 8px;
+}
+
+.description {
+  order: 7;
+  width: 100%;
+  padding: 25px 24px 22px;
+  background-color: #1e2139;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.closeIcon {
+  order: 7;
+  color: #7c5dfa;
+}
+
+/* .innerDescription {
+  padding: 2rem;
+  background-color: red;
+} */
+
 @media screen and (min-width: 400px) {
   .cardMain {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-height: 140px;
+    max-height: 150px;
   }
 }
 
