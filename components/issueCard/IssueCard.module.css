@@ -1,8 +1,9 @@
 .cardMain {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-height: 140px;
+  max-height: 140px; */
+
   width: 100%;
   padding: 25px 24px 22px;
   background-color: #1e2139;
@@ -79,6 +80,15 @@
   background-color: #ff8f00;
   border-radius: 999px; */
   margin-right: 5px;
+}
+
+@media screen and (min-width: 400px) {
+  .cardMain {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 140px;
+  }
 }
 
 @media screen and (min-width: 700px) {
