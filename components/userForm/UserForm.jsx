@@ -7,7 +7,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import StatusMessage from "../statusMessage/StatusMessage";
-
+import ConfirmationMessage from "../confirmationMessage/ConfirmationMessage";
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
 
@@ -67,6 +67,10 @@ export default function UserForm() {
 
   console.log("successRequest", successRequest);
 
+  const returnFormPage = () => {
+    setSuccessRequest(false);
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.image}>{/* <img src={image.src} /> */}</div>
@@ -81,12 +85,17 @@ export default function UserForm() {
               errors={errors}
             />
 
-            <Footer onClick={issueRequest} />
+            <Footer onClick={issueRequest}>
+              {successRequest === false ? "Post issue" : "Back"}
+            </Footer>
           </form>
         ) : (
-          <StatusMessage className={styles.successMessage} type="success">
+          <ConfirmationMessage
+            className={styles.successMessage}
+            onClick={returnFormPage}
+          >
             Thanks for submitting your issue!
-          </StatusMessage>
+          </ConfirmationMessage>
         )}
       </div>
     </div>

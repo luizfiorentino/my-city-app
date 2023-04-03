@@ -1,0 +1,39 @@
+.externalContainer {
+  background-color: #ffffff;
+  padding: 32px 24px;
+  margin: 0px 16px 24px 16px;
+  margin: 0 16px;
+  border-radius: 10px;
+  position: relative;
+  bottom: 96px;
+
+  color: #022959;
+}
+
+.message {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+
+.subtitle {
+  color: #9699aa;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 400;
+}
+
+.footer {
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 800px) {
+  .externalContainer {
+    bottom: 0;
+    margin: 0 0 44px 0;
+
+    padding: 16px 0 0 0;
+  }
+}
