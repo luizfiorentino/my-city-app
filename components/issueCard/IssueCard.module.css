@@ -115,6 +115,10 @@
     flex-wrap: wrap;
     max-height: 150px;
   }
+
+  .closeIcon {
+    align-self: flex-end;
+  }
 }
 
 @media screen and (min-width: 700px) {
@@ -142,6 +146,10 @@
     order: 4;
     flex-grow: 1;
     text-align: end;
+  }
+
+  .closeIcon {
+    align-self: auto;
   }
 }
 @media screen and (min-width: 948px) {
