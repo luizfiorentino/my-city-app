@@ -91,7 +91,7 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 700px) {
   .cardMain {
     flex-direction: row;
     align-items: center;
@@ -116,5 +116,10 @@
     order: 4;
     flex-grow: 1;
     text-align: end;
+  }
+}
+@media screen and (min-width: 948px) {
+  .cardMain {
+    min-width: 800px;
   }
 }
