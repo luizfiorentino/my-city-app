@@ -2,6 +2,7 @@ import React, { use, useState } from "react";
 import styles from "./IssueCard.module.css";
 import arrowDown from "../../pages/assets/images/icon-arrow-down.svg";
 import Description from "../description/Description";
+import Link from "next/link";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
@@ -12,6 +13,9 @@ export default function IssueCard(props) {
         className={styles.cardMain}
         onClick={() => setShowDescription(!showDescription)}
       >
+        <button>
+          <Link href={`admin/issues/${props.id}`}>Details</Link>
+        </button>
         <h3 className={styles.id}>
           <span className={styles.hash}>#</span>AMS{props.id.substring(0, 10)}
         </h3>{" "}

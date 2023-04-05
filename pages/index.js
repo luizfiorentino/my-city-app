@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import UserForm from "@/components/userForm/UserForm";
 import AdminList from "@/components/adminList/AdminList";
-import prisma from "@/prisma/client";
+// import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,10 +30,10 @@ export default function Home() {
   );
 }
 
-export async function getServerSideProps() {
-  const issues = await prisma.issue.findMany();
-  return { props: { data: { issues: serialize(issues) } } };
-}
+// export async function getServerSideProps() {
+//   const issues = await prisma.issue.findMany();
+//   return { props: { data: { issues: serialize(issues) } } };
+// }
 
 // import Head from "next/head";
 // import { useState } from "react";
