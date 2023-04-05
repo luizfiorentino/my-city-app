@@ -15,7 +15,8 @@
   letter-spacing: -0.25px;
 
   color: #ffffff;
-  padding: 35px 0px;
+  padding-top: 1px;
+  padding-bottom: 26px;
 }
 
 .arrow {
