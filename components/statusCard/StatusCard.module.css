@@ -1,0 +1,35 @@
+.statusCardContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e2139;
+  border-radius: 8px;
+  margin-bottom: 24px;
+
+  font-family: "League Spartan", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+
+  letter-spacing: -0.1px;
+
+  color: #dfe3fa;
+  padding: 24px 24px 27px;
+}
+
+.status {
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  color: #ff8f00;
+  padding: 14px 18px;
+  background-color: rgba(255, 143, 0, 0.06);
+
+  mix-blend-mode: normal;
+
+  border-radius: 6px;
+}
