@@ -65,5 +65,11 @@
 
   border-radius: 8px;
   background-color: #252945;
-  /* text-align: center; */
+  text-align: center;
+}
+
+@media screen and (max-width: 340px) {
+  .description {
+    text-align: left;
+  }
 }
