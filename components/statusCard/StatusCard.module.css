@@ -1,3 +1,13 @@
+@media screen and (max-width: 240px) {
+  .statusCardContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .statusTop {
+    margin-bottom: 13px;
+  }
+}
+
 .statusCardContainer {
   display: flex;
   justify-content: space-between;

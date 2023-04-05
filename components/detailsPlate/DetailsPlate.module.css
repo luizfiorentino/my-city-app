@@ -20,6 +20,43 @@
   color: #dfe3fa;
 }
 
+.id {
+  display: flex;
+  flex-direction: column;
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+
+  letter-spacing: -0.1px;
+
+  color: #dfe3fa;
+  margin-bottom: 13px;
+}
+
+.idHeader {
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  color: #ffffff;
+
+  margin-bottom: 4px;
+}
+
+.header {
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  color: #ffffff;
+}
+
 .location {
 }
 

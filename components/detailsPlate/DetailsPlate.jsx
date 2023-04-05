@@ -10,10 +10,21 @@ export default function DetailsPlate({
 }) {
   return (
     <div className={styles.detailsMain}>
-      <p>ID#AMS{id}</p>
-      <p>Submited at: {createdAt.substring(0, 10)}</p>
-      <p>User: {userName}</p>
-      <p className={styles.location}>Location: {location}</p>
+      <p className={styles.id}>
+        <span className={styles.idHeader}>ID#AMS</span>
+        {id}
+      </p>
+      <p className={styles.header}>
+        <span className={styles.id}>Submited at</span>
+        {createdAt.substring(0, 10)}
+      </p>
+      <p className={styles.header}>
+        <span className={styles.id}>By</span> {userName}
+      </p>
+      <p className={styles.header}>
+        <span className={styles.id}>Location</span>
+        {location}
+      </p>
       <p className={styles.description}>{description}</p>
     </div>
   );

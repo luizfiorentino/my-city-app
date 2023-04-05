@@ -13,9 +13,6 @@ export default function IssueCard(props) {
         className={styles.cardMain}
         onClick={() => setShowDescription(!showDescription)}
       >
-        <button>
-          <Link href={`admin/issues/${props.id}`}>Details</Link>
-        </button>
         <h3 className={styles.id}>
           <span className={styles.hash}>#</span>AMS{props.id.substring(0, 10)}
         </h3>{" "}
@@ -23,7 +20,8 @@ export default function IssueCard(props) {
         <p className={styles.location}>{props.location}</p>
         <p className={styles.userName}>{props.userName}</p>
         <p className={styles.status}>
-          <span className={styles.topicIcon}>·</span>Submited
+          <span className={styles.topicIcon}>·</span>
+          <Link href={`admin/issues/${props.id}`}>Submited</Link>
         </p>
         {showDescription === false ? (
           <img

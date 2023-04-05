@@ -7,27 +7,33 @@ import arrowLeft from "../../../pages/assets/images/icon-arrow-left.svg";
 import IssueCard from "@/components/issueCard/IssueCard";
 import StatusCard from "@/components/statusCard/StatusCard";
 import DetailsPlate from "@/components/detailsPlate/DetailsPlate";
+import Link from "next/link";
 
 export default function IssueStatus({ issue }) {
   console.log("issue det page top", issue);
 
   return (
-    <div className={styles.detailsPageMain}>
+    <div>
+      {" "}
       <AdminTopBar />
-      <p className={styles.backLink}>
-        <span className={styles.arrow}>
-          <img src={arrowLeft.src} alt="arrow sign pointed to the left" />
-        </span>
-        Go back
-      </p>
-      <StatusCard />
-      <DetailsPlate
-        id={issue.id}
-        createdAt={issue.createdAt}
-        userName={issue.userName}
-        location={issue.location}
-        description={issue.description}
-      />
+      <div className={styles.detailsPageMain}>
+        <Link href={`/admin/`}>
+          <p className={styles.backLink}>
+            <span className={styles.arrow}>
+              <img src={arrowLeft.src} alt="arrow sign pointed to the left" />
+            </span>
+            Go back
+          </p>
+        </Link>
+        <StatusCard />
+        <DetailsPlate
+          id={issue.id}
+          createdAt={issue.createdAt}
+          userName={issue.userName}
+          location={issue.location}
+          description={issue.description}
+        />
+      </div>
     </div>
   );
 }
