@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./DetailsPlate.module.css";
+import TextFragment from "../textFragment/TextFragment";
+import BackgroundCanvas from "../backgroundCanvas/BackgroundCanvas";
 
 export default function DetailsPlate({
   id,
@@ -65,31 +67,31 @@ export default function DetailsPlate({
   )}${prefix} ${month} ${createdAt.substring(0, 4)}`;
   console.log("date", date);
   return (
-    <div className={styles.detailsMain}>
+    <BackgroundCanvas className={styles.detailsMain}>
       <div className={styles.top}>
-        <p className={styles.id}>
+        <TextFragment className={styles.id}>
           <span className={styles.idHeader}>
             <span className={styles.hash}>#</span>id
           </span>
           {id}
-        </p>
-        <p className={styles.header}>
+        </TextFragment>
+        <TextFragment className={styles.header}>
           <span className={`${styles.sub} ${styles.rightSide}`}>Submited</span>
           {/* {createdAt.substring(0, 10)} */}
           {date}
-        </p>
+        </TextFragment>
       </div>
       <div className={styles.bottom}>
-        <p className={styles.header}>
+        <TextFragment className={styles.header}>
           <span className={styles.sub}>By</span> {userName}
-        </p>
-        <p className={styles.header}>
+        </TextFragment>
+        <TextFragment className={styles.header}>
           <span className={`${styles.sub} ${styles.rightSide}`}>Location</span>
           {location}
-        </p>
+        </TextFragment>
       </div>{" "}
       <label>Description</label>
-      <p className={styles.description}>{description}</p>
-    </div>
+      <TextFragment className={styles.description}>{description}</TextFragment>
+    </BackgroundCanvas>
   );
 }
