@@ -3,6 +3,7 @@ import styles from "./IssueCard.module.css";
 import arrowDown from "../../pages/assets/images/icon-arrow-down.svg";
 import Description from "../description/Description";
 import Link from "next/link";
+import TextFragment from "../textFragment/TextFragment";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
@@ -13,16 +14,23 @@ export default function IssueCard(props) {
         className={styles.cardMain}
         onClick={() => setShowDescription(!showDescription)}
       >
-        <h3 className={styles.id}>
-          <span className={styles.hash}>#</span>AMS{props.id.substring(0, 10)}
-        </h3>{" "}
-        <p className={styles.posted}>{props.date.substring(0, 9)}</p>{" "}
-        <p className={styles.location}>{props.location}</p>
-        <p className={styles.userName}>{props.userName}</p>
-        <p className={styles.status}>
+        <TextFragment className={`${styles.regularText} ${styles.id}`}>
+          <span className={`${styles.regularText} ${styles.hash}`}>#</span>AMS
+          {props.id.substring(0, 10)}
+        </TextFragment>{" "}
+        <TextFragment className={`${styles.smallerText} ${styles.posted}`}>
+          {props.date.substring(0, 9)}
+        </TextFragment>
+        <TextFragment className={styles.location}>
+          {props.location}
+        </TextFragment>
+        <TextFragment className={`${styles.smallerText} ${styles.userName}`}>
+          {props.userName}
+        </TextFragment>
+        <TextFragment className={`${styles.regularText} ${styles.status}`}>
           <span className={styles.topicIcon}>·</span>
           <Link href={`admin/issues/${props.id}`}>Submited</Link>
-        </p>
+        </TextFragment>
         {showDescription === false ? (
           <img
             src={arrowDown.src}
