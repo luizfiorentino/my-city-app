@@ -13,9 +13,8 @@ export default function IssueStatus({ issue }) {
   console.log("issue det page top", issue);
 
   return (
-    <div>
-      {" "}
-      <AdminTopBar />
+    <div className={styles.container}>
+      <AdminTopBar className={styles.tb} />
       <div className={styles.detailsPageMain}>
         <Link href={`/admin/`}>
           <p className={styles.backLink}>

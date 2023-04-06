@@ -66,22 +66,29 @@ export default function DetailsPlate({
   console.log("date", date);
   return (
     <div className={styles.detailsMain}>
-      <p className={styles.id}>
-        <span className={styles.idHeader}>ID#AMS</span>
-        {id}
-      </p>
-      <p className={styles.header}>
-        <span className={styles.id}>Submited at</span>
-        {/* {createdAt.substring(0, 10)} */}
-        {date}
-      </p>
-      <p className={styles.header}>
-        <span className={styles.id}>By</span> {userName}
-      </p>
-      <p className={styles.header}>
-        <span className={styles.id}>Location</span>
-        {location}
-      </p>
+      <div className={styles.top}>
+        <p className={styles.id}>
+          <span className={styles.idHeader}>
+            <span className={styles.hash}>#</span>id
+          </span>
+          {id}
+        </p>
+        <p className={styles.header}>
+          <span className={`${styles.sub} ${styles.rightSide}`}>Submited</span>
+          {/* {createdAt.substring(0, 10)} */}
+          {date}
+        </p>
+      </div>
+      <div className={styles.bottom}>
+        <p className={styles.header}>
+          <span className={styles.sub}>By</span> {userName}
+        </p>
+        <p className={styles.header}>
+          <span className={`${styles.sub} ${styles.rightSide}`}>Location</span>
+          {location}
+        </p>
+      </div>{" "}
+      <label>Description</label>
       <p className={styles.description}>{description}</p>
     </div>
   );

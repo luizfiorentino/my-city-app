@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 24px;
-  gap: 30px;
+  /* gap: 30px; */
 
   border-radius: 8px;
 
@@ -32,7 +32,26 @@
   letter-spacing: -0.1px;
 
   color: #dfe3fa;
+  margin-bottom: 30px;
+}
+
+.sub {
+  display: flex;
+  flex-direction: column;
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+
+  letter-spacing: -0.1px;
+
+  color: #dfe3fa;
   margin-bottom: 13px;
+}
+
+.hash {
+  color: #7e88c3;
 }
 
 .idHeader {
@@ -55,6 +74,7 @@
   line-height: 15px;
   letter-spacing: -0.25px;
   color: #ffffff;
+  margin-bottom: 30px;
 }
 
 .location {
@@ -66,10 +86,45 @@
   border-radius: 8px;
   background-color: #252945;
   text-align: center;
+  font-size: 15px;
 }
 
 @media screen and (max-width: 340px) {
   .description {
     text-align: left;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .detailsMain {
+    /* justify-content: space-between; */
+    /* padding: 24px 40px 32px; */
+    padding: 50px 48px 48px;
+    /* gap: 45px; */
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 45px;
+  }
+
+  .idHeader {
+    margin-bottom: 13px;
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 45px;
+  }
+  .rightSide {
+    text-align: right;
+  }
+  .description {
+    min-height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
   }
 }
