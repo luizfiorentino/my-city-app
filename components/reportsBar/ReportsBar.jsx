@@ -1,16 +1,19 @@
 import React from "react";
 import styles from "./ReportsBar.module.css";
 import arrowIcon from "../../pages/assets/images/icon-arrow-down.svg";
+import TextFragment from "../textFragment/TextFragment";
 
 export default function ReportsBar(props) {
   return (
     <div className={styles.main}>
       <div className={styles.issuesAndTotal}>
-        <h3 className={styles.issues}>Issues</h3>
-        <h5 className={styles.total}>Total: {props.issues.length}</h5>
+        <TextFragment className={styles.issues}>Issues</TextFragment>
+        <TextFragment className={styles.total}>
+          Total: {props.issues.length}
+        </TextFragment>
       </div>
       <div className={styles.filterAndEdit}>
-        <label className={styles.filter}>
+        <label className={styles.letterMedium}>
           Filter{" "}
           <img
             className={styles.arrowIcon}
@@ -18,9 +21,9 @@ export default function ReportsBar(props) {
             alt="arrow down icon"
           />
         </label>
-        <p className={styles.newIssue}>
+        <TextFragment className={`${styles.letterMedium} ${styles.newIssue}`}>
           <span className={styles.addIcon}>+</span> New
-        </p>
+        </TextFragment>
       </div>
     </div>
   );
