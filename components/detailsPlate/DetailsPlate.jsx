@@ -67,26 +67,35 @@ export default function DetailsPlate({
   )}${prefix} ${month} ${createdAt.substring(0, 4)}`;
   console.log("date", date);
   return (
-    <BackgroundCanvas className={styles.detailsMain}>
+    <BackgroundCanvas className={`${styles.lighterText} ${styles.detailsMain}`}>
       <div className={styles.top}>
-        <TextFragment className={styles.id}>
-          <span className={styles.idHeader}>
+        <TextFragment className={`${styles.lighterText} ${styles.id}`}>
+          <span className={`${styles.bolderText} ${styles.idHeader}`}>
             <span className={styles.hash}>#</span>id
           </span>
           {id}
         </TextFragment>
-        <TextFragment className={styles.header}>
-          <span className={`${styles.sub} ${styles.rightSide}`}>Submited</span>
+        <TextFragment className={`${styles.bolderText} ${styles.header}`}>
+          <span
+            className={`${styles.lighterText} ${styles.sub} ${styles.rightSide}`}
+          >
+            Submited
+          </span>
           {/* {createdAt.substring(0, 10)} */}
           {date}
         </TextFragment>
       </div>
       <div className={styles.bottom}>
-        <TextFragment className={styles.header}>
-          <span className={styles.sub}>By</span> {userName}
+        <TextFragment className={`${styles.bolderText} ${styles.header}`}>
+          <span className={`${styles.lighterText} ${styles.sub}`}>By</span>{" "}
+          {userName}
         </TextFragment>
-        <TextFragment className={styles.header}>
-          <span className={`${styles.sub} ${styles.rightSide}`}>Location</span>
+        <TextFragment className={`${styles.bolderText} ${styles.header}`}>
+          <span
+            className={`${styles.lighterText} ${styles.sub} ${styles.rightSide}`}
+          >
+            Location
+          </span>
           {location}
         </TextFragment>
       </div>{" "}
