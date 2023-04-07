@@ -7,13 +7,25 @@
   color: #dfe3fa;
 }
 
+.defaultSpacing {
+  margin-bottom: 15px;
+}
+
+.smallerSpacing {
+  margin-bottom: 4px;
+}
+
+.largeSpacing {
+  margin-bottom: 30px;
+}
+
 .bolderText {
-  font-family: "League Spartan", sans-serif;
+  /* font-family: "League Spartan", sans-serif;
   font-size: 15px;
   line-height: 15px;
   font-weight: 700;
   letter-spacing: -0.25px;
-  color: #ffffff;
+  color: #ffffff; */
 }
 
 .detailsMain {
@@ -24,19 +36,15 @@
 }
 
 .id {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 30px; */
 }
 
 .sub {
   display: flex;
   flex-direction: column;
   margin-bottom: 13px;
-}
-
-.hash {
-  color: #7e88c3;
 }
 
 .idHeader {
@@ -70,6 +78,10 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 45px;
+  }
+
+  .idLargeScreen {
+    margin-bottom: 15px;
   }
 
   .idHeader {

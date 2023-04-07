@@ -1,12 +1,16 @@
 import React from "react";
 import styles from "./StatusCard.module.css";
 import BackgroundCanvas from "../backgroundCanvas/BackgroundCanvas";
+import TextParagraph from "../textParagraph/TextParagraph";
+import TextBold from "../textBold/TextBold";
 
 export default function StatusCard(props) {
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
-      <p className={styles.statusTop}>Status</p>
-      <p className={styles.status}>· Pending</p>
+      <TextParagraph variant={styles.status}>Status</TextParagraph>
+      <TextBold variant={`${styles.status} ${styles.pending}`}>
+        · Pending
+      </TextBold>
     </BackgroundCanvas>
   );
 }

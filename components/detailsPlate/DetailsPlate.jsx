@@ -2,6 +2,9 @@ import React from "react";
 import styles from "./DetailsPlate.module.css";
 import TextFragment from "../textFragment/TextFragment";
 import BackgroundCanvas from "../backgroundCanvas/BackgroundCanvas";
+import TextParagraph from "../textParagraph/TextParagraph";
+import HashItem from "../hashItem/HashItem";
+import TextBold from "../textBold/TextBold";
 
 export default function DetailsPlate({
   id,
@@ -65,42 +68,65 @@ export default function DetailsPlate({
     8,
     10
   )}${prefix} ${month} ${createdAt.substring(0, 4)}`;
-  console.log("date", date);
+
   return (
-    <BackgroundCanvas className={`${styles.lighterText} ${styles.detailsMain}`}>
+    // <BackgroundCanvas className={`${styles.lighterText} ${styles.detailsMain}`}>
+    <BackgroundCanvas className={styles.detailsMain}>
       <div className={styles.top}>
-        <TextFragment className={`${styles.lighterText} ${styles.id}`}>
-          <span className={`${styles.bolderText} ${styles.idHeader}`}>
-            <span className={styles.hash}>#</span>id
-          </span>
-          {id}
-        </TextFragment>
+        <div>
+          <HashItem
+            variant={`${styles.idLargeScreen} ${styles.smallerSpacing}`}
+          >
+            id
+          </HashItem>{" "}
+          <TextParagraph>{id}</TextParagraph>
+        </div>
+
         <TextFragment className={`${styles.bolderText} ${styles.header}`}>
-          <span
+          {/* <span
             className={`${styles.lighterText} ${styles.sub} ${styles.rightSide}`}
           >
             Submited
-          </span>
-          {/* {createdAt.substring(0, 10)} */}
-          {date}
+          </span> */}
         </TextFragment>
+        <div className={`${styles.sub} ${styles.right}`}>
+          <TextParagraph
+            variant={`${styles.defaultSpacing} ${styles.rightSide}`}
+          >
+            Submited
+          </TextParagraph>
+          <TextBold variant={styles.largeSpacing}>{date}</TextBold>
+        </div>
       </div>
       <div className={styles.bottom}>
-        <TextFragment className={`${styles.bolderText} ${styles.header}`}>
+        {/* <TextFragment className={`${styles.bolderText} ${styles.header}`}>
           <span className={`${styles.lighterText} ${styles.sub}`}>By</span>{" "}
           {userName}
-        </TextFragment>
-        <TextFragment className={`${styles.bolderText} ${styles.header}`}>
+        </TextFragment> */}
+        <div>
+          <TextParagraph variant={styles.defaultSpacing}>By</TextParagraph>
+          <TextBold variant={styles.largeSpacing}>{userName}</TextBold>
+        </div>
+
+        {/* <TextFragment className={`${styles.bolderText} ${styles.header}`}>
           <span
             className={`${styles.lighterText} ${styles.sub} ${styles.rightSide}`}
           >
             Location
           </span>
           {location}
-        </TextFragment>
-      </div>{" "}
-      <label>Description</label>
-      <TextFragment className={styles.description}>{description}</TextFragment>
+        </TextFragment> */}
+        <div className={`${styles.sub} ${styles.right}`}>
+          <TextParagraph
+            variant={`${styles.defaultSpacing} ${styles.rightSide}`}
+          >
+            Location
+          </TextParagraph>
+          <TextBold variant={styles.largeSpacing}>{location}</TextBold>
+        </div>
+      </div>
+      <TextParagraph variant={styles.smallerSpacing}>Description</TextParagraph>
+      <TextParagraph variant={styles.description}>{description}</TextParagraph>
     </BackgroundCanvas>
   );
 }

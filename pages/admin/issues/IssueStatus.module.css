@@ -5,21 +5,17 @@
   
 } */
 
+.link {
+  display: flex;
+
+  align-items: baseline;
+}
+
 .detailsPageMain {
   padding: 0px 24px;
 }
 
 .backLink {
-  font-family: "League Spartan", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 15px;
-  /* identical to box height, or 100% */
-
-  letter-spacing: -0.25px;
-
-  color: #ffffff;
   padding-top: 1px;
   padding-bottom: 26px;
 }

@@ -8,6 +8,7 @@ import IssueCard from "@/components/issueCard/IssueCard";
 import StatusCard from "@/components/statusCard/StatusCard";
 import DetailsPlate from "@/components/detailsPlate/DetailsPlate";
 import Link from "next/link";
+import TextBold from "@/components/textBold/TextBold";
 
 export default function IssueStatus({ issue }) {
   console.log("issue det page top", issue);
@@ -16,13 +17,15 @@ export default function IssueStatus({ issue }) {
     <div className={styles.container}>
       <AdminTopBar className={styles.tb} />
       <div className={styles.detailsPageMain}>
-        <Link href={`/admin/`}>
-          <p className={styles.backLink}>
-            <span className={styles.arrow}>
-              <img src={arrowLeft.src} alt="arrow sign pointed to the left" />
-            </span>
-            Go back
-          </p>
+        <Link
+          href={`/admin/`}
+          style={{ display: "flex" }}
+          className={styles.link}
+        >
+          <span className={styles.arrow}>
+            <img src={arrowLeft.src} alt="arrow sign pointed to the left" />
+          </span>
+          <TextBold variant={styles.backLink}>Go back</TextBold>
         </Link>
         <StatusCard />
         <DetailsPlate
