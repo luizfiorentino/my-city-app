@@ -5,6 +5,7 @@ import BackgroundCanvas from "../backgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../textParagraph/TextParagraph";
 import HashItem from "../hashItem/HashItem";
 import TextBold from "../textBold/TextBold";
+import { dateFormat } from "@/utils/serialize";
 
 export default function DetailsPlate({
   id,
@@ -13,62 +14,6 @@ export default function DetailsPlate({
   location,
   description,
 }) {
-  let month;
-  if (createdAt.substring(5, 7) === "01") {
-    month = "Jan";
-  }
-  if (createdAt.substring(5, 7) === "02") {
-    month = "Feb";
-  }
-  if (createdAt.substring(5, 7) === "03") {
-    month = "Mar";
-  }
-  if (createdAt.substring(5, 7) === "04") {
-    month = "Apr";
-  }
-  if (createdAt.substring(5, 7) === "05") {
-    month = "May";
-  }
-  if (createdAt.substring(5, 7) === "06") {
-    month = "Jun";
-  }
-  if (createdAt.substring(5, 7) === "07") {
-    month = "Jul";
-  }
-  if (createdAt.substring(5, 7) === "08") {
-    month = "Aug";
-  }
-  if (createdAt.substring(5, 7) === "09") {
-    month = "Sep";
-  }
-  if (createdAt.substring(5, 7) === "10") {
-    month = "Oct";
-  }
-  if (createdAt.substring(5, 7) === "11") {
-    month = "Nov";
-  }
-  if (createdAt.substring(5, 7) === "12") {
-    month = "Dec";
-  }
-
-  let prefix;
-  if (createdAt.substring(8, 10) === "1") {
-    prefix = "st";
-  }
-  if (createdAt.substring(8, 10) === "2") {
-    prefix = "nd";
-  }
-  if (createdAt.substring(8, 10) === "3") {
-    prefix = "rd";
-  } else {
-    prefix = "th";
-  }
-
-  const date = `${createdAt.substring(
-    8,
-    10
-  )}${prefix} ${month} ${createdAt.substring(0, 4)}`;
-
   return (
     // <BackgroundCanvas className={`${styles.lighterText} ${styles.detailsMain}`}>
     <BackgroundCanvas className={styles.detailsMain}>
@@ -95,7 +40,9 @@ export default function DetailsPlate({
           >
             Submited
           </TextParagraph>
-          <TextBold variant={styles.largeSpacing}>{date}</TextBold>
+          <TextBold variant={styles.largeSpacing}>
+            {dateFormat(createdAt)}
+          </TextBold>
         </div>
       </div>
       <div className={styles.bottom}>

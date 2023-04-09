@@ -1,4 +1,8 @@
 :root {
+  --color--bg-light: #eff5ff;
+  --color--text-primary: #022959;
+  --color--sky-blue: #eff5ff;
+  --color--denim: #022959;
   /* --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
@@ -40,9 +44,6 @@
   --card-border-rgb: 131, 134, 135; */
   /* --color--sky-blue: #eff5ff;
   --color--denim: #022959; */
-
-  --color--bg-light: #eff5ff;
-  --color--text-primary: #022959;
 }
 
 .main {

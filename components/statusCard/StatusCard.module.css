@@ -28,7 +28,7 @@
   mix-blend-mode: normal;
   border-radius: 6px;
   padding: 14px 18px;
-  color: #ff8f00;
+  color: #ff8f00 !important ;
   background-color: rgba(255, 143, 0, 0.06);
 }
 
