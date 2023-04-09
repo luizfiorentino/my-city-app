@@ -9,6 +9,15 @@
     text-align: center;
     width: 100%;
   }
+
+  .hash {
+    justify-content: center;
+    margin-bottom: 10px !important;
+  }
+
+  .userName {
+    margin-bottom: 10px !important;
+  }
 }
 
 .cardMain {
@@ -25,8 +34,8 @@
 }
 
 .smallerText {
-  font-size: 13px;
-  line-height: 15px;
+  /* font-size: 13px;
+  line-height: 15px; */
 }
 
 .id {
@@ -44,31 +53,31 @@
 }
 
 .location {
-  color: white;
-  font-size: 15px;
-  line-height: 24px;
-  font-weight: 700;
-  letter-spacing: -0.25px;
+  /* color: white;
+  font-size: 15px; */
+  line-height: 24px !important;
+  /* font-weight: 700;
+  letter-spacing: -0.25px; */
   order: 3;
 }
 
 .userName {
-  color: white;
-  font-weight: 500;
+  /* color: white;
+  font-weight: 500; */
   margin-bottom: 24px;
   align-self: flex-end;
   order: 4;
 }
 
-.status {
+.submitted {
   width: 100px;
   padding: 14px 0 11px 0;
   text-align: center;
   align-self: flex-end;
 
-  font-weight: 700;
-  letter-spacing: -0.25px;
-  color: #ff8f00;
+  /* font-weight: 700;
+  letter-spacing: -0.25px; */
+  color: #ff8f00 !important;
 
   background-color: rgba(51, 214, 159, 0.06);
   border-radius: 6px;
