@@ -7,12 +7,13 @@ import TextParagraph from "../textParagraph/TextParagraph";
 import HashItem from "../hashItem/HashItem";
 import { dateFormat } from "@/utils/serialize";
 import TextBold from "../textBold/TextBold";
+import BackgroundCanvas from "../backgroundCanvas/BackgroundCanvas";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
 
   return (
-    <div>
+    <BackgroundCanvas>
       <div
         className={styles.cardMain}
         onClick={() => setShowDescription(!showDescription)}
@@ -56,6 +57,6 @@ export default function IssueCard(props) {
           </Description>
         </div>
       )}
-    </div>
+    </BackgroundCanvas>
   );
 }

@@ -13,10 +13,10 @@
 }
 
 .letterMedium {
-  font-size: 15px;
+  /* font-size: 15px;
   font-weight: 700;
   line-height: 15px;
-  letter-spacing: -0.25px;
+  letter-spacing: -0.25px; */
 }
 
 .arrowIcon {
@@ -37,7 +37,6 @@
 .addIcon {
   color: #7c5dfa;
   font-size: 18px;
-
   font-weight: 700;
   height: 32px;
   width: 32px;
@@ -49,13 +48,13 @@
 }
 
 .issues {
-  font-size: 24px;
-  line-height: 22px;
+  font-size: 24px !important;
+  line-height: 22px !important;
   font-weight: 700;
-  letter-spacing: -0.75px;
-  color: #ffffff;
-  text-align: center;
-  margin-bottom: 5px;
+  letter-spacing: -0.75px !important;
+  /* color: #ffffff; */
+  text-align: center !important;
+  margin-bottom: 5px !important;
 }
 
 .total {
@@ -65,7 +64,7 @@
   letter-spacing: -0.1px;
   color: #dfe3fa;
   text-align: center;
-  /* margin-bottom: 1rem; */
+  margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 300px) {
