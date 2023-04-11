@@ -1,26 +1,10 @@
 .mainCanvas {
-  /* display: flex;
-  flex-direction: column;
-  padding: 24px; */
-  /* padding: 24px; */
-  /* background-color: #1e2139; */
   background-color: var(--color--bg-canvas);
   border-radius: 8px;
 }
 
 @media screen and (min-width: 640px) {
-  .mainCanvas {
-    /* padding: 50px 48px 48px; */
-  }
 }
-
-/* .descriptionMain { -> check if necessary
-  padding: 1rem 2rem;
-  border: 1px solid grey;
-  border-radius: 10px;
-  width: 100%;
-  text-align: center;
-} */
 
 .lighterCanvas {
   background-color: var(--color--bg-canvas-lighter);

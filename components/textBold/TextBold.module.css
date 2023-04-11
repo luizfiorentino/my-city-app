@@ -11,6 +11,13 @@
   line-height: 24px;
 }
 
+.largeText {
+  font-size: 24px !important;
+  line-height: 22px !important;
+  font-weight: 700;
+  letter-spacing: -0.75px !important;
+}
+
 .orangeButton {
   width: 100px;
   padding: 14px 0 11px 0;

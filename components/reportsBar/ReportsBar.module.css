@@ -1,6 +1,5 @@
 .main {
   padding: 0px 24px 32px;
-  /* display: flex; */
   justify-content: space-between;
   align-items: center;
 }
@@ -10,13 +9,6 @@
   flex-direction: column;
   align-items: center;
   gap: 18px;
-}
-
-.letterMedium {
-  /* font-size: 15px;
-  font-weight: 700;
-  line-height: 15px;
-  letter-spacing: -0.25px; */
 }
 
 .arrowIcon {
@@ -48,21 +40,11 @@
 }
 
 .issues {
-  font-size: 24px !important;
-  line-height: 22px !important;
-  font-weight: 700;
-  letter-spacing: -0.75px !important;
-  /* color: #ffffff; */
   text-align: center !important;
   margin-bottom: 5px !important;
 }
 
 .total {
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 15px;
-  letter-spacing: -0.1px;
-  color: #dfe3fa;
   text-align: center;
   margin-bottom: 1rem;
 }

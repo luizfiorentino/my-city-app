@@ -23,43 +23,25 @@
 .cardMain {
   width: 100%;
   padding: 25px 24px 22px;
-  /* background-color: #1e2139; */
-
-  /* border-radius: 8px; */
   position: relative;
 }
 
-.regularText {
-  /* font-size: 15px;
-  line-height: 15px; */
-}
-
 .id {
-  color: white;
-  font-weight: 700;
   margin-bottom: 24px;
   order: 1;
 }
 
 .posted {
-  /* color: #def3fa; */
   font-weight: 500;
   margin-bottom: 9px;
   order: 2;
 }
 
 .location {
-  /* color: white;
-  font-size: 15px; */
-  /* line-height: 24px !important; */
-  /* font-weight: 700;
-  letter-spacing: -0.25px; */
   order: 3;
 }
 
 .userName {
-  /* color: white;
-  font-weight: 500; */
   margin-bottom: 24px;
   align-self: flex-end;
   order: 4;
@@ -71,7 +53,6 @@
 }
 
 .hash {
-  /* color: #7e88c3; */
   color: var(--hash);
   font-weight: 400;
   letter-spacing: -0.25px;
@@ -98,15 +79,9 @@
   order: 7;
   width: 100%;
   padding: 25px 24px 22px;
-  /* background-color: #1e2139; */
-  border-radius: 8px;
+
   display: flex;
   justify-content: center;
-}
-
-.closeIcon {
-  /* order: 7; */
-  /* color: #7c5dfa; */
 }
 
 @media screen and (min-width: 400px) {
@@ -115,10 +90,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     max-height: 150px;
-  }
-
-  .closeIcon {
-    /* align-self: flex-end; */
   }
 }
 
@@ -148,10 +119,6 @@
     order: 4;
     flex-grow: 1;
     text-align: end;
-  }
-
-  .closeIcon {
-    /* align-self: auto; */
   }
 
   .arrowDown {

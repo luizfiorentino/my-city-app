@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./DetailsPlate.module.css";
-import TextFragment from "../textFragment/TextFragment";
 import BackgroundCanvas from "../backgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../textParagraph/TextParagraph";
 import HashItem from "../hashItem/HashItem";
@@ -15,7 +14,6 @@ export default function DetailsPlate({
   description,
 }) {
   return (
-    // <BackgroundCanvas className={`${styles.lighterText} ${styles.detailsMain}`}>
     <BackgroundCanvas className={styles.detailsMain}>
       <div className={styles.top}>
         <div>
@@ -24,16 +22,9 @@ export default function DetailsPlate({
           >
             id
           </HashItem>{" "}
-          <TextParagraph>{id}</TextParagraph>
+          <TextParagraph className={styles.header}>{id}</TextParagraph>
         </div>
 
-        <TextFragment className={`${styles.bolderText} ${styles.header}`}>
-          {/* <span
-            className={`${styles.lighterText} ${styles.sub} ${styles.rightSide}`}
-          >
-            Submited
-          </span> */}
-        </TextFragment>
         <div className={`${styles.sub} ${styles.right}`}>
           <TextParagraph
             className={`${styles.defaultSpacing} ${styles.rightSide}`}
@@ -46,23 +37,10 @@ export default function DetailsPlate({
         </div>
       </div>
       <div className={styles.bottom}>
-        {/* <TextFragment className={`${styles.bolderText} ${styles.header}`}>
-          <span className={`${styles.lighterText} ${styles.sub}`}>By</span>{" "}
-          {userName}
-        </TextFragment> */}
         <div>
           <TextParagraph className={styles.defaultSpacing}>By</TextParagraph>
           <TextBold className={styles.largeSpacing}>{userName}</TextBold>
         </div>
-
-        {/* <TextFragment className={`${styles.bolderText} ${styles.header}`}>
-          <span
-            className={`${styles.lighterText} ${styles.sub} ${styles.rightSide}`}
-          >
-            Location
-          </span>
-          {location}
-        </TextFragment> */}
         <div className={`${styles.sub} ${styles.right}`}>
           <TextParagraph
             className={`${styles.defaultSpacing} ${styles.rightSide}`}

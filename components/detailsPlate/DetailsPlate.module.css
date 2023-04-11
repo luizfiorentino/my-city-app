@@ -1,12 +1,3 @@
-.lighterText {
-  font-family: "League Spartan", sans-serif;
-  font-size: 13px;
-  line-height: 15px;
-  font-weight: 500;
-  letter-spacing: -0.1px;
-  /* color: #dfe3fa; */
-}
-
 .defaultSpacing {
   margin-bottom: 15px;
 }
@@ -19,15 +10,6 @@
   margin-bottom: 30px;
 }
 
-.bolderText {
-  /* font-family: "League Spartan", sans-serif;
-  font-size: 15px;
-  line-height: 15px;
-  font-weight: 700;
-  letter-spacing: -0.25px;
-  color: #ffffff; */
-}
-
 .detailsMain {
   display: flex;
   flex-direction: column;
@@ -35,20 +17,9 @@
   /* gap: 30px; */
 }
 
-.id {
-  /* display: flex;
-  flex-direction: column;
-  margin-bottom: 30px; */
-}
-
 .sub {
   display: flex;
   flex-direction: column;
-  /* margin-bottom: 13px; */
-}
-
-.idHeader {
-  margin-bottom: 4px;
 }
 
 .header {
@@ -57,7 +28,6 @@
 
 .description {
   padding: 24px;
-
   text-align: center;
 }
 
@@ -80,10 +50,6 @@
 
   .idLargeScreen {
     margin-bottom: 15px;
-  }
-
-  .idHeader {
-    margin-bottom: 13px;
   }
 
   .bottom {

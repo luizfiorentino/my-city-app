@@ -1,7 +1,6 @@
 import React, { use, useState } from "react";
 import styles from "./IssueCard.module.css";
 import arrowDown from "../../pages/assets/images/icon-arrow-down.svg";
-import Description from "../description/Description";
 import Link from "next/link";
 import TextParagraph from "../textParagraph/TextParagraph";
 import HashItem from "../hashItem/HashItem";
@@ -18,12 +17,8 @@ export default function IssueCard(props) {
         className={styles.cardMain}
         onClick={() => setShowDescription(!showDescription)}
       >
-        {/* <TextFragment className={`${styles.regularText} ${styles.id}`}>
-          <span className={`${styles.regularText} ${styles.hash}`}>#</span>AMS
-          {props.id.substring(0, 10)}
-        </TextFragment>{" "} */}
         <HashItem
-          variant={`${styles.id} ${styles.hash}`}
+          className={`${styles.id} ${styles.hash}`}
         >{`AMS${props.id.substring(0, 10)}`}</HashItem>
         <TextParagraph className={styles.posted}>
           {dateFormat(props.date)}
@@ -35,7 +30,6 @@ export default function IssueCard(props) {
           {props.userName}
         </TextParagraph>
         <TextBold variant="orangeButton" className={styles.submitted}>
-          {/* <span className={styles.topicIcon}></span> */}
           <Link href={`admin/issues/${props.id}`}>· Submited</Link>
         </TextBold>
         {showDescription === false ? (
