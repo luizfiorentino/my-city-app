@@ -4,5 +4,6 @@
   line-height: 15px;
   font-weight: 500;
   letter-spacing: -0.1px;
-  color: #def3fa;
+  /* color: #def3fa; */
+  color: var(--color--admin-main);
 }

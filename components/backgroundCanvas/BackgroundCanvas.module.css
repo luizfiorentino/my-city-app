@@ -3,12 +3,13 @@
   flex-direction: column;
   padding: 24px; */
   /* padding: 24px; */
-  background-color: #1e2139;
+  /* background-color: #1e2139; */
+  background-color: var(--color--bg-canvas);
   border-radius: 8px;
 }
 
 @media screen and (min-width: 640px) {
   .mainCanvas {
-    padding: 50px 48px 48px;
+    /* padding: 50px 48px 48px; */
   }
 }
