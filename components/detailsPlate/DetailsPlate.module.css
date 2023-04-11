@@ -62,7 +62,6 @@
   background-color: var(--color--bg-canvas-lighter);
   text-align: center;
   font-size: 15px;
-  color: white;
 }
 
 @media screen and (max-width: 340px) {

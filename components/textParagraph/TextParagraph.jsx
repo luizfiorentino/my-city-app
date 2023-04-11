@@ -7,9 +7,12 @@ export default function TextParagraph({
   children,
   ...props
 }) {
-  console.log("className ->", variant);
+  //console.log("className ->", variant);
   return (
-    <p {...props} className={`${styles.defaultText} ${variant}`}>
+    <p
+      {...props}
+      className={`${styles.defaultText} ${className} ${styles[variant]}`}
+    >
       {children}
     </p>
   );

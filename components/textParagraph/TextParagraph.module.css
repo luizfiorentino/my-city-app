@@ -7,3 +7,7 @@
   /* color: #def3fa; */
   color: var(--color--admin-main);
 }
+
+.whiteText {
+  color: white;
+}

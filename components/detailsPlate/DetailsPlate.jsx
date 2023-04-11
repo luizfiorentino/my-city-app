@@ -36,7 +36,7 @@ export default function DetailsPlate({
         </TextFragment>
         <div className={`${styles.sub} ${styles.right}`}>
           <TextParagraph
-            variant={`${styles.defaultSpacing} ${styles.rightSide}`}
+            className={`${styles.defaultSpacing} ${styles.rightSide}`}
           >
             Submited
           </TextParagraph>
@@ -51,7 +51,7 @@ export default function DetailsPlate({
           {userName}
         </TextFragment> */}
         <div>
-          <TextParagraph variant={styles.defaultSpacing}>By</TextParagraph>
+          <TextParagraph className={styles.defaultSpacing}>By</TextParagraph>
           <TextBold variant={styles.largeSpacing}>{userName}</TextBold>
         </div>
 
@@ -65,15 +65,19 @@ export default function DetailsPlate({
         </TextFragment> */}
         <div className={`${styles.sub} ${styles.right}`}>
           <TextParagraph
-            variant={`${styles.defaultSpacing} ${styles.rightSide}`}
+            className={`${styles.defaultSpacing} ${styles.rightSide}`}
           >
             Location
           </TextParagraph>
           <TextBold variant={styles.largeSpacing}>{location}</TextBold>
         </div>
       </div>
-      <TextParagraph variant={styles.smallerSpacing}>Description</TextParagraph>
-      <TextParagraph variant={styles.description}>{description}</TextParagraph>
+      <TextParagraph className={styles.smallerSpacing}>
+        Description
+      </TextParagraph>
+      <BackgroundCanvas className={styles.description}>
+        <TextParagraph variant="whiteText">{description}</TextParagraph>
+      </BackgroundCanvas>
     </BackgroundCanvas>
   );
 }
