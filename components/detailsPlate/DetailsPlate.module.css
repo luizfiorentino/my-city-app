@@ -44,7 +44,7 @@
 .sub {
   display: flex;
   flex-direction: column;
-  margin-bottom: 13px;
+  /* margin-bottom: 13px; */
 }
 
 .idHeader {
@@ -106,5 +106,8 @@
     justify-content: center;
     align-items: center;
     text-align: justify;
+  }
+  .largeSpacing {
+    margin-bottom: 0;
   }
 }
