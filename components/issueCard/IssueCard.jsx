@@ -25,11 +25,11 @@ export default function IssueCard(props) {
         <HashItem
           variant={`${styles.id} ${styles.hash}`}
         >{`AMS${props.id.substring(0, 10)}`}</HashItem>
-        <TextParagraph variant={`${styles.smallerText} ${styles.posted}`}>
+        <TextParagraph className={styles.posted}>
           {dateFormat(props.date)}
         </TextParagraph>
         <TextBold variant={styles.location}>{props.location}</TextBold>
-        <TextParagraph variant={`${styles.smallerText} ${styles.userName}`}>
+        <TextParagraph className={styles.userName}>
           {props.userName}
         </TextParagraph>
         <TextBold variant={`${styles.regularText} ${styles.submitted}`}>
