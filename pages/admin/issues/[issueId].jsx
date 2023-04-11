@@ -25,7 +25,7 @@ export default function IssueStatus({ issue }) {
           <span className={styles.arrow}>
             <img src={arrowLeft.src} alt="arrow sign pointed to the left" />
           </span>
-          <TextBold variant={styles.backLink}>Go back</TextBold>
+          <TextBold className={styles.backLink}>Go back</TextBold>
         </Link>
         <StatusCard />
         <DetailsPlate

@@ -2,6 +2,7 @@
   .statusCardContainer {
     display: flex;
     flex-direction: column;
+    /* justify-content: center !important; */
   }
   /* .statusTop {
     margin-bottom: 13px;
@@ -9,9 +10,13 @@
   .status {
     margin-bottom: 1rem;
   }
+
   .pending {
-    margin-bottom: 0;
+    width: 100%;
   }
+  /* .pending {
+    margin-bottom: 0;
+  } */
 }
 
 .statusCardContainer {
@@ -22,14 +27,6 @@
 
   /* padding: 24px 24px 27px; */
   padding: 24px;
-}
-
-.pending {
-  mix-blend-mode: normal;
-  border-radius: 6px;
-  padding: 14px 18px;
-  color: #ff8f00 !important ;
-  background-color: rgba(255, 143, 0, 0.06);
 }
 
 @media screen and (min-width: 640px) {

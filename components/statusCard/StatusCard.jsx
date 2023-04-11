@@ -7,8 +7,10 @@ import TextBold from "../textBold/TextBold";
 export default function StatusCard(props) {
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
-      <TextParagraph variant={styles.status}>Status</TextParagraph>
-      <TextBold variant={`${styles.status} ${styles.pending}`}>
+      <TextParagraph variant="whiteText" className={styles.status}>
+        Status
+      </TextParagraph>
+      <TextBold variant="orangeButton" className={styles.pending}>
         · Pending
       </TextBold>
     </BackgroundCanvas>
