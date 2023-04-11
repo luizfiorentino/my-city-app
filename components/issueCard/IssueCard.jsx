@@ -28,11 +28,13 @@ export default function IssueCard(props) {
         <TextParagraph className={styles.posted}>
           {dateFormat(props.date)}
         </TextParagraph>
-        <TextBold variant={styles.location}>{props.location}</TextBold>
+        <TextBold variant="higherLine" className={styles.location}>
+          {props.location}
+        </TextBold>
         <TextParagraph className={styles.userName}>
           {props.userName}
         </TextParagraph>
-        <TextBold variant={`${styles.regularText} ${styles.submitted}`}>
+        <TextBold variant="orangeButton" className={styles.submitted}>
           {/* <span className={styles.topicIcon}></span> */}
           <Link href={`admin/issues/${props.id}`}>· Submited</Link>
         </TextBold>

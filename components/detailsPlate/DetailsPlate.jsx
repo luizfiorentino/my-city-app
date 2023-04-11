@@ -40,7 +40,7 @@ export default function DetailsPlate({
           >
             Submited
           </TextParagraph>
-          <TextBold variant={styles.largeSpacing}>
+          <TextBold className={styles.largeSpacing}>
             {dateFormat(createdAt)}
           </TextBold>
         </div>
@@ -52,7 +52,7 @@ export default function DetailsPlate({
         </TextFragment> */}
         <div>
           <TextParagraph className={styles.defaultSpacing}>By</TextParagraph>
-          <TextBold variant={styles.largeSpacing}>{userName}</TextBold>
+          <TextBold className={styles.largeSpacing}>{userName}</TextBold>
         </div>
 
         {/* <TextFragment className={`${styles.bolderText} ${styles.header}`}>
@@ -69,7 +69,7 @@ export default function DetailsPlate({
           >
             Location
           </TextParagraph>
-          <TextBold variant={styles.largeSpacing}>{location}</TextBold>
+          <TextBold className={styles.largeSpacing}>{location}</TextBold>
         </div>
       </div>
       <TextParagraph className={styles.smallerSpacing}>

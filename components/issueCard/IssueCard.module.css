@@ -30,8 +30,8 @@
 }
 
 .regularText {
-  font-size: 15px;
-  line-height: 15px;
+  /* font-size: 15px;
+  line-height: 15px; */
 }
 
 .id {
@@ -51,7 +51,7 @@
 .location {
   /* color: white;
   font-size: 15px; */
-  line-height: 24px !important;
+  /* line-height: 24px !important; */
   /* font-weight: 700;
   letter-spacing: -0.25px; */
   order: 3;
@@ -66,22 +66,7 @@
 }
 
 .submitted {
-  width: 100px;
-  padding: 14px 0 11px 0;
-  text-align: center;
-  align-self: flex-end;
-
-  /* font-weight: 700;
-  letter-spacing: -0.25px; */
-  color: var(--color--orange) !important;
-
-  background-color: var(--color--bg-submited);
-  border-radius: 6px;
-  margin-bottom: 10px;
-
   order: 5;
-  /* width: 104px;
-  max-height: 40px; */
 }
 
 .hash {
