@@ -4,7 +4,7 @@ import BackgroundCanvas from "../backgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../textParagraph/TextParagraph";
 import TextBold from "../textBold/TextBold";
 
-export default function StatusCard(props) {
+export default function StatusCard() {
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
       <TextParagraph variant="whiteText" className={styles.status}>

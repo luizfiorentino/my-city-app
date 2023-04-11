@@ -53,11 +53,12 @@ export default function IssueCard(props) {
         )}
       </div>{" "}
       {showDescription === false ? undefined : (
-        <div className={styles.description}>
-          <Description className={styles.innerDescription}>
-            {props.description}
-          </Description>
-        </div>
+        <BackgroundCanvas
+          className={styles.description}
+          variant="lighterCanvas"
+        >
+          {props.description}
+        </BackgroundCanvas>
       )}
     </BackgroundCanvas>
   );

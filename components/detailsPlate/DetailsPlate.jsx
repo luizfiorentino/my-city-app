@@ -75,7 +75,7 @@ export default function DetailsPlate({
       <TextParagraph className={styles.smallerSpacing}>
         Description
       </TextParagraph>
-      <BackgroundCanvas className={styles.description}>
+      <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
         <TextParagraph variant="whiteText">{description}</TextParagraph>
       </BackgroundCanvas>
     </BackgroundCanvas>

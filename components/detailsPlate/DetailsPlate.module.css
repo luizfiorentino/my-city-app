@@ -57,11 +57,8 @@
 
 .description {
   padding: 24px;
-  border-radius: 8px;
-  /* background-color: #252945; */
-  background-color: var(--color--bg-canvas-lighter);
+
   text-align: center;
-  font-size: 15px;
 }
 
 @media screen and (max-width: 340px) {

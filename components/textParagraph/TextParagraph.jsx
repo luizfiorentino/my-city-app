@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./TextParagraph.module.css";
 
 export default function TextParagraph({
-  variant = "normal",
+  variant = "primary",
   className,
   children,
   ...props
