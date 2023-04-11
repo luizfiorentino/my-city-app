@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./TextBold.module.css";
+import { leagueSpartan } from "@/styles/fonts";
 
 export default function TextBold({
   variant = "normal",
@@ -11,7 +12,7 @@ export default function TextBold({
   return (
     <p
       {...props}
-      className={`${styles.textBoldRegular} ${className} ${styles[variant]}`}
+      className={`${styles.textBoldRegular} ${className} ${styles[variant]} ${leagueSpartan.className}`}
     >
       {children}
     </p>

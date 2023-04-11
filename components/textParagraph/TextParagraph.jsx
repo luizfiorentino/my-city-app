@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./TextParagraph.module.css";
+import { leagueSpartan } from "@/styles/fonts";
 
 export default function TextParagraph({
   variant = "primary",
@@ -11,7 +12,7 @@ export default function TextParagraph({
   return (
     <p
       {...props}
-      className={`${styles.defaultText} ${className} ${styles[variant]}`}
+      className={`${styles.defaultText} ${className} ${styles[variant]} ${leagueSpartan.className}`}
     >
       {children}
     </p>

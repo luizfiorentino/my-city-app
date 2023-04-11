@@ -3,6 +3,7 @@ import styles from "./ReportsBar.module.css";
 import arrowIcon from "../../pages/assets/images/icon-arrow-down.svg";
 import TextParagraph from "../textParagraph/TextParagraph";
 import TextBold from "../textBold/TextBold";
+import { leagueSpartan } from "@/styles/fonts";
 
 export default function ReportsBar(props) {
   return (
@@ -24,8 +25,11 @@ export default function ReportsBar(props) {
             alt="arrow down icon"
           />
         </TextBold>
-        <p className={styles.newIssue}>
-          <span className={styles.addIcon}>+</span> New
+        <p className={`${styles.newIssue} ${leagueSpartan.className}`}>
+          <span className={styles.addIcon}>
+            <span className={styles.plusSign}>+</span>
+          </span>{" "}
+          New
         </p>
       </div>
     </div>

@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import StatusMessage from "../statusMessage/StatusMessage";
 import ConfirmationMessage from "../confirmationMessage/ConfirmationMessage";
+import { ubuntu } from "@/styles/fonts";
+
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
 
@@ -72,7 +74,7 @@ export default function UserForm() {
   };
 
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}>{/* <img src={image.src} /> */}</div>
 
       <div className={styles.form}>

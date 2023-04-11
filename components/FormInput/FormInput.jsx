@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./FormInput.module.css";
 import ErrorMessage from "../statusMessage/StatusMessage";
+import { ubuntu } from "@/styles/fonts";
 
 export default function FormInput(props) {
   return (
@@ -12,7 +13,7 @@ export default function FormInput(props) {
         placeholder={props.placeHolder}
         // value={props.value}
         // onChange={(e) => props.onChange(e)}
-        className={styles.input}
+        className={`${styles.input} ${ubuntu.className}`}
         {...props.register}
       />{" "}
       {props.error && <ErrorMessage>{props.error.message}</ErrorMessage>}
