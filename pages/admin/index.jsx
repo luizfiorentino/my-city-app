@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import AdminList from "@/components/adminList/AdminList";
+import AdminList from "@/components/Admin/AdminList/AdminList";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
 
