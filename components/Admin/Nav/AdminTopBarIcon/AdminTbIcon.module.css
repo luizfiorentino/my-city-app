@@ -12,6 +12,21 @@
   position: relative;
 }
 
+.shapes {
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+  border-left: 5px solid #7c5dfa;
+
+  border-width: 14px;
+
+  width: 28px;
+  height: 0;
+  /* margin: 20px; */
+  border-radius: 999px;
+  z-index: 30;
+  rotate: 90deg;
+}
+
 .pacmanUp {
   background: white;
   width: 28px;
