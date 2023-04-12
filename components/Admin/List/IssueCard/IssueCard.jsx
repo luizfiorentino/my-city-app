@@ -3,10 +3,10 @@ import styles from "./IssueCard.module.css";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
 import Link from "next/link";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
-import HashItem from "../HashItem/HashItem";
+import HashItem from "../HashItem";
 import { dateFormat } from "@/utils/serialize";
 import TextBold from "../../Shared/Typography/TextBold";
-import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
+import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);

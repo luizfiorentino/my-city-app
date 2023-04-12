@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./UserForm.module.css";
-import FormContent from "../FormContent/FormContent";
-import Footer from "../../Shared/Footer/Footer";
+import FormContent from "../FormContent";
+import Footer from "../../Shared/Footer";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import StatusMessage from "../../StatusMessage/StatusMessage";
-import ConfirmationMessage from "../ConfirmationMessage/ConfirmationMessage";
+import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
 
 export default function UserForm() {

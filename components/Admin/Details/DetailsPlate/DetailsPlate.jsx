@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./DetailsPlate.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
-import HashItem from "../../List/HashItem/HashItem";
-import TextBold from "../../Shared/Typography/TextBold/TextBold";
+import HashItem from "../../List/HashItem";
+import TextBold from "../../Shared/Typography/TextBold";
 import { dateFormat } from "@/utils/serialize";
 
 export default function DetailsPlate({

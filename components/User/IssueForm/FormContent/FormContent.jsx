@@ -1,7 +1,7 @@
 import styles from "./FormContent.module.css";
-import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
-import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
-import FormInput from "../../Shared/Fields/FormInput/FormInput";
+import FormHeader from "../../Shared/Fields/FormHeader";
+import FormSubtitle from "../../Shared/Fields/FormSubtitle";
+import FormInput from "../../Shared/Fields/FormInput";
 
 export default function FormContent({
   errors,

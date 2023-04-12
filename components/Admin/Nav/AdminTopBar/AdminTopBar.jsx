@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./AdminTopBar.module.css";
-import AdminTbIcon from "../AdminTopBarIcon/AdminTbIcon";
-import Avatar from "../Avatar/Avatar";
+import AdminTbIcon from "../../Nav/AdminTopBarIcon";
+import Avatar from "../../Nav/Avatar";
 
 export default function AdminTopBar() {
   return (

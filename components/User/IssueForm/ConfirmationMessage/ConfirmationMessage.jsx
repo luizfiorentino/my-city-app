@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./ConfirmationMessage.module.css";
-import Footer from "../../Shared/Footer/Footer";
-import Button from "../../../Admin/Shared/Button/Button.jsx";
-import Link from "next/link";
+import Footer from "../../Shared/Footer";
 
 export default function ConfirmationMessage(props) {
   return (

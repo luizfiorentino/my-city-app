@@ -1,14 +1,13 @@
 import React from "react";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
-import AdminTopBar from "@/components/Admin/Nav/AdminTopBar/AdminTopBar";
+import AdminTopBar from "@/components/Admin/Nav/AdminTopBar";
 import styles from "./IssueStatus.module.css";
 import arrowLeft from "../../../pages/assets/images/icon-arrow-left.svg";
-import IssueCard from "@/components/Admin/List/IssueCard/IssueCard";
-import StatusCard from "@/components/Admin/Details/StatusCard/StatusCard";
-import DetailsPlate from "@/components/Admin/Details/DetailsPlate/DetailsPlate";
+import StatusCard from "@/components/Admin/Details/StatusCard";
+import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
-import TextBold from "@/components/Admin/Shared/Typography/TextBold/TextBold";
+import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 
 export default function IssueStatus({ issue }) {
   console.log("issue det page top", issue);

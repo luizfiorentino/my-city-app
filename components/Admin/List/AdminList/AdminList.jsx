@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./AdminList.module.css";
-import AdminTopBar from "../../Nav/AdminTopBar/AdminTopBar";
-import ReportsBar from "../ReportsBar/ReportsBar";
-import IssueCard from "../IssueCard/IssueCard";
+import AdminTopBar from "../../Nav/AdminTopBar";
+import ReportsBar from "../ReportsBar";
+import IssueCard from "../IssueCard";
 export default function AdminList(props) {
   //console.log("props.issues", props.issues);
   return (
