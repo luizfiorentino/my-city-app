@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./HashItem.module.css";
-import TextBold from "../Shared/Typography/TextBold/TextBold";
+import TextBold from "../../Shared/Typography/TextBold/TextBold";
 
 export default function HashItem({ variant = "normal", className, children }) {
   return (

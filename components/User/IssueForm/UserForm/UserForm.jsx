@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./UserForm.module.css";
 import FormContent from "../FormContent/FormContent";
-import Footer from "../Footer/Footer";
+import Footer from "../../Shared/Footer/Footer";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import UserForm from "@/components/User/IssueForm/UserForm/UserForm";
-import AdminList from "@/components/Admin/AdminList/AdminList";
+import AdminList from "@/components/Admin/List/AdminList/AdminList";
 // import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
 

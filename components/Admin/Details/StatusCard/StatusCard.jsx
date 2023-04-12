@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./StatusCard.module.css";
-import BackgroundCanvas from "../BackgroundCanvas/BackgroundCanvas";
-import TextParagraph from "../Typography/TextParagraph";
-import TextBold from "../Typography/TextBold/TextBold";
+import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
+import TextParagraph from "../../Shared/Typography/TextParagraph";
+import TextBold from "../../Shared/Typography/TextBold/TextBold";
 import { leagueSpartan } from "@/styles/fonts";
 
 export default function StatusCard() {

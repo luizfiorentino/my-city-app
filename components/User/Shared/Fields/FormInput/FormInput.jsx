@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./FormInput.module.css";
-import ErrorMessage from "../../StatusMessage/StatusMessage";
+import ErrorMessage from "../../../StatusMessage/StatusMessage";
 import { ubuntu } from "@/styles/fonts";
 
 export default function FormInput(props) {

@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./ReportsBar.module.css";
-import arrowIcon from "../../../pages/assets/images/icon-arrow-down.svg";
-import TextParagraph from "../Shared/Typography/TextParagraph/TextParagraph";
-import TextBold from "../Shared/Typography/TextBold/TextBold";
+import arrowIcon from "../../../../pages/assets/images/icon-arrow-down.svg";
+import TextParagraph from "../../Shared/Typography/TextParagraph/TextParagraph";
+import TextBold from "../../Shared/Typography/TextBold/TextBold";
 import { leagueSpartan } from "@/styles/fonts";
 
 export default function ReportsBar(props) {

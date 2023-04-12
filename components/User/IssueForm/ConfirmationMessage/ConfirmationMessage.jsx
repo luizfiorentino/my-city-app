@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ConfirmationMessage.module.css";
-import Footer from "../Footer/Footer";
+import Footer from "../../Shared/Footer/Footer";
 import Button from "../../../Admin/Shared/Button/Button.jsx";
 import Link from "next/link";
 
