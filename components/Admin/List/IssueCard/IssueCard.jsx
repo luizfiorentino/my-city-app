@@ -3,7 +3,6 @@ import styles from "./IssueCard.module.css";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
 import Link from "next/link";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
-import HashItem from "../HashItem";
 import { dateFormat } from "@/utils/serialize";
 import TextBold from "../../Shared/Typography/TextBold";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
@@ -17,9 +16,12 @@ export default function IssueCard(props) {
         className={styles.cardMain}
         onClick={() => setShowDescription(!showDescription)}
       >
-        <HashItem
-          className={`${styles.id} ${styles.hash}`}
-        >{`AMS${props.id.substring(0, 10)}`}</HashItem>
+        <TextBold className={styles.id}>
+          <TextBold variant="hash" className={styles.hash}>
+            #
+          </TextBold>{" "}
+          {`AMS${props.id.substring(0, 10)}`}
+        </TextBold>
         <TextParagraph className={styles.posted}>
           {dateFormat(props.date)}
         </TextParagraph>

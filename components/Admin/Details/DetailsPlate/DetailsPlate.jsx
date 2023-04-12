@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./DetailsPlate.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
-import HashItem from "../../List/HashItem";
 import TextBold from "../../Shared/Typography/TextBold";
 import { dateFormat } from "@/utils/serialize";
 
@@ -16,12 +15,12 @@ export default function DetailsPlate({
   return (
     <BackgroundCanvas className={styles.detailsMain}>
       <div className={styles.top}>
-        <div>
-          <HashItem
-            variant={`${styles.idLargeScreen} ${styles.smallerSpacing}`}
-          >
-            id
-          </HashItem>{" "}
+        <div className={styles.id}>
+          <div className={`${styles.idInner} ${styles.idSpacing}`}>
+            <TextBold variant="hash">#</TextBold>
+            <TextBold variant={styles.idLargeScreen}>id</TextBold>{" "}
+          </div>
+
           <TextParagraph className={styles.header}>{id}</TextParagraph>
         </div>
 

@@ -10,9 +10,15 @@
     width: 100%;
   }
 
+  .id {
+    display: flex;
+
+    justify-content: center;
+  }
+
   .hash {
     justify-content: center;
-    margin-bottom: 10px !important;
+    margin-bottom: 10px;
   }
 
   .userName {
@@ -24,11 +30,6 @@
   width: 100%;
   padding: 25px 24px 22px;
   position: relative;
-}
-
-.id {
-  margin-bottom: 24px;
-  order: 1;
 }
 
 .posted {
@@ -50,12 +51,6 @@
 .submitted {
   margin-bottom: 10px;
   order: 5;
-}
-
-.hash {
-  color: var(--hash);
-  font-weight: 400;
-  letter-spacing: -0.25px;
 }
 
 .topicIcon {
@@ -90,6 +85,12 @@
     flex-direction: column;
     flex-wrap: wrap;
     max-height: 150px;
+  }
+  .id {
+    margin-bottom: 24px;
+    order: 1;
+    display: flex;
+    justify-content: left;
   }
 }
 

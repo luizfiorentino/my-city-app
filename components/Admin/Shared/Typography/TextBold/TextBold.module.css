@@ -18,6 +18,11 @@
   letter-spacing: -0.75px !important;
 }
 
+.hash {
+  color: #7e88c3;
+  font-weight: 400;
+}
+
 .orangeButton {
   width: 100px;
   padding: 14px 0 11px 0;

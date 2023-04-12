@@ -1,8 +1,16 @@
+.id {
+  display: flex;
+  flex-direction: column;
+}
+.idInner {
+  display: flex;
+}
+
 .defaultSpacing {
   margin-bottom: 15px;
 }
 
-.smallerSpacing {
+.idSpacing {
   margin-bottom: 4px;
 }
 
@@ -48,7 +56,15 @@
     margin-bottom: 45px;
   }
 
+  .id {
+    flex-direction: column;
+  }
+
   .idLargeScreen {
+    margin-bottom: 15px;
+  }
+
+  .idSpacing {
     margin-bottom: 15px;
   }
 
