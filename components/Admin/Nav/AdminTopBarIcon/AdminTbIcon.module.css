@@ -23,58 +23,22 @@
   height: 0;
   /* margin: 20px; */
   border-radius: 999px;
-  z-index: 30;
+  z-index: 15;
   rotate: 90deg;
 }
 
-.pacmanUp {
-  background: white;
-  width: 28px;
-  height: 14px;
-  /* margin-left: -5px;
-  margin-right: -5px; */
-  border-radius: 50px 50px 0 0;
-  /* rotate: 180deg; */
-  z-index: 5;
-  position: relative;
-}
-
-.pacmanInner {
-  background-color: red;
-  width: 30%;
-  height: 100%;
-  position: absolute;
-  left: 35%;
-  bottom: 0%;
-  border-radius: 50pxpx;
-}
-
-.triangle {
-  border-top: 30px solid blue;
-  border-right: 15px solid blue;
-  border-left: 15px solid transparent;
-}
-
-.pacman {
-  background: white;
-  width: 28px;
-  height: 14px;
-  /* margin-left: -5px;
-  margin-right: -5px; */
-  border-radius: 50px 50px 0 0;
-  rotate: 180deg;
-  z-index: 5;
-}
-
 .screen {
+  position: absolute;
   width: 72px;
   height: 72px;
-  border-radius: 0px, 20px, 20px;
+  /* left: calc(50% - 72px / 2 - 79.5px); */
+
+  top: 36.35px;
+  z-index: 10;
+
   background: #9277ff;
+  border-radius: 0px 20px 20px 0px;
   transform: matrix(-1, 0, 0, 1, 0, 0);
-  position: absolute;
-  top: 50%;
-  z-index: 0;
 }
 
 @media screen and (min-width: 948px) {
