@@ -20,6 +20,10 @@
   padding-bottom: 26px;
 }
 
+.backLink:hover {
+  color: var(--color--hover-grey);
+}
+
 .arrow {
   margin-right: 23px;
 }

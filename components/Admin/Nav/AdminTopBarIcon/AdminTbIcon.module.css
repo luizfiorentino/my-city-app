@@ -34,6 +34,12 @@
   border-radius: 999px;
   z-index: 15;
   rotate: 90deg;
+  transition: 0.3s;
+}
+
+.shapes:hover {
+  transform: rotate(90deg);
+  transition: 0.3s;
 }
 
 .screen {
