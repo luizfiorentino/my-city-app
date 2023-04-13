@@ -126,7 +126,7 @@
     position: static;
   }
 }
-@media screen and (min-width: 948px) {
+@media screen and (min-width: 1000px) {
   .cardMain {
     min-width: 800px;
   }
