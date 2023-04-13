@@ -1,5 +1,22 @@
+@media screen and (max-width: 216px) {
+  .main {
+    border-left: none !important;
+    border-top: 1px solid #494e6e;
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .image {
+  }
+}
+
 .main {
   border-left: 1px solid #494e6e;
+  /* background-color: red; */
+  display: flex;
+  min-height: 80px;
+  align-items: center;
 }
 
 .image {

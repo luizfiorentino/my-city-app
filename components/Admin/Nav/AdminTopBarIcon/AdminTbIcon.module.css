@@ -1,3 +1,12 @@
+@media screen and (max-width: 216px) {
+  .main {
+    width: 100% !important;
+  }
+  .screen {
+    width: 100% !important;
+  }
+}
+
 .main {
   width: 72px;
   height: 72px;
@@ -41,9 +50,38 @@
   transform: matrix(-1, 0, 0, 1, 0, 0);
 }
 
+@media screen and (min-width: 700px) {
+  .main {
+    width: 80px;
+    height: 80px;
+  }
+
+  .screen {
+    width: 80px;
+    height: 80px;
+    top: 40px;
+  }
+
+  .shapes {
+    border-width: 15px;
+
+    width: 30px;
+  }
+}
 @media screen and (min-width: 948px) {
   .main {
     width: 103px;
     height: 103px;
+  }
+  .screen {
+    width: 103px;
+    height: 103px;
+    top: 50px;
+  }
+
+  .shapes {
+    border-width: 20px;
+
+    width: 40px;
   }
 }
