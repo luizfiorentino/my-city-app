@@ -6,23 +6,32 @@
   }
 
   .cardMain > * {
-    text-align: center;
+    /* text-align: center; */
     width: 100%;
   }
 
   .id {
     display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 8px;
+  }
 
-    justify-content: center;
+  .posted {
+    margin-bottom: 24px !important;
   }
 
   .hash {
     justify-content: center;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+  }
+
+  .location {
+    margin-bottom: 8px;
   }
 
   .userName {
-    margin-bottom: 10px !important;
+    margin-bottom: 24px !important;
   }
 }
 
@@ -45,6 +54,8 @@
 
 .location {
   order: 3;
+  /* display: flex;
+  justify-content: right; */
 }
 
 .userName {
@@ -99,7 +110,7 @@
   }
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 712px) {
   .cardMain {
     flex-direction: row;
     align-items: center;

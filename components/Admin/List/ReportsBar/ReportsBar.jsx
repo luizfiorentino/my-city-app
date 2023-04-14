@@ -18,20 +18,26 @@ export default function ReportsBar(props) {
         </TextParagraph>
       </div>
       <div className={styles.filterAndEdit}>
-        <TextBold>
-          Filter{" "}
+        <TextBold className={styles.filter}>
+          Filter <span className={styles.filterExtraText}>by status</span>
           <img
             className={styles.arrowIcon}
             src={arrowIcon.src}
             alt="arrow down icon"
-          />
+          />{" "}
         </TextBold>{" "}
         <Link href="/">
           <p className={`${styles.newIssue} ${leagueSpartan.className}`}>
             <span className={styles.addIcon}>
               <span className={styles.plusSign}>+</span>
             </span>{" "}
-            New
+            <div className={styles.issueText}>
+              New{" "}
+              <span className={styles.extraText}>
+                {" "}
+                <span className={styles.ghost}>+</span>Issue
+              </span>
+            </div>
           </p>{" "}
         </Link>
       </div>
