@@ -27,7 +27,7 @@ export default function ReportsBar(props) {
           />{" "}
         </TextBold>{" "}
         <Link href="/">
-          <p className={`${styles.newIssue} ${leagueSpartan.className}`}>
+          <button className={`${styles.newIssue} ${leagueSpartan.className}`}>
             <span className={styles.addIcon}>
               <span className={styles.plusSign}>+</span>
             </span>{" "}
@@ -38,7 +38,7 @@ export default function ReportsBar(props) {
                 <span className={styles.ghost}>+</span>Issue
               </span>
             </div>
-          </p>{" "}
+          </button>{" "}
         </Link>
       </div>
     </div>

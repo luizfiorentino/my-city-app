@@ -9,12 +9,14 @@ export default function TextBold({
   ...props
 }) {
   //console.log("text bold", variant);
+  const TextTag = variant === "hash" ? "span" : "p";
+
   return (
-    <p
+    <TextTag
       {...props}
       className={`${styles.textBoldRegular} ${className} ${styles[variant]} ${leagueSpartan.className}`}
     >
       {children}
-    </p>
+    </TextTag>
   );
 }
