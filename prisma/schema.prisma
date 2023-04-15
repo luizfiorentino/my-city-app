@@ -17,4 +17,15 @@ model Issue {
   location          String
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
+  statusChange      StatusChange[]
+}
+
+model StatusChange {
+  id                String        @id @default(uuid())
+  status            String 
+  message           String
+  createdAt         DateTime      @default(now())
+  issueId           String 
+  issue             Issue         @relation(fields: [issueId], references: [id])
+
 }

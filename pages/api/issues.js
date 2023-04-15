@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ issues });
   }
   if (req.method === "POST") {
-    console.log("REQ BODY->", req.body.issue);
+    //console.log("REQ BODY->", req.body.issue);
     const newIssue = await prisma.issue.create({
       data: {
         userName: req.body.issue.userName,
