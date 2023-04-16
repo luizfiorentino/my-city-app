@@ -10,6 +10,15 @@ import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
 
+  const dayjs = require("dayjs");
+
+  const updates = props.updates.filter((update) => update.issueId === props.id);
+  console.log("updates from this issue card", updates, "props", props);
+
+  const changesOrderedByDate = updates.sort((a, b) => {
+    return dayjs(b.createdAt) - dayjs(a.createdAt);
+  });
+
   return (
     <BackgroundCanvas>
       <div
@@ -32,7 +41,9 @@ export default function IssueCard(props) {
           {props.userName}
         </TextParagraph>
         <TextBold variant="orangeButton" className={styles.submitted}>
-          <Link href={`admin/issues/${props.id}`}>· Submited</Link>
+          <Link href={`admin/issues/${props.id}`}>
+            · {changesOrderedByDate[0]["status"]}
+          </Link>
         </TextBold>
         {showDescription === false ? (
           <img

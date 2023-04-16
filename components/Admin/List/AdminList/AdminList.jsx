@@ -4,7 +4,7 @@ import AdminTopBar from "../../Nav/AdminTopBar";
 import ReportsBar from "../ReportsBar";
 import IssueCard from "../IssueCard";
 export default function AdminList(props) {
-  //console.log("props.issues", props.issues);
+  console.log("ADMIN LIST props.issues", props);
   return (
     <div className={styles.main}>
       {/* {props.issues ? undefined : <p>Problem with db</p>} */}
@@ -21,6 +21,7 @@ export default function AdminList(props) {
               userName={issue.userName}
               description={issue.description}
               location={issue.location}
+              updates={props.updates}
             />
           ))}
         </div>

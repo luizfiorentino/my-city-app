@@ -3,10 +3,11 @@ import { Inter } from "next/font/google";
 import AdminList from "@/components/Admin/List/AdminList";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
+import { all } from "axios";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ issues }) {
+export default function Home({ issues, statusUpdates }) {
   const reports = issues.map((issue) => issue.description);
   console.log("issues=>", issues);
   return (
@@ -22,7 +23,7 @@ export default function Home({ issues }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <AdminList data={issues} issues={reports} />
+        <AdminList data={issues} issues={reports} updates={statusUpdates} />
       </main>
     </>
   );
@@ -31,7 +32,12 @@ export default function Home({ issues }) {
 export async function getServerSideProps() {
   try {
     const issues = await prisma.issue.findMany();
-    return { props: { issues: serialize(issues) } };
+    const allUpdates = await prisma.statusChange.findMany();
+    const statusUpdates = allUpdates.map((update) => {
+      return serialize(update);
+    });
+
+    return { props: { issues: serialize(issues), statusUpdates } };
   } catch (e) {
     console.log("db error:", e);
   }
