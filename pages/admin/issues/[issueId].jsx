@@ -9,8 +9,8 @@ import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 
-export default function IssueStatus({ issue }) {
-  console.log("issue det page top", issue);
+export default function IssueStatus({ issue, arrayChanges }) {
+  console.log("issue det page top", issue, "array", arrayChanges);
 
   return (
     <div className={styles.container}>
@@ -33,6 +33,7 @@ export default function IssueStatus({ issue }) {
           userName={issue.userName}
           location={issue.location}
           description={issue.description}
+          arrayChanges={arrayChanges}
         />
       </div>
     </div>
@@ -46,8 +47,19 @@ export async function getServerSideProps(context) {
         id: context.params.issueId,
       },
     });
+    const statusChanges = await prisma.statusChange.findMany({
+      where: {
+        issueId: context.params.issueId,
+      },
+    });
+    const arrayChanges = statusChanges.map((change) => serialize(change));
 
-    return { props: { issue: serialize(issue) } };
+    return {
+      props: {
+        issue: serialize(issue),
+        arrayChanges: arrayChanges,
+      },
+    };
   } catch (e) {
     console.log("db error:", e);
   }
