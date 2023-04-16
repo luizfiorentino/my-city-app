@@ -26,14 +26,13 @@ export default function IssueStatus({ issue, arrayChanges }) {
           </span>
           <TextBold className={styles.backLink}>Go back</TextBold>
         </Link>
-        <StatusCard />
+        <StatusCard arrayChanges={arrayChanges} />
         <DetailsPlate
           id={issue.id}
           createdAt={issue.createdAt}
           userName={issue.userName}
           location={issue.location}
           description={issue.description}
-          arrayChanges={arrayChanges}
         />
       </div>
     </div>
