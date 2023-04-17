@@ -21,6 +21,7 @@ export default function StatusCard({ arrayChanges }) {
           issueId: arrayChanges[0]["issueId"],
         },
       });
+      window.alert("Status updated");
       console.log("NEW STATUS", newStatus);
     } catch (e) {
       console.log(e.message);

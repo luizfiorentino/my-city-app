@@ -13,7 +13,7 @@ export default function IssueStatus({ issue, arrayChanges }) {
   //console.log("issue det page top", issue, "array", arrayChanges);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${styles.overlay}`}>
       <AdminTopBar className={styles.tb} />
       <div className={styles.detailsPageMain}>
         <Link

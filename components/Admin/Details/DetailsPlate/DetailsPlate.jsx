@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DetailsPlate.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import { dateFormat } from "@/utils/serialize";
+import StatusMessage from "../StatusMessage/StatusMessage";
 
 export default function DetailsPlate({
   id,
@@ -12,8 +13,19 @@ export default function DetailsPlate({
   location,
   description,
 }) {
+  const [openModal, setOpenModal] = useState(false);
+  console.log("POENMODAL", openModal);
   return (
-    <BackgroundCanvas className={styles.detailsMain}>
+    <BackgroundCanvas
+      className={`${styles.detailsMain} ${
+        openModal === true ? styles.overlay : undefined
+      }`}
+    >
+      <button onClick={() => setOpenModal(true)}>Modal</button>
+      <StatusMessage
+        open={openModal}
+        onClose={() => setOpenModal(!openModal)}
+      />
       <div className={styles.top}>
         <div className={styles.id}>
           <div className={`${styles.idInner} ${styles.idSpacing}`}>
