@@ -21,7 +21,7 @@ export default function AdminList(props) {
               userName={issue.userName}
               description={issue.description}
               location={issue.location}
-              updates={props.updates}
+              updates={issue.statusChange}
             />
           ))}
         </div>

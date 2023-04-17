@@ -54,6 +54,12 @@ export default function UserForm() {
           location: data.location,
         },
       });
+      const firstStatus = await axios.post(`./api/statusChanges`, {
+        statusChange: {
+          status: "Submitted",
+          issueId: newIssue.id,
+        },
+      });
 
       // setValue("userName", "");
       // setValue("description", "");
