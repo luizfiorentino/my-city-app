@@ -10,7 +10,7 @@ import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 
 export default function IssueStatus({ issue, arrayChanges }) {
-  console.log("issue det page top", issue, "array", arrayChanges);
+  //console.log("issue det page top", issue, "array", arrayChanges);
 
   return (
     <div className={styles.container}>

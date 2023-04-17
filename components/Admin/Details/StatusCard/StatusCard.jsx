@@ -14,8 +14,8 @@ export default function StatusCard({ arrayChanges }) {
     return dayjs(date.createdAt);
   });
 
-  console.log("ordered by date", changesOrderedByDate);
-  console.log("date test", dateTest);
+  //console.log("ordered by date", changesOrderedByDate);
+  //console.log("date test", dateTest);
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
       <TextParagraph className={styles.status}>Status</TextParagraph>

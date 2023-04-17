@@ -13,7 +13,7 @@ export default function IssueCard(props) {
   const dayjs = require("dayjs");
 
   const updates = props.updates.filter((update) => update.issueId === props.id);
-  console.log("updates from this issue card", updates, "props", props);
+  //console.log("updates from this issue card", updates, "props", props);
 
   const changesOrderedByDate = updates.sort((a, b) => {
     return dayjs(b.createdAt) - dayjs(a.createdAt);
