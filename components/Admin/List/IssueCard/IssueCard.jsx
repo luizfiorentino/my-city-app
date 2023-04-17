@@ -9,6 +9,7 @@ import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
+  console.log("ISSUE CARD PROPS ->", props);
 
   return (
     <BackgroundCanvas>

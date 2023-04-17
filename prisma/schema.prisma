@@ -12,6 +12,7 @@ datasource db {
 
 model Issue {
   id                String        @id @default(uuid())
+  // id String @id @default(auto()) @map("_id") @db.ObjectId
   userName          String        
   description       String?
   location          String
@@ -25,7 +26,7 @@ model StatusChange {
   status            String 
   message           String
   createdAt         DateTime      @default(now())
-  issueId           String 
+  issueId           String
   issue             Issue         @relation(fields: [issueId], references: [id])
-
+          
 }

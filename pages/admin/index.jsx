@@ -41,7 +41,11 @@ export async function getServerSideProps() {
       },
     });
 
-    return { props: { issues: serialize(issues) } };
+    return {
+      props: {
+        issues: serialize(issues),
+      },
+    };
   } catch (e) {
     console.log("db error:", e);
   }

@@ -54,12 +54,23 @@ export default function UserForm() {
           location: data.location,
         },
       });
+      //console.log("WHAT IS THIS", newIssue);
       const firstStatus = await axios.post(`./api/statusChanges`, {
         statusChange: {
           status: "Submitted",
-          issueId: newIssue.id,
+          message: "first update",
+          issueId: newIssue.data.newIssue.id,
         },
       });
+      // return newIssue;
+
+      // const firstStatus = await axios.post(`./api/statusChanges`, {
+      //   statusChange: {
+      //     status: "Submitted",
+      //     message: "issue just posted",
+      //     issueId: bla,
+      //   },
+      // });
 
       // setValue("userName", "");
       // setValue("description", "");
@@ -67,6 +78,7 @@ export default function UserForm() {
       reset();
 
       setSuccessRequest(true);
+      // console.log("ID NEW ISSUE ->", newIssue.id);
     } catch (e) {
       console.log(e.message);
     }
