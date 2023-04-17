@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./StatusCard.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
+import axios from "axios";
 
 export default function StatusCard({ arrayChanges }) {
   const dayjs = require("dayjs");
@@ -10,18 +11,56 @@ export default function StatusCard({ arrayChanges }) {
     return dayjs(b.createdAt) - dayjs(a.createdAt);
   });
 
+  const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
+  const updateStatus = async () => {
+    try {
+      const newStatus = await axios.post(`../../api/statusChanges`, {
+        statusChange: {
+          status: status,
+          message: "status updated",
+          issueId: arrayChanges[0]["issueId"],
+        },
+      });
+      console.log("NEW STATUS", newStatus);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   const dateTest = arrayChanges.map((date) => {
     return dayjs(date.createdAt);
   });
 
   //console.log("ordered by date", changesOrderedByDate);
-  //console.log("date test", dateTest);
+  console.log("array changes sttus card", arrayChanges);
+
+  const buttonOptions = [
+    "Submitted",
+    "On progress",
+    "Information needed",
+    "Done",
+  ];
+
+  console.log("STATUS", status);
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
       <TextParagraph className={styles.status}>Status</TextParagraph>
+
       <TextBold variant="orangeButton" className={styles.pending}>
-        · {changesOrderedByDate[0]["status"]}
+        · {status}{" "}
       </TextBold>
+      <select value={status} onChange={(e) => setStatus(e.target.value)}>
+        {buttonOptions.map((option) => (
+          <option> {option} </option>
+        ))}
+      </select>
+      <button onClick={updateStatus}>confirm</button>
     </BackgroundCanvas>
   );
+}
+
+{
+  /* <TextBold variant="orangeButton" className={styles.pending}>
+· {changesOrderedByDate[0]["status"]}{" "}
+</TextBold> */
 }
