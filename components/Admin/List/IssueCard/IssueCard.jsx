@@ -10,15 +10,6 @@ import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
 
-  // const dayjs = require("dayjs");
-
-  // const updates = props.updates.filter((update) => update.issueId === props.id);
-  console.log("props.STATUSCHANGE", props);
-
-  // const changesOrderedByDate = updates.sort((a, b) => {
-  //   return dayjs(b.createdAt) - dayjs(a.createdAt);
-  // });
-
   return (
     <BackgroundCanvas>
       <div
