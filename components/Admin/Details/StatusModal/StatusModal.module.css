@@ -1,11 +1,40 @@
 .modalContainer {
   width: 50%;
-  min-height: 300px;
+  min-height: 150px;
   /* position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex; */
-  background-color: white;
+  /* background-color: white; */
+  border: 1px solid white;
+  border-radius: 8px;
   box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 5rem 2rem;
+}
+
+.canvas {
+}
+
+.confirmationMessage {
+  margin-bottom: 1rem;
+  color: var(--color--intense-purple) !important;
+  font-size: 18px !important;
+}
+
+.button {
+  border: none;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+.confirmText {
+  /* border: 2px solid var(--color--intense-purple); */
 }

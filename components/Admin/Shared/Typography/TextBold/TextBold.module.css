@@ -39,3 +39,25 @@
   background-color: var(--color--bg-submited);
   border-radius: 6px;
 }
+
+.purpleButton {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  color: var(--color--intense-purple);
+  /* background-color: var(--color--bg-light); */
+  background-color: white;
+  border-radius: 6px;
+}
+
+.redButton {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  color: red;
+  /* background-color: var(--color--bg-light); */
+  background-color: white;
+  border-radius: 6px;
+}

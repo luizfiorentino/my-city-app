@@ -16,7 +16,8 @@
 }
 
 .overlay {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--color--bg-canvas);
+  opacity: 0.9;
   position: fixed;
   margin-top: -20rem;
 

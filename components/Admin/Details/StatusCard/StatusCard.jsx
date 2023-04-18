@@ -31,8 +31,8 @@ export default function StatusCard({ arrayChanges }) {
           issueId: arrayChanges[0]["issueId"],
         },
       });
-      window.alert("Status updated");
-      console.log("NEW STATUS", newStatus);
+
+      //console.log("NEW STATUS", newStatus);
     } catch (e) {
       console.log(e.message);
     }
@@ -76,7 +76,9 @@ export default function StatusCard({ arrayChanges }) {
           onClose={() => setOpenModal(false)}
           updateStatus={updateStatus}
         />
-        <button onClick={() => setOpenModal(true)}>change</button>
+        {openModal ? undefined : (
+          <button onClick={() => setOpenModal(true)}>change</button>
+        )}
       </div>
     </BackgroundCanvas>
   );
