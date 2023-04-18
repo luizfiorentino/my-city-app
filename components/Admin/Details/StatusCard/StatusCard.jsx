@@ -22,12 +22,12 @@ export default function StatusCard({ arrayChanges }) {
   }
 
   const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
-  const updateStatus = async () => {
+  const updateStatus = async (message) => {
     try {
       const newStatus = await axios.post(`../../api/statusChanges`, {
         statusChange: {
           status: status,
-          message: "status updated",
+          message: message,
           issueId: arrayChanges[0]["issueId"],
         },
       });

@@ -51,6 +51,17 @@
   border-radius: 6px;
 }
 
+.purpleButtonInactive {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  color: var(--color--hash);
+  /* background-color: var(--color--bg-light); */
+  background-color: rgba(37, 41, 69, 0.9);
+  border-radius: 6px;
+}
+
 .redButton {
   width: 100px;
   padding: 14px 0 11px 0;
