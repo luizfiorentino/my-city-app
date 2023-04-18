@@ -26,7 +26,7 @@ export default function IssueStatus({ issue, arrayChanges }) {
           </span>
           <TextBold className={styles.backLink}>Go back</TextBold>
         </Link>
-        <StatusCard arrayChanges={arrayChanges} />
+        <StatusCard arrayChanges={issue.statusChange} />
         <DetailsPlate
           id={issue.id}
           createdAt={issue.createdAt}
@@ -45,18 +45,25 @@ export async function getServerSideProps(context) {
       where: {
         id: context.params.issueId,
       },
-    });
-    const statusChanges = await prisma.statusChange.findMany({
-      where: {
-        issueId: context.params.issueId,
+      include: {
+        statusChange: true,
       },
     });
-    const arrayChanges = statusChanges.map((change) => serialize(change));
+
+    // no longer necessary due to the "include" above
+    // const statusChanges = await prisma.statusChange.findMany({
+    //   where: {
+    //     issueId: context.params.issueId,
+    //   },
+    // });
+    // const arrayChanges = statusChanges.map((change) => serialize(change));
+    // don't need to serialize so, we can do it with the whole array
+    // props: (...) arrayChanges: serialize(statusChanges)
 
     return {
       props: {
         issue: serialize(issue),
-        arrayChanges: arrayChanges,
+        // arrayChanges: arrayChanges,
       },
     };
   } catch (e) {
