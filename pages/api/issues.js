@@ -14,6 +14,14 @@ export default async function handler(req, res) {
         userName: req.body.issue.userName,
         description: req.body.issue.description,
         location: req.body.issue.location,
+        statusChange: {
+          create: [
+            {
+              status: "Submitted",
+              message: "first update",
+            },
+          ],
+        },
       },
     });
 

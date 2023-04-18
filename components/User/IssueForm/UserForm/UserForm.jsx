@@ -54,14 +54,16 @@ export default function UserForm() {
           location: data.location,
         },
       });
+
       //console.log("WHAT IS THIS", newIssue);
-      const firstStatus = await axios.post(`./api/statusChanges`, {
-        statusChange: {
-          status: "Submitted",
-          message: "first update",
-          issueId: newIssue.data.newIssue.id,
-        },
-      });
+      // not the best way since relays too much on the user's internet connection
+      // const firstStatus = await axios.post(`./api/statusChanges`, {
+      //   statusChange: {
+      //     status: "Submitted",
+      //     message: "first update",
+      //     issueId: newIssue.data.newIssue.id,
+      //   },
+      // });
       // return newIssue;
 
       // const firstStatus = await axios.post(`./api/statusChanges`, {
