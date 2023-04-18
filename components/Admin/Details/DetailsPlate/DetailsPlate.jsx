@@ -14,18 +14,24 @@ export default function DetailsPlate({
   description,
 }) {
   const [openModal, setOpenModal] = useState(false);
-  console.log("POENMODAL", openModal);
+  console.log("openModal", openModal);
+
+  function close(e) {
+    if (e.target.id === "overlay") {
+      setOpenModal(false);
+    }
+  }
+
   return (
-    <BackgroundCanvas
-      className={`${styles.detailsMain} ${
-        openModal === true ? styles.overlay : undefined
-      }`}
-    >
+    <BackgroundCanvas className={styles.detailsMain}>
       <button onClick={() => setOpenModal(true)}>Modal</button>
-      <StatusMessage
-        open={openModal}
-        onClose={() => setOpenModal(!openModal)}
-      />
+      <div
+        id="overlay"
+        className={`${openModal === true ? styles.overlay : undefined}`}
+        onClick={openModal ? close : null}
+      >
+        <StatusMessage open={openModal} onClose={() => setOpenModal(false)} />
+      </div>{" "}
       <div className={styles.top}>
         <div className={styles.id}>
           <div className={`${styles.idInner} ${styles.idSpacing}`}>

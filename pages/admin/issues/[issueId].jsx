@@ -9,11 +9,11 @@ import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 
-export default function IssueStatus({ issue, arrayChanges }) {
+export default function IssueStatus({ issue }) {
   //console.log("issue det page top", issue, "array", arrayChanges);
 
   return (
-    <div className={`${styles.container} ${styles.overlay}`}>
+    <div className={styles.container}>
       <AdminTopBar className={styles.tb} />
       <div className={styles.detailsPageMain}>
         <Link
