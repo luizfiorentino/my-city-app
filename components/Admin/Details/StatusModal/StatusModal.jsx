@@ -19,7 +19,11 @@ export default function StatusMessage({ open, onClose, updateStatus }) {
       <TextBold variant="higherLine" className={styles.confirmationMessage}>
         Enter a message related to the new status:
       </TextBold>
-      <textarea type="text" onChange={(e) => setMessage(e.target.value)} />
+      <textarea
+        type="text"
+        onChange={(e) => setMessage(e.target.value)}
+        className={styles.textArea}
+      />
       <div className={styles.buttons}>
         <button
           onClick={submit}

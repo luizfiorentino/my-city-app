@@ -18,9 +18,6 @@
   padding: 5rem 2rem;
 }
 
-.canvas {
-}
-
 .confirmationMessage {
   margin-bottom: 1rem;
   color: var(--color--intense-purple) !important;
@@ -35,6 +32,8 @@
   display: flex;
   gap: 1rem;
 }
-.confirmText {
-  /* border: 2px solid var(--color--intense-purple); */
+
+.textArea {
+  margin-bottom: 1rem;
+  width: 100%;
 }
