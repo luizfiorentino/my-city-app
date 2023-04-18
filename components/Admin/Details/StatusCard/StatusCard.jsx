@@ -4,12 +4,22 @@ import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import axios from "axios";
+import StatusModal from "../StatusModal/StatusModal";
 
 export default function StatusCard({ arrayChanges }) {
   const dayjs = require("dayjs");
   const changesOrderedByDate = arrayChanges.sort((a, b) => {
     return dayjs(b.createdAt) - dayjs(a.createdAt);
   });
+
+  const [openModal, setOpenModal] = useState(false);
+  console.log("openModal", openModal);
+
+  function close(e) {
+    if (e.target.id === "overlay") {
+      setOpenModal(false);
+    }
+  }
 
   const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
   const updateStatus = async () => {
@@ -55,7 +65,15 @@ export default function StatusCard({ arrayChanges }) {
           <option> {option} </option>
         ))}
       </select>
-      <button onClick={updateStatus}>confirm</button>
+      <button onClick={updateStatus}>change</button>
+      <div
+        id="overlay"
+        className={`${openModal === true ? styles.overlay : undefined}`}
+        onClick={openModal ? close : null}
+      >
+        <StatusModal open={openModal} onClose={() => setOpenModal(false)} />
+        <button onClick={() => setOpenModal(true)}>Modal</button>
+      </div>
     </BackgroundCanvas>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./StatusMessage.module.css";
+import styles from "./StatusModal.module.css";
 
 export default function StatusMessage({ open, onClose }) {
   if (!open) return null;
