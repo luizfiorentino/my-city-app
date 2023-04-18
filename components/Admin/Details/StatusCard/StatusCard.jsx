@@ -65,14 +65,18 @@ export default function StatusCard({ arrayChanges }) {
           <option> {option} </option>
         ))}
       </select>
-      <button onClick={updateStatus}>change</button>
+      {/* <button onClick={updateStatus}>change</button> */}
       <div
         id="overlay"
         className={`${openModal === true ? styles.overlay : undefined}`}
         onClick={openModal ? close : null}
       >
-        <StatusModal open={openModal} onClose={() => setOpenModal(false)} />
-        <button onClick={() => setOpenModal(true)}>Modal</button>
+        <StatusModal
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          updateStatus={updateStatus}
+        />
+        <button onClick={() => setOpenModal(true)}>change</button>
       </div>
     </BackgroundCanvas>
   );
