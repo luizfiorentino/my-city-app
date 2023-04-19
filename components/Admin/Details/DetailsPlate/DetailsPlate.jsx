@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./DetailsPlate.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
@@ -49,6 +49,12 @@ export default function DetailsPlate({
           <TextBold className={styles.largeSpacing}>{location}</TextBold>
         </div>
       </div>
+
+      <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
+        <TextParagraph variant="whiteText" size="large">
+          {description}
+        </TextParagraph>
+      </BackgroundCanvas>
       <TextParagraph className={styles.smallerSpacing}>
         Description
       </TextParagraph>

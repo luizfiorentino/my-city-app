@@ -3,16 +3,15 @@ import styles from "./StatusModal.module.css";
 import TextBold from "../../Shared/Typography/TextBold/TextBold";
 import TextParagraph from "../../Shared/Typography/TextParagraph/TextParagraph";
 
-export default function StatusMessage({ open, onClose, updateStatus }) {
-  const [message, setMessage] = useState("");
-
+export default function StatusMessage({
+  open,
+  onClose,
+  updateStatus,
+  message,
+  setMessage,
+  submit,
+}) {
   if (!open) return null;
-
-  const submit = () => {
-    updateStatus(message);
-    onClose();
-    setMessage("");
-  };
 
   return (
     <div className={styles.modalContainer}>
