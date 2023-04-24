@@ -17,7 +17,7 @@ export default function DetailsPlate({
   arrayChanges,
 }) {
   //console.log("ARRAY CHANGES ->", arrayChanges);
-  const [historyData, setHistoryData] = useState([]);
+  const [historyData, setHistoryData] = useState(arrayChanges);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(3);
 
@@ -31,7 +31,9 @@ export default function DetailsPlate({
     "total cards",
     totalCards,
     "currentPage",
-    currentPage
+    currentPage,
+    "currentCards",
+    currentCards
   );
 
   // const pagination = () => {
@@ -50,11 +52,6 @@ export default function DetailsPlate({
 
   return (
     <BackgroundCanvas className={styles.detailsMain}>
-      <Pagination
-        totalCards={totalCards}
-        cardsPerPage={cardsPerPage}
-        setCurrentPage={setCurrentPage}
-      />
       <div className={styles.top}>
         <div className={styles.id}>
           <div className={`${styles.idInner} ${styles.idSpacing}`}>
@@ -103,7 +100,12 @@ export default function DetailsPlate({
       <TextParagraph className={styles.smallerSpacing}>
         {arrayChanges.length} updates
       </TextParagraph>
-      {arrayChanges.map((change) => (
+      <Pagination
+        totalCards={totalCards}
+        cardsPerPage={cardsPerPage}
+        setCurrentPage={setCurrentPage}
+      />
+      {currentCards.map((change) => (
         <StatusCard
           key={change.id}
           issueStatus={change.status}
