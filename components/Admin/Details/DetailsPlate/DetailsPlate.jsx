@@ -4,7 +4,6 @@ import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import { dateFormat } from "@/utils/serialize";
-import IssueCard from "../../List/IssueCard/IssueCard";
 import StatusCard from "../StatusCard/StatusCard";
 import { Pagination } from "@/utils/serialize";
 
@@ -101,14 +100,10 @@ export default function DetailsPlate({
           key={change.id}
           issueStatus={change.status}
           issueMessage={change.message}
+          issueDate={change.createdAt}
           isHistory={true}
         />
       ))}
-      <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
-        <TextParagraph variant="whiteText" size="large">
-          {description}
-        </TextParagraph>
-      </BackgroundCanvas>
     </BackgroundCanvas>
   );
 }

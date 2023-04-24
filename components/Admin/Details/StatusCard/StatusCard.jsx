@@ -5,11 +5,13 @@ import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import axios from "axios";
 import StatusModal from "../StatusModal/StatusModal";
-import { set } from "zod";
+import { date, set } from "zod";
+import { dateFormat } from "@/utils/serialize";
 
 export default function StatusCard({
   arrayChanges,
   issueStatus,
+  issueDate,
   issueMessage,
   isHistory,
 }) {
@@ -97,19 +99,20 @@ export default function StatusCard({
           </TextBold>
         ) : undefined}
 
-        <div className={styles.selector}>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className={styles.selectorInner}
-          >
-            {buttonOptions.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
-          </select>
-        </div>
+        {isHistory === false ? (
+          <div className={styles.selector}>
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className={styles.selectorInner}
+            >
+              {buttonOptions.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+        ) : undefined}
 
-        {/* <button onClick={updateStatus}>change</button> */}
         <div
           id="overlay"
           className={`${openModal === true ? styles.overlay : undefined}`}
@@ -123,13 +126,15 @@ export default function StatusCard({
             setMessage={setMessage}
             submit={submit}
           />
-          {openModal ? undefined : (
+          {openModal || isHistory !== false ? undefined : (
             <button onClick={() => setOpenModal(true)}>change</button>
           )}
         </div>
       </div>
       <div className={styles.currentMessage}>
-        <TextParagraph>Current status</TextParagraph>
+        <TextParagraph>
+          {isHistory === false ? "Current status" : dateFormat(issueDate)}
+        </TextParagraph>
         {isHistory === false ? (
           <BackgroundCanvas
             variant="lighterCanvas"
