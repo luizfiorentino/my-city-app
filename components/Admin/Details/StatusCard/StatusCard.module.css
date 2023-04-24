@@ -54,6 +54,17 @@
   text-align: center;
 }
 
+.selectorInner {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  color: var(--color--orange);
+  /* background-color: var(--color--bg-submited); */
+
+  border-radius: 6px;
+}
+
 @media screen and (min-width: 640px) {
   .statusCardContainer {
     padding: 24px 48px 27px;

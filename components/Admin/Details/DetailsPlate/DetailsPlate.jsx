@@ -4,6 +4,8 @@ import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import { dateFormat } from "@/utils/serialize";
+import IssueCard from "../../List/IssueCard/IssueCard";
+import StatusCard from "../StatusCard/StatusCard";
 
 export default function DetailsPlate({
   id,
@@ -11,7 +13,9 @@ export default function DetailsPlate({
   userName,
   location,
   description,
+  arrayChanges,
 }) {
+  console.log("ARRAY CHANGES ->", arrayChanges);
   return (
     <BackgroundCanvas className={styles.detailsMain}>
       <div className={styles.top}>
@@ -50,14 +54,26 @@ export default function DetailsPlate({
         </div>
       </div>
 
+      <TextParagraph className={styles.smallerSpacing}>
+        Description
+      </TextParagraph>
       <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
         <TextParagraph variant="whiteText" size="large">
           {description}
         </TextParagraph>
       </BackgroundCanvas>
+      <TextBold>History</TextBold>
       <TextParagraph className={styles.smallerSpacing}>
-        Description
+        {arrayChanges.length} updates
       </TextParagraph>
+      {arrayChanges.map((change) => (
+        <StatusCard
+          key={change.id}
+          issueStatus={change.status}
+          issueMessage={change.message}
+          isHistory={true}
+        />
+      ))}
       <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
         <TextParagraph variant="whiteText" size="large">
           {description}

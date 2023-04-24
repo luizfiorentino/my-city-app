@@ -7,11 +7,20 @@ import axios from "axios";
 import StatusModal from "../StatusModal/StatusModal";
 import { set } from "zod";
 
-export default function StatusCard({ arrayChanges }) {
+export default function StatusCard({
+  arrayChanges,
+  issueStatus,
+  issueMessage,
+  isHistory,
+}) {
   const dayjs = require("dayjs");
-  const changesOrderedByDate = arrayChanges.sort((a, b) => {
-    return dayjs(b.createdAt) - dayjs(a.createdAt);
-  });
+
+  const changesOrderedByDate =
+    isHistory === false
+      ? arrayChanges.sort((a, b) => {
+          return dayjs(b.createdAt) - dayjs(a.createdAt);
+        })
+      : undefined;
 
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
@@ -23,9 +32,11 @@ export default function StatusCard({ arrayChanges }) {
     }
   }
 
-  console.log("statu card", changesOrderedByDate[0]["message"]);
+  //console.log("statu card", changesOrderedByDate[0]["message"]);
 
-  const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
+  const [status, setStatus] = useState(
+    isHistory === false ? changesOrderedByDate[0]["status"] : "not applied"
+  );
   const updateStatus = async (message) => {
     try {
       const newStatus = await axios.post(`../../api/statusChanges`, {
@@ -48,12 +59,12 @@ export default function StatusCard({ arrayChanges }) {
     // setMessage("");
   };
 
-  const dateTest = arrayChanges.map((date) => {
-    return dayjs(date.createdAt);
-  });
+  // const dateTest = arrayChanges.map((date) => {
+  //   return dayjs(date.createdAt);
+  // });
 
   //console.log("ordered by date", changesOrderedByDate);
-  console.log("array changes sttus card", arrayChanges);
+  //console.log("array changes sttus card", arrayChanges);
 
   const buttonOptions = [
     "Submitted",
@@ -64,7 +75,8 @@ export default function StatusCard({ arrayChanges }) {
 
   console.log("STATUS", status);
 
-  const currentMessage = changesOrderedByDate[0]["message"];
+  const currentMessage =
+    isHistory === false ? changesOrderedByDate[0]["message"] : "not applied";
 
   useEffect(() => {
     setMessage(message);
@@ -74,14 +86,29 @@ export default function StatusCard({ arrayChanges }) {
     <BackgroundCanvas className={styles.statusCardContainer}>
       <div className={styles.topCard}>
         <TextParagraph className={styles.status}>Status</TextParagraph>
-        <TextBold variant="orangeButton" className={styles.pending}>
-          · {status}{" "}
-        </TextBold>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          {buttonOptions.map((option) => (
-            <option key={option}> {option} </option>
-          ))}
-        </select>
+        {isHistory === false ? (
+          <TextBold variant="orangeButton" className={styles.pending}>
+            · {status}{" "}
+          </TextBold>
+        ) : undefined}
+        {isHistory === true ? (
+          <TextBold variant="orangeButton" className={styles.pending}>
+            · {issueStatus}{" "}
+          </TextBold>
+        ) : undefined}
+
+        <div className={styles.selector}>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className={styles.selectorInner}
+          >
+            {buttonOptions.map((option) => (
+              <option key={option}>{option}</option>
+            ))}
+          </select>
+        </div>
+
         {/* <button onClick={updateStatus}>change</button> */}
         <div
           id="overlay"
@@ -103,12 +130,22 @@ export default function StatusCard({ arrayChanges }) {
       </div>
       <div className={styles.currentMessage}>
         <TextParagraph>Current status</TextParagraph>
-        <BackgroundCanvas
-          variant="lighterCanvas"
-          className={styles.messageCanvas}
-        >
-          {!message ? currentMessage : message}
-        </BackgroundCanvas>
+        {isHistory === false ? (
+          <BackgroundCanvas
+            variant="lighterCanvas"
+            className={styles.messageCanvas}
+          >
+            {!message ? currentMessage : message}
+          </BackgroundCanvas>
+        ) : undefined}
+        {isHistory === true ? (
+          <BackgroundCanvas
+            variant="lighterCanvas"
+            className={styles.messageCanvas}
+          >
+            {issueMessage}
+          </BackgroundCanvas>
+        ) : undefined}
       </div>
     </BackgroundCanvas>
   );
