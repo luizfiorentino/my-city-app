@@ -17,7 +17,10 @@ export default function DetailsPlate({
   arrayChanges,
 }) {
   //console.log("ARRAY CHANGES ->", arrayChanges);
-  const [historyData, setHistoryData] = useState(arrayChanges);
+  const arrayHistory = arrayChanges.filter(
+    (change) => change !== arrayChanges[0]
+  );
+  const [historyData, setHistoryData] = useState(arrayHistory);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(3);
 
@@ -33,22 +36,10 @@ export default function DetailsPlate({
     "currentPage",
     currentPage,
     "currentCards",
-    currentCards
+    currentCards,
+    "arrayHistory",
+    arrayHistory
   );
-
-  // const pagination = () => {
-  //   let pages = [];
-
-  //   for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
-  //     return (
-  //       <div>
-  //         {pages.map((page, index) => {
-  //           return <button key={index}>{page}</button>;
-  //         })}
-  //       </div>
-  //     );
-  //   }
-  // };
 
   return (
     <BackgroundCanvas className={styles.detailsMain}>
