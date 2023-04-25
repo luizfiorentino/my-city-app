@@ -8,9 +8,10 @@ import StatusCard from "@/components/Admin/Details/StatusCard";
 import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
+import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
 
 export default function IssueStatus({ issue }) {
-  //console.log("issue det page top", issue, "array", arrayChanges);
+  console.log("issue det page top", issue, "array");
 
   return (
     <div className={styles.container}>
@@ -36,6 +37,42 @@ export default function IssueStatus({ issue }) {
           arrayChanges={issue.statusChange}
         />
       </div>
+      <BackgroundCanvas className={styles.footer}>
+        <div className={styles.buttonsPannel}>
+          <button
+            onClick={() => setOpenModal(true)}
+            className={styles.buttonEdit}
+          >
+            <TextBold size="large" className={styles.editButton}>
+              Edit
+            </TextBold>
+          </button>
+
+          <button
+            onClick={() => setOpenModal(true)}
+            className={styles.buttonEdit}
+          >
+            <TextBold
+              size="large"
+              className={`${styles.editButton} ${styles.deleteButton}`}
+            >
+              Delete
+            </TextBold>
+          </button>
+
+          <button
+            onClick={() => setOpenModal(true)}
+            className={styles.buttonEdit}
+          >
+            <TextBold
+              size="large"
+              className={`${styles.editButton} ${styles.solvedButton}`}
+            >
+              Mark as solved
+            </TextBold>
+          </button>
+        </div>
+      </BackgroundCanvas>
     </div>
   );
 }

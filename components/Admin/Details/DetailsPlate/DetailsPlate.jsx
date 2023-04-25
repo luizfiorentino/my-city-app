@@ -90,8 +90,21 @@ export default function DetailsPlate({
         </div>
 
         <TextParagraph className={styles.smallerSpacing}>
+          Current message
+        </TextParagraph>
+
+        <BackgroundCanvas
+          variant="lighterCanvas"
+          className={styles.description}
+        >
+          <TextParagraph variant="whiteText" size="large">
+            {arrayChanges[0].message}
+          </TextParagraph>
+        </BackgroundCanvas>
+        <TextParagraph className={styles.smallerSpacing}>
           Description
         </TextParagraph>
+
         <BackgroundCanvas
           variant="lighterCanvas"
           className={styles.description}
@@ -118,42 +131,6 @@ export default function DetailsPlate({
             isHistory={true}
           />
         ))}
-      </BackgroundCanvas>
-      <BackgroundCanvas className={styles.footer}>
-        <div className={styles.buttonsPannel}>
-          <button
-            onClick={() => setOpenModal(true)}
-            className={styles.buttonEdit}
-          >
-            <TextBold size="large" className={styles.editButton}>
-              Edit
-            </TextBold>
-          </button>
-
-          <button
-            onClick={() => setOpenModal(true)}
-            className={styles.buttonEdit}
-          >
-            <TextBold
-              size="large"
-              className={`${styles.editButton} ${styles.deleteButton}`}
-            >
-              Delete
-            </TextBold>
-          </button>
-
-          <button
-            onClick={() => setOpenModal(true)}
-            className={styles.buttonEdit}
-          >
-            <TextBold
-              size="large"
-              className={`${styles.editButton} ${styles.solvedButton}`}
-            >
-              Mark as solved
-            </TextBold>
-          </button>
-        </div>
       </BackgroundCanvas>
     </div>
   );
