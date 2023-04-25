@@ -16,6 +16,16 @@ export default function DetailsPlate({
   arrayChanges,
 }) {
   //console.log("ARRAY CHANGES ->", arrayChanges);
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState("");
+  console.log("openModal", openModal);
+
+  function close(e) {
+    if (e.target.id === "overlay") {
+      setOpenModal(false);
+    }
+  }
+
   const arrayHistory = arrayChanges.filter(
     (change) => change !== arrayChanges[0]
   );
@@ -41,69 +51,110 @@ export default function DetailsPlate({
   );
 
   return (
-    <BackgroundCanvas className={styles.detailsMain}>
-      <div className={styles.top}>
-        <div className={styles.id}>
-          <div className={`${styles.idInner} ${styles.idSpacing}`}>
-            <TextBold variant="hash">#</TextBold>
-            <TextBold variant={styles.idLargeScreen}>id</TextBold>{" "}
+    <div className={styles.top}>
+      <BackgroundCanvas className={styles.detailsMain}>
+        <div className={styles.top}>
+          <div className={styles.id}>
+            <div className={`${styles.idInner} ${styles.idSpacing}`}>
+              <TextBold variant="hash">#</TextBold>
+              <TextBold variant={styles.idLargeScreen}>id</TextBold>{" "}
+            </div>
+
+            <TextParagraph className={styles.header}>{id}</TextParagraph>
           </div>
 
-          <TextParagraph className={styles.header}>{id}</TextParagraph>
+          <div className={`${styles.sub} ${styles.right}`}>
+            <TextParagraph
+              className={`${styles.defaultSpacing} ${styles.rightSide}`}
+            >
+              Submited
+            </TextParagraph>
+            <TextBold className={styles.largeSpacing}>
+              {dateFormat(createdAt)}
+            </TextBold>
+          </div>
+        </div>
+        <div className={styles.bottom}>
+          <div>
+            <TextParagraph className={styles.defaultSpacing}>By</TextParagraph>
+            <TextBold className={styles.largeSpacing}>{userName}</TextBold>
+          </div>
+          <div className={`${styles.sub} ${styles.right}`}>
+            <TextParagraph
+              className={`${styles.defaultSpacing} ${styles.rightSide}`}
+            >
+              Location
+            </TextParagraph>
+            <TextBold className={styles.largeSpacing}>{location}</TextBold>
+          </div>
         </div>
 
-        <div className={`${styles.sub} ${styles.right}`}>
-          <TextParagraph
-            className={`${styles.defaultSpacing} ${styles.rightSide}`}
-          >
-            Submited
-          </TextParagraph>
-          <TextBold className={styles.largeSpacing}>
-            {dateFormat(createdAt)}
-          </TextBold>
-        </div>
-      </div>
-      <div className={styles.bottom}>
-        <div>
-          <TextParagraph className={styles.defaultSpacing}>By</TextParagraph>
-          <TextBold className={styles.largeSpacing}>{userName}</TextBold>
-        </div>
-        <div className={`${styles.sub} ${styles.right}`}>
-          <TextParagraph
-            className={`${styles.defaultSpacing} ${styles.rightSide}`}
-          >
-            Location
-          </TextParagraph>
-          <TextBold className={styles.largeSpacing}>{location}</TextBold>
-        </div>
-      </div>
-
-      <TextParagraph className={styles.smallerSpacing}>
-        Description
-      </TextParagraph>
-      <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
-        <TextParagraph variant="whiteText" size="large">
-          {description}
+        <TextParagraph className={styles.smallerSpacing}>
+          Description
         </TextParagraph>
-      </BackgroundCanvas>
-      <TextBold>History</TextBold>
-      <TextParagraph className={styles.smallerSpacing}>
-        {arrayChanges.length} updates
-      </TextParagraph>
-      <Pagination
-        totalCards={totalCards}
-        cardsPerPage={cardsPerPage}
-        setCurrentPage={setCurrentPage}
-      />
-      {currentCards.map((change) => (
-        <StatusCard
-          key={change.id}
-          issueStatus={change.status}
-          issueMessage={change.message}
-          issueDate={change.createdAt}
-          isHistory={true}
+        <BackgroundCanvas
+          variant="lighterCanvas"
+          className={styles.description}
+        >
+          <TextParagraph variant="whiteText" size="large">
+            {description}
+          </TextParagraph>
+        </BackgroundCanvas>
+        <TextBold>History</TextBold>
+        <TextParagraph className={styles.smallerSpacing}>
+          {arrayChanges.length} updates
+        </TextParagraph>
+        <Pagination
+          totalCards={totalCards}
+          cardsPerPage={cardsPerPage}
+          setCurrentPage={setCurrentPage}
         />
-      ))}
-    </BackgroundCanvas>
+        {currentCards.map((change) => (
+          <StatusCard
+            key={change.id}
+            issueStatus={change.status}
+            issueMessage={change.message}
+            issueDate={change.createdAt}
+            isHistory={true}
+          />
+        ))}
+      </BackgroundCanvas>
+      <BackgroundCanvas className={styles.footer}>
+        <div className={styles.buttonsPannel}>
+          <button
+            onClick={() => setOpenModal(true)}
+            className={styles.buttonEdit}
+          >
+            <TextBold size="large" className={styles.editButton}>
+              Edit
+            </TextBold>
+          </button>
+
+          <button
+            onClick={() => setOpenModal(true)}
+            className={styles.buttonEdit}
+          >
+            <TextBold
+              size="large"
+              className={`${styles.editButton} ${styles.deleteButton}`}
+            >
+              Delete
+            </TextBold>
+          </button>
+
+          <button
+            onClick={() => setOpenModal(true)}
+            className={styles.buttonEdit}
+          >
+            <TextBold
+              size="large"
+              className={`${styles.editButton} ${styles.solvedButton}`}
+            >
+              Mark as solved
+            </TextBold>
+          </button>
+        </div>
+      </BackgroundCanvas>
+    </div>
   );
 }

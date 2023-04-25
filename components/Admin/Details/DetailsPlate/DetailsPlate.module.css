@@ -1,3 +1,7 @@
+.top {
+  flex-direction: column;
+}
+
 .id {
   display: flex;
   flex-direction: column;
@@ -23,6 +27,7 @@
   flex-direction: column;
   padding: 24px;
   /* gap: 30px; */
+  margin-bottom: 56px;
 }
 
 .sub {
@@ -37,6 +42,39 @@
 .description {
   padding: 24px;
   text-align: center;
+}
+
+.footer {
+  padding: 22px 24px;
+  border-radius: 0;
+  display: flex;
+}
+
+.buttonsPannel {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.editButton {
+  padding: 18px 23px 15px 24px;
+  border-radius: 24px;
+  background-color: #252945;
+}
+
+.buttonEdit {
+  border-style: none;
+  background-color: #252945;
+  border-radius: 24px;
+}
+
+.deleteButton {
+  background-color: #ec5757 !important;
+}
+
+.solvedButton {
+  background-color: var(--color--intense-purple) !important;
 }
 
 @media screen and (max-width: 340px) {
@@ -87,5 +125,28 @@
   }
   .largeSpacing {
     margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .footer {
+    display: none;
+  }
+
+  .detailsMain {
+    margin-bottom: 135px;
+  }
+}
+
+@media screen and (max-width: 421px) {
+  .footer {
+    justify-content: center;
+  }
+
+  .buttonsPannel {
+    flex-direction: column;
+    gap: 16px;
+    max-width: 50%;
+    justify-content: center;
   }
 }

@@ -3,17 +3,33 @@
   justify-content: space-between;
 }
 
-.topCardInner {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+.buttonsPannel {
+  display: none;
 }
+
+.topCardInner {
+  /* display: flex;
+  align-items: center;
+
+  gap: 20px; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* width: 100%;
+justify-content: space-between; */
 
 .editParts {
   /* width: 50%; */
   /* display: flex;
   justify-content: right;
   align-items: center; */
+}
+
+.status {
+  color: var(--color--pale-grey);
 }
 
 .pending {
@@ -28,16 +44,27 @@
   display: none;
 } */
 
-.buttonPannel {
-  display: flex;
-  gap: 8px;
+@media screen and (min-width: 767px) {
+  .topCardInner {
+    display: flex;
+    align-items: center;
+    max-width: 28%;
+    gap: 20px;
+    /* width: 100%;
+    justify-content: space-between; */
+  }
+
+  .buttonsPannel {
+    display: flex;
+    gap: 8px;
+  }
 }
 
-.editStstusButton {
+/* .editStatusButton {
   display: flex;
   align-items: center;
   height: 100%;
-}
+} */
 
 .deleteButton {
   background-color: #ec5757 !important;

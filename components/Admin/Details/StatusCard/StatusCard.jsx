@@ -100,7 +100,7 @@ export default function StatusCard({
             <TextBold variant="orangeButton">· {issueStatus}</TextBold>
           )}{" "}
         </div>
-        <div className={styles.buttonPannel}>
+        <div className={styles.buttonsPannel}>
           {openModal || isHistory === true ? undefined : (
             <button
               onClick={() => setOpenModal(true)}
