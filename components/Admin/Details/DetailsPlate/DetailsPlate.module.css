@@ -45,6 +45,34 @@
   margin-bottom: 1rem;
 }
 
+.pagination {
+  padding: 10px;
+  background-color: #1e2139;
+}
+
+.paginationInner {
+}
+
+.arrowDown {
+  transition: 0.3s;
+}
+
+.historyOuter {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.historyAndUpdates {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
+}
+
+.hideHistory {
+  display: none;
+}
+
 @media screen and (max-width: 340px) {
   .description {
     text-align: left;

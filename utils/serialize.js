@@ -1,3 +1,5 @@
+import styles from "./serialize.module.css";
+
 export default function serialize(data) {
   return JSON.parse(JSON.stringify(data));
 }
@@ -59,17 +61,33 @@ export function dateFormat(createdAt) {
   )}`;
 }
 
-export function Pagination({ totalCards, cardsPerPage, setCurrentPage }) {
+export function Pagination({
+  totalCards,
+  cardsPerPage,
+  currentPage,
+  setCurrentPage,
+}) {
   let pages = [];
 
   for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
     pages.push(i);
   }
+  const clicked = (page) => {
+    setCurrentPage(page);
+    console.log("PAGE:::", page);
+  };
   return (
-    <div>
+    <div className={styles.button}>
       {pages.map((page, index) => {
         return (
-          <button key={index} onClick={() => setCurrentPage(page)}>
+          <button
+            className={
+              currentPage === page ? styles.buttonActive : styles.buttonInner
+            }
+            key={index}
+            // onClick={() => setCurrentPage(page)}
+            onClick={() => clicked(page)}
+          >
             {page}
           </button>
         );

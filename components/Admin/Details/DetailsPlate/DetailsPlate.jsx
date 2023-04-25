@@ -7,6 +7,7 @@ import { dateFormat } from "@/utils/serialize";
 
 import { Pagination } from "@/utils/serialize";
 import StatusCard from "../../Details/StatusCard";
+import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
 
 export default function DetailsPlate({
   id,
@@ -19,6 +20,7 @@ export default function DetailsPlate({
   //console.log("ARRAY CHANGES ->", arrayChanges);
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
+  const [openHistory, setOpenHistory] = useState(false);
   console.log("openModal", openModal);
 
   function close(e) {
@@ -88,11 +90,9 @@ export default function DetailsPlate({
           <TextBold className={styles.largeSpacing}>{location}</TextBold>
         </div>
       </div>
-
       <TextParagraph className={styles.smallerSpacing}>
         Current message
       </TextParagraph>
-
       <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
         <TextParagraph variant="whiteText" size="large">
           {arrayChanges[0].message}
@@ -101,29 +101,51 @@ export default function DetailsPlate({
       <TextParagraph className={styles.smallerSpacing}>
         Description
       </TextParagraph>
-
       <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
         <TextParagraph variant="whiteText" size="large">
           {description}
         </TextParagraph>
       </BackgroundCanvas>
-      <TextBold>History</TextBold>
-      <TextParagraph className={styles.smallerSpacing}>
-        {arrayChanges.length} updates
-      </TextParagraph>
-      <Pagination
-        totalCards={totalCards}
-        cardsPerPage={cardsPerPage}
-        setCurrentPage={setCurrentPage}
-      />
-      {currentCards.map((change) => (
-        <StatusCard
-          key={change.id}
-          issueStatus={change.status}
-          issueMessage={change.message}
-          issueDate={change.createdAt}
-        />
-      ))}
+      <div
+        className={styles.historyOuter}
+        onClick={() => setOpenHistory(!openHistory)}
+      >
+        <div className={styles.historyAndUpdates}>
+          <TextBold>History</TextBold>
+          <TextParagraph className={styles.smallerSpacing}>
+            {arrayChanges.length} updates
+          </TextParagraph>
+        </div>
+        <div>
+          <img
+            src={arrowDown.src}
+            className={styles.arrowDown}
+            alt="arrow down"
+          />
+        </div>
+      </div>
+      <div className={openHistory === false && styles.hideHistory}>
+        <div className={styles.pagination}>
+          {" "}
+          <BackgroundCanvas variant="lighterCanvas">
+            <Pagination
+              totalCards={totalCards}
+              cardsPerPage={cardsPerPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              className={styles.paginationInner}
+            />{" "}
+          </BackgroundCanvas>
+        </div>
+        {currentCards.map((change) => (
+          <StatusCard
+            key={change.id}
+            issueStatus={change.status}
+            issueMessage={change.message}
+            issueDate={change.createdAt}
+          />
+        ))}{" "}
+      </div>
     </BackgroundCanvas>
   );
 }
