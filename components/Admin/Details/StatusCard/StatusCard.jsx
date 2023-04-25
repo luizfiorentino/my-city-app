@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./StatusCard.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
@@ -88,31 +88,31 @@ export default function StatusCard({
     <BackgroundCanvas className={styles.statusCardContainer}>
       <div className={styles.topCard}>
         <TextParagraph className={styles.status}>Status</TextParagraph>
-        {isHistory === false ? (
-          <TextBold variant="orangeButton" className={styles.pending}>
-            · {status}{" "}
-          </TextBold>
-        ) : undefined}
-        {isHistory === true ? (
-          <TextBold variant="orangeButton" className={styles.pending}>
-            · {issueStatus}{" "}
-          </TextBold>
-        ) : undefined}
-
-        {isHistory === false ? (
-          <div className={styles.selector}>
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              className={styles.selectorInner}
+        <div className={styles.rightSection}>
+          {isHistory === false ? (
+            <div className={styles.editStstusButton}>
+              <TextBold variant="orangeButton" className={styles.pending}>
+                · {status}
+              </TextBold>
+            </div>
+          ) : (
+            <TextBold variant="orangeButton" className={styles.pending}>
+              · {issueStatus}
+            </TextBold>
+          )}
+          {openModal || isHistory !== false ? undefined : (
+            <button
+              onClick={() => setOpenModal(true)}
+              className={styles.buttonEdit}
             >
-              {buttonOptions.map((option) => (
-                <option key={option}>{option}</option>
-              ))}
-            </select>
-          </div>
-        ) : undefined}
-
+              <TextBold size="large" className={styles.editButton}>
+                Edit
+              </TextBold>
+            </button>
+          )}
+        </div>
+      </div>
+      <div className={isHistory === false ? styles.editParts : styles.hidden}>
         <div
           id="overlay"
           className={`${openModal === true ? styles.overlay : undefined}`}
@@ -125,10 +125,10 @@ export default function StatusCard({
             message={message}
             setMessage={setMessage}
             submit={submit}
+            isHistory={isHistory}
+            buttonOptions={buttonOptions}
+            setStatus={setStatus}
           />
-          {openModal || isHistory !== false ? undefined : (
-            <button onClick={() => setOpenModal(true)}>change</button>
-          )}
         </div>
       </div>
       <div className={styles.currentMessage}>
@@ -157,7 +157,4 @@ export default function StatusCard({
 }
 
 {
-  /* <TextBold variant="orangeButton" className={styles.pending}>
-· {changesOrderedByDate[0]["status"]}{" "}
-</TextBold> */
 }
