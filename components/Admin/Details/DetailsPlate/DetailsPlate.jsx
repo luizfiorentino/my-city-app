@@ -116,24 +116,33 @@ export default function DetailsPlate({
             {arrayChanges.length} updates
           </TextParagraph>
         </div>
-        <div>
+
+        {openHistory === false ? (
           <img
             src={arrowDown.src}
             className={styles.arrowDown}
             alt="arrow down"
           />
-        </div>
+        ) : (
+          <img
+            src={arrowDown.src}
+            className={`${styles.arrowDown} ${styles.arrowUp}`}
+            alt="arrow up"
+          />
+        )}
       </div>
       <div className={openHistory === false && styles.hideHistory}>
         <div className={styles.pagination}>
           {" "}
-          <BackgroundCanvas variant="lighterCanvas">
+          <BackgroundCanvas
+            variant="lighterCanvas"
+            className={styles.paginationInner}
+          >
             <Pagination
               totalCards={totalCards}
               cardsPerPage={cardsPerPage}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
-              className={styles.paginationInner}
             />{" "}
           </BackgroundCanvas>
         </div>

@@ -22,6 +22,9 @@
   margin-bottom: 30px;
 }
 
+.smallerSpacing {
+  margin-bottom: 5px;
+}
 .detailsMain {
   display: flex;
   flex-direction: column;
@@ -42,7 +45,7 @@
 .description {
   padding: 24px;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .pagination {
@@ -50,11 +53,12 @@
   background-color: #1e2139;
 }
 
-.paginationInner {
-}
-
 .arrowDown {
   transition: 0.3s;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
 }
 
 .historyOuter {
@@ -69,8 +73,16 @@
   margin-right: 1rem;
 }
 
+.historyAndUpdates:hover {
+  cursor: pointer;
+}
+
 .hideHistory {
   display: none;
+}
+
+.paginationInner {
+  margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 340px) {
