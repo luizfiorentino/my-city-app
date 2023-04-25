@@ -87,20 +87,21 @@ export default function StatusCard({
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
       <div className={styles.topCard}>
-        <TextParagraph className={styles.status}>Status</TextParagraph>
-        <div className={styles.rightSection}>
+        <div className={styles.topCardInner}>
+          <TextParagraph className={styles.status}>Status</TextParagraph>
+          {/* <div className={styles.rightSection}> */}
           {isHistory === false ? (
-            <div className={styles.editStstusButton}>
-              <TextBold variant="orangeButton" className={styles.pending}>
-                · {status}
-              </TextBold>
-            </div>
-          ) : (
+            // <div className={styles.editStstusButton}>
             <TextBold variant="orangeButton" className={styles.pending}>
-              · {issueStatus}
+              · {status}
             </TextBold>
-          )}
-          {openModal || isHistory !== false ? undefined : (
+          ) : (
+            // </div>
+            <TextBold variant="orangeButton">· {issueStatus}</TextBold>
+          )}{" "}
+        </div>
+        <div className={styles.buttonPannel}>
+          {openModal || isHistory === true ? undefined : (
             <button
               onClick={() => setOpenModal(true)}
               className={styles.buttonEdit}
@@ -110,48 +111,74 @@ export default function StatusCard({
               </TextBold>
             </button>
           )}
+          {openModal || isHistory === true ? undefined : (
+            <button
+              onClick={() => setOpenModal(true)}
+              className={styles.buttonEdit}
+            >
+              <TextBold
+                size="large"
+                className={`${styles.editButton} ${styles.deleteButton}`}
+              >
+                Delete
+              </TextBold>
+            </button>
+          )}
+          {openModal || isHistory === true ? undefined : (
+            <button
+              onClick={() => setOpenModal(true)}
+              className={styles.buttonEdit}
+            >
+              <TextBold
+                size="large"
+                className={`${styles.editButton} ${styles.solvedButton}`}
+              >
+                Mark as solved
+              </TextBold>
+            </button>
+          )}
         </div>
       </div>
-      <div className={isHistory === false ? styles.editParts : styles.hidden}>
-        <div
-          id="overlay"
-          className={`${openModal === true ? styles.overlay : undefined}`}
-          onClick={openModal ? close : null}
+      {/* <div className={isHistory === false ? styles.editParts : styles.hidden}> */}
+      <div
+        id="overlay"
+        className={`${openModal === true ? styles.overlay : undefined}`}
+        onClick={openModal ? close : null}
+      >
+        <StatusModal
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          updateStatus={updateStatus}
+          message={message}
+          setMessage={setMessage}
+          submit={submit}
+          isHistory={isHistory}
+          buttonOptions={buttonOptions}
+          setStatus={setStatus}
+        />
+      </div>
+      {/* </div> */}
+      {/* <div className={styles.currentMessage}> */}
+      <TextParagraph>
+        {isHistory === false ? null : dateFormat(issueDate)}
+      </TextParagraph>
+      {/* {isHistory === false ? (
+        <BackgroundCanvas
+          variant="lighterCanvas"
+          className={styles.messageCanvas}
         >
-          <StatusModal
-            open={openModal}
-            onClose={() => setOpenModal(false)}
-            updateStatus={updateStatus}
-            message={message}
-            setMessage={setMessage}
-            submit={submit}
-            isHistory={isHistory}
-            buttonOptions={buttonOptions}
-            setStatus={setStatus}
-          />
-        </div>
-      </div>
-      <div className={styles.currentMessage}>
-        <TextParagraph>
-          {isHistory === false ? "Current status" : dateFormat(issueDate)}
-        </TextParagraph>
-        {isHistory === false ? (
-          <BackgroundCanvas
-            variant="lighterCanvas"
-            className={styles.messageCanvas}
-          >
-            {!message ? currentMessage : message}
-          </BackgroundCanvas>
-        ) : undefined}
-        {isHistory === true ? (
-          <BackgroundCanvas
-            variant="lighterCanvas"
-            className={styles.messageCanvas}
-          >
-            {issueMessage}
-          </BackgroundCanvas>
-        ) : undefined}
-      </div>
+          {!message ? currentMessage : message}
+        </BackgroundCanvas>
+      ) : undefined} */}
+      {isHistory === true ? (
+        <BackgroundCanvas
+          variant="lighterCanvas"
+          className={styles.messageCanvas}
+        >
+          {issueMessage}
+        </BackgroundCanvas>
+      ) : undefined}
+      {/* </div> */}
     </BackgroundCanvas>
   );
 }

@@ -3,6 +3,12 @@
   justify-content: space-between;
 }
 
+.topCardInner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .editParts {
   /* width: 50%; */
   /* display: flex;
@@ -11,6 +17,7 @@
 }
 
 .pending {
+  align-self: auto;
 }
 
 .hidden {
@@ -21,10 +28,23 @@
   display: none;
 } */
 
+.buttonPannel {
+  display: flex;
+  gap: 8px;
+}
+
 .editStstusButton {
   display: flex;
   align-items: center;
   height: 100%;
+}
+
+.deleteButton {
+  background-color: #ec5757 !important;
+}
+
+.solvedButton {
+  background-color: var(--color--intense-purple) !important;
 }
 
 .rightSection {
