@@ -1,17 +1,13 @@
+.statusCardContainer {
+  background-color: black;
+}
+
 .topCard {
   display: flex;
   justify-content: space-between;
 }
 
-.buttonsPannel {
-  display: none;
-}
-
 .topCardInner {
-  /* display: flex;
-  align-items: center;
-
-  gap: 20px; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -19,77 +15,16 @@
 }
 
 /* width: 100%;
-justify-content: space-between; */
-
-.editParts {
-  /* width: 50%; */
-  /* display: flex;
-  justify-content: right;
-  align-items: center; */
-}
+  justify-content: space-between; */
 
 .status {
   color: var(--color--pale-grey);
 }
 
-.pending {
-  align-self: auto;
-}
-
-.hidden {
-  display: none;
-}
-
-/* .editParts {
-  display: none;
-} */
-
-@media screen and (min-width: 767px) {
-  .topCardInner {
-    display: flex;
-    align-items: center;
-    max-width: 28%;
-    gap: 20px;
-    /* width: 100%;
-    justify-content: space-between; */
-  }
-
-  .buttonsPannel {
-    display: flex;
-    gap: 8px;
-  }
-}
-
-/* .editStatusButton {
+.bottomCard {
+  width: 100%;
   display: flex;
-  align-items: center;
-  height: 100%;
-} */
-
-.deleteButton {
-  background-color: #ec5757 !important;
-}
-
-.solvedButton {
-  background-color: var(--color--intense-purple) !important;
-}
-
-.rightSection {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.editButton {
-  padding: 18px 23px 15px 24px;
-  border-radius: 24px;
-  background-color: #252945;
-}
-
-.buttonEdit {
-  border-style: none;
-  background-color: #252945;
-  border-radius: 24px;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 240px) {
@@ -101,25 +36,6 @@ justify-content: space-between; */
   .status {
     margin-bottom: 1rem;
   }
-
-  .pending {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-}
-
-.overlay {
-  background-color: var(--color--bg-canvas);
-  opacity: 0.9;
-  position: fixed;
-  margin-top: -20rem;
-
-  inset: 0;
-  z-index: 30;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .statusCardContainer {
@@ -139,24 +55,9 @@ justify-content: space-between; */
   align-items: center;
 }
 
-.currentMessage {
-  width: 100%;
-}
-
 .messageCanvas {
   padding: 24px;
   text-align: center;
-}
-
-.selectorInner {
-  width: 100px;
-  padding: 14px 0 11px 0;
-  text-align: center;
-  align-self: flex-end;
-  color: var(--color--orange);
-  /* background-color: var(--color--bg-submited); */
-
-  border-radius: 6px;
 }
 
 @media screen and (min-width: 640px) {

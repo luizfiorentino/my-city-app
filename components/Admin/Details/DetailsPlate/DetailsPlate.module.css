@@ -58,6 +58,8 @@
 
   .top {
     display: flex;
+    flex-direction: row;
+
     justify-content: space-between;
     margin-bottom: 45px;
   }
@@ -93,6 +95,7 @@
   }
   .largeSpacing {
     margin-bottom: 0;
+    text-align: right;
   }
 }
 

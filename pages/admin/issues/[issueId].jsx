@@ -4,7 +4,7 @@ import serialize from "@/utils/serialize";
 import AdminTopBar from "@/components/Admin/Nav/AdminTopBar";
 import styles from "./IssueStatus.module.css";
 import arrowLeft from "../../../pages/assets/images/icon-arrow-left.svg";
-import StatusCard from "@/components/Admin/Details/StatusCard";
+import EditBar from "@/components/Admin/Details/EditBar";
 import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
@@ -27,7 +27,7 @@ export default function IssueStatus({ issue }) {
           </span>
           <TextBold className={styles.backLink}>Go back</TextBold>
         </Link>
-        <StatusCard arrayChanges={issue.statusChange} isHistory={false} />
+        <EditBar arrayChanges={issue.statusChange} isHistory={false} />
         <DetailsPlate
           id={issue.id}
           createdAt={issue.createdAt}
