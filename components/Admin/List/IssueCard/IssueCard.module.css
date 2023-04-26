@@ -85,8 +85,16 @@
   transition: 0.3s;
 }
 
+.arrowDown:hover {
+  cursor: pointer;
+}
+
 .arrowUp {
   transform: rotate(180deg);
+}
+
+.arrowDown:hover {
+  cursor: pointer;
 }
 
 .description {

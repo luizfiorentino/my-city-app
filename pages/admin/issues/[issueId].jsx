@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
 import AdminTopBar from "@/components/Admin/Nav/AdminTopBar";
@@ -9,9 +9,61 @@ import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
+import StatusModal from "../../../components/Admin/Details/StatusModal";
+import axios from "axios";
 
 export default function IssueStatus({ issue }) {
-  console.log("issue det page top", issue, "array");
+  //console.log("issue det page top", issue, "array");
+  const dayjs = require("dayjs");
+
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const changesOrderedByDate = issue.statusChange.sort((a, b) => {
+    return dayjs(b.createdAt) - dayjs(a.createdAt);
+  });
+
+  const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
+  //console.log("openModal", openModal);
+
+  function close(e) {
+    if (e.target.id === "overlay") {
+      setOpenModal(false);
+    }
+  }
+
+  const updateStatus = async (message) => {
+    try {
+      const newStatus = await axios.post(`../../api/statusChanges`, {
+        statusChange: {
+          status: status,
+          message: message,
+          issueId: issue.statusChange[0]["issueId"],
+        },
+      });
+
+      //console.log("NEW STATUS", newStatus);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  console.log("status", status, "message", message),
+    "issueId",
+    issue.statusChange[0]["issueId"];
+
+  const submit = () => {
+    updateStatus(message);
+    setOpenModal(false);
+    // setMessage("");
+  };
+
+  const buttonOptions = [
+    "Submitted",
+    "On progress",
+    "Information needed",
+    "Done",
+  ];
 
   return (
     <div className={styles.container}>
@@ -35,6 +87,22 @@ export default function IssueStatus({ issue }) {
           location={issue.location}
           description={issue.description}
           arrayChanges={issue.statusChange}
+        />
+      </div>
+      <div
+        id="overlay"
+        className={`${openModal === true ? styles.overlay : undefined}`}
+        onClick={openModal ? close : null}
+      >
+        <StatusModal
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          updateStatus={updateStatus}
+          message={message}
+          setMessage={setMessage}
+          submit={submit}
+          buttonOptions={buttonOptions}
+          setStatus={setStatus}
         />
       </div>
       <BackgroundCanvas className={styles.footer}>

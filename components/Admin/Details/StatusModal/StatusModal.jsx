@@ -10,7 +10,7 @@ export default function StatusMessage({
   message,
   setMessage,
   submit,
-  isHistory,
+
   buttonOptions,
   setStatus,
 }) {
@@ -21,19 +21,19 @@ export default function StatusMessage({
       <TextBold variant="higherLine" className={styles.confirmationMessage}>
         Select a new status if necessary
       </TextBold>
-      {isHistory === false ? (
-        <div className={styles.selector}>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className={styles.selectorInner}
-          >
-            {buttonOptions.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
-          </select>
-        </div>
-      ) : undefined}
+
+      <div className={styles.selector}>
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className={styles.selectorInner}
+        >
+          {buttonOptions.map((option) => (
+            <option key={option}>{option}</option>
+          ))}
+        </select>
+      </div>
+
       <TextBold variant="higherLine" className={styles.confirmationMessage}>
         Enter a message related to the new status:
       </TextBold>

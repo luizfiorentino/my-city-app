@@ -5,7 +5,7 @@ import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import axios from "axios";
 import StatusModal from "../StatusModal/StatusModal";
-import { date, set } from "zod";
+
 import { dateFormat } from "@/utils/serialize";
 
 export default function StatusCard({
@@ -13,20 +13,16 @@ export default function StatusCard({
   issueStatus,
   issueDate,
   issueMessage,
-  isHistory,
 }) {
   const dayjs = require("dayjs");
 
-  const changesOrderedByDate =
-    isHistory === false
-      ? arrayChanges.sort((a, b) => {
-          return dayjs(b.createdAt) - dayjs(a.createdAt);
-        })
-      : undefined;
+  const changesOrderedByDate = arrayChanges.sort((a, b) => {
+    return dayjs(b.createdAt) - dayjs(a.createdAt);
+  });
 
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
-  console.log("openModal", openModal);
+  //console.log("openModal", openModal);
 
   function close(e) {
     if (e.target.id === "overlay") {
@@ -36,9 +32,7 @@ export default function StatusCard({
 
   //console.log("statu card", changesOrderedByDate[0]["message"]);
 
-  const [status, setStatus] = useState(
-    isHistory === false ? changesOrderedByDate[0]["status"] : "not applied"
-  );
+  const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
   const updateStatus = async (message) => {
     try {
       const newStatus = await axios.post(`../../api/statusChanges`, {
@@ -75,10 +69,9 @@ export default function StatusCard({
     "Done",
   ];
 
-  console.log("STATUS", status);
+  //console.log("STATUS", status);
 
-  const currentMessage =
-    isHistory === false ? changesOrderedByDate[0]["message"] : "not applied";
+  const currentMessage = changesOrderedByDate[0]["message"];
 
   useEffect(() => {
     setMessage(message);
@@ -90,18 +83,15 @@ export default function StatusCard({
         <div className={styles.topCardInner}>
           <TextParagraph className={styles.status}>Status</TextParagraph>
           {/* <div className={styles.rightSection}> */}
-          {isHistory === false ? (
-            // <div className={styles.editStstusButton}>
+
+          <div className={styles.editStstusButton}>
             <TextBold variant="orangeButton" className={styles.pending}>
               · {status}
             </TextBold>
-          ) : (
-            // </div>
-            <TextBold variant="orangeButton">· {issueStatus}</TextBold>
-          )}{" "}
+          </div>
         </div>
         <div className={styles.buttonsPannel}>
-          {openModal || isHistory === true ? undefined : (
+          {openModal ? undefined : (
             <button
               onClick={() => setOpenModal(true)}
               className={styles.buttonEdit}
@@ -111,7 +101,7 @@ export default function StatusCard({
               </TextBold>
             </button>
           )}
-          {openModal || isHistory === true ? undefined : (
+          {openModal === true ? undefined : (
             <button
               onClick={() => setOpenModal(true)}
               className={styles.buttonEdit}
@@ -124,7 +114,7 @@ export default function StatusCard({
               </TextBold>
             </button>
           )}
-          {openModal || isHistory === true ? undefined : (
+          {openModal ? undefined : (
             <button
               onClick={() => setOpenModal(true)}
               className={styles.buttonEdit}
@@ -152,16 +142,15 @@ export default function StatusCard({
           message={message}
           setMessage={setMessage}
           submit={submit}
-          isHistory={isHistory}
           buttonOptions={buttonOptions}
           setStatus={setStatus}
         />
       </div>
       {/* </div> */}
       {/* <div className={styles.currentMessage}> */}
-      <TextParagraph>
+      {/* <TextParagraph>
         {isHistory === false ? null : dateFormat(issueDate)}
-      </TextParagraph>
+      </TextParagraph> */}
       {/* {isHistory === false ? (
         <BackgroundCanvas
           variant="lighterCanvas"
@@ -170,14 +159,14 @@ export default function StatusCard({
           {!message ? currentMessage : message}
         </BackgroundCanvas>
       ) : undefined} */}
-      {isHistory === true ? (
+      {/* {isHistory === true ? (
         <BackgroundCanvas
           variant="lighterCanvas"
           className={styles.messageCanvas}
         >
           {issueMessage}
         </BackgroundCanvas>
-      ) : undefined}
+      ) : undefined} */}
       {/* </div> */}
     </BackgroundCanvas>
   );

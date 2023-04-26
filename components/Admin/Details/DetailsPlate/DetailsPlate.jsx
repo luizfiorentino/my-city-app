@@ -21,7 +21,7 @@ export default function DetailsPlate({
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
   const [openHistory, setOpenHistory] = useState(false);
-  console.log("openModal", openModal);
+  //console.log("openModal", openModal);
 
   function close(e) {
     if (e.target.id === "overlay") {
@@ -40,18 +40,18 @@ export default function DetailsPlate({
   const firstCardIndex = lastCardIndex - cardsPerPage;
   const currentCards = historyData.slice(firstCardIndex, lastCardIndex);
   const totalCards = arrayChanges.length;
-  console.log(
-    "cards per page",
-    cardsPerPage,
-    "total cards",
-    totalCards,
-    "currentPage",
-    currentPage,
-    "currentCards",
-    currentCards,
-    "arrayHistory",
-    arrayHistory
-  );
+  // console.log(
+  //   "cards per page",
+  //   cardsPerPage,
+  //   "total cards",
+  //   totalCards,
+  //   "currentPage",
+  //   currentPage,
+  //   "currentCards",
+  //   currentCards,
+  //   "arrayHistory",
+  //   arrayHistory
+  // );
 
   return (
     <BackgroundCanvas className={styles.detailsMain}>
