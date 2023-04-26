@@ -143,6 +143,7 @@ export default function StatusCard({
           setMessage={setMessage}
           submit={submit}
           buttonOptions={buttonOptions}
+          status={status}
           setStatus={setStatus}
         />
       </div>

@@ -10,7 +10,7 @@ export default function StatusMessage({
   message,
   setMessage,
   submit,
-
+  status,
   buttonOptions,
   setStatus,
 }) {
