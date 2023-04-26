@@ -7,8 +7,6 @@ import IssueCard from "../IssueCard";
 export default function AdminList(props) {
   return (
     <div className={styles.main}>
-      {/* {props.issues ? undefined : <p>Problem with db</p>} */}
-
       <AdminTopBar />
       <div className={styles.barAndCardList}>
         <ReportsBar issues={props.data} />

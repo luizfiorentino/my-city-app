@@ -37,6 +37,10 @@
   border: none;
 }
 
+.newIssue:hover {
+  cursor: pointer;
+}
+
 .extraText {
   display: none;
 }
