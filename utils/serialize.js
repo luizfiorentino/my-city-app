@@ -1,4 +1,5 @@
 import styles from "./serialize.module.css";
+import { leagueSpartan } from "@/styles/fonts";
 
 export default function serialize(data) {
   return JSON.parse(JSON.stringify(data));
@@ -81,9 +82,9 @@ export function Pagination({
       {pages.map((page, index) => {
         return (
           <button
-            className={
+            className={`${
               currentPage === page ? styles.buttonActive : styles.buttonInner
-            }
+            } ${leagueSpartan.className}`}
             key={index}
             // onClick={() => setCurrentPage(page)}
             onClick={() => clicked(page)}
