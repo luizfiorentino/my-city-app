@@ -3,6 +3,8 @@ import styles from "./StatusModal.module.css";
 import TextBold from "../../Shared/Typography/TextBold/TextBold";
 import TextParagraph from "../../Shared/Typography/TextParagraph/TextParagraph";
 import IssueContext from "@/utils/IssueContext";
+import LoadingSpinner from "../../../../pages/assets/images/Iphone-spinner-2.gif";
+import Spinner from "../../../Shared/LoaderSpinner";
 
 export default function StatusModal({
   open,
@@ -52,15 +54,19 @@ export default function StatusModal({
           className={styles.button}
           disabled={message.length <= 4 || context.loading}
         >
-          <TextBold
-            variant={
-              message.length >= 4 && !context.loading
-                ? "purpleButton"
-                : "purpleButtonInactive"
-            }
-          >
-            {context.loading ? "Loading" : "Confirm"}
-          </TextBold>
+          {context.loading ? (
+            <Spinner />
+          ) : (
+            <TextBold
+              variant={
+                message.length >= 4 && !context.loading
+                  ? "purpleButton"
+                  : "purpleButtonInactive"
+              }
+            >
+              "Confirm"
+            </TextBold>
+          )}
         </button>
         <button onClick={onClose} className={styles.button}>
           <TextBold variant="redButton" className={styles.confirmText}>
