@@ -14,11 +14,11 @@ export default function StatusModal({
   status,
   buttonOptions,
   setStatus,
-  loading,
+
   hello,
 }) {
   if (!open) return null;
-  console.log("LOADING??", loading, "HELLO", hello);
+
   const context = useContext(IssueContext);
   return (
     <div className={styles.modalContainer}>

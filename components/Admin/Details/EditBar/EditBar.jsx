@@ -15,8 +15,6 @@ export default function StatusCard({
   issueDate,
   issueMessage,
   addStatus,
-  loading,
-  setLoading,
 }) {
   const dayjs = require("dayjs");
   const context = useContext(IssueContext);
@@ -27,16 +25,12 @@ export default function StatusCard({
 
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
-  //console.log("openModal", openModal);
-  //console.log("addStatus EDIT BAR", addStatus);
 
   function close(e) {
     if (e.target.id === "overlay") {
       setOpenModal(false);
     }
   }
-
-  //console.log("statu card", changesOrderedByDate[0]["message"]);
 
   const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
   const updateStatus = async (message) => {
@@ -60,25 +54,10 @@ export default function StatusCard({
       context.setLoading(false);
     }
   };
-  // const updateStatus = useContext(
-  //   IssueContextProvider(
-  //     editStatus((status, message, arrayChanges[0]["issueId"]))
-  //   )
-  // );
 
   const submit = () => {
     updateStatus(message);
-    // setOpenModal(false);
-    // setMessage("");
-    context.setCurrentMessage(message);
   };
-
-  // const dateTest = arrayChanges.map((date) => {
-  //   return dayjs(date.createdAt);
-  // });
-
-  //console.log("ordered by date", changesOrderedByDate);
-  //console.log("array changes sttus card", arrayChanges);
 
   const buttonOptions = [
     "Submitted",
@@ -86,8 +65,6 @@ export default function StatusCard({
     "Information needed",
     "Done",
   ];
-
-  //console.log("STATUS", status);
 
   const currentMessage = changesOrderedByDate[0]["message"];
 
@@ -147,7 +124,7 @@ export default function StatusCard({
           )}
         </div>
       </div>
-      {/* <div className={isHistory === false ? styles.editParts : styles.hidden}> */}
+
       <div
         id="overlay"
         className={`${openModal === true ? styles.overlay : undefined}`}
@@ -163,31 +140,8 @@ export default function StatusCard({
           buttonOptions={buttonOptions}
           status={status}
           setStatus={setStatus}
-          loading={loading}
         />
       </div>
-      {/* </div> */}
-      {/* <div className={styles.currentMessage}> */}
-      {/* <TextParagraph>
-        {isHistory === false ? null : dateFormat(issueDate)}
-      </TextParagraph> */}
-      {/* {isHistory === false ? (
-        <BackgroundCanvas
-          variant="lighterCanvas"
-          className={styles.messageCanvas}
-        >
-          {!message ? currentMessage : message}
-        </BackgroundCanvas>
-      ) : undefined} */}
-      {/* {isHistory === true ? (
-        <BackgroundCanvas
-          variant="lighterCanvas"
-          className={styles.messageCanvas}
-        >
-          {issueMessage}
-        </BackgroundCanvas>
-      ) : undefined} */}
-      {/* </div> */}
     </BackgroundCanvas>
   );
 }

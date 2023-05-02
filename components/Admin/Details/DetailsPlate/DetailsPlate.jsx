@@ -18,13 +18,11 @@ export default function DetailsPlate({
   description,
   arrayChanges,
 }) {
-  //console.log("ARRAY CHANGES ->", arrayChanges);
   const context = useContext(IssueContext);
-  console.log("context", context);
+  //console.log("context", context);
   const [openModal, setOpenModal] = useState(false);
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [openHistory, setOpenHistory] = useState(false);
-  //console.log("openModal", openModal);
 
   function close(e) {
     if (e.target.id === "overlay") {
@@ -43,23 +41,10 @@ export default function DetailsPlate({
   const firstCardIndex = lastCardIndex - cardsPerPage;
   const currentCards = historyData.slice(firstCardIndex, lastCardIndex);
   const totalCards = arrayChanges.length;
-  // console.log(
-  //   "cards per page",
-  //   cardsPerPage,
-  //   "total cards",
-  //   totalCards,
-  //   "currentPage",
-  //   currentPage,
-  //   "currentCards",
-  //   currentCards,
-  //   "arrayHistory",
-  //   arrayHistory
-  // );
 
   return (
     <BackgroundCanvas className={styles.detailsMain}>
       <div className={styles.top}>
-        {/* <h3>{context.currentMessage}</h3> */}
         <div className={styles.id}>
           <div className={`${styles.idInner} ${styles.idSpacing}`}>
             <TextBold variant="hash">#</TextBold>

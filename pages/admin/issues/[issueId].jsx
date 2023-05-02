@@ -53,9 +53,8 @@ export default function IssueStatus({ issue }) {
     }
   };
 
-  console.log("status", status, "message", message),
-    "issueId",
-    issue.statusChange[0]["issueId"];
+  //console.log("status", status, "message", message),
+  "issueId", issue.statusChange[0]["issueId"];
 
   const submit = () => {
     updateStatus(message);
@@ -78,7 +77,7 @@ export default function IssueStatus({ issue }) {
     });
   }
 
-  console.log("DETAILS PAGE", loading);
+  //console.log("DETAILS PAGE", loading);
 
   return (
     <div className={styles.container}>
@@ -109,24 +108,7 @@ export default function IssueStatus({ issue }) {
           arrayChanges={issueDetails.statusChange}
         />
       </div>
-      {/* <div
-        id="overlay"
-        className={`${openModal === true ? styles.overlay : undefined}`}
-        onClick={openModal ? close : null}
-      > */}
-      {/* <StatusModal
-          open={openModal}
-          onClose={() => setOpenModal(false)}
-          updateStatus={updateStatus}
-          message={message}
-          setMessage={setMessage}
-          submit={submit}
-          buttonOptions={buttonOptions}
-          setStatus={setStatus}
-          loading={loading}
-          hello={"world"}
-        /> */}
-      {/* </div> */}
+
       <BackgroundCanvas className={styles.footer}>
         <div className={styles.buttonsPannel}>
           <button
