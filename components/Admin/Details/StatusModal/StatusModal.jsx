@@ -5,6 +5,7 @@ import TextParagraph from "../../Shared/Typography/TextParagraph/TextParagraph";
 import IssueContext from "@/utils/IssueContext";
 import LoadingSpinner from "../../../../pages/assets/images/Iphone-spinner-2.gif";
 import Spinner from "../../../Shared/LoaderSpinner";
+import LoaderImage from "../../../../pages/assets/images/Loading_icon.gif";
 
 export default function StatusModal({
   open,
@@ -55,7 +56,11 @@ export default function StatusModal({
           disabled={message.length <= 4 || context.loading}
         >
           {context.loading ? (
-            <Spinner />
+            <img
+              src={LoaderImage.src}
+              className={styles.defaultSpinner}
+              alt="loader image"
+            />
           ) : (
             <TextBold
               variant={
@@ -64,7 +69,7 @@ export default function StatusModal({
                   : "purpleButtonInactive"
               }
             >
-              "Confirm"
+              Confirm
             </TextBold>
           )}
         </button>
