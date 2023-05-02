@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
 import AdminTopBar from "@/components/Admin/Nav/AdminTopBar";
@@ -11,6 +11,7 @@ import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
 import StatusModal from "../../../components/Admin/Details/StatusModal";
 import axios from "axios";
+import IssueContext from "@/utils/IssueContext";
 
 export default function IssueStatus({ issue }) {
   //console.log("issue det page top", issue, "array");
@@ -20,6 +21,8 @@ export default function IssueStatus({ issue }) {
   const [message, setMessage] = useState("");
   const [issueDetails, setIssueDetails] = useState(issue);
   const [loading, setLoading] = useState(false);
+
+  const context = useContext(IssueContext);
 
   const changesOrderedByDate = issueDetails.statusChange.sort((a, b) => {
     return dayjs(b.createdAt) - dayjs(a.createdAt);

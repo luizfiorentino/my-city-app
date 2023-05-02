@@ -41,7 +41,7 @@ export default function StatusCard({
   const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
   const updateStatus = async (message) => {
     try {
-      setLoading(true);
+      context.setLoading(true);
       const response = await axios.post(`../../api/statusChanges`, {
         statusChange: {
           status: status,
@@ -50,14 +50,14 @@ export default function StatusCard({
         },
       });
       // window.location.reload();
-      setLoading(false);
+      context.setLoading(false);
       addStatus(response.data.newChange);
       setOpenModal(false);
 
       console.log("NEW STATUS", response.data.newChange);
     } catch (e) {
       console.log(e.message);
-      setLoading(false);
+      context.setLoading(false);
     }
   };
   // const updateStatus = useContext(

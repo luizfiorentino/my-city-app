@@ -5,9 +5,9 @@ import { set } from "zod";
 import issueContext from "../utils/IssueContext";
 
 export default function App({ Component, pageProps }) {
-  const [currentMessage, setCurrentMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   return (
-    <issueContext.Provider value={{ currentMessage, setCurrentMessage }}>
+    <issueContext.Provider value={{ loading, setLoading }}>
       {" "}
       <Component {...pageProps} />
     </issueContext.Provider>

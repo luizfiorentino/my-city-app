@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./StatusModal.module.css";
 import TextBold from "../../Shared/Typography/TextBold/TextBold";
 import TextParagraph from "../../Shared/Typography/TextParagraph/TextParagraph";
+import IssueContext from "@/utils/IssueContext";
 
 export default function StatusModal({
   open,
@@ -18,6 +19,7 @@ export default function StatusModal({
 }) {
   if (!open) return null;
   console.log("LOADING??", loading, "HELLO", hello);
+  const context = useContext(IssueContext);
   return (
     <div className={styles.modalContainer}>
       <TextBold variant="higherLine" className={styles.confirmationMessage}>
@@ -48,16 +50,16 @@ export default function StatusModal({
         <button
           onClick={submit}
           className={styles.button}
-          disabled={message.length <= 4 || loading}
+          disabled={message.length <= 4 || context.loading}
         >
           <TextBold
             variant={
-              message.length >= 4 && !loading
+              message.length >= 4 && !context.loading
                 ? "purpleButton"
                 : "purpleButtonInactive"
             }
           >
-            {loading ? "Loading" : "Confirm"}
+            {context.loading ? "Loading" : "Confirm"}
           </TextBold>
         </button>
         <button onClick={onClose} className={styles.button}>
