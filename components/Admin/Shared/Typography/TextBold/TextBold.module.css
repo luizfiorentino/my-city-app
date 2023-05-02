@@ -40,6 +40,17 @@
   border-radius: 6px;
 }
 
+.greenButton {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  color: greenyellow;
+  /* background-color: var(--color--bg-submited); */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
 .purpleButton {
   width: 100px;
   padding: 14px 0 11px 0;

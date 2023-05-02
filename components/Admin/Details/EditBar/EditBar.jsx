@@ -103,7 +103,10 @@ export default function StatusCard({
           {/* <div className={styles.rightSection}> */}
 
           <div className={styles.editStstusButton}>
-            <TextBold variant="orangeButton" className={styles.pending}>
+            <TextBold
+              variant={status === "Solved" ? "greenButton" : "orangeButton"}
+              className={styles.pending}
+            >
               · {status}
             </TextBold>
           </div>
