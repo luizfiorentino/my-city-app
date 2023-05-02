@@ -42,7 +42,7 @@ export default function StatusModal({
       </div>
 
       <TextBold variant="higherLine" className={styles.confirmationMessage}>
-        Enter a message related to the new status:
+        Enter a message related to the new status
       </TextBold>
       <textarea
         type="text"

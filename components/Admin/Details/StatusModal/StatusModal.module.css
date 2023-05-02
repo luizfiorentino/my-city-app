@@ -1,5 +1,6 @@
 .modalContainer {
   width: 50%;
+  max-width: 529px;
   min-height: 150px;
   /* position: fixed;
   top: 40%;
@@ -22,6 +23,7 @@
   margin-bottom: 1rem;
   color: var(--color--intense-purple) !important;
   font-size: 18px !important;
+  align-self: flex-start;
 }
 
 .button {
@@ -33,9 +35,17 @@
   gap: 1rem;
 }
 
+.selector {
+  margin-bottom: 1.2rem;
+  /* align-self: baseline; */
+}
+
 .textArea {
   margin-bottom: 1rem;
   width: 100%;
+  display: flex;
+  padding: 1rem;
+  line-height: 20px;
 }
 
 .defaultSpinner {
@@ -50,4 +60,19 @@
   border-radius: 6px;
   display: flex;
   align-content: center;
+}
+
+@media screen and (max-width: 370px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .modalContainer {
+    width: 80%;
+  }
+  /* .selector {
+    align-self: center;
+  } */
 }
