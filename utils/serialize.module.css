@@ -1,5 +1,6 @@
 .button {
   display: flex;
+  padding: 5px;
 }
 
 .buttonInner {
