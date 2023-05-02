@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./EditBar.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import axios from "axios";
 import StatusModal from "../StatusModal/StatusModal";
+import IssueContext from "@/utils/IssueContext";
 
 import { dateFormat } from "@/utils/serialize";
 
@@ -13,8 +14,12 @@ export default function StatusCard({
   issueStatus,
   issueDate,
   issueMessage,
+  addStatus,
+  loading,
+  setLoading,
 }) {
   const dayjs = require("dayjs");
+  const context = useContext(IssueContext);
 
   const changesOrderedByDate = arrayChanges.sort((a, b) => {
     return dayjs(b.createdAt) - dayjs(a.createdAt);
@@ -23,6 +28,7 @@ export default function StatusCard({
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
   //console.log("openModal", openModal);
+  //console.log("addStatus EDIT BAR", addStatus);
 
   function close(e) {
     if (e.target.id === "overlay") {
@@ -35,24 +41,36 @@ export default function StatusCard({
   const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
   const updateStatus = async (message) => {
     try {
-      const newStatus = await axios.post(`../../api/statusChanges`, {
+      setLoading(true);
+      const response = await axios.post(`../../api/statusChanges`, {
         statusChange: {
           status: status,
           message: message,
           issueId: arrayChanges[0]["issueId"],
         },
       });
+      // window.location.reload();
+      setLoading(false);
+      addStatus(response.data.newChange);
+      setOpenModal(false);
 
-      //console.log("NEW STATUS", newStatus);
+      console.log("NEW STATUS", response.data.newChange);
     } catch (e) {
       console.log(e.message);
+      setLoading(false);
     }
   };
+  // const updateStatus = useContext(
+  //   IssueContextProvider(
+  //     editStatus((status, message, arrayChanges[0]["issueId"]))
+  //   )
+  // );
 
   const submit = () => {
     updateStatus(message);
-    setOpenModal(false);
+    // setOpenModal(false);
     // setMessage("");
+    context.setCurrentMessage(message);
   };
 
   // const dateTest = arrayChanges.map((date) => {
@@ -145,6 +163,7 @@ export default function StatusCard({
           buttonOptions={buttonOptions}
           status={status}
           setStatus={setStatus}
+          loading={loading}
         />
       </div>
       {/* </div> */}

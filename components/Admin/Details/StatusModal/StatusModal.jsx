@@ -3,7 +3,7 @@ import styles from "./StatusModal.module.css";
 import TextBold from "../../Shared/Typography/TextBold/TextBold";
 import TextParagraph from "../../Shared/Typography/TextParagraph/TextParagraph";
 
-export default function StatusMessage({
+export default function StatusModal({
   open,
   onClose,
   updateStatus,
@@ -13,9 +13,11 @@ export default function StatusMessage({
   status,
   buttonOptions,
   setStatus,
+  loading,
+  hello,
 }) {
   if (!open) return null;
-
+  console.log("LOADING??", loading, "HELLO", hello);
   return (
     <div className={styles.modalContainer}>
       <TextBold variant="higherLine" className={styles.confirmationMessage}>
@@ -46,14 +48,16 @@ export default function StatusMessage({
         <button
           onClick={submit}
           className={styles.button}
-          disabled={message.length <= 4 && true}
+          disabled={message.length <= 4 || loading}
         >
           <TextBold
             variant={
-              message.length >= 4 ? "purpleButton" : "purpleButtonInactive"
+              message.length >= 4 && !loading
+                ? "purpleButton"
+                : "purpleButtonInactive"
             }
           >
-            Confirm
+            {loading ? "Loading" : "Confirm"}
           </TextBold>
         </button>
         <button onClick={onClose} className={styles.button}>

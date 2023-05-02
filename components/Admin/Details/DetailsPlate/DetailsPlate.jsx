@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./DetailsPlate.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
@@ -8,6 +8,7 @@ import { dateFormat } from "@/utils/serialize";
 import { Pagination } from "@/utils/serialize";
 import StatusCard from "../../Details/StatusCard";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
+import IssueContext from "@/utils/IssueContext";
 
 export default function DetailsPlate({
   id,
@@ -18,6 +19,8 @@ export default function DetailsPlate({
   arrayChanges,
 }) {
   //console.log("ARRAY CHANGES ->", arrayChanges);
+  const context = useContext(IssueContext);
+  console.log("context", context);
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
   const [openHistory, setOpenHistory] = useState(false);
@@ -56,6 +59,7 @@ export default function DetailsPlate({
   return (
     <BackgroundCanvas className={styles.detailsMain}>
       <div className={styles.top}>
+        {/* <h3>{context.currentMessage}</h3> */}
         <div className={styles.id}>
           <div className={`${styles.idInner} ${styles.idSpacing}`}>
             <TextBold variant="hash">#</TextBold>

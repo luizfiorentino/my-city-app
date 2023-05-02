@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import UserForm from "@/components/User/IssueForm/UserForm";
+import IssueContextProvider from "@/utils/IssueContext";
 
 const inter = Inter({ subsets: ["latin"] });
 

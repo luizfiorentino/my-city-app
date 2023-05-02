@@ -15,6 +15,7 @@ export default async function handler(req, res) {
       },
     });
 
+    // return res.redirect(`/admin/issues/${req.body.statusChange.issueId}`);
     return res
       .status(201)
       .json({ message: `New change placed`, newChange: newChange });

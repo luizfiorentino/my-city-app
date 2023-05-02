@@ -18,8 +18,10 @@ export default function IssueStatus({ issue }) {
 
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
+  const [issueDetails, setIssueDetails] = useState(issue);
+  const [loading, setLoading] = useState(false);
 
-  const changesOrderedByDate = issue.statusChange.sort((a, b) => {
+  const changesOrderedByDate = issueDetails.statusChange.sort((a, b) => {
     return dayjs(b.createdAt) - dayjs(a.createdAt);
   });
 
@@ -38,7 +40,7 @@ export default function IssueStatus({ issue }) {
         statusChange: {
           status: status,
           message: message,
-          issueId: issue.statusChange[0]["issueId"],
+          issueId: issueDetails.statusChange[0]["issueId"],
         },
       });
 
@@ -65,6 +67,16 @@ export default function IssueStatus({ issue }) {
     "Done",
   ];
 
+  function addStatus(newStatus) {
+    console.log("addStatus function", newStatus, issue);
+    setIssueDetails({
+      ...issue,
+      statusChange: [...issue.statusChange, newStatus],
+    });
+  }
+
+  console.log("DETAILS PAGE", loading);
+
   return (
     <div className={styles.container}>
       <AdminTopBar className={styles.tb} />
@@ -79,22 +91,27 @@ export default function IssueStatus({ issue }) {
           </span>
           <TextBold className={styles.backLink}>Go back</TextBold>
         </Link>
-        <EditBar arrayChanges={issue.statusChange} isHistory={false} />
+        <EditBar
+          arrayChanges={issueDetails.statusChange}
+          addStatus={addStatus}
+          loading={loading}
+          setLoading={setLoading}
+        />
         <DetailsPlate
-          id={issue.id}
-          createdAt={issue.createdAt}
-          userName={issue.userName}
-          location={issue.location}
-          description={issue.description}
-          arrayChanges={issue.statusChange}
+          id={issueDetails.id}
+          createdAt={issueDetails.createdAt}
+          userName={issueDetails.userName}
+          location={issueDetails.location}
+          description={issueDetails.description}
+          arrayChanges={issueDetails.statusChange}
         />
       </div>
-      <div
+      {/* <div
         id="overlay"
         className={`${openModal === true ? styles.overlay : undefined}`}
         onClick={openModal ? close : null}
-      >
-        <StatusModal
+      > */}
+      {/* <StatusModal
           open={openModal}
           onClose={() => setOpenModal(false)}
           updateStatus={updateStatus}
@@ -103,8 +120,10 @@ export default function IssueStatus({ issue }) {
           submit={submit}
           buttonOptions={buttonOptions}
           setStatus={setStatus}
-        />
-      </div>
+          loading={loading}
+          hello={"world"}
+        /> */}
+      {/* </div> */}
       <BackgroundCanvas className={styles.footer}>
         <div className={styles.buttonsPannel}>
           <button
