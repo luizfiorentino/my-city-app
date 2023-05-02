@@ -20,13 +20,13 @@ export default function DetailsPlate({
 }) {
   const context = useContext(IssueContext);
   //console.log("context", context);
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
   // const [message, setMessage] = useState("");
   const [openHistory, setOpenHistory] = useState(false);
 
   function close(e) {
     if (e.target.id === "overlay") {
-      setOpenModal(false);
+      context.setOpenModal(false);
     }
   }
 

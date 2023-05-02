@@ -23,12 +23,12 @@ export default function StatusCard({
     return dayjs(b.createdAt) - dayjs(a.createdAt);
   });
 
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
 
   function close(e) {
     if (e.target.id === "overlay") {
-      setOpenModal(false);
+      context.setOpenModal(false);
     }
   }
 
@@ -46,7 +46,7 @@ export default function StatusCard({
       // window.location.reload();
       context.setLoading(false);
       addStatus(response.data.newChange);
-      setOpenModal(false);
+      context.setOpenModal(false);
 
       console.log("NEW STATUS", response.data.newChange);
     } catch (e) {
@@ -86,9 +86,9 @@ export default function StatusCard({
           </div>
         </div>
         <div className={styles.buttonsPannel}>
-          {openModal ? undefined : (
+          {!context.openModal && (
             <button
-              onClick={() => setOpenModal(true)}
+              onClick={() => context.setOpenModal(true)}
               className={styles.buttonEdit}
             >
               <TextBold size="large" className={styles.editButton}>
@@ -96,9 +96,9 @@ export default function StatusCard({
               </TextBold>
             </button>
           )}
-          {openModal === true ? undefined : (
+          {!context.openModal && (
             <button
-              onClick={() => setOpenModal(true)}
+              onClick={() => context.setOpenModal(true)}
               className={styles.buttonEdit}
             >
               <TextBold
@@ -109,9 +109,9 @@ export default function StatusCard({
               </TextBold>
             </button>
           )}
-          {openModal ? undefined : (
+          {!context.openModal && (
             <button
-              onClick={() => setOpenModal(true)}
+              onClick={() => context.setOpenModal(true)}
               className={styles.buttonEdit}
             >
               <TextBold
@@ -127,12 +127,12 @@ export default function StatusCard({
 
       <div
         id="overlay"
-        className={`${openModal === true ? styles.overlay : undefined}`}
-        onClick={openModal ? close : null}
+        className={`${context.openModal && styles.overlay}`}
+        onClick={context.openModal && close}
       >
         <StatusModal
-          open={openModal}
-          onClose={() => setOpenModal(false)}
+          open={context.openModal}
+          onClose={() => context.setOpenModal(false)}
           updateStatus={updateStatus}
           message={message}
           setMessage={setMessage}

@@ -6,8 +6,11 @@ import issueContext from "../utils/IssueContext";
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   return (
-    <issueContext.Provider value={{ loading, setLoading }}>
+    <issueContext.Provider
+      value={{ loading, setLoading, openModal, setOpenModal }}
+    >
       {" "}
       <Component {...pageProps} />
     </issueContext.Provider>

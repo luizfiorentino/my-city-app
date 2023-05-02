@@ -17,7 +17,7 @@ export default function IssueStatus({ issue }) {
   //console.log("issue det page top", issue, "array");
   const dayjs = require("dayjs");
 
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
   const [issueDetails, setIssueDetails] = useState(issue);
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ export default function IssueStatus({ issue }) {
 
   function close(e) {
     if (e.target.id === "overlay") {
-      setOpenModal(false);
+      context.setOpenModal(false);
     }
   }
 
@@ -58,7 +58,7 @@ export default function IssueStatus({ issue }) {
 
   const submit = () => {
     updateStatus(message);
-    setOpenModal(false);
+    context.setOpenModal(false);
     // setMessage("");
   };
 
@@ -112,7 +112,7 @@ export default function IssueStatus({ issue }) {
       <BackgroundCanvas className={styles.footer}>
         <div className={styles.buttonsPannel}>
           <button
-            onClick={() => setOpenModal(true)}
+            onClick={() => context.setOpenModal(true)}
             className={styles.buttonEdit}
           >
             <TextBold size="large" className={styles.editButton}>
@@ -121,7 +121,7 @@ export default function IssueStatus({ issue }) {
           </button>
 
           <button
-            onClick={() => setOpenModal(true)}
+            onClick={() => context.setOpenModal(true)}
             className={styles.buttonEdit}
           >
             <TextBold
@@ -133,7 +133,7 @@ export default function IssueStatus({ issue }) {
           </button>
 
           <button
-            onClick={() => setOpenModal(true)}
+            onClick={() => context.setOpenModal(true)}
             className={styles.buttonEdit}
           >
             <TextBold
