@@ -59,11 +59,34 @@ export default function StatusCard({
     updateStatus(message);
   };
 
+  const markSolved = async () => {
+    try {
+      context.setLoading(true);
+      const response = await axios.post(`../../api/statusChanges`, {
+        statusChange: {
+          status: "Solved",
+          message: "Issue solved",
+          issueId: arrayChanges[0]["issueId"],
+        },
+      });
+      // window.location.reload();
+      context.setLoading(false);
+      addStatus(response.data.newChange);
+      context.setOpenModal(false);
+      setStatus("Solved");
+
+      console.log("SOLVED", response.data.newChange);
+    } catch (e) {
+      console.log(e.message);
+      context.setLoading(false);
+    }
+  };
+
   const buttonOptions = [
     "Submitted",
     "On progress",
     "Information needed",
-    "Done",
+    "Solved",
   ];
 
   const currentMessage = changesOrderedByDate[0]["message"];
@@ -110,10 +133,7 @@ export default function StatusCard({
             </button>
           )}
           {!context.openModal && (
-            <button
-              onClick={() => context.setOpenModal(true)}
-              className={styles.buttonEdit}
-            >
+            <button onClick={markSolved} className={styles.buttonEdit}>
               <TextBold
                 size="large"
                 className={`${styles.editButton} ${styles.solvedButton}`}
