@@ -250,9 +250,10 @@ export default function StatusCard({
               ) : (
                 <TextBold
                   variant={
-                    message.length >= 4 && !context.loading
-                      ? "purpleButton"
-                      : "purpleButtonInactive"
+                    (buttonMode === "edit" && message.length <= 4) ||
+                    (buttonMode === "edit" && context.loading)
+                      ? "purpleButtonInactive"
+                      : "purpleButton"
                   }
                 >
                   Confirm
