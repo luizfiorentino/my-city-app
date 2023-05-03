@@ -6,6 +6,7 @@ import TextBold from "../../Shared/Typography/TextBold";
 import axios from "axios";
 import StatusModal from "../StatusModal/StatusModal";
 import IssueContext from "@/utils/IssueContext";
+import LoaderImage from "../../../../pages/assets/images/Loading_icon.gif";
 
 import { dateFormat } from "@/utils/serialize";
 
@@ -25,6 +26,7 @@ export default function StatusCard({
 
   // const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
+  const [buttonMode, setButtonMode] = useState("");
 
   function close(e) {
     if (e.target.id === "overlay") {
@@ -34,52 +36,55 @@ export default function StatusCard({
 
   const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
   const updateStatus = async (message) => {
-    try {
-      context.setLoading(true);
-      const response = await axios.post(`../../api/statusChanges`, {
-        statusChange: {
-          status: status,
-          message: message,
-          issueId: arrayChanges[0]["issueId"],
-        },
-      });
-      // window.location.reload();
-      context.setLoading(false);
-      addStatus(response.data.newChange);
-      context.setOpenModal(false);
+    if (buttonMode === "edit") {
+      try {
+        context.setLoading(true);
+        const response = await axios.post(`../../api/statusChanges`, {
+          statusChange: {
+            status: status,
+            message: message,
+            issueId: arrayChanges[0]["issueId"],
+          },
+        });
+        // window.location.reload();
+        context.setLoading(false);
+        addStatus(response.data.newChange);
+        context.setOpenModal(false);
 
-      console.log("NEW STATUS", response.data.newChange);
-    } catch (e) {
-      console.log(e.message);
-      context.setLoading(false);
+        console.log("NEW STATUS", response.data.newChange);
+      } catch (e) {
+        console.log(e.message);
+        context.setLoading(false);
+      }
+    }
+    if (buttonMode === "solved") {
+      try {
+        context.setLoading(true);
+        const response = await axios.post(`../../api/statusChanges`, {
+          statusChange: {
+            status: "Solved",
+            message: "Issue solved",
+            issueId: arrayChanges[0]["issueId"],
+          },
+        });
+        // window.location.reload();
+        context.setLoading(false);
+        addStatus(response.data.newChange);
+        context.setOpenModal(false);
+        setStatus("Solved");
+
+        console.log("SOLVED", response.data.newChange);
+      } catch (e) {
+        console.log(e.message);
+        context.setLoading(false);
+      }
+    } else {
+      return;
     }
   };
 
   const submit = () => {
     updateStatus(message);
-  };
-
-  const markSolved = async () => {
-    try {
-      context.setLoading(true);
-      const response = await axios.post(`../../api/statusChanges`, {
-        statusChange: {
-          status: "Solved",
-          message: "Issue solved",
-          issueId: arrayChanges[0]["issueId"],
-        },
-      });
-      // window.location.reload();
-      context.setLoading(false);
-      addStatus(response.data.newChange);
-      context.setOpenModal(false);
-      setStatus("Solved");
-
-      console.log("SOLVED", response.data.newChange);
-    } catch (e) {
-      console.log(e.message);
-      context.setLoading(false);
-    }
   };
 
   const buttonOptions = [
@@ -94,6 +99,21 @@ export default function StatusCard({
   useEffect(() => {
     setMessage(message);
   }, [message]);
+
+  const clickDelete = () => {
+    setButtonMode("delete");
+    context.setOpenModal(true);
+  };
+
+  const clickEdit = () => {
+    setButtonMode("edit");
+    context.setOpenModal(true);
+  };
+
+  const clickSolved = () => {
+    setButtonMode("solved");
+    context.setOpenModal(true);
+  };
 
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
@@ -113,20 +133,14 @@ export default function StatusCard({
         </div>
         <div className={styles.buttonsPannel}>
           {!context.openModal && (
-            <button
-              onClick={() => context.setOpenModal(true)}
-              className={styles.buttonEdit}
-            >
+            <button onClick={clickEdit} className={styles.buttonEdit}>
               <TextBold size="large" className={styles.editButton}>
                 Edit
               </TextBold>
             </button>
           )}
           {!context.openModal && (
-            <button
-              onClick={() => context.setOpenModal(true)}
-              className={styles.buttonEdit}
-            >
+            <button onClick={clickDelete} className={styles.buttonEdit}>
               <TextBold
                 size="large"
                 className={`${styles.editButton} ${styles.deleteButton}`}
@@ -136,7 +150,7 @@ export default function StatusCard({
             </button>
           )}
           {!context.openModal && (
-            <button onClick={markSolved} className={styles.buttonEdit}>
+            <button onClick={clickSolved} className={styles.buttonEdit}>
               <TextBold
                 size="large"
                 className={`${styles.editButton} ${styles.solvedButton}`}
@@ -163,7 +177,99 @@ export default function StatusCard({
           buttonOptions={buttonOptions}
           status={status}
           setStatus={setStatus}
-        />
+        >
+          <TextBold variant="higherLine" className={styles.confirmationMessage}>
+            {buttonMode === "delete" || buttonMode === "solved"
+              ? undefined
+              : "Select a new status if necessary"}
+          </TextBold>
+          <TextBold
+            variant="higherLine"
+            className={
+              buttonMode === "delete" ? styles.confirmationMessage : undefined
+            }
+          >
+            {buttonMode === "delete"
+              ? "Are you sure you want to delete this issue?"
+              : undefined}
+          </TextBold>
+          <TextBold
+            variant="higherLine"
+            className={
+              buttonMode === "solved" ? styles.confirmationMessage : undefined
+            }
+          >
+            {buttonMode === "solved"
+              ? "Are you sure you want to mark this issue as solved?"
+              : undefined}
+          </TextBold>
+
+          <div className={styles.selector}>
+            {buttonMode === "delete" || buttonMode === "solved" ? undefined : (
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className={styles.selectorInner}
+              >
+                {buttonOptions.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            )}
+          </div>
+
+          <TextBold variant="higherLine" className={styles.confirmationMessage}>
+            {buttonMode === "delete" || buttonMode === "solved"
+              ? undefined
+              : "Enter a message related to it"}{" "}
+          </TextBold>
+          {buttonMode === "delete" || buttonMode === "solved" ? undefined : (
+            <textarea
+              type="text"
+              onChange={(e) => setMessage(e.target.value)}
+              className={styles.textArea}
+            />
+          )}
+
+          <div className={styles.buttons}>
+            <button
+              onClick={submit}
+              className={styles.button}
+              disabled={
+                buttonMode === "edit"
+                  ? message.length <= 4 || context.loading
+                  : undefined
+              }
+            >
+              {context.loading ? (
+                <img
+                  src={LoaderImage.src}
+                  className={styles.defaultSpinner}
+                  alt="loader image"
+                />
+              ) : (
+                <TextBold
+                  variant={
+                    message.length >= 4 && !context.loading
+                      ? "purpleButton"
+                      : "purpleButtonInactive"
+                  }
+                >
+                  Confirm
+                </TextBold>
+              )}
+            </button>
+
+            <button
+              onClick={() => context.setOpenModal(false)}
+              className={styles.button}
+            >
+              <TextBold variant="redButton" className={styles.confirmText}>
+                Cancel
+              </TextBold>
+            </button>
+          </div>
+        </StatusModal>
       </div>
     </BackgroundCanvas>
   );

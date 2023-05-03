@@ -9,15 +9,13 @@ import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
-import StatusModal from "../../../components/Admin/Details/StatusModal";
+
 import axios from "axios";
 import IssueContext from "@/utils/IssueContext";
 
 export default function IssueStatus({ issue }) {
-  //console.log("issue det page top", issue, "array");
   const dayjs = require("dayjs");
 
-  // const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
   const [issueDetails, setIssueDetails] = useState(issue);
   const [loading, setLoading] = useState(false);
@@ -29,7 +27,6 @@ export default function IssueStatus({ issue }) {
   });
 
   const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
-  //console.log("openModal", openModal);
 
   function close(e) {
     if (e.target.id === "overlay") {
@@ -46,14 +43,11 @@ export default function IssueStatus({ issue }) {
           issueId: issueDetails.statusChange[0]["issueId"],
         },
       });
-
-      //console.log("NEW STATUS", newStatus);
     } catch (e) {
       console.log(e.message);
     }
   };
 
-  //console.log("status", status, "message", message),
   "issueId", issue.statusChange[0]["issueId"];
 
   const submit = () => {
@@ -76,8 +70,6 @@ export default function IssueStatus({ issue }) {
       statusChange: [...issue.statusChange, newStatus],
     });
   }
-
-  //console.log("DETAILS PAGE", loading);
 
   return (
     <div className={styles.container}>
