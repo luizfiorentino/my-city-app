@@ -178,38 +178,34 @@ export default function StatusCard({
               variant={status === "Solved" ? "greenButton" : "orangeButton"}
               className={styles.pending}
             >
-              · {status}
+              · {changesOrderedByDate[0]["status"]}
             </TextBold>
           </div>
         </div>
         <div className={styles.buttonsPannel}>
-          {!context.openModal && (
-            <button onClick={clickEdit} className={styles.buttonEdit}>
-              <TextBold size="large" className={styles.editButton}>
-                Edit
-              </TextBold>
-            </button>
-          )}
-          {!context.openModal && (
-            <button onClick={clickDelete} className={styles.buttonEdit}>
-              <TextBold
-                size="large"
-                className={`${styles.editButton} ${styles.deleteButton}`}
-              >
-                Delete
-              </TextBold>
-            </button>
-          )}
-          {!context.openModal && (
-            <button onClick={clickSolved} className={styles.buttonEdit}>
-              <TextBold
-                size="large"
-                className={`${styles.editButton} ${styles.solvedButton}`}
-              >
-                Mark as solved
-              </TextBold>
-            </button>
-          )}
+          <button onClick={clickEdit} className={styles.buttonEdit}>
+            <TextBold size="large" className={styles.editButton}>
+              Edit
+            </TextBold>
+          </button>
+
+          <button onClick={clickDelete} className={styles.buttonEdit}>
+            <TextBold
+              size="large"
+              className={`${styles.editButton} ${styles.deleteButton}`}
+            >
+              Delete
+            </TextBold>
+          </button>
+
+          <button onClick={clickSolved} className={styles.buttonEdit}>
+            <TextBold
+              size="large"
+              className={`${styles.editButton} ${styles.solvedButton}`}
+            >
+              Mark as solved
+            </TextBold>
+          </button>
         </div>
       </div>
 
