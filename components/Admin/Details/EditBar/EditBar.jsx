@@ -16,6 +16,7 @@ export default function StatusCard({
   issueDate,
   issueMessage,
   addStatus,
+  issueId,
 }) {
   const dayjs = require("dayjs");
   const context = useContext(IssueContext);
@@ -27,6 +28,7 @@ export default function StatusCard({
   // const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
   const [buttonMode, setButtonMode] = useState("");
+  console.log("EDITBAR test console log", issueId, "button mode", buttonMode);
 
   function close(e) {
     if (e.target.id === "overlay") {
@@ -78,11 +80,37 @@ export default function StatusCard({
         console.log(e.message);
         context.setLoading(false);
       }
+    }
+    if (buttonMode === "delete") {
+      try {
+        console.log("ISSUE IID", issueId);
+        context.setLoading(true);
+        const response = await axios.delete(`../../api/issues/${issueId}`, {
+          object: { id: issueId, something: 123 },
+        });
+        // fetch(`../../api/issues/${id}`, {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   method: "DELETE",
+        // }).then(() => {
+        //   refreshData();
+        // });
+        context.setLoading(false);
+
+        context.setOpenModal(false);
+      } catch (e) {
+        console.log(e.message);
+        context.setLoading(false);
+      }
     } else {
       return;
     }
   };
 
+  // const submit = () => {
+  //   updateStatus(message);
+  // };
   const submit = () => {
     updateStatus(message);
   };
@@ -115,10 +143,33 @@ export default function StatusCard({
     context.setOpenModal(true);
   };
 
+  const deleteIssue = async () => {
+    console.log("clicked");
+    try {
+      context.setLoading(true);
+
+      const response =
+        (`../../api/issues/${issueId}`,
+        {
+          object: { id: issueId, something: 123 },
+        });
+      // window.location.reload();
+      context.setLoading(false);
+      addStatus(response.data.newChange);
+      context.setOpenModal(false);
+
+      console.log("NEW STATUS", response.data.newChange);
+    } catch (e) {
+      console.log(e.message);
+      context.setLoading(false);
+    }
+  };
+
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
       <div className={styles.topCard}>
         <div className={styles.topCardInner}>
+          <button onClick={deleteIssue}>delete</button>
           <TextParagraph className={styles.status}>Status</TextParagraph>
           {/* <div className={styles.rightSection}> */}
 

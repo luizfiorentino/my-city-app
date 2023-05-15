@@ -19,6 +19,7 @@ export default function IssueStatus({ issue }) {
   const [message, setMessage] = useState("");
   const [issueDetails, setIssueDetails] = useState(issue);
   const [loading, setLoading] = useState(false);
+  //console.log("ISSUE", issue);
 
   const context = useContext(IssueContext);
 
@@ -90,6 +91,7 @@ export default function IssueStatus({ issue }) {
           addStatus={addStatus}
           loading={loading}
           setLoading={setLoading}
+          issueId={issue.id}
         />
         <DetailsPlate
           id={issueDetails.id}
