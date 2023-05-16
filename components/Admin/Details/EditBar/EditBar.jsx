@@ -10,17 +10,10 @@ import LoaderImage from "../../../../pages/assets/images/Loading_icon.gif";
 import dayjs from "dayjs";
 
 import { dateFormat } from "@/utils/serialize";
-import {
-  sendDeleteRequest,
-  sendSolvedUpdateRequest,
-  sendUpdateIssueRequest,
-} from "@/services";
 
 export default function EditBar({
   arrayChanges,
-  issueStatus,
-  issueDate,
-  issueMessage,
+  updateStatus,
   addStatus,
   issueId,
 }) {
@@ -45,34 +38,11 @@ export default function EditBar({
     }
   }
 
-  const updateStatus = async (message) => {
-    try {
-      context.setLoading(true);
-
-      switch (buttonMode) {
-        case "edit":
-          await sendUpdateIssueRequest(status, message, issueId);
-          break;
-        case "solved":
-          await sendSolvedUpdateRequest(issueId);
-          break;
-        case "delete":
-          await sendDeleteRequest(issueId);
-          break;
-      }
-      context.setLoading(false);
-      context.setOpenModal(false);
-    } catch (e) {
-      console.log(e.message);
-      context.setLoading(false);
-    }
-  };
-
   // const submit = () => {
   //   updateStatus(message);
   // };
   const submit = () => {
-    updateStatus(message);
+    updateStatus(message, status, buttonMode);
   };
 
   const buttonOptions = [
@@ -125,7 +95,6 @@ export default function EditBar({
     <BackgroundCanvas className={styles.statusCardContainer}>
       <div className={styles.topCard}>
         <div className={styles.topCardInner}>
-          <button onClick={deleteIssue}>delete</button>
           <TextParagraph className={styles.status}>Status</TextParagraph>
           {/* <div className={styles.rightSection}> */}
 

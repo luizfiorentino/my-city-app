@@ -12,6 +12,11 @@ import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/Backgro
 
 import axios from "axios";
 import IssueContext from "@/utils/IssueContext";
+import {
+  sendDeleteRequest,
+  sendSolvedUpdateRequest,
+  sendUpdateIssueRequest,
+} from "@/services";
 
 export default function IssueStatus({ issue }) {
   const dayjs = require("dayjs");
@@ -20,6 +25,34 @@ export default function IssueStatus({ issue }) {
   const [issueDetails, setIssueDetails] = useState(issue);
   const [loading, setLoading] = useState(false);
   //console.log("ISSUE", issue);
+
+  const updateStatus = async (message, status, buttonMode) => {
+    try {
+      context.setLoading(true);
+
+      switch (buttonMode) {
+        case "edit":
+          const newStatus = await sendUpdateIssueRequest(
+            status,
+            message,
+            issue.id
+          );
+          addStatus(newStatus);
+          break;
+        case "solved":
+          await sendSolvedUpdateRequest(issue.id);
+          break;
+        case "delete":
+          await sendDeleteRequest(issue.id);
+          break;
+      }
+      context.setLoading(false);
+      context.setOpenModal(false);
+    } catch (e) {
+      console.log(e.message);
+      context.setLoading(false);
+    }
+  };
 
   const context = useContext(IssueContext);
 
@@ -35,21 +68,21 @@ export default function IssueStatus({ issue }) {
     }
   }
 
-  const updateStatus = async (message) => {
-    try {
-      const newStatus = await axios.post(`../../api/statusChanges`, {
-        statusChange: {
-          status: status,
-          message: message,
-          issueId: issueDetails.statusChange[0]["issueId"],
-        },
-      });
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
+  // const updateStatus = async (message) => {
+  //   try {
+  //     const newStatus = await axios.post(`../../api/statusChanges`, {
+  //       statusChange: {
+  //         status: status,
+  //         message: message,
+  //         issueId: issueDetails.statusChange[0]["issueId"],
+  //       },
+  //     });
+  //   } catch (e) {
+  //     console.log(e.message);
+  //   }
+  // };
 
-  "issueId", issue.statusChange[0]["issueId"];
+  // "issueId", issue.statusChange[0]["issueId"];
 
   const submit = () => {
     updateStatus(message);
@@ -65,7 +98,6 @@ export default function IssueStatus({ issue }) {
   ];
 
   function addStatus(newStatus) {
-    console.log("addStatus function", newStatus, issue);
     setIssueDetails({
       ...issue,
       statusChange: [...issue.statusChange, newStatus],
@@ -87,6 +119,7 @@ export default function IssueStatus({ issue }) {
           <TextBold className={styles.backLink}>Go back</TextBold>
         </Link>
         <EditBar
+          updateStatus={updateStatus}
           arrayChanges={issueDetails.statusChange}
           addStatus={addStatus}
           loading={loading}
