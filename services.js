@@ -17,11 +17,13 @@ export async function sendDeleteRequest(issueId) {
 }
 
 export async function sendSolvedUpdateRequest(issueId) {
-  return await axios.post(`/api/statusChanges`, {
+  const response = await axios.post(`/api/statusChanges`, {
     statusChange: {
       status: "Solved",
       message: "Issue solved",
       issueId: issueId,
     },
   });
+
+  return response.data.newChange;
 }

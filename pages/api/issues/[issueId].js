@@ -5,13 +5,14 @@ export default async function handler(req, res) {
   console.log("REQ BODY->", req.body);
 
   // const issueId = req.query.id;
-  const issueId = req.body.object.id;
+  const issueId = req.query.issueId;
   console.log("from handler", issueId);
 
   if (req.method === "DELETE") {
+    await prisma.statusChange.deleteMany({ where: { issueId: issueId } });
     const issueDelete = await prisma.issue.delete({
       where: {
-        id: { id: issueId },
+        id: issueId,
       },
     });
     return res.status(200).json({ issueDelete });

@@ -9,7 +9,7 @@ import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
-
+import { useRouter } from "next/router";
 import axios from "axios";
 import IssueContext from "@/utils/IssueContext";
 import {
@@ -21,6 +21,8 @@ import {
 export default function IssueStatus({ issue }) {
   const dayjs = require("dayjs");
 
+  const router = useRouter();
+
   const [message, setMessage] = useState("");
   const [issueDetails, setIssueDetails] = useState(issue);
   const [loading, setLoading] = useState(false);
@@ -31,7 +33,7 @@ export default function IssueStatus({ issue }) {
       context.setLoading(true);
 
       switch (buttonMode) {
-        case "edit":
+        case "edit": {
           const newStatus = await sendUpdateIssueRequest(
             status,
             message,
@@ -39,12 +41,20 @@ export default function IssueStatus({ issue }) {
           );
           addStatus(newStatus);
           break;
-        case "solved":
-          await sendSolvedUpdateRequest(issue.id);
+        }
+
+        case "solved": {
+          const newStatus = await sendSolvedUpdateRequest(issue.id);
+          addStatus(newStatus);
+
           break;
-        case "delete":
+        }
+
+        case "delete": {
           await sendDeleteRequest(issue.id);
+          router.push("/admin");
           break;
+        }
       }
       context.setLoading(false);
       context.setOpenModal(false);
