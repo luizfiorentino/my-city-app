@@ -90,6 +90,7 @@ export default function IssueStatus({ issue }) {
           <TextBold className={styles.backLink}>Go back</TextBold>
         </Link>
         <EditBar
+          footer={false}
           updateStatus={updateStatus}
           arrayChanges={issueDetails.statusChange}
           addStatus={addStatus}
@@ -104,10 +105,20 @@ export default function IssueStatus({ issue }) {
           location={issueDetails.location}
           description={issueDetails.description}
           arrayChanges={issueDetails.statusChange}
+        />{" "}
+        <EditBar
+          className={styles.footerBar}
+          footer={true}
+          updateStatus={updateStatus}
+          arrayChanges={issueDetails.statusChange}
+          addStatus={addStatus}
+          loading={loading}
+          setLoading={setLoading}
+          issueId={issue.id}
         />
       </div>
 
-      <BackgroundCanvas className={styles.footer}>
+      {/* <BackgroundCanvas className={styles.footer}>
         <div className={styles.buttonsPannel}>
           <button
             onClick={() => context.setOpenModal(true)}
@@ -142,7 +153,7 @@ export default function IssueStatus({ issue }) {
             </TextBold>
           </button>
         </div>
-      </BackgroundCanvas>
+      </BackgroundCanvas> */}
     </div>
   );
 }

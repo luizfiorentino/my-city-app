@@ -8,7 +8,7 @@ import IssueContext from "@/utils/IssueContext";
 import LoaderImage from "../../../../pages/assets/images/Loading_icon.gif";
 import dayjs from "dayjs";
 
-export default function EditBar({ arrayChanges, updateStatus }) {
+export default function EditBar({ arrayChanges, updateStatus, footer }) {
   const context = useContext(IssueContext);
 
   const changesOrderedByDate = arrayChanges.sort((a, b) => {
@@ -54,9 +54,17 @@ export default function EditBar({ arrayChanges, updateStatus }) {
   };
 
   return (
-    <BackgroundCanvas className={styles.statusCardContainer}>
+    <BackgroundCanvas
+      className={
+        footer === false ? styles.statusCardContainer : styles.hiddenBar
+      }
+    >
       <div className={styles.topCard}>
-        <div className={styles.topCardInner}>
+        <div
+          className={
+            footer === false ? styles.topCardInner : styles.topCardHidden
+          }
+        >
           <TextParagraph className={styles.status}>Status</TextParagraph>
 
           <div className={styles.editStstusButton}>
@@ -70,7 +78,11 @@ export default function EditBar({ arrayChanges, updateStatus }) {
             </TextBold>
           </div>
         </div>
-        <div className={styles.buttonsPannel}>
+        <div
+          className={
+            footer === false ? styles.buttonsPannel : styles.buttonsPannelFooter
+          }
+        >
           <button onClick={clickEdit} className={styles.buttonEdit}>
             <TextBold size="large" className={styles.editButton}>
               Edit

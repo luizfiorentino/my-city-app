@@ -81,6 +81,22 @@ justify-content: space-between; */
   align-content: center;
 }
 
+.buttonsPannelFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  gap: 8px;
+}
+
+.topCardHidden {
+  display: none;
+}
+
+.hiddenBar {
+  padding: 24px 48px 27px;
+}
+
 @media screen and (max-width: 370px) {
   .buttons {
     flex-direction: column;
@@ -100,6 +116,18 @@ justify-content: space-between; */
   .buttonsPannel {
     display: flex;
     gap: 8px;
+  }
+
+  .buttonsPannelFooter {
+    display: none;
+  }
+
+  .topCardHidden {
+    display: none;
+  }
+
+  .hiddenBar {
+    display: none;
   }
 }
 
@@ -137,6 +165,13 @@ justify-content: space-between; */
   border-style: none;
   background-color: #252945;
   border-radius: 24px;
+}
+
+@media screen and (max-width: 480px) {
+  .buttonsPannelFooter {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 @media screen and (max-width: 240px) {
