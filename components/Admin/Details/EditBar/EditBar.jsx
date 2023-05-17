@@ -1,23 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./EditBar.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
-import axios from "axios";
-import StatusModal from "../StatusModal/StatusModal";
+import Modal from "../Modal/Modal";
 import IssueContext from "@/utils/IssueContext";
 import LoaderImage from "../../../../pages/assets/images/Loading_icon.gif";
 import dayjs from "dayjs";
 
-import { dateFormat } from "@/utils/serialize";
-
-export default function EditBar({
-  arrayChanges,
-  updateStatus,
-  addStatus,
-  issueId,
-}) {
-  // const dayjs = require("dayjs");
+export default function EditBar({ arrayChanges, updateStatus }) {
   const context = useContext(IssueContext);
 
   const changesOrderedByDate = arrayChanges.sort((a, b) => {
@@ -26,21 +17,10 @@ export default function EditBar({
 
   const lastSavedStatus = changesOrderedByDate[0]["status"];
 
-  // const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
   const [buttonMode, setButtonMode] = useState("");
   const [status, setStatus] = useState(lastSavedStatus);
-  console.log("EDITBAR test console log", issueId, "button mode", buttonMode);
 
-  function close(e) {
-    if (e.target.id === "overlay") {
-      context.setOpenModal(false);
-    }
-  }
-
-  // const submit = () => {
-  //   updateStatus(message);
-  // };
   const submit = () => {
     updateStatus(message, status, buttonMode);
   };
@@ -51,8 +31,6 @@ export default function EditBar({
     "Information needed",
     "Solved",
   ];
-
-  const currentMessage = changesOrderedByDate[0]["message"];
 
   const clickDelete = () => {
     setButtonMode("delete");
@@ -69,26 +47,10 @@ export default function EditBar({
     context.setOpenModal(true);
   };
 
-  const deleteIssue = async () => {
-    console.log("clicked");
-    try {
-      context.setLoading(true);
-
-      const response =
-        (`../../api/issues/${issueId}`,
-        {
-          object: { id: issueId, something: 123 },
-        });
-      // window.location.reload();
-      context.setLoading(false);
-      addStatus(response.data.newChange);
-      context.setOpenModal(false);
-
-      console.log("NEW STATUS", response.data.newChange);
-    } catch (e) {
-      console.log(e.message);
-      context.setLoading(false);
-    }
+  const modalMessages = {
+    delete: "Are you sure you want to delete this issue?",
+    solved: "Are you sure you want to mark this issue as solved?",
+    edit: "Select a new status if necessary",
   };
 
   return (
@@ -96,7 +58,6 @@ export default function EditBar({
       <div className={styles.topCard}>
         <div className={styles.topCardInner}>
           <TextParagraph className={styles.status}>Status</TextParagraph>
-          {/* <div className={styles.rightSection}> */}
 
           <div className={styles.editStstusButton}>
             <TextBold
@@ -136,50 +97,27 @@ export default function EditBar({
         </div>
       </div>
 
-      <div
-        id="overlay"
-        className={`${context.openModal && styles.overlay}`}
-        onClick={context.openModal && close}
-      >
-        <StatusModal
-          open={context.openModal}
-          onClose={() => context.setOpenModal(false)}
-          updateStatus={updateStatus}
-          message={message}
-          setMessage={setMessage}
-          submit={submit}
-          buttonOptions={buttonOptions}
-          status={status}
-          setStatus={setStatus}
-        >
-          <TextBold variant="higherLine" className={styles.confirmationMessage}>
-            {buttonMode === "delete" || buttonMode === "solved"
-              ? undefined
-              : "Select a new status if necessary"}
-          </TextBold>
-          <TextBold
-            variant="higherLine"
-            className={
-              buttonMode === "delete" ? styles.confirmationMessage : undefined
-            }
-          >
-            {buttonMode === "delete"
-              ? "Are you sure you want to delete this issue?"
-              : undefined}
-          </TextBold>
-          <TextBold
-            variant="higherLine"
-            className={
-              buttonMode === "solved" ? styles.confirmationMessage : undefined
-            }
-          >
-            {buttonMode === "solved"
-              ? "Are you sure you want to mark this issue as solved?"
-              : undefined}
-          </TextBold>
+      <Modal>
+        {/* <TextBold variant="higherLine" className={styles.confirmationMessage}>
+          {buttonMode === "edit" && "Select a new status if necessary"}
+        </TextBold>
+        <TextBold variant="higherLine" className={styles.confirmationMessage}>
+          {" "}
+          {buttonMode === "delete" &&
+            "Are you sure you want to delete this issue?"}
+        </TextBold>
+        <TextBold variant="higherLine" className={styles.confirmationMessage}>
+          {" "}
+          {buttonMode === "solved" &&
+            "Are you sure you want to mark this issue as solved?"}
+        </TextBold> */}
+        <TextBold className={styles.confirmationMessage}>
+          {modalMessages[buttonMode]}
+        </TextBold>
 
-          <div className={styles.selector}>
-            {buttonMode === "delete" || buttonMode === "solved" ? undefined : (
+        {buttonMode === "edit" && (
+          <>
+            <div className={styles.selector}>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
@@ -189,63 +127,60 @@ export default function EditBar({
                   <option key={option}>{option}</option>
                 ))}
               </select>
-            )}
-          </div>
+            </div>
+            <TextBold
+              variant="higherLine"
+              className={styles.confirmationMessage}
+            >
+              Enter a message related to it
+            </TextBold>
 
-          <TextBold variant="higherLine" className={styles.confirmationMessage}>
-            {buttonMode === "delete" || buttonMode === "solved"
-              ? undefined
-              : "Enter a message related to it"}{" "}
-          </TextBold>
-          {buttonMode === "delete" || buttonMode === "solved" ? undefined : (
             <textarea
               type="text"
               onChange={(e) => setMessage(e.target.value)}
               className={styles.textArea}
             />
-          )}
+          </>
+        )}
 
-          <div className={styles.buttons}>
-            <button
-              onClick={submit}
-              className={styles.button}
-              disabled={
-                buttonMode === "edit"
-                  ? message.length <= 4 || context.loading
-                  : undefined
-              }
-            >
-              {context.loading ? (
-                <img
-                  src={LoaderImage.src}
-                  className={styles.defaultSpinner}
-                  alt="loader image"
-                />
-              ) : (
-                <TextBold
-                  variant={
-                    (buttonMode === "edit" && message.length <= 4) ||
-                    (buttonMode === "edit" && context.loading)
-                      ? "purpleButtonInactive"
-                      : "purpleButton"
-                  }
-                >
-                  Confirm
-                </TextBold>
-              )}
-            </button>
-
-            <button
-              onClick={() => context.setOpenModal(false)}
-              className={styles.button}
-            >
-              <TextBold variant="redButton" className={styles.confirmText}>
-                Cancel
+        <div className={styles.buttons}>
+          <button
+            onClick={submit}
+            className={styles.button}
+            disabled={
+              (buttonMode === "edit" && message.length <= 4) || context.loading
+            }
+          >
+            {context.loading ? (
+              <img
+                src={LoaderImage.src}
+                className={styles.defaultSpinner}
+                alt="loader image"
+              />
+            ) : (
+              <TextBold
+                variant={
+                  (buttonMode === "edit" && message.length <= 4) ||
+                  (buttonMode === "edit" && context.loading)
+                    ? "purpleButtonInactive"
+                    : "purpleButton"
+                }
+              >
+                Confirm
               </TextBold>
-            </button>
-          </div>
-        </StatusModal>
-      </div>
+            )}
+          </button>
+
+          <button
+            onClick={() => context.setOpenModal(false)}
+            className={styles.button}
+          >
+            <TextBold variant="redButton" className={styles.confirmText}>
+              Cancel
+            </TextBold>
+          </button>
+        </div>
+      </Modal>
     </BackgroundCanvas>
   );
 }

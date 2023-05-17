@@ -156,19 +156,6 @@ justify-content: space-between; */
   }
 }
 
-.overlay {
-  background-color: var(--color--bg-canvas);
-  opacity: 0.9;
-  position: fixed;
-  margin-top: -20rem;
-
-  inset: 0;
-  z-index: 30;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .statusCardContainer {
   display: flex;
   flex-direction: column;

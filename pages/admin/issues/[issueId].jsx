@@ -10,7 +10,6 @@ import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
 import { useRouter } from "next/router";
-import axios from "axios";
 import IssueContext from "@/utils/IssueContext";
 import {
   sendDeleteRequest,
@@ -19,11 +18,8 @@ import {
 } from "@/services";
 
 export default function IssueStatus({ issue }) {
-  const dayjs = require("dayjs");
-
   const router = useRouter();
 
-  const [message, setMessage] = useState("");
   const [issueDetails, setIssueDetails] = useState(issue);
   const [loading, setLoading] = useState(false);
   //console.log("ISSUE", issue);
@@ -66,46 +62,11 @@ export default function IssueStatus({ issue }) {
 
   const context = useContext(IssueContext);
 
-  const changesOrderedByDate = issueDetails.statusChange.sort((a, b) => {
-    return dayjs(b.createdAt) - dayjs(a.createdAt);
-  });
-
-  const [status, setStatus] = useState(changesOrderedByDate[0]["status"]);
-
   function close(e) {
     if (e.target.id === "overlay") {
       context.setOpenModal(false);
     }
   }
-
-  // const updateStatus = async (message) => {
-  //   try {
-  //     const newStatus = await axios.post(`../../api/statusChanges`, {
-  //       statusChange: {
-  //         status: status,
-  //         message: message,
-  //         issueId: issueDetails.statusChange[0]["issueId"],
-  //       },
-  //     });
-  //   } catch (e) {
-  //     console.log(e.message);
-  //   }
-  // };
-
-  // "issueId", issue.statusChange[0]["issueId"];
-
-  const submit = () => {
-    updateStatus(message);
-    context.setOpenModal(false);
-    // setMessage("");
-  };
-
-  const buttonOptions = [
-    "Submitted",
-    "On progress",
-    "Information needed",
-    "Done",
-  ];
 
   function addStatus(newStatus) {
     setIssueDetails({
@@ -197,20 +158,9 @@ export async function getServerSideProps(context) {
       },
     });
 
-    // no longer necessary due to the "include" above
-    // const statusChanges = await prisma.statusChange.findMany({
-    //   where: {
-    //     issueId: context.params.issueId,
-    //   },
-    // });
-    // const arrayChanges = statusChanges.map((change) => serialize(change));
-    // don't need to serialize so, we can do it with the whole array
-    // props: (...) arrayChanges: serialize(statusChanges)
-
     return {
       props: {
         issue: serialize(issue),
-        // arrayChanges: arrayChanges,
       },
     };
   } catch (e) {
