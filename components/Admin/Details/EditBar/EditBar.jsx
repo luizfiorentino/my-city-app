@@ -7,6 +7,7 @@ import Modal from "../Modal/Modal";
 import IssueContext from "@/utils/IssueContext";
 import LoaderImage from "../../../../pages/assets/images/Loading_icon.gif";
 import dayjs from "dayjs";
+import Button from "@/components/Shared/Button/Button";
 
 export default function EditBar({ arrayChanges, updateStatus, footer }) {
   const context = useContext(IssueContext);
@@ -66,7 +67,7 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
           }
         >
           <TextParagraph className={styles.status}>Status</TextParagraph>
-
+          <Button>Test</Button>
           <div className={styles.editStstusButton}>
             <TextBold
               variant={
@@ -83,29 +84,36 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
             footer === false ? styles.buttonsPannel : styles.buttonsPannelFooter
           }
         >
-          <button onClick={clickEdit} className={styles.buttonEdit}>
+          {/* <button onClick={clickEdit} className={styles.buttonEdit}>
             <TextBold size="large" className={styles.editButton}>
               Edit
             </TextBold>
-          </button>
+          </button> */}
+          <Button variant="dark" onClick={clickEdit}>
+            Edit
+          </Button>
 
-          <button onClick={clickDelete} className={styles.buttonEdit}>
+          {/* <button onClick={clickDelete} className={styles.buttonEdit}>
             <TextBold
               size="large"
               className={`${styles.editButton} ${styles.deleteButton}`}
             >
               Delete
             </TextBold>
-          </button>
+          </button> */}
+          <Button variant="danger" onClick={clickDelete}>
+            Edit
+          </Button>
 
-          <button onClick={clickSolved} className={styles.buttonEdit}>
+          {/* <button onClick={clickSolved} className={styles.buttonEdit}>
             <TextBold
               size="large"
               className={`${styles.editButton} ${styles.solvedButton}`}
             >
               Mark as solved
             </TextBold>
-          </button>
+          </button> */}
+          <Button onClick={clickSolved}>Mar as solved</Button>
         </div>
       </div>
 
