@@ -1,3 +1,6 @@
 .defaultSpinner {
-  background-color: red;
+}
+
+.small {
+  width: 14px;
 }

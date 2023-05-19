@@ -7,10 +7,23 @@
   color: var(--color--white);
   border-radius: 24px;
   border: none;
+  position: relative;
+  /* display: flex;
+  align-items: center; */
 }
 
 .btn:hover {
   cursor: pointer;
+}
+
+.loading {
+  padding-right: 32px;
+}
+
+.spinner {
+  position: absolute;
+  right: 7px;
+  top: 16px;
 }
 
 .primary {
@@ -43,11 +56,11 @@
   border-radius: 6px;
 }
 
-.redButton {
-  width: 100px;
+.cancel {
+  /* width: 100px;
   padding: 14px 0 11px 0;
   text-align: center;
-  align-self: flex-end;
+  align-self: flex-end; */
   color: red;
   /* background-color: var(--color--bg-light); */
   background-color: white;

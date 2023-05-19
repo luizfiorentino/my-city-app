@@ -8,6 +8,7 @@ import IssueContext from "@/utils/IssueContext";
 import LoaderImage from "../../../../pages/assets/images/Loading_icon.gif";
 import dayjs from "dayjs";
 import Button from "@/components/Shared/Button/Button";
+import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 export default function EditBar({ arrayChanges, updateStatus, footer }) {
   const context = useContext(IssueContext);
@@ -67,7 +68,7 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
           }
         >
           <TextParagraph className={styles.status}>Status</TextParagraph>
-          <Button>Test</Button>
+
           <div className={styles.editStstusButton}>
             <TextBold
               variant={
@@ -84,53 +85,19 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
             footer === false ? styles.buttonsPannel : styles.buttonsPannelFooter
           }
         >
-          {/* <button onClick={clickEdit} className={styles.buttonEdit}>
-            <TextBold size="large" className={styles.editButton}>
-              Edit
-            </TextBold>
-          </button> */}
           <Button variant="dark" onClick={clickEdit}>
             Edit
           </Button>
 
-          {/* <button onClick={clickDelete} className={styles.buttonEdit}>
-            <TextBold
-              size="large"
-              className={`${styles.editButton} ${styles.deleteButton}`}
-            >
-              Delete
-            </TextBold>
-          </button> */}
           <Button variant="danger" onClick={clickDelete}>
-            Edit
+            Delete
           </Button>
 
-          {/* <button onClick={clickSolved} className={styles.buttonEdit}>
-            <TextBold
-              size="large"
-              className={`${styles.editButton} ${styles.solvedButton}`}
-            >
-              Mark as solved
-            </TextBold>
-          </button> */}
-          <Button onClick={clickSolved}>Mar as solved</Button>
+          <Button onClick={clickSolved}>Mark as solved</Button>
         </div>
       </div>
 
       <Modal>
-        {/* <TextBold variant="higherLine" className={styles.confirmationMessage}>
-          {buttonMode === "edit" && "Select a new status if necessary"}
-        </TextBold>
-        <TextBold variant="higherLine" className={styles.confirmationMessage}>
-          {" "}
-          {buttonMode === "delete" &&
-            "Are you sure you want to delete this issue?"}
-        </TextBold>
-        <TextBold variant="higherLine" className={styles.confirmationMessage}>
-          {" "}
-          {buttonMode === "solved" &&
-            "Are you sure you want to mark this issue as solved?"}
-        </TextBold> */}
         <TextBold className={styles.confirmationMessage}>
           {modalMessages[buttonMode]}
         </TextBold>
@@ -164,41 +131,23 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
         )}
 
         <div className={styles.buttons}>
-          <button
+          <Button
             onClick={submit}
-            className={styles.button}
+            // className={styles.button}
             disabled={
               (buttonMode === "edit" && message.length <= 4) || context.loading
             }
+            loading={context.loading}
           >
-            {context.loading ? (
-              <img
-                src={LoaderImage.src}
-                className={styles.defaultSpinner}
-                alt="loader image"
-              />
-            ) : (
-              <TextBold
-                variant={
-                  (buttonMode === "edit" && message.length <= 4) ||
-                  (buttonMode === "edit" && context.loading)
-                    ? "purpleButtonInactive"
-                    : "purpleButton"
-                }
-              >
-                Confirm
-              </TextBold>
-            )}
-          </button>
+            Confirm
+          </Button>
 
-          <button
+          <Button
             onClick={() => context.setOpenModal(false)}
-            className={styles.button}
+            // className={styles.button}
           >
-            <TextBold variant="redButton" className={styles.confirmText}>
-              Cancel
-            </TextBold>
-          </button>
+            <Button variant="cancel">Cancel</Button>
+          </Button>
         </div>
       </Modal>
     </BackgroundCanvas>
