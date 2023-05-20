@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./IssueCard.module.css";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
 import Link from "next/link";
@@ -6,6 +6,7 @@ import TextParagraph from "../../Shared/Typography/TextParagraph";
 import { dateFormat } from "@/utils/serialize";
 import TextBold from "../../Shared/Typography/TextBold";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
+import StatusBanner from "../../Details/StatusBanner/StatusBanner";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
@@ -32,11 +33,15 @@ export default function IssueCard(props) {
         <TextParagraph className={styles.userName}>
           {props.userName}
         </TextParagraph>
-        <TextBold variant="orangeButton" className={styles.submitted}>
-          <Link href={`admin/issues/${props.id}`}>
-            · {props.updates[0]["status"]}
-          </Link>
-        </TextBold>
+        <div className={styles.submitted}>
+          <StatusBanner
+            variant={props.updates[0]["status"] === "Solved" && "solved"}
+          >
+            <Link href={`admin/issues/${props.id}`}>
+              · {props.updates[0]["status"]}
+            </Link>
+          </StatusBanner>
+        </div>
         {showDescription === false ? (
           <img
             src={arrowDown.src}
