@@ -5,10 +5,8 @@ import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import Modal from "../Modal/Modal";
 import IssueContext from "@/utils/IssueContext";
-import LoaderImage from "../../../../pages/assets/images/Loading_icon.gif";
 import dayjs from "dayjs";
 import Button from "@/components/Shared/Button/Button";
-import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 export default function EditBar({ arrayChanges, updateStatus, footer }) {
   const context = useContext(IssueContext);
@@ -133,7 +131,6 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
         <div className={styles.buttons}>
           <Button
             onClick={submit}
-            // className={styles.button}
             disabled={
               (buttonMode === "edit" && message.length <= 4) || context.loading
             }
@@ -142,11 +139,8 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
             Confirm
           </Button>
 
-          <Button
-            onClick={() => context.setOpenModal(false)}
-            // className={styles.button}
-          >
-            <Button variant="cancel">Cancel</Button>
+          <Button onClick={() => context.setOpenModal(false)} variant="light">
+            Cancel
           </Button>
         </div>
       </Modal>

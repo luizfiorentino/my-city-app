@@ -18,7 +18,7 @@ export default function Button({
       `}
     >
       {children}
-      {!loading && <LoaderSpinner className={styles.spinner} />}
+      {loading && <LoaderSpinner className={styles.spinner} />}
     </button>
   );
 }

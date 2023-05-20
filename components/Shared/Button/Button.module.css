@@ -16,13 +16,17 @@
   cursor: pointer;
 }
 
+.btn:disabled {
+  opacity: 0.6;
+}
+
 .loading {
   padding-right: 32px;
 }
 
 .spinner {
   position: absolute;
-  right: 7px;
+  right: 8px;
   top: 16px;
 }
 

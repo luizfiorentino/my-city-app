@@ -1,31 +1,29 @@
-.topCard {
+.statusCardContainer {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 24px;
 }
 
-.buttonsPannel {
-  display: none;
+.topCard {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .topCardInner {
-  /* display: flex;
-  align-items: center;
-
-  gap: 20px; */
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* width: 100%;
-justify-content: space-between; */
-
-.editParts {
-  /* width: 50%; */
-  /* display: flex;
-  justify-content: right;
-  align-items: center; */
+.buttonsPannel {
+  display: none;
 }
 
 .status {
@@ -36,14 +34,6 @@ justify-content: space-between; */
   align-self: auto;
 }
 
-.hidden {
-  display: none;
-}
-
-/* .editParts {
-  display: none;
-} */
-
 .confirmationMessage {
   margin-bottom: 1rem;
   color: var(--color--intense-purple) !important;
@@ -53,7 +43,15 @@ justify-content: space-between; */
 
 .selector {
   margin-bottom: 1.2rem;
-  /* align-self: baseline; */
+}
+
+.selectorInner {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  color: var(--color--orange);
+  border-radius: 6px;
 }
 
 .textArea {
@@ -66,26 +64,14 @@ justify-content: space-between; */
 
 .buttons {
   display: flex;
+  align-items: center;
   gap: 1rem;
-}
-
-.button {
-  border: none;
-}
-
-.defaultSpinner {
-  width: 100px;
-  max-height: 40px;
-  border-radius: 6px;
-  display: flex;
-  align-content: center;
 }
 
 .buttonsPannelFooter {
   width: 100%;
   display: flex;
   justify-content: space-between;
-
   gap: 8px;
 }
 
@@ -95,84 +81,6 @@ justify-content: space-between; */
 
 .hiddenBar {
   padding: 24px 48px 27px;
-}
-
-@media screen and (max-width: 370px) {
-  .buttons {
-    flex-direction: column;
-  }
-}
-
-@media screen and (min-width: 767px) {
-  .topCardInner {
-    display: flex;
-    align-items: center;
-    max-width: 28%;
-    gap: 20px;
-    /* width: 100%;
-    justify-content: space-between; */
-  }
-
-  .buttonsPannel {
-    display: flex;
-    gap: 8px;
-  }
-
-  .buttonsPannelFooter {
-    display: none;
-  }
-
-  .topCardHidden {
-    display: none;
-  }
-
-  .hiddenBar {
-    display: none;
-  }
-}
-
-/* .editStatusButton {
-  display: flex;
-  align-items: center;
-  height: 100%;
-} */
-
-.deleteButton {
-  background-color: #ec5757 !important;
-}
-
-.solvedButton {
-  background-color: var(--color--intense-purple) !important;
-}
-
-.rightSection {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.editButton {
-  padding: 18px 23px 15px 24px;
-  border-radius: 24px;
-  background-color: #252945;
-}
-
-.editButton:hover {
-  cursor: pointer;
-}
-
-.buttonEdit {
-  border-style: none;
-  background-color: #252945;
-  border-radius: 24px;
-}
-
-@media screen and (max-width: 480px) {
-  .buttonsPannelFooter {
-    flex-direction: column;
-
-    gap: 1rem;
-  }
 }
 
 @media screen and (max-width: 240px) {
@@ -192,45 +100,46 @@ justify-content: space-between; */
   }
 }
 
-.statusCardContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  padding: 24px;
+@media screen and (max-width: 370px) {
+  .buttons {
+    flex-direction: column;
+  }
 }
 
-.topCard {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.currentMessage {
-  width: 100%;
-}
-
-.messageCanvas {
-  padding: 24px;
-  text-align: center;
-}
-
-.selectorInner {
-  width: 100px;
-  padding: 14px 0 11px 0;
-  text-align: center;
-  align-self: flex-end;
-  color: var(--color--orange);
-  /* background-color: var(--color--bg-submited); */
-
-  border-radius: 6px;
+@media screen and (max-width: 480px) {
+  .buttonsPannelFooter {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 @media screen and (min-width: 640px) {
   .statusCardContainer {
     padding: 24px 48px 27px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .topCardInner {
+    display: flex;
+    align-items: center;
+    max-width: 28%;
+  }
+
+  .buttonsPannel {
+    display: flex;
+    gap: 8px;
+  }
+
+  .buttonsPannelFooter {
+    display: none;
+  }
+
+  .topCardHidden {
+    display: none;
+  }
+
+  .hiddenBar {
+    display: none;
   }
 }
