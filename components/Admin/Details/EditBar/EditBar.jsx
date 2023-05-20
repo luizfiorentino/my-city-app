@@ -7,6 +7,7 @@ import Modal from "../Modal/Modal";
 import IssueContext from "@/utils/IssueContext";
 import dayjs from "dayjs";
 import Button from "@/components/Shared/Button/Button";
+import StatusBanner from "../StatusBanner/StatusBanner";
 
 export default function EditBar({ arrayChanges, updateStatus, footer }) {
   const context = useContext(IssueContext);
@@ -67,14 +68,12 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
           <TextParagraph className={styles.status}>Status</TextParagraph>
 
           <div className={styles.editStstusButton}>
-            <TextBold
-              variant={
-                lastSavedStatus === "Solved" ? "greenButton" : "orangeButton"
-              }
+            <StatusBanner
+              variant={lastSavedStatus === "Solved" ? "solved" : "orangeButton"}
               className={styles.pending}
             >
               · {changesOrderedByDate[0]["status"]}
-            </TextBold>
+            </StatusBanner>
           </div>
         </div>
         <div
