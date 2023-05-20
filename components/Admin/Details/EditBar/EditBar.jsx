@@ -10,7 +10,6 @@ import Button from "@/components/Shared/Button/Button";
 
 export default function EditBar({ arrayChanges, updateStatus, footer }) {
   const context = useContext(IssueContext);
-
   const changesOrderedByDate = arrayChanges.sort((a, b) => {
     return dayjs(b.createdAt) - dayjs(a.createdAt);
   });

@@ -1,67 +1,3 @@
-.modalContainer {
-  width: 50%;
-  max-width: 529px;
-  min-height: 150px;
-  /* position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex; */
-  /* background-color: white; */
-  border: 1px solid white;
-  border-radius: 8px;
-  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  padding: 5rem 2rem;
-}
-
-/* .confirmationMessage {
-  margin-bottom: 1rem;
-  color: var(--color--intense-purple) !important;
-  font-size: 18px !important;
-  align-self: flex-start;
-} */
-
-/* .button {
-  border: none;
-} */
-
-/* .buttons {
-  display: flex;
-  gap: 1rem;
-} */
-
-.selector {
-  margin-bottom: 1.2rem;
-  /* align-self: baseline; */
-}
-
-/* .textArea {
-  margin-bottom: 1rem;
-  width: 100%;
-  display: flex;
-  padding: 1rem;
-  line-height: 20px;
-} */
-
-/* .defaultSpinner {
-  width: 100px;
-  max-height: 40px;
-  border-radius: 6px;
-  display: flex;
-  align-content: center;
-} */
-
-/* @media screen and (max-width: 370px) {
-  .buttons {
-    flex-direction: column;
-  }
-} */
-
 .overlay {
   background-color: var(--color--bg-canvas);
   opacity: 0.9;
@@ -75,11 +11,23 @@
   align-items: center;
 }
 
+.modalContainer {
+  width: 50%;
+  max-width: 529px;
+  min-height: 150px;
+  border: 1px solid white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 5rem 2rem;
+}
+
 @media screen and (max-width: 580px) {
   .modalContainer {
     width: 80%;
   }
-  /* .selector {
-    align-self: center;
-  } */
 }
