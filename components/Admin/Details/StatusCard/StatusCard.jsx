@@ -5,6 +5,7 @@ import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 
 import { dateFormat } from "@/utils/serialize";
+import StatusBanner from "../StatusBanner/StatusBanner";
 
 export default function StatusCard({
   arrayChanges,
@@ -18,7 +19,9 @@ export default function StatusCard({
       <div className={styles.topCard}>
         <div className={styles.topCardInner}>
           <TextParagraph className={styles.status}>Status</TextParagraph>
-          <TextBold variant="orangeButton">· {issueStatus}</TextBold>
+          <StatusBanner variant={issueStatus === "Solved" && "solved"}>
+            · {issueStatus}
+          </StatusBanner>
         </div>
       </div>
       <div className={styles.bottomCard}>
