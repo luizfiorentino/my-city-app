@@ -54,7 +54,7 @@ export default function DetailsPlate({
           <TextParagraph className={styles.header}>{id}</TextParagraph>
         </div>
 
-        <div className={`${styles.sub} ${styles.right}`}>
+        <div className={styles.sub}>
           <TextParagraph
             className={`${styles.defaultSpacing} ${styles.rightSide}`}
           >
@@ -70,7 +70,7 @@ export default function DetailsPlate({
           <TextParagraph className={styles.defaultSpacing}>By</TextParagraph>
           <TextBold className={styles.largeSpacing}>{userName}</TextBold>
         </div>
-        <div className={`${styles.sub} ${styles.right}`}>
+        <div className={styles.sub}>
           <TextParagraph
             className={`${styles.defaultSpacing} ${styles.rightSide}`}
           >

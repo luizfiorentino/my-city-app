@@ -15,11 +15,7 @@ export default function StatusModal({ children, ...props }) {
   if (!openModal) return null;
 
   return (
-    <div
-      id="overlay"
-      className={`${openModal && styles.overlay}`}
-      onClick={openModal && close}
-    >
+    <div id="overlay" className={styles.overlay} onClick={openModal && close}>
       <div {...props} className={styles.modalContainer}>
         {children}
       </div>

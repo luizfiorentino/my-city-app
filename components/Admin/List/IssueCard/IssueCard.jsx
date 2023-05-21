@@ -33,7 +33,7 @@ export default function IssueCard(props) {
         <TextParagraph className={styles.userName}>
           {props.userName}
         </TextParagraph>
-        <div className={styles.submitted}>
+        <div className={`${styles.submitted} ${styles.status}`}>
           <StatusBanner
             variant={props.updates[0]["status"] === "Solved" && "solved"}
           >

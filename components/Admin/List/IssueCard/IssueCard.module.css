@@ -1,4 +1,4 @@
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 390px) {
   .cardMain {
     display: flex;
     justify-content: center;
@@ -65,6 +65,11 @@
   margin-bottom: 24px;
   align-self: flex-end;
   order: 4;
+}
+
+.status {
+  align-self: flex-end;
+  order: 5;
 }
 
 .submitted {
