@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styles from "./IssueCard.module.css";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
 import Link from "next/link";
@@ -10,7 +10,6 @@ import StatusBanner from "../../Details/StatusBanner/StatusBanner";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
-  //console.log("ISSUE CARD PROPS ->", props);
 
   return (
     <BackgroundCanvas>
