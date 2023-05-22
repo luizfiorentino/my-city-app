@@ -34,7 +34,9 @@ export default function IssueCard(props) {
         </TextParagraph>
         <div className={`${styles.submitted} ${styles.status}`}>
           <StatusBanner
-            variant={props.updates[0]["status"] === "Solved" && "solved"}
+            variant={
+              props.updates[0]["status"] === "Solved" ? "solved" : "primary"
+            }
           >
             <Link href={`admin/issues/${props.id}`}>
               · {props.updates[0]["status"]}

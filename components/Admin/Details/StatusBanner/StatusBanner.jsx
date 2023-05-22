@@ -7,13 +7,9 @@ export default function StatusBanner({
   variant = "primary",
   ...props
 }) {
+  console.log("variant", variant);
   return (
-    <p
-      {...props}
-      className={`${styles.bannerMain} ${
-        styles[variant !== "solved" ? "primary" : variant]
-      }`}
-    >
+    <p {...props} className={`${styles.bannerMain} ${styles[variant]}`}>
       {children}
     </p>
   );

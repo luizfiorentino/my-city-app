@@ -69,7 +69,7 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
 
           <div className={styles.editStstusButton}>
             <StatusBanner
-              variant={lastSavedStatus === "Solved" ? "solved" : "orangeButton"}
+              variant={lastSavedStatus === "Solved" ? "solved" : "primary"}
               className={styles.pending}
             >
               · {changesOrderedByDate[0]["status"]}
