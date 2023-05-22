@@ -1,0 +1,72 @@
+.btn {
+  padding: 18px 24px 15px 24px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 700;
+  color: var(--color--white);
+  border-radius: 24px;
+  border: none;
+  position: relative;
+  /* display: flex;
+  align-items: center; */
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+}
+
+.loading {
+  padding-right: 32px;
+}
+
+.spinner {
+  position: absolute;
+  right: 8px;
+  top: 16px;
+}
+
+.primary {
+  background-color: var(--color--intense-purple);
+}
+
+.dark {
+  background-color: var(--color--bg-canvas-lighter);
+}
+
+.danger {
+  background-color: var(--color--danger);
+}
+
+.light {
+  color: var(--color--intense-purple);
+  background-color: var(--color--white);
+}
+
+/* Use these classes before delete: */
+
+.purpleButtonInactive {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  color: var(--color--hash);
+  /* background-color: var(--color--bg-light); */
+  background-color: rgba(37, 41, 69, 0.9);
+  border-radius: 6px;
+}
+
+.cancel {
+  /* width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end; */
+  color: red;
+  /* background-color: var(--color--bg-light); */
+  background-color: white;
+  border-radius: 6px;
+}

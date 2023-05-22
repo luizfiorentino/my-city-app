@@ -1,0 +1,145 @@
+.statusCardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 24px;
+}
+
+.topCard {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topCardInner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonsPannel {
+  display: none;
+}
+
+.status {
+  color: var(--color--pale-grey);
+}
+
+.pending {
+  align-self: auto;
+}
+
+.confirmationMessage {
+  margin-bottom: 1rem;
+  color: var(--color--intense-purple) !important;
+  font-size: 18px !important;
+  align-self: flex-start;
+}
+
+.selector {
+  margin-bottom: 1.2rem;
+}
+
+.selectorInner {
+  width: 100px;
+  padding: 14px 0 11px 0;
+  text-align: center;
+  align-self: flex-end;
+  color: var(--color--orange);
+  border-radius: 6px;
+}
+
+.textArea {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  line-height: 20px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttonsPannelFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.topCardHidden {
+  display: none;
+}
+
+.hiddenBar {
+  padding: 24px 48px 27px;
+}
+
+@media screen and (max-width: 240px) {
+  .statusCardContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .status {
+    margin-bottom: 1rem;
+  }
+
+  .pending {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .buttonsPannelFooter {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .statusCardContainer {
+    padding: 24px 48px 27px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .topCardInner {
+    display: flex;
+    align-items: center;
+    max-width: 28%;
+  }
+
+  .buttonsPannel {
+    display: flex;
+    gap: 8px;
+  }
+
+  .buttonsPannelFooter {
+    display: none;
+  }
+
+  .topCardHidden {
+    display: none;
+  }
+
+  .hiddenBar {
+    display: none;
+  }
+}

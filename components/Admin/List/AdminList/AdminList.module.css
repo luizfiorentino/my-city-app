@@ -1,0 +1,55 @@
+/* @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800&family=Ubuntu:wght@300;400;700&display=swap"); */
+
+.main {
+  margin: auto;
+  /* width: 375px; */
+
+  font-family: "League Spartan", sans-serif;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.issuesList {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 105px;
+}
+
+@media screen and (min-width: 712px) {
+  .issuesList {
+    margin-bottom: 173px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .main {
+    /* display: flex; */
+  }
+
+  .barAndCardList {
+    /* padding: 77px 355px 0; */
+    padding: 0;
+  }
+  .issuesList {
+    padding: 0 48px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .main {
+    display: flex;
+  }
+
+  .barAndCardList {
+    /* padding: 77px 355px 0; */
+    padding: 0;
+
+    margin: auto;
+    margin-top: 78px;
+  }
+  .issuesList {
+    padding: 0;
+  }
+}

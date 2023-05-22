@@ -1,0 +1,11 @@
+.mainCanvas {
+  background-color: var(--color--bg-canvas);
+  border-radius: 8px;
+}
+
+@media screen and (min-width: 640px) {
+}
+
+.lighterCanvas {
+  background-color: var(--color--bg-canvas-lighter);
+}

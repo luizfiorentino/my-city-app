@@ -1,0 +1,93 @@
+@media screen and (max-width: 216px) {
+  .main {
+    width: 100% !important;
+  }
+  .screen {
+    width: 100% !important;
+  }
+}
+
+.main {
+  width: 72px;
+  height: 72px;
+  background-color: #7c5dfa;
+  border-radius: 0px 20px 20px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.shapes {
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+  border-left: 5px solid #7c5dfa;
+
+  border-width: 14px;
+
+  width: 28px;
+  height: 0;
+  /* margin: 20px; */
+  border-radius: 999px;
+  z-index: 15;
+  rotate: 90deg;
+  transition: 0.3s;
+}
+
+.shapes:hover {
+  transform: rotate(90deg);
+  transition: 0.3s;
+}
+
+.screen {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  /* left: calc(50% - 72px / 2 - 79.5px); */
+
+  top: 36.35px;
+  z-index: 10;
+
+  background: #9277ff;
+  border-radius: 0px 20px 20px 0px;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+@media screen and (min-width: 712px) {
+  .main {
+    width: 80px;
+    height: 80px;
+  }
+
+  .screen {
+    width: 80px;
+    height: 80px;
+    top: 40px;
+  }
+
+  .shapes {
+    border-width: 15px;
+
+    width: 30px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .main {
+    width: 103px;
+    height: 103px;
+  }
+  .screen {
+    width: 103px;
+    height: 103px;
+    top: 50px;
+  }
+
+  .shapes {
+    border-width: 20px;
+
+    width: 40px;
+  }
+}

@@ -1,0 +1,152 @@
+.detailsMain {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  margin-bottom: 56px;
+}
+
+.top {
+  flex-direction: column;
+}
+
+.id {
+  display: flex;
+  flex-direction: column;
+}
+.idInner {
+  display: flex;
+}
+
+.idSpacing {
+  margin-bottom: 4px;
+}
+
+.sub {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.defaultSpacing {
+  margin-bottom: 15px;
+}
+
+.largeSpacing {
+  margin-bottom: 30px;
+}
+
+.smallerSpacing {
+  margin-bottom: 5px;
+}
+
+.description {
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pagination {
+  background-color: #1e2139;
+}
+
+.paginationInner {
+  margin-bottom: 1rem;
+}
+
+.arrowDown {
+  transition: 0.3s;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+}
+
+.historyOuter {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.historyAndUpdates {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
+}
+
+.historyAndUpdates:hover {
+  cursor: pointer;
+}
+
+.hideHistory {
+  display: none;
+}
+
+@media screen and (max-width: 340px) {
+  .description {
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .detailsMain {
+    padding: 50px 48px 48px;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    margin-bottom: 45px;
+  }
+
+  .id {
+    flex-direction: column;
+  }
+
+  .idLargeScreen {
+    margin-bottom: 15px;
+  }
+
+  .idSpacing {
+    margin-bottom: 15px;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 45px;
+  }
+
+  .rightSide {
+    text-align: right;
+  }
+
+  .description {
+    min-height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+  }
+  .largeSpacing {
+    margin-bottom: 0;
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 421px) {
+  .footer {
+    justify-content: center;
+  }
+
+  .buttonsPannel {
+    flex-direction: column;
+    gap: 16px;
+    max-width: 50%;
+    justify-content: center;
+  }
+}

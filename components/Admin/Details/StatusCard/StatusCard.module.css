@@ -1,0 +1,67 @@
+.statusCardContainer {
+  background-color: black;
+}
+
+.topCard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.topCardInner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* width: 100%;
+  justify-content: space-between; */
+
+.status {
+  color: var(--color--pale-grey);
+}
+
+.bottomCard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 240px) {
+  .statusCardContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .status {
+    margin-bottom: 1rem;
+  }
+}
+
+.statusCardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 24px;
+}
+
+.topCard {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.messageCanvas {
+  padding: 24px;
+  text-align: center;
+}
+
+@media screen and (min-width: 640px) {
+  .statusCardContainer {
+    padding: 24px 48px 27px;
+  }
+}
