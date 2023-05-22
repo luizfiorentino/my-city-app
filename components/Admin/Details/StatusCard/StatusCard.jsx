@@ -19,7 +19,9 @@ export default function StatusCard({
       <div className={styles.topCard}>
         <div className={styles.topCardInner}>
           <TextParagraph className={styles.status}>Status</TextParagraph>
-          <StatusBanner variant={issueStatus === "Solved" && "solved"}>
+          <StatusBanner
+            variant={issueStatus === "Solved" ? "solved" : "primary"}
+          >
             · {issueStatus}
           </StatusBanner>
         </div>
