@@ -4,10 +4,13 @@ import AdminList from "@/components/Admin/List/AdminList";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
 import { all } from "axios";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ issues }) {
+  const { data: session } = useSession();
+
   return (
     <>
       <Head>
@@ -21,6 +24,8 @@ export default function Home({ issues }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <h2>Signed in as {session?.user?.email}</h2>
+        <button onClick={() => signIn()}>Sign in</button>
         <AdminList data={issues} />
       </main>
     </>
