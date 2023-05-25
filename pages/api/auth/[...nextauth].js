@@ -34,7 +34,11 @@ export const authOptions = {
   ],
   adapter: PrismaAdapter(prisma),
   //   adapter: Adapters.Prisma.Adapter({ prisma }),
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
+  //secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt", // See https://next-auth.js.org/configuration/nextjs#caveats, middleware (currently) doesn't support the "database" strategy which is used by default when using an adapter (https://next-auth.js.org/configuration/options#session)
+  },
 };
 export default NextAuth(authOptions);
 //Maybe to use later
