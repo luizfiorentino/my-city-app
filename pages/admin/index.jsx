@@ -26,6 +26,7 @@ export default function Home({ issues }) {
       <main>
         <h2>Signed in as {session?.user?.email}</h2>
         <button onClick={() => signIn()}>Sign in</button>
+        <button onClick={() => signOut()}>Sign out</button>
         <AdminList data={issues} />
       </main>
     </>

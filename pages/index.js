@@ -3,10 +3,18 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import UserForm from "@/components/User/IssueForm/UserForm";
 import IssueContextProvider from "@/utils/IssueContext";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { AuthOptions } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const wtf = useSession();
+  //console.log(("from index.js, session", session));
+  console.log("object??", wtf);
+
   return (
     <>
       <Head>
@@ -21,11 +29,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.externalContainer}>
+        {status === "loading" && <p>Loading</p>}
         <UserForm />
       </main>
     </>
   );
 }
+
+// export async function getServerSideProps({ req, res }) {
+//   try {
+//     return {
+//       props: {
+//         session: await getServerSession(req, res, authOptions),
+//       },
+//     };
+//   } catch (e) {
+//     console.log(e.message);
+//   }
+//}
 
 // export async function getServerSideProps() {
 //   const issues = await prisma.issue.findMany();
