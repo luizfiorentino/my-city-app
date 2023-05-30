@@ -1,26 +1,20 @@
 import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-//This one we dont kknow yet if necessary
-//import Adapters from "next-auth/adapters";
-//This one
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import EmailProvider from "next-auth/providers/email";
 import { createTransport } from "nodemailer";
+import GithubProvider from "next-auth/providers/github";
 
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export const authOptions = {
-  // Configure one or more authentication providers
   providers: [
-    //alternativelly Providers.GitHub
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
 
-    // ...add more providers here
     EmailProvider({
       server: {
         host: process.env.SMTP_HOST,
@@ -58,11 +52,8 @@ export const authOptions = {
         if (failed.length) {
           throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`);
         }
-        //};
 
         function html({ url, host, theme }) {
-          //const { url, host, theme } = params;
-
           const escapedHost = host.replace(/\./g, "&#8203;.");
 
           const brandColor = theme.brandColor || "#346df1";
@@ -108,25 +99,25 @@ export const authOptions = {
           `;
         }
 
-        /** Email Text body (fallback for email clients that don't render HTML, e.g. feature phones) */
         function text({ url, host }) {
           return `Sign in to ${host}\n${url}\n\n`;
         }
       },
-
-      // The "from" address that you want to use
     }),
     {},
   ],
   adapter: PrismaAdapter(prisma),
-  //   adapter: Adapters.Prisma.Adapter({ prisma }),
+
   secret: process.env.NEXTAUTH_SECRET,
-  //secret: process.env.NEXTAUTH_SECRET,
+
   session: {
     strategy: "jwt", // See https://next-auth.js.org/configuration/nextjs#caveats, middleware (currently) doesn't support the "database" strategy which is used by default when using an adapter (https://next-auth.js.org/configuration/options#session)
   },
 };
 export default NextAuth(authOptions);
-//Maybe to use later
-// const authHandler = (req, res) => NextAuth(req, res, options);
-// export default authHandler;
+
+//alternativelly Providers.GitHub
+// GithubProvider({
+//   clientId: process.env.GITHUB_ID,
+//   clientSecret: process.env.GITHUB_SECRET,
+// }),

@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import AdminList from "@/components/Admin/List/AdminList";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
-import { all } from "axios";
-import { useSession, signIn, signOut } from "next-auth/react";
+
+import { useSession, signOut } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +24,10 @@ export default function Home({ issues }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h2>Signed in as {session?.user?.email}</h2>
-        <button onClick={() => signIn()}>Sign in</button>
-        <button onClick={() => signOut()}>Sign out</button>
+        <h2 style={{ display: "flex", justifyContent: "center" }}>
+          Signed in as {session?.user?.email}
+        </h2>
+
         <AdminList data={issues} />
       </main>
     </>
