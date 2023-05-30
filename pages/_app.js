@@ -15,11 +15,19 @@ export default function App({
 
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [signedInAs, setSignedInAs] = useState("");
 
   return (
     <SessionProvider session={session}>
       <issueContext.Provider
-        value={{ loading, setLoading, openModal, setOpenModal }}
+        value={{
+          loading,
+          setLoading,
+          openModal,
+          setOpenModal,
+          signedInAs,
+          setSignedInAs,
+        }}
       >
         {" "}
         <Component {...pageProps} />

@@ -25,16 +25,30 @@
   align-items: center;
 }
 
+.signedInAs {
+  font-size: 10px;
+}
+
+.userEmail {
+  font-style: italic;
+  font-weight: 700;
+}
+
 .smallIcon {
   background-color: #858bb2;
+
   width: 20px;
   height: 20px;
   border-radius: 999px;
   margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .signOutIcon {
-  margin-right: 20px;
+  margin-top: 2.5px;
+  margin-left: 2.5px;
 }
 
 .signOutIcon:hover {
@@ -55,10 +69,5 @@
   .smallIcon {
     margin-right: 0;
     margin-bottom: 21px;
-  }
-
-  .signOutIcon {
-    margin-bottom: 21px;
-    margin-right: 0;
   }
 }
