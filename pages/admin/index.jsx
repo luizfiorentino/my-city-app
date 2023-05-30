@@ -14,8 +14,8 @@ export default function Home({ issues }) {
   const { data: session } = useSession();
   const context = useContext(IssueContext);
 
-  context.setSignedInAs(session?.user?.email);
-  //console.log("signedInAs", context.signedInAs);
+  context.setSignedInAs(session);
+  //console.log("session", session);
 
   return (
     <>

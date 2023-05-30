@@ -15,7 +15,9 @@ export default function AdminTopBar() {
       <div className={styles.signedInAs}>
         <p>
           Signed in as{" "}
-          <span className={styles.userEmail}>{context.signedInAs}</span>
+          <span className={styles.userEmail}>
+            {context.signedInAs?.user?.email}
+          </span>
         </p>
       </div>
 
