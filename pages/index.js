@@ -12,8 +12,6 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const { data: session, status } = useSession();
   const wtf = useSession();
-  //console.log(("from index.js, session", session));
-  console.log("object??", wtf);
 
   return (
     <>
