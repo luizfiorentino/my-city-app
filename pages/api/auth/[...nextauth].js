@@ -31,34 +31,34 @@ export const authOptions = {
         },
       },
       from: process.env.SMTP_FROM,
-      sendVerificationRequest({
-        identifier: email,
-        url,
-        provider: { server, from },
-      }) {
-        return async function sendVerificationRequest({
-          identifier,
-          url,
-          provider,
-          theme,
-        }) {
-          const { host } = new URL(url);
-          // NOTE: You are not required to use `nodemailer`, use whatever you want.
-          const transport = createTransport(provider.server);
-          const result = await transport.sendMail({
-            to: identifier,
-            from: provider.from,
-            subject: `Sign in to ${host}`,
-            text: text({ url, host }),
-            html: html({ url, host, theme }),
-          });
-          const failed = result.rejected.concat(result.pending).filter(Boolean);
-          if (failed.length) {
-            throw new Error(
-              `Email(s) (${failed.join(", ")}) could not be sent`
-            );
-          }
-        };
+      async sendVerificationRequest({ identifier, url, provider, theme }) {
+        const response = await prisma.user.findUnique({
+          where: {
+            email: identifier,
+          },
+        });
+        if (!response) {
+          console.log("admin account not found");
+
+          throw new Error("email not found");
+        }
+
+        const { host } = new URL(url);
+
+        const transport = createTransport(provider.server);
+        const result = await transport.sendMail({
+          to: identifier,
+          from: provider.from,
+          subject: `Sign in to ${host}`,
+          text: text({ url, host }),
+          html: html({ url, host, theme }),
+        });
+        const failed = result.rejected.concat(result.pending).filter(Boolean);
+
+        if (failed.length) {
+          throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`);
+        }
+        //};
 
         function html({ url, host, theme }) {
           //const { url, host, theme } = params;
