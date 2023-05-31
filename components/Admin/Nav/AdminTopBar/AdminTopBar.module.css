@@ -25,10 +25,6 @@
   align-items: center;
 }
 
-.signedInAs {
-  font-size: 10px;
-}
-
 .userEmail {
   font-style: italic;
   font-weight: 700;

@@ -3,20 +3,10 @@ import { Inter } from "next/font/google";
 import AdminList from "@/components/Admin/List/AdminList";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
-import IssueContext from "@/utils/IssueContext";
-
-import { useSession, signOut } from "next-auth/react";
-import { useContext } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ issues }) {
-  const { data: session } = useSession();
-  const context = useContext(IssueContext);
-
-  context.setSignedInAs(session);
-  //console.log("session", session);
-
   return (
     <>
       <Head>
@@ -30,14 +20,6 @@ export default function Home({ issues }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {/* <h4 style={{ display: "flex", justifyContent: "center" }}>
-          Signed in as{" "}
-          <span style={{ fontStyle: "italic", marginLeft: "5px" }}>
-            {" "}
-            {session?.user?.email}
-          </span>
-        </h4> */}
-
         <AdminList data={issues} />
       </main>
     </>
