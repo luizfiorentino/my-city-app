@@ -1,8 +1,6 @@
 import "@/styles/globals.css";
-// import IssueContextProvider from "@/utils/IssueContext";
 import { useState } from "react";
 import { SessionProvider } from "next-auth/react";
-import { useSession } from "next-auth/react";
 
 import issueContext from "../utils/IssueContext";
 
