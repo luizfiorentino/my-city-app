@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import AdminList from "@/components/Admin/List/AdminList";
 import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
-import { all } from "axios";
 
 const inter = Inter({ subsets: ["latin"] });
 

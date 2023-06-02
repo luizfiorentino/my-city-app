@@ -11,11 +11,13 @@ import StatusBanner from "../StatusBanner/StatusBanner";
 
 export default function EditBar({ arrayChanges, updateStatus, footer }) {
   const context = useContext(IssueContext);
-  const changesOrderedByDate = arrayChanges.sort((a, b) => {
+  const changesOrderedByDate = arrayChanges?.sort((a, b) => {
     return dayjs(b.createdAt) - dayjs(a.createdAt);
   });
 
-  const lastSavedStatus = changesOrderedByDate[0]["status"];
+  const lastSavedStatus = changesOrderedByDate
+    ? changesOrderedByDate[0]["status"]
+    : null;
 
   const [message, setMessage] = useState("");
   const [buttonMode, setButtonMode] = useState("");
@@ -72,7 +74,7 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
               variant={lastSavedStatus === "Solved" ? "solved" : "primary"}
               className={styles.pending}
             >
-              · {changesOrderedByDate[0]["status"]}
+              · {changesOrderedByDate && changesOrderedByDate[0]["status"]}
             </StatusBanner>
           </div>
         </div>

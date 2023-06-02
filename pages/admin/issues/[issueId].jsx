@@ -8,7 +8,6 @@ import EditBar from "@/components/Admin/Details/EditBar";
 import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import Link from "next/link";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
-import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
 import { useRouter } from "next/router";
 import IssueContext from "@/utils/IssueContext";
 import {
@@ -22,7 +21,6 @@ export default function IssueStatus({ issue }) {
 
   const [issueDetails, setIssueDetails] = useState(issue);
   const [loading, setLoading] = useState(false);
-  //console.log("ISSUE", issue);
 
   const updateStatus = async (message, status, buttonMode) => {
     try {
@@ -92,68 +90,31 @@ export default function IssueStatus({ issue }) {
         <EditBar
           footer={false}
           updateStatus={updateStatus}
-          arrayChanges={issueDetails.statusChange}
+          arrayChanges={issueDetails?.statusChange}
           addStatus={addStatus}
           loading={loading}
           setLoading={setLoading}
-          issueId={issue.id}
+          issueId={issue?.id}
         />
         <DetailsPlate
-          id={issueDetails.id}
-          createdAt={issueDetails.createdAt}
-          userName={issueDetails.userName}
-          location={issueDetails.location}
-          description={issueDetails.description}
-          arrayChanges={issueDetails.statusChange}
+          id={issueDetails?.id}
+          createdAt={issueDetails?.createdAt}
+          userName={issueDetails?.userName}
+          location={issueDetails?.location}
+          description={issueDetails?.description}
+          arrayChanges={issueDetails?.statusChange}
         />{" "}
         <EditBar
           className={styles.footerBar}
           footer={true}
           updateStatus={updateStatus}
-          arrayChanges={issueDetails.statusChange}
+          arrayChanges={issueDetails?.statusChange}
           addStatus={addStatus}
           loading={loading}
           setLoading={setLoading}
-          issueId={issue.id}
+          issueId={issue?.id}
         />
       </div>
-
-      {/* <BackgroundCanvas className={styles.footer}>
-        <div className={styles.buttonsPannel}>
-          <button
-            onClick={() => context.setOpenModal(true)}
-            className={styles.buttonEdit}
-          >
-            <TextBold size="large" className={styles.editButton}>
-              Edit
-            </TextBold>
-          </button>
-
-          <button
-            onClick={() => context.setOpenModal(true)}
-            className={styles.buttonEdit}
-          >
-            <TextBold
-              size="large"
-              className={`${styles.editButton} ${styles.deleteButton}`}
-            >
-              Delete
-            </TextBold>
-          </button>
-
-          <button
-            onClick={() => context.setOpenModal(true)}
-            className={styles.buttonEdit}
-          >
-            <TextBold
-              size="large"
-              className={`${styles.editButton} ${styles.solvedButton}`}
-            >
-              Mark as solved
-            </TextBold>
-          </button>
-        </div>
-      </BackgroundCanvas> */}
     </div>
   );
 }
