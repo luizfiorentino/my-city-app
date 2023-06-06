@@ -11,6 +11,69 @@ import { ubuntu } from "@/styles/fonts";
 
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
+  const [fileInputState, setFileInputState] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+  const [selectedFile, setSelectedFile] = useState();
+
+  const formData = new FormData();
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+
+    previewFile(file);
+    setSelectedFile(file);
+    console.log("selected file", file);
+    setFileInputState(e.target.value);
+  };
+
+  const handleSubmitFile = (e) => {
+    e.preventDefault();
+    if (!selectedFile) return;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    console.log("FROM HANDLE SUB FILE", selectedFile);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+      console.log("FROM HANDLE SUB FILE", reader.result);
+    };
+    reader.onerror = () => {
+      console.error("Error");
+    };
+  };
+
+  const uploadImage = async (imageData) => {
+    console.log("BEFORE FORMDATA CONST", selectedFile, "FILE:::::");
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    console.log("IMAGEDATA IN THE APPEND", imageData);
+    // formData.append("image", fileInputElement.files[0]);
+    console.log("FORM DATA", formData);
+
+    try {
+      const response = await axios.post("/api/photos", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Set the correct content type for file uploads
+        },
+      });
+      console.log("Uploaded to Cloudinary", response.data.imageUrl);
+      setFileInputState("");
+      setPreviewSource("");
+      console.log("FORM DATA", formData);
+    } catch (err) {
+      console.error(err.response);
+    }
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+      console.log("PREVIEW FILE", reader.result);
+    };
+  };
 
   const formSchema = z.object({
     userName: z
@@ -55,28 +118,6 @@ export default function UserForm() {
         },
       });
 
-      //console.log("WHAT IS THIS", newIssue);
-      // not the best way since relays too much on the user's internet connection
-      // const firstStatus = await axios.post(`./api/statusChanges`, {
-      //   statusChange: {
-      //     status: "Submitted",
-      //     message: "first update",
-      //     issueId: newIssue.data.newIssue.id,
-      //   },
-      // });
-      // return newIssue;
-
-      // const firstStatus = await axios.post(`./api/statusChanges`, {
-      //   statusChange: {
-      //     status: "Submitted",
-      //     message: "issue just posted",
-      //     issueId: bla,
-      //   },
-      // });
-
-      // setValue("userName", "");
-      // setValue("description", "");
-      // setValue("location", "");
       reset();
 
       setSuccessRequest(true);
@@ -92,20 +133,30 @@ export default function UserForm() {
     setSuccessRequest(false);
   };
 
+  console.log("selectedFile", selectedFile);
+
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}>{/* <img src={image.src} /> */}</div>
 
       <div className={styles.form}>
+        {" "}
         {successRequest === false ? (
           <form onSubmit={handleSubmit(issueRequest)}>
+            {" "}
             <FormContent
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
               locationRegister={{ ...register("location") }}
               errors={errors}
             />
-
+            {previewSource && (
+              <img
+                src={previewSource}
+                alt="chosen"
+                style={{ height: "300px" }}
+              />
+            )}
             <Footer onClick={issueRequest}>
               {successRequest === false ? "Post issue" : "Back"}
             </Footer>
@@ -117,7 +168,35 @@ export default function UserForm() {
           >
             Thanks for submitting your issue!
           </ConfirmationMessage>
-        )}
+        )}{" "}
+        <div>
+          <h1>Upload</h1>
+          <form onSubmit={handleSubmitFile}>
+            <p>
+              <label>
+                File to stash:
+                <input
+                  id="fileInput"
+                  type="file"
+                  name="image"
+                  onChange={handleFileInputChange}
+                  value={fileInputState}
+                  className="form-input"
+                />
+              </label>
+              {previewSource && (
+                <img
+                  src={previewSource}
+                  alt="chosen"
+                  style={{ height: "300px" }}
+                />
+              )}
+            </p>
+            <p>
+              <input type="submit" value="Stash the file!" />
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );
