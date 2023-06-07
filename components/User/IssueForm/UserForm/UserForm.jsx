@@ -8,14 +8,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
+import NewForm from "../../NewForm/NewForm";
 
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState();
-
-  const formData = new FormData();
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -29,27 +28,13 @@ export default function UserForm() {
   const handleSubmitFile = (e) => {
     e.preventDefault();
     if (!selectedFile) return;
-
-    const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
-    console.log("FROM HANDLE SUB FILE", selectedFile);
-    reader.onloadend = () => {
-      uploadImage(reader.result);
-      console.log("FROM HANDLE SUB FILE", reader.result);
-    };
-    reader.onerror = () => {
-      console.error("Error");
-    };
+    uploadImage();
   };
 
-  const uploadImage = async (imageData) => {
+  const uploadImage = async () => {
     console.log("BEFORE FORMDATA CONST", selectedFile, "FILE:::::");
     const formData = new FormData();
     formData.append("image", selectedFile);
-
-    console.log("IMAGEDATA IN THE APPEND", imageData);
-    // formData.append("image", fileInputElement.files[0]);
-    console.log("FORM DATA", formData);
 
     try {
       const response = await axios.post("/api/photos", formData, {
@@ -137,6 +122,7 @@ export default function UserForm() {
 
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
+      <NewForm></NewForm>
       <div className={styles.image}>{/* <img src={image.src} /> */}</div>
 
       <div className={styles.form}>
