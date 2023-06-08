@@ -58,6 +58,13 @@ export default function handler(req, res) {
                       },
                     ],
                   },
+                  images: {
+                    create: [
+                      {
+                        url: imageUrl,
+                      },
+                    ],
+                  },
                 },
               });
 
