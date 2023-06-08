@@ -6,7 +6,6 @@ const multer = require("multer");
 
 const fs = require("fs");
 const { cloudinary } = require("./utils/cloudinary");
-const { PrismaClient } = require("@prisma/client");
 
 const upload = multer({ dest: "uploads/" });
 
@@ -76,19 +75,6 @@ export default function handler(req, res) {
       });
     });
   }
-  if (req.method === "GET") {
-  if (!session) {
-    return res.status(401).end();
-  }
-
-  const issues = await prisma.issue.findMany();
-
-  if (!issues) {
-    return res.status(404).end();
-  }
-
-  return res.status(200).json({ issues });
-}
 }
 // const session = await getServerSession(req, res, authOptions);
 
