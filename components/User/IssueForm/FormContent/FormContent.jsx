@@ -8,6 +8,9 @@ export default function FormContent({
   userRegister,
   descriptionRegister,
   locationRegister,
+  register,
+  handleFileInputChange,
+  fileInputState,
 }) {
   return (
     <div className={styles.formContent}>
@@ -23,6 +26,8 @@ export default function FormContent({
         // onChange={(e) => setUserName(e.target.value)}
         error={errors.userName}
         register={userRegister}
+        type="text"
+        name="userName"
       />
       <FormInput
         label="Description"
@@ -31,6 +36,8 @@ export default function FormContent({
         // onChange={(e) => setDescription(e.target.value)}
         error={errors.description}
         register={descriptionRegister}
+        type="text"
+        name="description"
       />
       <FormInput
         label="Location"
@@ -39,7 +46,20 @@ export default function FormContent({
         // onChange={(e) => setLocation(e.target.value)}
         error={errors.location}
         register={locationRegister}
+        type="text"
+        name="location"
       />
+      <div style={{ color: "black" }}>
+        <label>File:</label>
+        <input
+          type="file"
+          name="file"
+          ref={register("file")}
+          onChange={handleFileInputChange}
+          value={fileInputState}
+        />
+        {errors.file && <span>{errors.file.message}</span>}
+      </div>
     </div>
   );
 }

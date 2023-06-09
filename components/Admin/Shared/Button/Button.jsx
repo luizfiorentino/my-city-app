@@ -7,7 +7,7 @@ export default function Button(props) {
     <button
       type="submit"
       className={`${styles.main} ${ubuntu.className}`}
-      onClick={() => props.onClick()}
+      // onClick={() => props.onClick()}
     >
       {props.children}
     </button>
