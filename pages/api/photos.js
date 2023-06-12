@@ -10,7 +10,6 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  //console.log(await req.formData());
   if (req.method === "POST") {
     upload.single("image")(req, res, (err) => {
       if (err) {
@@ -18,12 +17,10 @@ export default async function handler(req, res) {
         return res.status(500).send("Error uploading file");
       }
 
-      console.log(":::::REQUEST File:", req.file); // Log the req.body object
-
       if (!req.file) return res.status(400).send("No file uploaded");
 
       const path = req.file.path;
-      console.log("PATH:::", path);
+
       const folder = "react_cloudinary"; // Specify the folder name here
 
       cloudinary.uploader.upload(path, { folder: folder }, (error, result) => {

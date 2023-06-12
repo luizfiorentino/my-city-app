@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./UserForm.module.css";
 import FormContent from "../FormContent";
@@ -8,8 +8,22 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
-import NewForm from "../../NewForm/NewForm";
-import { Hanken_Grotesk } from "next/font/google";
+
+const formSchema = z.object({
+  userName: z
+    .string()
+    .min(2, "user name must be at least 2 characters long")
+    .max(255, "the provided user name contains too much characters"),
+  description: z
+    .string()
+    .min(10, "description must be at least 10 characters long")
+    .max(255, "the provided description contains too much characters"),
+  location: z
+    .string()
+    .min(8, "location must be at least 8 characters long")
+    .max(255, "the provided location contains too much characters"),
+  file: z.any(),
+});
 
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
@@ -17,39 +31,15 @@ export default function UserForm() {
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState();
 
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    console.log("handleFileInputChange - selected file", file);
+  const { watch } = useForm();
 
-    previewFile(file);
-    setSelectedFile(file);
-  };
+  const selectedFiles = watch("file");
 
-  const handleSubmitFile = (e) => {
-    e.preventDefault();
-    if (!selectedFile) return;
-    uploadImage();
-  };
-
-  const uploadImage = async () => {
-    console.log("upload image selected file", selectedFile);
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-
-    try {
-      const response = await axios.post("/api/photos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Set the correct content type for file uploads
-        },
-      });
-
-      setFileInputState("");
-      setPreviewSource("");
-      console.log("frin uplaod image FORM DATA", formData);
-    } catch (err) {
-      console.error(err.response);
+  useEffect(() => {
+    if (selectedFiles) {
+      previewFile(selectedFiles[0]);
     }
-  };
+  }, [selectedFiles]);
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -59,21 +49,12 @@ export default function UserForm() {
     };
   };
 
-  const formSchema = z.object({
-    userName: z
-      .string()
-      .min(2, "user name must be at least 2 characters long")
-      .max(255, "the provided user name contains too much characters"),
-    description: z
-      .string()
-      .min(10, "description must be at least 10 characters long")
-      .max(255, "the provided description contains too much characters"),
-    location: z
-      .string()
-      .min(8, "location must be at least 8 characters long")
-      .max(255, "the provided location contains too much characters"),
-    file: z.any(),
-  });
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+
+    previewFile(file);
+    setSelectedFile(file);
+  };
 
   const {
     formState: { errors },
@@ -98,17 +79,15 @@ export default function UserForm() {
     setSuccessRequest(false);
   };
 
-  console.log("return form page selectedFile", selectedFile);
-
   const issueRequest = async (data) => {
-    console.log("IssueRequest WHAT is data?", data);
     try {
       const formData = new FormData();
       formData.append("userName", data.userName);
       formData.append("description", data.description);
       formData.append("location", data.location);
-      console.log("DATADOTFILE", data.file);
-      formData.append("file", selectedFile);
+
+      // formData.append("file", selectedFile);
+      formData.append("file", data.file[0]);
 
       const response = await fetch("/api/issues", {
         method: "POST",
@@ -135,8 +114,7 @@ export default function UserForm() {
 
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
-      {/* <NewForm /> */}
-      <div className={styles.image}>{/* <img src={image.src} /> */}</div>
+      <div className={styles.image}></div>
 
       <div className={styles.form}>
         {" "}
@@ -147,7 +125,6 @@ export default function UserForm() {
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
               locationRegister={{ ...register("location") }}
-              // fileRegister={{ ...register("file") }}
               errors={errors}
               register={register}
               handleFileInputChange={handleFileInputChange}
@@ -169,7 +146,7 @@ export default function UserForm() {
           >
             Thanks for submitting your issue!
           </ConfirmationMessage>
-        )}{" "}
+        )}
       </div>
     </div>
   );

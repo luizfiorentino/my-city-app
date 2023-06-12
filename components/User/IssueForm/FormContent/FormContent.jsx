@@ -49,15 +49,28 @@ export default function FormContent({
         type="text"
         name="location"
       />
-      <div style={{ color: "black" }}>
-        <label>File:</label>
+      <div
+        style={{
+          color: "black",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <label>Send a related picture</label>
         <input
+          type="file"
+          {...register("file")}
+          onChange={handleFileInputChange}
+          style={{ marginTop: "1rem" }}
+        />
+        {/* <input
           type="file"
           name="file"
           ref={register("file")}
           onChange={handleFileInputChange}
           value={fileInputState}
-        />
+          style={{ marginTop: "1rem" }}
+        /> */}
         {errors.file && <span>{errors.file.message}</span>}
       </div>
     </div>

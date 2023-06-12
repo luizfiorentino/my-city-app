@@ -30,7 +30,6 @@ export default function handler(req, res) {
 
         const { userName, description, location } = req.body;
         const path = req.file.path;
-        console.log("PATH::", path);
 
         const folder = "react_cloudinary"; // Specify the folder name here
 
