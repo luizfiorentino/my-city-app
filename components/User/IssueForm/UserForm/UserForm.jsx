@@ -22,7 +22,14 @@ const formSchema = z.object({
     .string()
     .min(8, "location must be at least 8 characters long")
     .max(255, "the provided location contains too much characters"),
-  file: z.any(),
+  file: z
+    .any()
+    .refine((value) => value[0]?.size <= 1048576, {
+      message: "File size should be less than or equal to 1MB",
+    })
+    .refine((value) => /^image\/(jpeg|jpg|png)$/i.test(value[0]?.type), {
+      message: "File must be in JPEG, JPG, or PNG format",
+    }),
 });
 
 export default function UserForm() {
