@@ -4,7 +4,7 @@ import styles from "./UserForm.module.css";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
@@ -106,6 +106,7 @@ export default function UserForm() {
         console.log("Form data submitted successfully");
         reset();
         setSuccessRequest(true);
+        setPreviewSource("");
       } else {
         // Handle error
         console.log("Failed to submit form data");
@@ -127,7 +128,6 @@ export default function UserForm() {
         {" "}
         {successRequest === false ? (
           <form onSubmit={handleSubmit(issueRequest)}>
-            {" "}
             <FormContent
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
