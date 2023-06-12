@@ -34,6 +34,8 @@ const formSchema = z.object({
 
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
+  const [errorPosting, setErrorPosting] = useState(false);
+
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState();
@@ -101,15 +103,19 @@ export default function UserForm() {
         body: formData,
       });
 
+      if (!response.ok) {
+        console.log("Failed to submit form data");
+        setErrorPosting(true);
+        setPreviewSource("");
+        return;
+      }
+
       if (response.ok) {
         // Handle success
         console.log("Form data submitted successfully");
         reset();
         setSuccessRequest(true);
         setPreviewSource("");
-      } else {
-        // Handle error
-        console.log("Failed to submit form data");
       }
     } catch (error) {
       // Handle error
@@ -117,6 +123,9 @@ export default function UserForm() {
         "An error occurred while submitting form data:",
         error.message
       );
+
+      setErrorPosting(true);
+      setPreviewSource("");
     }
   };
 
@@ -125,7 +134,6 @@ export default function UserForm() {
       <div className={styles.image}></div>
 
       <div className={styles.form}>
-        {" "}
         {successRequest === false ? (
           <form onSubmit={handleSubmit(issueRequest)}>
             <FormContent
@@ -137,6 +145,12 @@ export default function UserForm() {
               handleFileInputChange={handleFileInputChange}
               fileInputState={fileInputState}
             />
+            {errorPosting && (
+              <p style={{ color: "red" }}>
+                An error occured when posting the issue. Please try again or
+                contact admin
+              </p>
+            )}
             {previewSource && (
               <img
                 src={previewSource}
