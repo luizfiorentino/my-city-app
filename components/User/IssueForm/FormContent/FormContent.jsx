@@ -2,13 +2,14 @@ import styles from "./FormContent.module.css";
 import FormHeader from "../../Shared/Fields/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle";
 import FormInput from "../../Shared/Fields/FormInput";
-
+import { IoMdAdd } from "react-icons/io";
 export default function FormContent({
   errors,
   userRegister,
   descriptionRegister,
   locationRegister,
   fileRegister,
+  previewSource,
 }) {
   return (
     <div className={styles.formContent}>
@@ -47,15 +48,30 @@ export default function FormContent({
         type="text"
         name="location"
       />
-      <div
-        style={{
-          color: "black",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <label>Send a related picture</label>
-        <input type="file" style={{ marginTop: "1rem" }} {...fileRegister} />
+      <div className={styles.uploadImage}>
+        <label htmlFor="file">
+          {" "}
+          <FormSubtitle variant="sendPictureBanner">
+            {previewSource
+              ? "Choose another picture"
+              : "Send a related picture"}{" "}
+            <IoMdAdd />
+          </FormSubtitle>
+        </label>
+        <input
+          className={styles.hiddenInput}
+          type="file"
+          id="file"
+          style={{ marginTop: "1rem" }}
+          {...fileRegister}
+        />
+        {previewSource && (
+          <img
+            className={styles.imagePreview}
+            src={previewSource}
+            alt="chosen"
+          />
+        )}
 
         {errors.file && <span>{errors.file.message}</span>}
       </div>

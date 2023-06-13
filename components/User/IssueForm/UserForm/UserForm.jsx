@@ -38,7 +38,6 @@ const formSchema = z.object({
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
-
   const [previewSource, setPreviewSource] = useState("");
 
   const {
@@ -119,20 +118,15 @@ export default function UserForm() {
               locationRegister={{ ...register("location") }}
               fileRegister={{ ...register("file") }}
               errors={errors}
+              previewSource={previewSource}
             />
             {errorPosting && (
-              <p style={{ color: "red" }}>
+              <p className={styles.errorMessage}>
                 An error occured when posting the issue. Please try again or
                 contact admin
               </p>
             )}
-            {previewSource && (
-              <img
-                src={previewSource}
-                alt="chosen"
-                style={{ height: "300px" }}
-              />
-            )}
+
             <Footer>{successRequest === false ? "Post issue" : "Back"}</Footer>
           </form>
         ) : (

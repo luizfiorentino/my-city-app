@@ -8,6 +8,23 @@
   bottom: 96px;
 }
 
+.uploadImage {
+  color: black;
+  display: "flex";
+  flex-direction: "column";
+}
+
+.imagePreview {
+  height: 300px;
+  padding: 1rem;
+  border: 1px solid #9699aa;
+  border-radius: 4px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
 @media screen and (min-width: 800px) {
   .formContent {
     bottom: 0;
