@@ -10,7 +10,6 @@ export default function FormContent({
   locationRegister,
   register,
   handleFileInputChange,
-  fileInputState,
 }) {
   return (
     <div className={styles.formContent}>

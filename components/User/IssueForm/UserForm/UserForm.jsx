@@ -35,7 +35,6 @@ export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
 
-  const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState();
 
@@ -142,7 +141,6 @@ export default function UserForm() {
               errors={errors}
               register={register}
               handleFileInputChange={handleFileInputChange}
-              fileInputState={fileInputState}
             />
             {errorPosting && (
               <p style={{ color: "red" }}>
