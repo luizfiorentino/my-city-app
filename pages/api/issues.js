@@ -13,12 +13,53 @@ export const config = {
   },
 };
 
+async function uploadSingleImage(path, folder) {
+  try {
+    const response = await cloudinary.uploader.upload(path, { folder: folder });
+    console.log("RES?", response);
+    return [null, response];
+  } catch (error) {
+    console.log("ERROR?", error);
+    return [error, null];
+  }
+}
+
+async function insertNewIssue(userName, description, location, imageUrl) {
+  try {
+    const newIssue = await prisma.issue.create({
+      data: {
+        userName,
+        description,
+        location,
+        statusChange: {
+          create: [
+            {
+              status: "Submitted",
+              message: "first update",
+            },
+          ],
+        },
+        images: {
+          create: [
+            {
+              url: imageUrl,
+            },
+          ],
+        },
+      },
+    });
+    return [null, newIssue];
+  } catch (error) {
+    return [error, null];
+  }
+}
+
 export default function handler(req, res) {
   if (req.method === "POST") {
     return new Promise((resolve, reject) => {
       upload.single("file")(req, res, async (error) => {
         if (error) {
-          console.error("Error uploading file:", error);
+          console.error("Error uploading file with multer:", error);
           return reject(res.status(500).send("Error uploading file"));
         }
 
@@ -26,60 +67,127 @@ export default function handler(req, res) {
           return reject(res.status(400).send("No file uploaded"));
         }
 
-        const { userName, description, location } = req.body;
         const path = req.file.path;
+        const folder = "react_cloudinary"; // Cloudinary folder name
 
-        const folder = "react_cloudinary"; // Specify the folder name here
+        const [cloudinaryError, image] = await uploadSingleImage(path, folder);
 
-        cloudinary.uploader.upload(
-          path,
-          { folder: folder },
-          async (error, result) => {
-            if (error) {
-              console.error("Error uploading to Cloudinary", error);
-              return reject(res.status(500).send("Error uploading file"));
-            }
-            fs.unlinkSync(path);
-            const imageUrl = result.secure_url;
-            try {
-              const newIssue = await prisma.issue.create({
-                data: {
-                  userName,
-                  description,
-                  location,
-                  statusChange: {
-                    create: [
-                      {
-                        status: "Submitted",
-                        message: "first update",
-                      },
-                    ],
-                  },
-                  images: {
-                    create: [
-                      {
-                        url: imageUrl,
-                      },
-                    ],
-                  },
-                },
-              });
+        if (error) {
+          console.error("Error uploading to Cloudinary", cloudinaryError);
+          return reject(res.status(500).send("Error uploading file"));
+        }
+        //remove symbolic link from file system
+        fs.unlinkSync(path);
 
-              resolve(
-                res
-                  .status(200)
-                  .json({ message: "Issue created successfully", newIssue })
-              );
-            } catch (error) {
-              console.error("Error creating issue:", error);
-              reject(res.status(500).send("Error creating issue"));
-            }
-          }
+        const imageUrl = image.secure_url;
+        const { userName, description, location } = req.body;
+
+        const [databaseError, newIssue] = await insertNewIssue(
+          userName,
+          description,
+          location,
+          imageUrl
+        );
+
+        if (databaseError) {
+          console.log("Error during insertion into database:", databaseError);
+          return reject(res.status(500).send("Error creating issue"));
+        }
+
+        return resolve(
+          res
+            .status(200)
+            .json({ message: "Issue created successfully", newIssue })
         );
       });
     });
   }
 }
+
+// try {
+//   const newIssue = await prisma.issue.create({
+//     data: {
+//       userName,
+//       description,
+//       location,
+//       statusChange: {
+//         create: [
+//           {
+//             status: "Submitted",
+//             message: "first update",
+//           },
+//         ],
+//       },
+//       images: {
+//         create: [
+//           {
+//             url: imageUrl,
+//           },
+//         ],
+//       },
+//     },
+//   });
+
+//   resolve(
+//     res
+//       .status(200)
+//       .json({ message: "Issue created successfully", newIssue })
+//   );
+// } catch (error) {
+//   console.error("Error creating issue:", error);
+//   reject(res.status(500).send("Error creating issue"));
+// }
+
+//console.log("ERROR", cloudinaryError, "RES", cloudinaryResponse);
+// cloudinary.uploader.upload(
+//   path,
+//   { folder: folder },
+//   async (error, result) => {
+//     if (error) {
+//       console.error("Error uploading to Cloudinary", error);
+//       return reject(res.status(500).send("Error uploading file"));
+//     }
+//     fs.unlinkSync(path);
+//     const imageUrl = result.secure_url;
+//     try {
+//       const newIssue = await prisma.issue.create({
+//         data: {
+//           userName,
+//           description,
+//           location,
+//           statusChange: {
+//             create: [
+//               {
+//                 status: "Submitted",
+//                 message: "first update",
+//               },
+//             ],
+//           },
+//           images: {
+//             create: [
+//               {
+//                 url: imageUrl,
+//               },
+//             ],
+//           },
+//         },
+//       });
+
+//       resolve(
+//         res
+//           .status(200)
+//           .json({ message: "Issue created successfully", newIssue })
+//       );
+//     } catch (error) {
+//       console.error("Error creating issue:", error);
+//       reject(res.status(500).send("Error creating issue"));
+//     }
+//   }
+// );
+//       });
+//     });
+//   }
+// }
 // const session = await getServerSession(req, res, authOptions);
 
 // if (req.method === "GET") {
