@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styles from "./UserForm.module.css";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
 import { z } from "zod";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";

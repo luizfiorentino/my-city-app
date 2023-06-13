@@ -1,6 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "./auth/[...nextauth]";
 import prisma from "@/prisma/client";
 const multer = require("multer");
 

@@ -17,6 +17,7 @@ export default function DetailsPlate({
   location,
   description,
   arrayChanges,
+  images,
 }) {
   const context = useContext(IssueContext);
   //console.log("context", context);
@@ -95,6 +96,27 @@ export default function DetailsPlate({
           {description}
         </TextParagraph>
       </BackgroundCanvas>
+
+      <TextParagraph className={styles.smallerSpacing}>
+        Related Image(s)
+      </TextParagraph>
+      <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
+        {images.length === 0 ? (
+          <TextParagraph variant="whiteText" size="large">
+            No image was posted by the user
+          </TextParagraph>
+        ) : (
+          images.map((image, index) => (
+            <img
+              style={{ height: "300px" }}
+              key={index}
+              src={image.url}
+              alt="user's posted image"
+            />
+          ))
+        )}
+      </BackgroundCanvas>
+
       <div
         className={styles.historyOuter}
         onClick={() => setOpenHistory(!openHistory)}
