@@ -8,8 +8,7 @@ export default function FormContent({
   userRegister,
   descriptionRegister,
   locationRegister,
-  register,
-  handleFileInputChange,
+  fileRegister,
 }) {
   return (
     <div className={styles.formContent}>
@@ -56,20 +55,8 @@ export default function FormContent({
         }}
       >
         <label>Send a related picture</label>
-        <input
-          type="file"
-          {...register("file")}
-          onChange={handleFileInputChange}
-          style={{ marginTop: "1rem" }}
-        />
-        {/* <input
-          type="file"
-          name="file"
-          ref={register("file")}
-          onChange={handleFileInputChange}
-          value={fileInputState}
-          style={{ marginTop: "1rem" }}
-        /> */}
+        <input type="file" style={{ marginTop: "1rem" }} {...fileRegister} />
+
         {errors.file && <span>{errors.file.message}</span>}
       </div>
     </div>

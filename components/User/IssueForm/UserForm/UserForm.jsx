@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
+import { postIssue } from "@/services";
 
 const formSchema = z.object({
   userName: z
@@ -23,12 +24,15 @@ const formSchema = z.object({
     .max(255, "the provided location contains too much characters"),
   file: z
     .any()
-    .refine((value) => value[0]?.size <= 1048576, {
+    .refine((value) => value && value[0]?.size <= 1048576, {
       message: "File size should be less than or equal to 1MB",
     })
-    .refine((value) => /^image\/(jpeg|jpg|png)$/i.test(value[0]?.type), {
-      message: "File must be in JPEG, JPG, or PNG format",
-    }),
+    .refine(
+      (value) => value && /^image\/(jpeg|jpg|png)$/i.test(value[0]?.type),
+      {
+        message: "File must be in JPEG, JPG, or PNG format",
+      }
+    ),
 });
 
 export default function UserForm() {
@@ -36,9 +40,30 @@ export default function UserForm() {
   const [errorPosting, setErrorPosting] = useState(false);
 
   const [previewSource, setPreviewSource] = useState("");
-  const [selectedFile, setSelectedFile] = useState();
 
-  const { watch } = useForm();
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+    getValues,
+    setValues,
+    setValue,
+    reset,
+    watch,
+  } = useForm({
+    defaultValues: {
+      userName: "",
+      description: "",
+      location: "",
+      file: null,
+    },
+    // mode: "all", --> don't use, it's users unfriendly
+    resolver: zodResolver(formSchema),
+  });
+
+  const returnFormPage = () => {
+    setSuccessRequest(false);
+  };
 
   const selectedFiles = watch("file");
 
@@ -56,65 +81,19 @@ export default function UserForm() {
     };
   };
 
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-
-    previewFile(file);
-    setSelectedFile(file);
-  };
-
-  const {
-    formState: { errors },
-    register,
-    handleSubmit,
-    getValues,
-    setValues,
-    setValue,
-    reset,
-  } = useForm({
-    defaultValues: {
-      userName: "",
-      description: "",
-      location: "",
-      file: null,
-    },
-    // mode: "all", --> don't use, it's users unfriendly
-    resolver: zodResolver(formSchema),
-  });
-
-  const returnFormPage = () => {
-    setSuccessRequest(false);
-  };
-
   const issueRequest = async (data) => {
     try {
-      const formData = new FormData();
-      formData.append("userName", data.userName);
-      formData.append("description", data.description);
-      formData.append("location", data.location);
+      const [error, _response] = await postIssue(data);
 
-      // formData.append("file", selectedFile);
-      formData.append("file", data.file[0]);
-
-      const response = await fetch("/api/issues", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        console.log("Failed to submit form data");
+      if (error) {
+        console.log("Failed to submit data");
         setErrorPosting(true);
-        setPreviewSource("");
         return;
       }
 
-      if (response.ok) {
-        // Handle success
-        console.log("Form data submitted successfully");
-        reset();
-        setSuccessRequest(true);
-        setPreviewSource("");
-      }
+      reset();
+      setSuccessRequest(true);
+      setPreviewSource("");
     } catch (error) {
       // Handle error
       console.log(
@@ -138,9 +117,8 @@ export default function UserForm() {
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
               locationRegister={{ ...register("location") }}
+              fileRegister={{ ...register("file") }}
               errors={errors}
-              register={register}
-              handleFileInputChange={handleFileInputChange}
             />
             {errorPosting && (
               <p style={{ color: "red" }}>
