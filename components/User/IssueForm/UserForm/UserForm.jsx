@@ -178,7 +178,7 @@ export default function UserForm() {
               </p>
             )}
             <div
-              className="dropzone"
+              className={styles.dropzone}
               {...getRootProps()}
               style={{ color: "black" }}
             >
@@ -187,7 +187,11 @@ export default function UserForm() {
               {images.length && (
                 <div>
                   {images.map((image, index) => (
-                    <img src={image} key={index} className="selectedImages" />
+                    <img
+                      src={image}
+                      key={index}
+                      className={styles.selectedImages}
+                    />
                   ))}
                 </div>
               )}
