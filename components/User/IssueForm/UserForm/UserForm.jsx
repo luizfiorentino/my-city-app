@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./UserForm.module.css";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
 import { postIssue } from "@/services";
+import { useDropzone } from "react-dropzone";
+import axios from "axios";
 
 const formSchema = z.object({
   userName: z
@@ -39,6 +41,55 @@ export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSource, setPreviewSource] = useState("");
+  const [images, setImages] = useState([]);
+
+  console.log("preview source", previewSource);
+
+  function handleUpload() {
+    console.log("uploading files");
+    axios
+      .post("http://localhost:4000/upload", { images })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+
+  const onDrop = useCallback(
+    (acceptedFiles, rejectedFiles) => {
+      acceptedFiles.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImages((prevState) => [...prevState, reader.result]);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      console.log(
+        "acceptedFiles",
+        acceptedFiles,
+        "rejected files",
+        rejectedFiles
+      );
+    },
+    [images]
+  );
+
+  useEffect(() => console.log(images), [images]);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/png",
+  });
+
+  console.log(
+    "getInputProps",
+    getInputProps(),
+    "getRootProps",
+    getInputProps()
+  );
 
   const {
     formState: { errors },
@@ -125,6 +176,27 @@ export default function UserForm() {
                 An error occured when posting the issue. Please try again or
                 contact admin
               </p>
+            )}
+            <div
+              className="dropzone"
+              {...getRootProps()}
+              style={{ color: "black" }}
+            >
+              <input {...getInputProps()} />
+              {isDragActive ? "Drag Active" : "You can drop your files here."}
+              {images.length && (
+                <div>
+                  {images.map((image, index) => (
+                    <img src={image} key={index} className="selectedImages" />
+                  ))}
+                </div>
+              )}
+              {images.length && (
+                <button onClick={handleUpload}>Upload images</button>
+              )}
+            </div>
+            {images.length && (
+              <button onClick={handleUpload}>Upload images</button>
             )}
 
             <Footer>{successRequest === false ? "Post issue" : "Back"}</Footer>
