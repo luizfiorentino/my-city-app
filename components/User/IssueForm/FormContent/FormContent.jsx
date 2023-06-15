@@ -65,21 +65,21 @@ export default function FormContent({
             <IoMdAdd />
           </FormSubtitle>
         </label>
-        {/* <div {...getRootProps()} className={styles.dropzone}>
+        <div {...getRootProps()} className={styles.dropzone}>
           <input {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here...</p>
           ) : (
             <p>Drag 'n' drop some files here, or click to select files</p>
           )}
-        </div> */}
-        {/* <input
+        </div>
+        <input
           className={styles.hiddenInput}
           type="file"
           id="file"
           style={{ marginTop: "1rem" }}
           {...fileRegister}
-        /> */}
+        />
         {previewSource && (
           <img
             className={styles.imagePreview}

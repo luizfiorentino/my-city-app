@@ -43,8 +43,6 @@ export default function UserForm() {
   const [previewSource, setPreviewSource] = useState("");
   const [images, setImages] = useState([]);
 
-  console.log("preview source", previewSource);
-
   function handleUpload() {
     console.log("uploading files");
     axios
