@@ -23,7 +23,7 @@ async function uploadSingleImage(path, folder) {
   }
 }
 
-async function insertNewIssue(userName, description, location, imageUrl) {
+async function insertNewIssue(userName, description, location, images) {
   try {
     const newIssue = await prisma.issue.create({
       data: {
@@ -39,11 +39,7 @@ async function insertNewIssue(userName, description, location, imageUrl) {
           ],
         },
         images: {
-          create: [
-            {
-              url: imageUrl,
-            },
-          ],
+          create: images,
         },
       },
     });
@@ -56,36 +52,48 @@ async function insertNewIssue(userName, description, location, imageUrl) {
 export default function handler(req, res) {
   if (req.method === "POST") {
     return new Promise((resolve, reject) => {
-      upload.single("file")(req, res, async (multerError) => {
+      upload.array("file", 3)(req, res, async (multerError) => {
         if (multerError) {
           console.error("Error uploading file with multer:", multerError);
           return reject(res.status(500).send("Error uploading file"));
         }
 
-        if (!req.file) {
+        if (!req.files) {
           return reject(res.status(400).send("No file uploaded"));
         }
 
-        const path = req.file.path;
-        const folder = "react_cloudinary"; // Cloudinary folder name
+        const fileUploadPromises = req.files.map((file) => {
+          const path = file.path;
+          const folder = "react_cloudinary"; // Cloudinary folder name
 
-        const [cloudinaryError, image] = await uploadSingleImage(path, folder);
+          return uploadSingleImage(path, folder);
+        });
 
-        if (cloudinaryError) {
-          console.error("Error uploading to Cloudinary", cloudinaryError);
-          return reject(res.status(500).send("Error uploading file"));
-        }
-        //remove symbolic link from file system
-        fs.unlinkSync(path);
+        const cloudinaryResponses = await Promise.all(fileUploadPromises);
 
-        const imageUrl = image.secure_url;
+        const images = cloudinaryResponses.map(([cloudinaryError, image]) => {
+          if (cloudinaryError) {
+            console.error("Error uploading to cloudinary", cloudinaryError);
+          }
+
+          return { url: image.secure_url };
+        });
+
+        console.log("URLS?", images);
+
+        //remove symbolic links from file system
+        req.files.forEach((file) => {
+          const path = file.path;
+          fs.unlinkSync(path);
+        });
+
         const { userName, description, location } = req.body;
 
         const [databaseError, newIssue] = await insertNewIssue(
           userName,
           description,
           location,
-          imageUrl
+          images
         );
 
         if (databaseError) {

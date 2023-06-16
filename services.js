@@ -1,10 +1,25 @@
 import axios from "axios";
 
 export async function postIssue({ file, ...data }) {
+  const formData = new FormData();
+  // "in" return the keys
+  for (let field in data) {
+    formData.append(field, data[field]);
+    //same as
+    //formData.append("name", data.name)
+    //formData.append("description", data.description)
+  }
+
+  //"of" returns values
+  for (let eachFile of file) {
+    formData.append("file", eachFile);
+  }
+
   try {
-    const response = await axios.postForm("/api/issues", {
-      file: file[0],
-      ...data,
+    const response = await axios.postForm("/api/issues", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
     console.log("Service response", response);
     return [null, response];

@@ -9,7 +9,6 @@ import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
 import { postIssue } from "@/services";
 import { useDropzone } from "react-dropzone";
-import axios from "axios";
 
 const formSchema = z.object({
   userName: z
@@ -24,58 +23,44 @@ const formSchema = z.object({
     .string()
     .min(8, "location must be at least 8 characters long")
     .max(255, "the provided location contains too much characters"),
-  file: z
-    .any()
-    .refine((value) => value && value[0]?.size <= 1048576, {
-      message: "File size should be less than or equal to 1MB",
-    })
-    .refine(
-      (value) => value && /^image\/(jpeg|jpg|png)$/i.test(value[0]?.type),
-      {
-        message: "File must be in JPEG, JPG, or PNG format",
-      }
-    ),
+  file: z.any().optional(),
+  // .refine((value) => value && value[0]?.size <= 1048576, {
+  //   message: "File size should be less than or equal to 1MB",
+  // })
+  // .refine(
+  //   (value) => value && /^image\/(jpeg|jpg|png)$/i.test(value[0]?.type),
+  //   {
+  //     message: "File must be in JPEG, JPG, or PNG format",
+  //   }
+  // ),
 });
 
 export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
-  const [previewSource, setPreviewSource] = useState("");
-  const [images, setImages] = useState([]);
+  const [previewSources, setPreviewSources] = useState([]);
 
-  function handleUpload() {
-    console.log("uploading files");
-    axios
-      .post("http://localhost:4000/upload", { images })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }
-
-  const onDrop = useCallback(
-    (acceptedFiles, rejectedFiles) => {
-      acceptedFiles.forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setImages((prevState) => [...prevState, reader.result]);
-        };
-        reader.readAsDataURL(file);
-      });
-
-      console.log(
-        "acceptedFiles",
-        acceptedFiles,
-        "rejected files",
-        rejectedFiles
-      );
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    watch,
+  } = useForm({
+    defaultValues: {
+      userName: "",
+      description: "",
+      location: "",
+      file: [],
     },
-    [images]
-  );
+    // mode: "all", --> don't use, it's users unfriendly
+    resolver: zodResolver(formSchema),
+  });
 
-  useEffect(() => console.log(images), [images]);
+  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
+    setValue("file", acceptedFiles);
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -89,26 +74,6 @@ export default function UserForm() {
     getInputProps()
   );
 
-  const {
-    formState: { errors },
-    register,
-    handleSubmit,
-    getValues,
-    setValues,
-    setValue,
-    reset,
-    watch,
-  } = useForm({
-    defaultValues: {
-      userName: "",
-      description: "",
-      location: "",
-      file: null,
-    },
-    // mode: "all", --> don't use, it's users unfriendly
-    resolver: zodResolver(formSchema),
-  });
-
   const returnFormPage = () => {
     setSuccessRequest(false);
   };
@@ -117,40 +82,39 @@ export default function UserForm() {
 
   useEffect(() => {
     if (selectedFiles) {
-      previewFile(selectedFiles[0]);
+      generatePreviews(selectedFiles);
     }
   }, [selectedFiles]);
 
-  const previewFile = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
+  const generatePreviews = (files) => {
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewSources((prevState) => [...prevState, reader.result]);
+      };
+      reader.readAsDataURL(file);
+    });
   };
 
   const issueRequest = async (data) => {
     try {
       const [error, _response] = await postIssue(data);
-
       if (error) {
         console.log("Failed to submit data");
         setErrorPosting(true);
         return;
       }
-
       reset();
       setSuccessRequest(true);
-      setPreviewSource("");
+      setPreviewSources([]);
     } catch (error) {
       // Handle error
       console.log(
         "An error occurred while submitting form data:",
         error.message
       );
-
       setErrorPosting(true);
-      setPreviewSource("");
+      setPreviewSources([]);
     }
   };
 
@@ -165,9 +129,8 @@ export default function UserForm() {
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
               locationRegister={{ ...register("location") }}
-              fileRegister={{ ...register("file") }}
               errors={errors}
-              previewSource={previewSource}
+              previewSources={previewSources}
             />
             {errorPosting && (
               <p className={styles.errorMessage}>
@@ -182,24 +145,7 @@ export default function UserForm() {
             >
               <input {...getInputProps()} />
               {isDragActive ? "Drag Active" : "You can drop your files here."}
-              {images.length && (
-                <div>
-                  {images.map((image, index) => (
-                    <img
-                      src={image}
-                      key={index}
-                      className={styles.selectedImages}
-                    />
-                  ))}
-                </div>
-              )}
-              {images.length && (
-                <button onClick={handleUpload}>Upload images</button>
-              )}
             </div>
-            {images.length && (
-              <button onClick={handleUpload}>Upload images</button>
-            )}
 
             <Footer>{successRequest === false ? "Post issue" : "Back"}</Footer>
           </form>
