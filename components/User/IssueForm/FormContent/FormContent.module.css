@@ -12,23 +12,28 @@
   color: black;
   display: "flex";
   flex-direction: "column";
-}
-
-.imagePreview {
-  height: 300px;
-  padding: 1rem;
   border: 1px solid #9699aa;
   border-radius: 4px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .hiddenInput {
   display: none;
 }
 
+.imagePreview {
+  max-width: 200px;
+}
+
 @media screen and (min-width: 800px) {
   .formContent {
     bottom: 0;
-    margin: 0 0 44px 0;
+    margin: 0;
 
     padding: 16px 0 0 0;
   }

@@ -41,7 +41,12 @@ export default function FormContent({
         type="text"
         name="location"
       />
-      <div className={styles.uploadImage}>
+      <FormInput label="Pictures" variant="photos" />
+      <div
+        className={
+          !previewSources.length ? styles.hiddenInput : styles.uploadImage
+        }
+      >
         {previewSources &&
           previewSources.map((src, index) => {
             return (
@@ -53,7 +58,6 @@ export default function FormContent({
               />
             );
           })}
-
         {errors.file && <span>{errors.file.message}</span>}
       </div>
     </div>

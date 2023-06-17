@@ -9,6 +9,8 @@ import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
 import { postIssue } from "@/services";
 import { useDropzone } from "react-dropzone";
+import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
+import { AiOutlineUpload } from "react-icons/ai";
 
 const formSchema = z.object({
   userName: z
@@ -143,8 +145,18 @@ export default function UserForm() {
               {...getRootProps()}
               style={{ color: "black" }}
             >
+              <FormSubtitle></FormSubtitle>
+
               <input {...getInputProps()} />
-              {isDragActive ? "Drag Active" : "You can drop your files here."}
+              {isDragActive ? (
+                <FormSubtitle variant="dragDrop">Drag Active</FormSubtitle>
+              ) : (
+                <FormSubtitle variant="dragDrop">
+                  {" "}
+                  Drag n' drop files or click here{" "}
+                  <AiOutlineUpload className={styles.uploadIcon} />
+                </FormSubtitle>
+              )}
             </div>
 
             <Footer>{successRequest === false ? "Post issue" : "Back"}</Footer>
