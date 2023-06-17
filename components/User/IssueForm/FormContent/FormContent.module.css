@@ -20,6 +20,17 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dropzone {
+  display: flex;
+  justify-content: center;
+
+  border: 2px dotted gray;
+  padding: 0 1rem;
+  border-radius: 4px;
+  margin-bottom: 44px;
 }
 
 .hiddenInput {
@@ -28,6 +39,11 @@
 
 .imagePreview {
   max-width: 200px;
+}
+
+.uploadIcon {
+  margin-left: 8px;
+  margin-bottom: 4px;
 }
 
 @media screen and (min-width: 800px) {

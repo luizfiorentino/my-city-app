@@ -2,6 +2,7 @@ import styles from "./FormContent.module.css";
 import FormHeader from "../../Shared/Fields/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle";
 import FormInput from "../../Shared/Fields/FormInput";
+import { AiOutlineUpload } from "react-icons/ai";
 
 export default function FormContent({
   errors,
@@ -9,6 +10,9 @@ export default function FormContent({
   descriptionRegister,
   locationRegister,
   previewSources,
+  getRootProps,
+  getInputProps,
+  isDragActive,
 }) {
   return (
     <div className={styles.formContent}>
@@ -59,6 +63,22 @@ export default function FormContent({
             );
           })}
         {errors.file && <span>{errors.file.message}</span>}
+      </div>
+      <div
+        className={styles.dropzone}
+        {...getRootProps}
+        style={{ color: "black" }}
+      >
+        <input {...getInputProps} />
+        {isDragActive ? (
+          <FormSubtitle variant="dragDrop">Drag Active</FormSubtitle>
+        ) : (
+          <FormSubtitle variant="dragDrop">
+            {" "}
+            Drag n' drop files or click here{" "}
+            <AiOutlineUpload className={styles.uploadIcon} />
+          </FormSubtitle>
+        )}
       </div>
     </div>
   );

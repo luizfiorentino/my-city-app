@@ -23,27 +23,12 @@
   margin: 5px;
 }
 
-.dropzone {
-  display: flex;
-  justify-content: center;
-
-  border: 2px dotted gray;
-  padding: 0 1rem;
-  border-radius: 4px;
-  margin-bottom: 44px;
-}
-
 .selectedImages {
   height: 100px;
   width: 100px;
   object-fit: cover;
   margin: 16px;
   background-color: antiquewhite;
-}
-
-.uploadIcon {
-  margin-left: 8px;
-  margin-bottom: 4px;
 }
 
 @media screen and (min-width: 800px) {
