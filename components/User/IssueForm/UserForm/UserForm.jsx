@@ -85,6 +85,18 @@ export default function UserForm() {
     console.log("accepted files", acceptedFiles);
   }, []);
 
+  const removeFile = (index) => {
+    const currentFiles = watch("file");
+    // show only one if the same slected file at once
+    const updatedFiles = currentFiles.filter((_, i) => i !== index);
+    setValue("file", updatedFiles);
+    setPreviewSources((prevSources) => {
+      const updatedSources = [...prevSources];
+      updatedSources.splice(index, 1);
+      return updatedSources;
+    });
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: "image/png",
@@ -103,20 +115,37 @@ export default function UserForm() {
     }
   }, [selectedFiles]);
 
-  const generatePreviews = (files) => {
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setPreviewSources((prevState) => {
-          if (!prevState.includes(reader.result)) {
-            return [...prevState, reader.result];
-          }
-          return prevState;
+  const generatePreviews = useCallback(
+    (files) => {
+      const newPreviewSources = [];
+
+      // Generate previews for the selected files
+      const promises = files.map((file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+          reader.onerror = (error) => {
+            reject(error);
+          };
+          reader.readAsDataURL(file);
         });
-      };
-      reader.readAsDataURL(file);
-    });
-  };
+      });
+
+      Promise.all(promises)
+        .then((results) => {
+          const uniqueResults = results.filter(
+            (result) => !previewSources.includes(result)
+          );
+          setPreviewSources((prevState) => [...prevState, ...uniqueResults]);
+        })
+        .catch((error) => {
+          console.log("Error generating previews:", error);
+        });
+    },
+    [previewSources, setPreviewSources]
+  );
 
   const issueRequest = async (data) => {
     try {
@@ -162,6 +191,7 @@ export default function UserForm() {
               getRootProps={{ ...getRootProps() }}
               getInputProps={{ ...getInputProps() }}
               isDragActive={isDragActive}
+              removeFile={removeFile}
             />
             <button onClick={(event) => remove(event)}>Remove files</button>
             {errorPosting && (

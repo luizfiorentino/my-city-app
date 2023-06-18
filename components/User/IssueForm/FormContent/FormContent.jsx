@@ -14,6 +14,7 @@ export default function FormContent({
   getRootProps,
   getInputProps,
   isDragActive,
+  removeFile,
 }) {
   return (
     <div className={styles.formContent}>
@@ -53,16 +54,21 @@ export default function FormContent({
         }
       >
         {previewSources &&
-          previewSources.map((src, index) => {
-            return (
-              <img
-                key={index}
-                className={styles.imagePreview}
-                src={src}
-                alt="chosen"
-              />
-            );
-          })}
+          previewSources.map((src, index) => (
+            <div key={index}>
+              <img className={styles.imagePreview} src={src} alt="chosen" />
+              <button
+                //preventDefault avoids submitting the form before clicking the button
+                onClick={(event) => {
+                  event.preventDefault();
+                  removeFile(index);
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+
         {errors.file && <ErrorMessage>{errors.file.message}</ErrorMessage>}
       </div>
       <div
