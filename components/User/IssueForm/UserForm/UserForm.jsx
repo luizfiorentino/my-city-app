@@ -40,6 +40,8 @@ export default function UserForm() {
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSources, setPreviewSources] = useState([]);
 
+  console.log("PREVIEWS", previewSources);
+
   const {
     formState: { errors },
     register,
@@ -59,7 +61,9 @@ export default function UserForm() {
   });
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    setValue("file", acceptedFiles);
+    const currentFiles = watch("file");
+    setValue("file", [...currentFiles, ...acceptedFiles]);
+    console.log("accepted files", acceptedFiles);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -67,18 +71,12 @@ export default function UserForm() {
     accept: "image/png",
   });
 
-  console.log(
-    "getInputProps",
-    getInputProps(),
-    "getRootProps",
-    getInputProps()
-  );
-
   const returnFormPage = () => {
     setSuccessRequest(false);
   };
 
   const selectedFiles = watch("file");
+  console.log("SELECTED FILES", selectedFiles);
 
   useEffect(() => {
     if (selectedFiles) {
@@ -90,7 +88,12 @@ export default function UserForm() {
     files.forEach((file) => {
       const reader = new FileReader();
       reader.onload = () => {
-        setPreviewSources((prevState) => [...prevState, reader.result]);
+        setPreviewSources((prevState) => {
+          if (!prevState.includes(reader.result)) {
+            return [...prevState, reader.result];
+          }
+          return prevState;
+        });
       };
       reader.readAsDataURL(file);
     });
@@ -118,6 +121,11 @@ export default function UserForm() {
     }
   };
 
+  const remove = () => {
+    setValue("file", []);
+    setPreviewSources([]);
+  };
+
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}></div>
@@ -135,6 +143,7 @@ export default function UserForm() {
               getInputProps={{ ...getInputProps() }}
               isDragActive={isDragActive}
             />
+            <button onClick={remove}>Remove files</button>
             {errorPosting && (
               <p className={styles.errorMessage}>
                 An error occured when posting the issue. Please try again or

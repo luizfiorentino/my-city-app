@@ -71,11 +71,10 @@ export default function FormContent({
       >
         <input {...getInputProps} />
         {isDragActive ? (
-          <FormSubtitle variant="dragDrop">Drag Active</FormSubtitle>
+          <FormSubtitle variant="dragDrop">Drop files here</FormSubtitle>
         ) : (
           <FormSubtitle variant="dragDrop">
-            {" "}
-            Drag n' drop files or click here{" "}
+            Drag n' drop files or click here
             <AiOutlineUpload className={styles.uploadIcon} />
           </FormSubtitle>
         )}
