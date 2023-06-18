@@ -23,16 +23,35 @@ const formSchema = z.object({
     .string()
     .min(8, "location must be at least 8 characters long")
     .max(255, "the provided location contains too much characters"),
-  file: z.any().optional(),
-  // .refine((value) => value && value[0]?.size <= 1048576, {
-  //   message: "File size should be less than or equal to 1MB",
-  // })
-  // .refine(
-  //   (value) => value && /^image\/(jpeg|jpg|png)$/i.test(value[0]?.type),
-  //   {
-  //     message: "File must be in JPEG, JPG, or PNG format",
-  //   }
-  // ),
+  file: z
+    .array(z.any())
+    .max(3, "You can upload up to 3 images")
+    .optional()
+    .refine(
+      (value) => {
+        if (!value) return true; // If no file is provided, consider it valid
+        const fileSizeLimit = 1048576; // 1MB file size limit
+        const acceptedExtensions = ["jpeg", "jpg", "png"]; // Accepted file extensions
+        // Check if the number of files is within the limit
+        if (value.length > 3) return false;
+        // Validate each file
+        for (const file of value) {
+          const fileSize = file.size;
+          const fileExtension = file.name.split(".").pop().toLowerCase();
+          if (
+            fileSize > fileSizeLimit ||
+            !acceptedExtensions.includes(fileExtension)
+          ) {
+            return false;
+          }
+        }
+        return true;
+      },
+      {
+        message:
+          "File must be in JPEG, JPG, or PNG format, be less than or equal to 1MB in size, and you can upload up to 3 images",
+      }
+    ),
 });
 
 export default function UserForm() {
@@ -121,7 +140,8 @@ export default function UserForm() {
     }
   };
 
-  const remove = () => {
+  const remove = (event) => {
+    event.preventDefault();
     setValue("file", []);
     setPreviewSources([]);
   };
@@ -143,7 +163,7 @@ export default function UserForm() {
               getInputProps={{ ...getInputProps() }}
               isDragActive={isDragActive}
             />
-            <button onClick={remove}>Remove files</button>
+            <button onClick={(event) => remove(event)}>Remove files</button>
             {errorPosting && (
               <p className={styles.errorMessage}>
                 An error occured when posting the issue. Please try again or

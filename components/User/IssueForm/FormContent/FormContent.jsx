@@ -3,6 +3,7 @@ import FormHeader from "../../Shared/Fields/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle";
 import FormInput from "../../Shared/Fields/FormInput";
 import { AiOutlineUpload } from "react-icons/ai";
+import ErrorMessage from "../../Shared/StatusMessage/StatusMessage";
 
 export default function FormContent({
   errors,
@@ -45,7 +46,7 @@ export default function FormContent({
         type="text"
         name="location"
       />
-      <FormInput label="Pictures" variant="photos" />
+      <FormInput label="Pictures (max. 3)" variant="photos" />
       <div
         className={
           !previewSources.length ? styles.hiddenInput : styles.uploadImage
@@ -62,7 +63,7 @@ export default function FormContent({
               />
             );
           })}
-        {errors.file && <span>{errors.file.message}</span>}
+        {errors.file && <ErrorMessage>{errors.file.message}</ErrorMessage>}
       </div>
       <div
         className={styles.dropzone}
