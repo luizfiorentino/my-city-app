@@ -55,7 +55,7 @@ export default function FormContent({
       >
         {previewSources &&
           previewSources.map((src, index) => (
-            <div key={index}>
+            <div key={index} className={styles.imagePreview}>
               <img className={styles.imagePreview} src={src} alt="chosen" />
               <button
                 //preventDefault avoids submitting the form before clicking the button

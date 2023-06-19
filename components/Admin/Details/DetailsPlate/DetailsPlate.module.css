@@ -84,6 +84,20 @@
   display: none;
 }
 
+.imagesContainer {
+  display: flex;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.image {
+  max-width: 50%;
+}
+
 @media screen and (max-width: 340px) {
   .description {
     text-align: left;

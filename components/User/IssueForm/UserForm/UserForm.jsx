@@ -9,6 +9,7 @@ import ConfirmationMessage from "../ConfirmationMessage";
 import { ubuntu } from "@/styles/fonts";
 import { postIssue } from "@/services";
 import { useDropzone } from "react-dropzone";
+import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 const formSchema = z.object({
   userName: z
@@ -58,8 +59,7 @@ export default function UserForm() {
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSources, setPreviewSources] = useState([]);
-
-  console.log("PREVIEWS", previewSources);
+  const [loading, setLoading] = useState(false);
 
   const {
     formState: { errors },
@@ -82,7 +82,6 @@ export default function UserForm() {
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     const currentFiles = watch("file");
     setValue("file", [...currentFiles, ...acceptedFiles]);
-    console.log("accepted files", acceptedFiles);
   }, []);
 
   const removeFile = (index) => {
@@ -107,7 +106,6 @@ export default function UserForm() {
   };
 
   const selectedFiles = watch("file");
-  console.log("SELECTED FILES", selectedFiles);
 
   useEffect(() => {
     if (selectedFiles) {
@@ -149,6 +147,7 @@ export default function UserForm() {
 
   const issueRequest = async (data) => {
     try {
+      setLoading(true);
       const [error, _response] = await postIssue(data);
       if (error) {
         console.log("Failed to submit data");
@@ -158,6 +157,7 @@ export default function UserForm() {
       reset();
       setSuccessRequest(true);
       setPreviewSources([]);
+      setLoading(false);
     } catch (error) {
       // Handle error
       console.log(
@@ -167,12 +167,6 @@ export default function UserForm() {
       setErrorPosting(true);
       setPreviewSources([]);
     }
-  };
-
-  const remove = (event) => {
-    event.preventDefault();
-    setValue("file", []);
-    setPreviewSources([]);
   };
 
   return (
@@ -193,7 +187,7 @@ export default function UserForm() {
               isDragActive={isDragActive}
               removeFile={removeFile}
             />
-            <button onClick={(event) => remove(event)}>Remove files</button>
+
             {errorPosting && (
               <p className={styles.errorMessage}>
                 An error occured when posting the issue. Please try again or
@@ -201,7 +195,10 @@ export default function UserForm() {
               </p>
             )}
 
-            <Footer>{successRequest === false ? "Post issue" : "Back"}</Footer>
+            <Footer className={styles.footer}>
+              {successRequest === false ? "Post issue" : "Back"}
+              {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
+            </Footer>
           </form>
         ) : (
           <ConfirmationMessage

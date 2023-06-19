@@ -100,7 +100,10 @@ export default function DetailsPlate({
       <TextParagraph className={styles.smallerSpacing}>
         Related Image(s)
       </TextParagraph>
-      <BackgroundCanvas variant="lighterCanvas" className={styles.description}>
+      <BackgroundCanvas
+        variant="lighterCanvas"
+        className={styles.imagesContainer}
+      >
         {images.length === 0 ? (
           <TextParagraph variant="whiteText" size="large">
             No image was posted by the user
@@ -108,7 +111,7 @@ export default function DetailsPlate({
         ) : (
           images.map((image, index) => (
             <img
-              style={{ height: "300px" }}
+              className={styles.image}
               key={index}
               src={image.url}
               alt="user's posted image"
