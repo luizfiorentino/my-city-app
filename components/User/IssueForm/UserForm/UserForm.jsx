@@ -30,29 +30,29 @@ const formSchema = z.object({
     .optional()
     .refine(
       (value) => {
-        if (!value) return true; // If no file is provided, consider it valid
-        const fileSizeLimit = 1048576; // 1MB file size limit
+        if (!value) return true;
         const acceptedExtensions = ["jpeg", "jpg", "png"]; // Accepted file extensions
-        // Check if the number of files is within the limit
-        if (value.length > 3) return false;
         // Validate each file
         for (const file of value) {
-          const fileSize = file.size;
           const fileExtension = file.name.split(".").pop().toLowerCase();
-          if (
-            fileSize > fileSizeLimit ||
-            !acceptedExtensions.includes(fileExtension)
-          ) {
+          if (!acceptedExtensions.includes(fileExtension)) {
             return false;
           }
         }
         return true;
       },
       {
-        message:
-          "File must be in JPEG, JPG, or PNG format, be less than or equal to 1MB in size, and you can upload up to 3 images",
+        message: "File must be in JPEG, JPG, or PNG format.",
       }
     ),
+  // .refine((value)=> {
+  //   if(!value) return true;
+  //   const fileSizeLimit = 1048576; // 1MB file size limit
+  //   for (const file of value) {
+
+  //     const fileExtension
+  //   }
+  // })
 });
 
 export default function UserForm() {
@@ -103,7 +103,6 @@ export default function UserForm() {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: "image/png",
   });
 
   const returnFormPage = () => {

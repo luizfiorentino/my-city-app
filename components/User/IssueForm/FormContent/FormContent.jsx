@@ -54,24 +54,28 @@ export default function FormContent({
           !previewSources.length ? styles.hiddenInput : styles.uploadImage
         }
       >
-        {previewSources &&
-          previewSources.map((src, index) => (
-            <div key={index} className={styles.imagePreviewContainer}>
-              <img className={styles.imagePreview} src={src} alt="chosen" />
-              <button
-                className={styles.removeButton}
-                //preventDefault avoids submitting the form before clicking the button
-                onClick={(event) => {
-                  event.preventDefault();
-                  removeFile(index);
-                }}
-              >
-                <BsTrash className={styles.deleteIcon} />
-              </button>
-            </div>
-          ))}
+        <div className={styles.imageArea}>
+          {previewSources &&
+            previewSources.map((src, index) => (
+              <div key={index} className={styles.imagePreviewContainer}>
+                <img className={styles.imagePreview} src={src} alt="chosen" />
+                <button
+                  className={styles.removeButton}
+                  //preventDefault avoids submitting the form before clicking the button
+                  onClick={(event) => {
+                    event.preventDefault();
+                    removeFile(index);
+                  }}
+                >
+                  <BsTrash className={styles.deleteIcon} />
+                </button>
+              </div>
+            ))}
+        </div>
 
-        {errors.file && <ErrorMessage>{errors.file.message}</ErrorMessage>}
+        <div>
+          {errors.file && <ErrorMessage>{errors.file.message}</ErrorMessage>}
+        </div>
       </div>
       <div
         className={styles.dropzone}
