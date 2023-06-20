@@ -81,7 +81,12 @@ export default function UserForm() {
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     const currentFiles = watch("file");
-    setValue("file", [...currentFiles, ...acceptedFiles]);
+    const uniqueFiles = acceptedFiles.filter(
+      (file) =>
+        currentFiles.find((existingFile) => existingFile.path === file.path) ===
+        undefined
+    );
+    setValue("file", [...currentFiles, ...uniqueFiles]);
   }, []);
 
   const removeFile = (index) => {
@@ -115,8 +120,6 @@ export default function UserForm() {
 
   const generatePreviews = useCallback(
     (files) => {
-      const newPreviewSources = [];
-
       // Generate previews for the selected files
       const promises = files.map((file) => {
         return new Promise((resolve, reject) => {
@@ -133,10 +136,7 @@ export default function UserForm() {
 
       Promise.all(promises)
         .then((results) => {
-          const uniqueResults = results.filter(
-            (result) => !previewSources.includes(result)
-          );
-          setPreviewSources((prevState) => [...prevState, ...uniqueResults]);
+          setPreviewSources([...results]);
         })
         .catch((error) => {
           console.log("Error generating previews:", error);
