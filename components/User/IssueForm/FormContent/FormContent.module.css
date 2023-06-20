@@ -10,8 +10,8 @@
 
 .uploadImage {
   color: black;
-  display: "flex";
-  flex-direction: "column";
+  display: flex;
+  /* flex-direction: column; */
   border: 1px solid #9699aa;
   border-radius: 4px;
   padding: 1rem;
@@ -37,13 +37,37 @@
   display: none;
 }
 
+.imagePreviewContainer {
+  position: relative;
+}
+
 .imagePreview {
-  max-width: 200px;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.removeButton {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  border: none;
 }
 
 .uploadIcon {
   margin-left: 8px;
   margin-bottom: 4px;
+}
+
+.deleteIcon {
+  margin-top: 3px;
+  margin-right: 1px;
 }
 
 @media screen and (min-width: 800px) {
@@ -52,5 +76,11 @@
     margin: 0;
 
     padding: 16px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .uploadImage {
+    flex-direction: column;
   }
 }

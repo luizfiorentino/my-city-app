@@ -3,6 +3,7 @@ import FormHeader from "../../Shared/Fields/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle";
 import FormInput from "../../Shared/Fields/FormInput";
 import { AiOutlineUpload } from "react-icons/ai";
+import { BsTrash } from "react-icons/bs";
 import ErrorMessage from "../../Shared/StatusMessage/StatusMessage";
 
 export default function FormContent({
@@ -55,16 +56,17 @@ export default function FormContent({
       >
         {previewSources &&
           previewSources.map((src, index) => (
-            <div key={index} className={styles.imagePreview}>
+            <div key={index} className={styles.imagePreviewContainer}>
               <img className={styles.imagePreview} src={src} alt="chosen" />
               <button
+                className={styles.removeButton}
                 //preventDefault avoids submitting the form before clicking the button
                 onClick={(event) => {
                   event.preventDefault();
                   removeFile(index);
                 }}
               >
-                Remove
+                <BsTrash className={styles.deleteIcon} />
               </button>
             </div>
           ))}
