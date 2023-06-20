@@ -44,15 +44,23 @@ const formSchema = z.object({
       {
         message: "File must be in JPEG, JPG, or PNG format.",
       }
+    )
+    .refine(
+      (value) => {
+        if (!value) return true;
+        const fileSizeLimit = 1048576; // 1MB file size limit
+        for (const file of value) {
+          const fileSize = file.size;
+          if (fileSize > fileSizeLimit) {
+            return false;
+          }
+        }
+        return true;
+      },
+      {
+        message: "Files must be smaller or equal to 1MB.",
+      }
     ),
-  // .refine((value)=> {
-  //   if(!value) return true;
-  //   const fileSizeLimit = 1048576; // 1MB file size limit
-  //   for (const file of value) {
-
-  //     const fileExtension
-  //   }
-  // })
 });
 
 export default function UserForm() {
