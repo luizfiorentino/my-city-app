@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import styles from "./AdminList.module.css";
 import AdminTopBar from "../../Nav/AdminTopBar";
 import ReportsBar from "../ReportsBar";
 import IssueCard from "../IssueCard";
+import IssueContext from "@/utils/IssueContext";
 
 export default function AdminList(props) {
+  const context = useContext(IssueContext);
+  const [status, setStatus] = useState("all");
+
   return (
     <div className={styles.main}>
       <AdminTopBar />
@@ -12,7 +16,12 @@ export default function AdminList(props) {
         <ReportsBar issues={props.data} />
         <div className={styles.issuesList}>
           {props.data
-            .slice() // Create a copy of the array
+            .filter(
+              (issue) =>
+                context.filterIssuesByStatus === "all" || // Add this condition
+                issue.statusChange[0].status === context.filterIssuesByStatus
+            )
+            .slice()
             .reverse()
             .map((issue) => (
               <IssueCard

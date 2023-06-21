@@ -10,6 +10,7 @@ export default function App({
 }) {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [filterIssuesByStatus, setFilterIssueByStatus] = useState("all");
 
   return (
     <SessionProvider session={session}>
@@ -19,6 +20,8 @@ export default function App({
           setLoading,
           openModal,
           setOpenModal,
+          filterIssuesByStatus,
+          setFilterIssueByStatus,
         }}
       >
         {" "}
