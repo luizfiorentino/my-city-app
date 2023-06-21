@@ -11,6 +11,8 @@ export default function ReportsBar(props) {
   const context = useContext(IssueContext);
   console.log("CONTEXT", context.filterIssuesByStatus);
   const [status, setStatus] = useState("all");
+  const [showSelector, setShowSelector] = useState(false);
+
   const issueStatusses = [
     "all",
     "Submitted",
@@ -25,6 +27,10 @@ export default function ReportsBar(props) {
     context.setFilterIssueByStatus(selectedStatus);
   };
 
+  const handleFilterClick = () => {
+    setShowSelector(!showSelector);
+  };
+
   return (
     <div className={styles.main}>
       <div>
@@ -37,17 +43,23 @@ export default function ReportsBar(props) {
       </div>
       <div className={styles.filterAndEdit}>
         <TextBold className={styles.filter}>
-          Filter <span className={styles.filterExtraText}>by status</span>
+          Filter{" "}
+          <span onClick={handleFilterClick} className={styles.filterExtraText}>
+            by status
+          </span>
           <img
+            onClick={handleFilterClick}
             className={styles.arrowIcon}
             src={arrowIcon.src}
             alt="arrow down icon"
           />
-          <select onChange={handleStatusChange}>
-            {issueStatusses.map((status) => (
-              <option key={status}>{status}</option>
-            ))}
-          </select>
+          {showSelector && (
+            <select onChange={handleStatusChange}>
+              {issueStatusses.map((status) => (
+                <option key={status}>{status}</option>
+              ))}
+            </select>
+          )}
         </TextBold>
 
         <Link href="/">
