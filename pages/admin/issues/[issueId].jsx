@@ -104,7 +104,7 @@ export default function IssueStatus({ issue }) {
           description={issueDetails?.description}
           arrayChanges={issueDetails?.statusChange}
           images={issueDetails?.images}
-        />{" "}
+        />
         <EditBar
           className={styles.footerBar}
           footer={true}

@@ -9,7 +9,6 @@ export default function AdminTopBar() {
   return (
     <div className={styles.main}>
       <AdminTbIcon />
-
       <div className={styles.profile}>
         <span onClick={() => signOut()}>
           <div className={styles.smallIcon}>
