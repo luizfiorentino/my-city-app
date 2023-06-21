@@ -40,6 +40,8 @@ export async function getServerSideProps() {
       },
     });
 
+    console.log("ISSUES", issues);
+
     return {
       props: {
         issues: serialize(issues),

@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./Avatar.module.css";
-import { useContext } from "react";
-import IssueContext from "@/utils/IssueContext";
+import { useSession } from "next-auth/react";
 
 export default function Avatar() {
-  const context = useContext(IssueContext);
+  const { data: session, status } = useSession();
+
   return (
     <div className={styles.main}>
       <img
         className={styles.image}
-        src={context?.signedInAs?.user?.image}
+        src={session?.user?.image}
         alt="admin avatar"
       />
     </div>
