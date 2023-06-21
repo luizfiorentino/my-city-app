@@ -11,17 +11,20 @@ export default function AdminList(props) {
       <div className={styles.barAndCardList}>
         <ReportsBar issues={props.data} />
         <div className={styles.issuesList}>
-          {props.data.map((issue) => (
-            <IssueCard
-              key={issue.id}
-              id={issue.id}
-              date={issue.createdAt}
-              userName={issue.userName}
-              description={issue.description}
-              location={issue.location}
-              updates={issue.statusChange}
-            />
-          ))}
+          {props.data
+            .slice() // Create a copy of the array
+            .reverse()
+            .map((issue) => (
+              <IssueCard
+                key={issue.id}
+                id={issue.id}
+                date={issue.createdAt}
+                userName={issue.userName}
+                description={issue.description}
+                location={issue.location}
+                updates={issue.statusChange}
+              />
+            ))}
         </div>
       </div>
     </div>
