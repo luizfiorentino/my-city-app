@@ -72,10 +72,9 @@ export default function FormContent({
               </div>
             ))}
         </div>
-
-        <div>
-          {errors.file && <ErrorMessage>{errors.file.message}</ErrorMessage>}
-        </div>
+      </div>
+      <div>
+        {errors.file && <ErrorMessage>{errors.file.message}</ErrorMessage>}
       </div>
       <div
         className={styles.dropzone}
