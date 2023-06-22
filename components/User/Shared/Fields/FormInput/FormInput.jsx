@@ -8,12 +8,12 @@ export default function FormInput(props) {
     <>
       <label className={styles.label}>{props.label}</label>{" "}
       <input
-        defaultValue="test"
-        type="text"
+        type={props.type}
+        name={props.name}
         placeholder={props.placeHolder}
-        // value={props.value}
-        // onChange={(e) => props.onChange(e)}
-        className={`${styles.input} ${ubuntu.className}`}
+        className={`${
+          props.variant === "photos" ? styles.hidden : styles.input
+        } ${ubuntu.className}`}
         {...props.register}
       />{" "}
       {props.error && <ErrorMessage>{props.error.message}</ErrorMessage>}

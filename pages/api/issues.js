@@ -1,31 +1,35 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "./auth/[...nextauth]";
 import prisma from "@/prisma/client";
+import multer from "multer";
+import fs from "fs";
+import { cloudinary } from "./utils/cloudinary";
 
-export default async function handler(req, res) {
-  const session = await getServerSession(req, res, authOptions);
+const upload = multer({ dest: "uploads/" });
 
-  if (req.method === "GET") {
-    if (!session) {
-      return res.status(401).end();
-    }
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
-    const issues = await prisma.issue.findMany();
-
-    if (!issues) {
-      return res.status(404).end();
-    }
-
-    return res.status(200).json({ issues });
+async function uploadSingleImage(path, folder) {
+  try {
+    const response = await cloudinary.uploader.upload(path, { folder: folder });
+    console.log("RES?", response);
+    return [null, response];
+  } catch (error) {
+    console.log("ERROR?", error);
+    return [error, null];
   }
+}
 
-  if (req.method === "POST") {
+async function insertNewIssue(userName, description, location, images) {
+  try {
     const newIssue = await prisma.issue.create({
       data: {
-        userName: req.body.issue.userName,
-        description: req.body.issue.description,
-        location: req.body.issue.location,
+        userName,
+        description,
+        location,
         statusChange: {
           create: [
             {
@@ -34,41 +38,75 @@ export default async function handler(req, res) {
             },
           ],
         },
+        images: {
+          create: images,
+        },
       },
     });
-
-    return res
-      .status(201)
-      .json({ message: `New issue placed`, newIssue: newIssue });
-  } else {
-    res.status(405).end();
+    return [null, newIssue];
+  } catch (error) {
+    return [error, null];
   }
 }
 
-//Confirm we're not using DELETE here!
-// if (req.method === "DELETE") {
-//   const issueDelete = await prisma.issue.delete({
-//     where: {
-//       id: req.body.object.id,
-//     },
-//   });
-//   return res.status(200).json({ issueDelete });
-// } else {
-//   return res
-//     .status(405)
-//     .json({ message: `Method ${req.method} not supported` });
-// }
+export default function handler(req, res) {
+  if (req.method === "POST") {
+    return new Promise((resolve, reject) => {
+      upload.array("file", 3)(req, res, async (multerError) => {
+        if (multerError) {
+          console.error("Error uploading file with multer:", multerError);
+          return reject(res.status(500).send("Error uploading file"));
+        }
 
-// } else {
-//   res.status(405).end();
-// }
+        if (!req.files) {
+          return reject(res.status(400).send("No file uploaded"));
+        }
 
-//Maybe use as reference?
-// if (session) {
-//   // Signed in
-//   console.log("Session", JSON.stringify(session, null, 2));
-// } else {
-//   // Not Signed in
-//   res.status(401);
-// }
-// res.end();
+        const fileUploadPromises = req.files.map((file) => {
+          const path = file.path;
+          const folder = "react_cloudinary"; // Cloudinary folder name
+
+          return uploadSingleImage(path, folder);
+        });
+
+        const cloudinaryResponses = await Promise.all(fileUploadPromises);
+
+        const images = cloudinaryResponses.map(([cloudinaryError, image]) => {
+          if (cloudinaryError) {
+            console.error("Error uploading to cloudinary", cloudinaryError);
+          }
+
+          return { url: image.secure_url };
+        });
+
+        console.log("URLS?", images);
+
+        //remove symbolic links from file system
+        req.files.forEach((file) => {
+          const path = file.path;
+          fs.unlinkSync(path);
+        });
+
+        const { userName, description, location } = req.body;
+
+        const [databaseError, newIssue] = await insertNewIssue(
+          userName,
+          description,
+          location,
+          images
+        );
+
+        if (databaseError) {
+          console.log("Error during insertion into database:", databaseError);
+          return reject(res.status(500).send("Error creating issue"));
+        }
+
+        return resolve(
+          res
+            .status(200)
+            .json({ message: "Issue created successfully", newIssue })
+        );
+      });
+    });
+  }
+}

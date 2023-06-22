@@ -18,6 +18,25 @@
   background-size: cover;
 }
 
+.errorMessage {
+  color: red;
+  margin: 5px;
+}
+
+.selectedImages {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  margin: 16px;
+  background-color: antiquewhite;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (min-width: 800px) {
   .main {
     max-width: 1024px;

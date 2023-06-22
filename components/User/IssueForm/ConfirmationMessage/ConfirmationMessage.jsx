@@ -3,6 +3,7 @@ import styles from "./ConfirmationMessage.module.css";
 import Footer from "../../Shared/Footer";
 
 export default function ConfirmationMessage(props) {
+  console.log("conf message", props);
   return (
     <div>
       <div className={styles.externalContainer}>

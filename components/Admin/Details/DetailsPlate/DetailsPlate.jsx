@@ -17,11 +17,10 @@ export default function DetailsPlate({
   location,
   description,
   arrayChanges,
+  images,
 }) {
   const context = useContext(IssueContext);
-  //console.log("context", context);
-  // const [openModal, setOpenModal] = useState(false);
-  // const [message, setMessage] = useState("");
+
   const [openHistory, setOpenHistory] = useState(false);
 
   function close(e) {
@@ -33,13 +32,14 @@ export default function DetailsPlate({
   const arrayHistory = arrayChanges.filter(
     (change) => change !== arrayChanges[0]
   );
-  const [historyData, setHistoryData] = useState(arrayHistory);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage, setCardsPerPage] = useState(3);
+  const cardsPerPage = 3;
 
   const lastCardIndex = currentPage * cardsPerPage;
+
   const firstCardIndex = lastCardIndex - cardsPerPage;
-  const currentCards = historyData.slice(firstCardIndex, lastCardIndex);
+  const currentCards = arrayHistory.slice(firstCardIndex, lastCardIndex);
   const totalCards = arrayChanges.length;
 
   return (
@@ -95,6 +95,30 @@ export default function DetailsPlate({
           {description}
         </TextParagraph>
       </BackgroundCanvas>
+
+      <TextParagraph className={styles.smallerSpacing}>
+        Related Image(s)
+      </TextParagraph>
+      <BackgroundCanvas
+        variant="lighterCanvas"
+        className={styles.imagesContainer}
+      >
+        {images.length === 0 ? (
+          <TextParagraph variant="whiteText" size="large">
+            No image was posted by the user
+          </TextParagraph>
+        ) : (
+          images.map((image, index) => (
+            <img
+              className={styles.image}
+              key={index}
+              src={image.url}
+              alt="user's posted image"
+            />
+          ))
+        )}
+      </BackgroundCanvas>
+
       <div
         className={styles.historyOuter}
         onClick={() => setOpenHistory(!openHistory)}
@@ -120,7 +144,7 @@ export default function DetailsPlate({
           />
         )}
       </div>
-      <div className={openHistory === false && styles.hideHistory}>
+      <div className={openHistory === false ? styles.hideHistory : ""}>
         <div className={styles.pagination}>
           {" "}
           <BackgroundCanvas

@@ -8,11 +8,92 @@
   bottom: 96px;
 }
 
+.uploadImage {
+  color: black;
+  display: flex;
+  /* flex-direction: column; */
+  border: 1px solid #9699aa;
+  border-radius: 4px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  margin-bottom: 1rem;
+}
+
+.imageArea {
+  display: flex;
+  gap: 1rem;
+}
+
+.dropzone {
+  display: flex;
+  justify-content: center;
+
+  border: 2px dotted gray;
+  padding: 0 1rem;
+  border-radius: 4px;
+  margin-bottom: 44px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.imagePreviewContainer {
+  position: relative;
+}
+
+.imagePreview {
+  width: 150px;
+  height: 150px;
+  object-fit: scale-down;
+  border: 1px solid var(--color--pale-grey);
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.removeButton {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+.uploadIcon {
+  margin-left: 8px;
+  margin-bottom: 4px;
+}
+
+.deleteIcon {
+  margin-top: 3px;
+  margin-right: 1px;
+}
+
+@media screen and (max-width: 610px) {
+  .imageArea {
+    flex-direction: column;
+  }
+}
+
 @media screen and (min-width: 800px) {
   .formContent {
     bottom: 0;
-    margin: 0 0 44px 0;
+    margin: 0;
 
     padding: 16px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .uploadImage {
+    flex-direction: column;
   }
 }

@@ -103,7 +103,8 @@ export default function IssueStatus({ issue }) {
           location={issueDetails?.location}
           description={issueDetails?.description}
           arrayChanges={issueDetails?.statusChange}
-        />{" "}
+          images={issueDetails?.images}
+        />
         <EditBar
           className={styles.footerBar}
           footer={true}
@@ -127,8 +128,10 @@ export async function getServerSideProps(context) {
       },
       include: {
         statusChange: true,
+        images: true,
       },
     });
+    console.log("issue details", issue);
 
     return {
       props: {

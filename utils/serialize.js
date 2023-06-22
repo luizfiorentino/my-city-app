@@ -70,12 +70,13 @@ export function Pagination({
 }) {
   let pages = [];
 
-  for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
+  const totalCardsInHistory = totalCards - 1;
+
+  for (let i = 1; i <= Math.ceil(totalCardsInHistory / cardsPerPage); i++) {
     pages.push(i);
   }
   const clicked = (page) => {
     setCurrentPage(page);
-    console.log("PAGE:::", page);
   };
   return (
     <div className={styles.button}>

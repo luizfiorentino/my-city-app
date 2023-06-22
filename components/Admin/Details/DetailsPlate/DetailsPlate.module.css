@@ -84,6 +84,24 @@
   display: none;
 }
 
+.imagesContainer {
+  display: flex;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+  object-fit: scale-down;
+  border: 1px solid var(--color--pale-grey);
+  border-radius: 4px;
+}
+
 @media screen and (max-width: 340px) {
   .description {
     text-align: left;
@@ -148,5 +166,11 @@
     gap: 16px;
     max-width: 50%;
     justify-content: center;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .imagesContainer {
+    flex-direction: column;
   }
 }
