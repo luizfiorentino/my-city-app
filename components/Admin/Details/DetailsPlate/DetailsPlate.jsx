@@ -20,9 +20,7 @@ export default function DetailsPlate({
   images,
 }) {
   const context = useContext(IssueContext);
-  //console.log("context", context);
-  // const [openModal, setOpenModal] = useState(false);
-  // const [message, setMessage] = useState("");
+
   const [openHistory, setOpenHistory] = useState(false);
 
   function close(e) {
