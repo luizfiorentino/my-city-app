@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./statusMessage.module.css";
+import styles from "./StatusMessage.module.css";
 
 export default function ErrorMessage({ children, type }) {
   return (
