@@ -86,7 +86,7 @@ export default function FormContent({
           <FormSubtitle variant="dragDrop">Drop files here</FormSubtitle>
         ) : (
           <FormSubtitle variant="dragDrop">
-            Drag n' drop files or click here
+            Drag and drop files or click here
             <AiOutlineUpload className={styles.uploadIcon} />
           </FormSubtitle>
         )}
