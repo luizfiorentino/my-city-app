@@ -34,13 +34,14 @@ export default function DetailsPlate({
   const arrayHistory = arrayChanges.filter(
     (change) => change !== arrayChanges[0]
   );
-  const [historyData, setHistoryData] = useState(arrayHistory);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage, setCardsPerPage] = useState(3);
+  const cardsPerPage = 3;
 
   const lastCardIndex = currentPage * cardsPerPage;
+
   const firstCardIndex = lastCardIndex - cardsPerPage;
-  const currentCards = historyData.slice(firstCardIndex, lastCardIndex);
+  const currentCards = arrayHistory.slice(firstCardIndex, lastCardIndex);
   const totalCards = arrayChanges.length;
 
   return (
@@ -145,7 +146,7 @@ export default function DetailsPlate({
           />
         )}
       </div>
-      <div className={openHistory === false && styles.hideHistory}>
+      <div className={openHistory === false ? styles.hideHistory : ""}>
         <div className={styles.pagination}>
           {" "}
           <BackgroundCanvas

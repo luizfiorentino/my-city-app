@@ -18,6 +18,7 @@ export const authOptions = {
           pass: process.env.SMTP_PASSWORD,
         },
       },
+
       from: process.env.SMTP_FROM,
       async sendVerificationRequest({ identifier, url, provider, theme }) {
         const response = await prisma.user.findUnique({
@@ -51,6 +52,7 @@ export const authOptions = {
         text({ url, host });
       },
     }),
+
     {},
   ],
   adapter: PrismaAdapter(prisma),
