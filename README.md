@@ -12,6 +12,8 @@ When the admin clicks on the status button, a Details Page opens with all inform
 
 Both `Admin Pages` can only be accessed by authorized users, who receive a Magic Link in their email account to do so.
 
+# [My City App](https://my-city-app-git-main-luizfiorentino.vercel.app/)
+
 ### My City App website with `Next.js`, `Prisma`, `PostgreSQL`, `Cloudinary`, `Next-Auth`, `React Dropzone`, `React-hook-form`, `Zod Schema validation`, `Multer Middleware`,`Nodemailer`, `Magic Link`, and `Figma Design`.
 
 ## The Challenge and Learning Goals
