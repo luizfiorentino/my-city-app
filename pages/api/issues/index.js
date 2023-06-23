@@ -4,7 +4,7 @@ import multer from "multer";
 import fs from "fs";
 import { cloudinary } from "../utils/cloudinary";
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "/tmp" });
 
 export const config = {
   api: {
