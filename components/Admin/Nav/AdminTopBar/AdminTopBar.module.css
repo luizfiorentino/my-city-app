@@ -55,6 +55,8 @@
   .main {
     flex-direction: column;
     margin-bottom: 0;
+    height: 100vh;
+    position: fixed;
   }
 
   .profile {
