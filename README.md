@@ -14,6 +14,8 @@ Both `Admin Pages` can only be accessed by authorized users, who receive a Magic
 
 # [My City App](https://my-city-app-git-main-luizfiorentino.vercel.app/)
 
+# [Demo Video](https://share.getcloudapp.com/v1uWxA85#)
+
 ### My City App website with `Next.js`, `Prisma`, `PostgreSQL`, `Cloudinary`, `Next-Auth`, `React Dropzone`, `React-hook-form`, `Zod Schema validation`, `Multer Middleware`,`Nodemailer`, `Magic Link`, and `Figma Design`.
 
 ## The Challenge and Learning Goals
@@ -39,17 +41,25 @@ Both `Admin Pages` can only be accessed by authorized users, who receive a Magic
 - The app can expand or be changed keeping functionality and styling thanks to the reusable components roughtly divided in the "admin" and "user" folders, and more specifically organized in subfolders;
 - Simplicity: the user story is approached with objectivity, e.g. the user form contains only essential elements, and the admin interface is clearly divided into a list of posted issues pointing to the details page in an intuitive way. Moreover, the admin actions are clearly set in the Edit Bar, so that all issues receive a same handling and understanding based in the history section.
 
-### Design preview:
+### Design Preview: User Form
 
-![Preview image](some image)
+![Preview image](./public/assets/UserForm.png)
 
-### Design preview:
+### Design Preview: Form filled in
 
-![Preview image](some image)
+![Preview image](./public/assets/UserFormFilledIn.png)
 
-### Design preview:
+### Design Preview: Admin List of Submitted Issues
 
-![Preview image](some image)
+![Preview image](./public/assets/PostedIssuesList.png)
+
+### Design Preview: Admin Issue Details Page
+
+![Preview image](./public/assets/DetailsPage.png)
+
+### Design Preview: Admin Issue Edition
+
+![Preview image](./public/assets/IssueEdition.png)
 
 ### Built with
 
