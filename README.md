@@ -14,7 +14,8 @@ Both `Admin Pages` can only be accessed by authorized users, who receive a Magic
 
 # [My City App](https://my-city-app-git-main-luizfiorentino.vercel.app/)
 
-# [Demo Video](https://share.getcloudapp.com/v1uWxA85#)
+https://github.com/luizfiorentino/my-city-app/assets/96445830/34da685b-1c10-4186-a1f9-dd854c212777
+
 
 ### My City App website with `Next.js`, `Prisma`, `PostgreSQL`, `Cloudinary`, `Next-Auth`, `React Dropzone`, `React-hook-form`, `Zod Schema validation`, `Multer Middleware`,`Nodemailer`, `Magic Link`, and `Figma Design`.
 
