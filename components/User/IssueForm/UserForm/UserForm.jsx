@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import styles from "./UserForm.module.css";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
@@ -11,6 +11,7 @@ import { postIssue } from "@/services";
 import { useDropzone } from "react-dropzone";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import dynamic from "next/dynamic";
+import IssueContext from "@/utils/IssueContext";
 
 const UserLocation = dynamic(() => import("../UserLoaction/UserLocation"), {
   ssr: false,
@@ -69,6 +70,7 @@ const formSchema = z.object({
 });
 
 export default function UserForm() {
+  const context = useContext(IssueContext);
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSources, setPreviewSources] = useState([]);
@@ -82,8 +84,8 @@ export default function UserForm() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setLatitude(latitude);
-          setLongitude(longitude);
+          context.setLatitude(latitude);
+          context.setLongitude(longitude);
         },
         (error) => {
           setError(error.message);
@@ -94,7 +96,13 @@ export default function UserForm() {
     }
   }, []);
 
-  console.log("geolocation", "lat:", latitude, "log:", longitude);
+  console.log(
+    "CONTEXTgeolocation",
+    "lat:",
+    context.latitude,
+    "log:",
+    context.longitude
+  );
 
   const {
     formState: { errors },

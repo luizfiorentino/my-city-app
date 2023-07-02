@@ -12,6 +12,8 @@ export default function App({
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [filterIssuesByStatus, setFilterIssueByStatus] = useState("all");
+  const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(null);
 
   return (
     <SessionProvider session={session}>
@@ -23,6 +25,10 @@ export default function App({
           setOpenModal,
           filterIssuesByStatus,
           setFilterIssueByStatus,
+          longitude,
+          setLongitude,
+          latitude,
+          setLatitude,
         }}
       >
         {" "}
