@@ -35,7 +35,7 @@ function UserLocation() {
         // center={[latitude, longitude]}
         center={markerPosition}
         zoom={14}
-        style={{ width: "100%", height: "380px" }}
+        style={{ width: "100%", height: "180px" }}
       >
         <TileLayer
           attribution={`&copy; MapTiler &copy; OpenStreetMap contributors`}
