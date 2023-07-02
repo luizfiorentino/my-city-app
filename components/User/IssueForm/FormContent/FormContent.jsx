@@ -5,6 +5,11 @@ import FormInput from "../../Shared/Fields/FormInput";
 import { AiOutlineUpload } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import ErrorMessage from "../../Shared/StatusMessage/StatusMessage";
+import dynamic from "next/dynamic";
+
+const UserLocation = dynamic(() => import("../UserLoaction/UserLocation"), {
+  ssr: false,
+});
 
 export default function FormContent({
   errors,
@@ -32,6 +37,7 @@ export default function FormContent({
         type="text"
         name="userName"
       />
+
       <FormInput
         label="Description"
         placeHolder="e.g. there is something..."
@@ -48,6 +54,7 @@ export default function FormContent({
         type="text"
         name="location"
       />
+      <UserLocation />
       <FormInput label="Pictures (max. 3)" variant="photos" />
       <div
         className={

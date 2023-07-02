@@ -10,6 +10,11 @@ import { ubuntu } from "@/styles/fonts";
 import { postIssue } from "@/services";
 import { useDropzone } from "react-dropzone";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
+import dynamic from "next/dynamic";
+
+const UserLocation = dynamic(() => import("../UserLoaction/UserLocation"), {
+  ssr: false,
+});
 
 const formSchema = z.object({
   userName: z
@@ -201,6 +206,7 @@ export default function UserForm() {
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}></div>
+      <div className={styles.map}></div>
 
       <div className={styles.form}>
         {successRequest === false ? (
