@@ -6,7 +6,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import ErrorMessage from "../../Shared/StatusMessage/StatusMessage";
 import dynamic from "next/dynamic";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import IssueContext from "@/utils/IssueContext";
 
 const UserLocation = dynamic(() => import("../UserLoaction/UserLocation"), {
@@ -24,7 +24,20 @@ export default function FormContent({
   isDragActive,
   removeFile,
 }) {
+  const [locationType, setLocationType] = useState(null);
   const context = useContext(IssueContext);
+
+  const locationChoice = (choice, e) => {
+    if (choice === "current") {
+      e.preventDefault();
+      setLocationType("current");
+    }
+    if (choice === "map") {
+      e.preventDefault();
+      setLocationType("map");
+    }
+  };
+  console.log("LOCATION TYPE", locationType);
   return (
     <div className={styles.formContent}>
       <FormHeader>Reports data</FormHeader>
@@ -58,6 +71,16 @@ export default function FormContent({
         name="location"
       />
       <UserLocation />
+
+      <button
+        onClick={(e) => locationChoice("current", e)}
+        style={{ marginRight: "1rem" }}
+      >
+        Share my current location
+      </button>
+      <button onClick={(e) => locationChoice("map", e)}>
+        Choose on the map
+      </button>
       <FormInput label="Pictures (max. 3)" variant="photos" />
       <div
         className={

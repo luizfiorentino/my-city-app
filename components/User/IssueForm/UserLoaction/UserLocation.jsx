@@ -37,6 +37,7 @@ function UserLocation() {
       setDraggable((d) => !d);
     }, []);
 
+    console.log("POSITION", position);
     return (
       <Marker
         draggable={draggable}
