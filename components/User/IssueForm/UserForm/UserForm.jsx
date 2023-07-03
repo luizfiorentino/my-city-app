@@ -74,31 +74,31 @@ export default function UserForm() {
   const [longitude, setLongitude] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          context.setLatitude(latitude);
-          context.setLongitude(longitude);
-        },
-        (error) => {
-          setError(error.message);
-        }
-      );
-      context.setLoadingMap(false);
-    } else {
-      setError("Geolocation is not supported by this browser.");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const { latitude, longitude } = position.coords;
+  //         context.setLatitude(latitude);
+  //         context.setLongitude(longitude);
+  //       },
+  //       (error) => {
+  //         setError(error.message);
+  //       }
+  //     );
+  //     context.setLoadingMap(false);
+  //   } else {
+  //     setError("Geolocation is not supported by this browser.");
+  //   }
+  // }, []);
 
-  console.log(
-    "CONTEXTgeolocation",
-    "lat:",
-    context.latitude,
-    "log:",
-    context.longitude
-  );
+  // console.log(
+  //   "CONTEXTgeolocation",
+  //   "lat:",
+  //   context.latitude,
+  //   "log:",
+  //   context.longitude
+  // );
 
   const {
     formState: { errors },

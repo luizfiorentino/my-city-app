@@ -1,4 +1,11 @@
-import { useContext, useState, useRef, useMemo, useCallback } from "react";
+import {
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -10,13 +17,15 @@ import styles from "./UserLocation.module.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
-function UserLocation() {
+function UserLocation(props) {
+  console.log("PROPS>TYPE", props.locationType);
   const context = useContext(IssueContext);
   const latitude = context.latitude ? context.latitude : "52.3732";
   const longitude = context.longitude ? context.longitude : "4.8914";
 
   const markerPosition = [latitude, longitude];
-  const center = [latitude, longitude];
+  const center = [52.3732, 4.8914];
+  console.log("CONTEXT POSITIOBN:::", context.latitude);
 
   function DraggableMarker() {
     const [draggable, setDraggable] = useState(false);
@@ -31,13 +40,16 @@ function UserLocation() {
           }
         },
       }),
+
       []
     );
+
     const toggleDraggable = useCallback(() => {
       setDraggable((d) => !d);
     }, []);
 
-    console.log("POSITION", position);
+    console.log("POSITION", position, "latitude cont", context.latitude);
+
     return (
       <Marker
         draggable={draggable}
@@ -56,12 +68,16 @@ function UserLocation() {
     );
   }
 
+  if (props.locationType === null) {
+    return null;
+  }
+
   return (
     <div className={styles.mainContainer}>
       {context.latitude ? (
         <MapContainer
           // center={[latitude, longitude]}
-          center={center}
+          center={props.locationType === "current" ? markerPosition : center}
           zoom={14}
           style={{ width: "100%", height: "180px" }}
           scrollWheelZoom={false}
@@ -70,8 +86,11 @@ function UserLocation() {
             attribution={`&copy; MapTiler &copy; OpenStreetMap contributors`}
             url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=Zlvdjhx8LLJZkQKgusKO"
           />
-          {/* <Marker position={markerPosition} /> */}
-          <DraggableMarker />
+          {props.locationType === "current" ? (
+            <Marker position={markerPosition} />
+          ) : (
+            <DraggableMarker />
+          )}
         </MapContainer>
       ) : (
         <p>

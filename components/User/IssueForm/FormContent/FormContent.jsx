@@ -30,14 +30,37 @@ export default function FormContent({
   const locationChoice = (choice, e) => {
     if (choice === "current") {
       e.preventDefault();
+      getUserCurrentLocation();
       setLocationType("current");
     }
     if (choice === "map") {
       e.preventDefault();
+      //Set Amsterdam Dam city center as default
+      context.setLatitude(52.3732);
+      context.setLongitude(4.8914);
       setLocationType("map");
     }
   };
   console.log("LOCATION TYPE", locationType);
+
+  const getUserCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          context.setLatitude(latitude);
+          context.setLongitude(longitude);
+        },
+        (error) => {
+          setError(error.message);
+        }
+      );
+      context.setLoadingMap(false);
+    } else {
+      setError("Geolocation is not supported by this browser.");
+    }
+  };
+
   return (
     <div className={styles.formContent}>
       <FormHeader>Reports data</FormHeader>
@@ -70,7 +93,7 @@ export default function FormContent({
         type="text"
         name="location"
       />
-      <UserLocation />
+      <UserLocation locationType={locationType} />
 
       <button
         onClick={(e) => locationChoice("current", e)}
