@@ -10,12 +10,7 @@ import { ubuntu } from "@/styles/fonts";
 import { postIssue } from "@/services";
 import { useDropzone } from "react-dropzone";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
-import dynamic from "next/dynamic";
 import IssueContext from "@/utils/IssueContext";
-
-const UserLocation = dynamic(() => import("../UserLoaction/UserLocation"), {
-  ssr: false,
-});
 
 const formSchema = z.object({
   userName: z
@@ -91,6 +86,7 @@ export default function UserForm() {
           setError(error.message);
         }
       );
+      context.setLoadingMap(false);
     } else {
       setError("Geolocation is not supported by this browser.");
     }

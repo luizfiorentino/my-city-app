@@ -6,6 +6,8 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import ErrorMessage from "../../Shared/StatusMessage/StatusMessage";
 import dynamic from "next/dynamic";
+import { useContext } from "react";
+import IssueContext from "@/utils/IssueContext";
 
 const UserLocation = dynamic(() => import("../UserLoaction/UserLocation"), {
   ssr: false,
@@ -22,6 +24,7 @@ export default function FormContent({
   isDragActive,
   removeFile,
 }) {
+  const context = useContext(IssueContext);
   return (
     <div className={styles.formContent}>
       <FormHeader>Reports data</FormHeader>
