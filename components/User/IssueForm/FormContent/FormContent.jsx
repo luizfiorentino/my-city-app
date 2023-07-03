@@ -27,22 +27,6 @@ export default function FormContent({
   const [locationType, setLocationType] = useState(null);
   const context = useContext(IssueContext);
 
-  const locationChoice = (choice, e) => {
-    if (choice === "current") {
-      e.preventDefault();
-      getUserCurrentLocation();
-      setLocationType("current");
-    }
-    if (choice === "map") {
-      e.preventDefault();
-      //Set Amsterdam Dam city center as default
-      context.setLatitude(52.3732);
-      context.setLongitude(4.8914);
-      setLocationType("map");
-    }
-  };
-  console.log("LOCATION TYPE", locationType);
-
   const getUserCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -60,6 +44,27 @@ export default function FormContent({
       setError("Geolocation is not supported by this browser.");
     }
   };
+
+  const locationChoice = (choice, e) => {
+    if (choice === "current") {
+      e.preventDefault();
+      getUserCurrentLocation();
+      setLocationType("current");
+    }
+    if (choice === "map") {
+      e.preventDefault();
+      //Set Amsterdam Dam city center as default
+      context.setLatitude(52.3732);
+      context.setLongitude(4.8914);
+      setLocationType("map");
+    }
+  };
+
+  const backToLocationSelection = (e) => {
+    e.preventDefault();
+    setLocationType(null);
+  };
+  console.log("LOCATION TYPE", locationType);
 
   return (
     <div className={styles.formContent}>
@@ -94,16 +99,25 @@ export default function FormContent({
         name="location"
       />
       <UserLocation locationType={locationType} />
+      {locationType === null && locationType !== "current" && (
+        <button
+          onClick={(e) => locationChoice("current", e)}
+          style={{ marginRight: "1rem" }}
+        >
+          Share my current location
+        </button>
+      )}
+      {locationType === null && locationType !== "map" && (
+        <button onClick={(e) => locationChoice("map", e)}>
+          Choose on the map
+        </button>
+      )}
+      {(locationType !== null ||
+        locationType === "current" ||
+        locationType === "map") && (
+        <button onClick={(e) => backToLocationSelection(e)}>Back</button>
+      )}
 
-      <button
-        onClick={(e) => locationChoice("current", e)}
-        style={{ marginRight: "1rem" }}
-      >
-        Share my current location
-      </button>
-      <button onClick={(e) => locationChoice("map", e)}>
-        Choose on the map
-      </button>
       <FormInput label="Pictures (max. 3)" variant="photos" />
       <div
         className={

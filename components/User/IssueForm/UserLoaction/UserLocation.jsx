@@ -18,7 +18,6 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 function UserLocation(props) {
-  console.log("PROPS>TYPE", props.locationType);
   const context = useContext(IssueContext);
   const latitude = context.latitude ? context.latitude : "52.3732";
   const longitude = context.longitude ? context.longitude : "4.8914";
@@ -29,6 +28,7 @@ function UserLocation(props) {
 
   function DraggableMarker() {
     const [draggable, setDraggable] = useState(false);
+    //This saves coordinates in case of locationType === "map"
     const [position, setPosition] = useState(center);
     const markerRef = useRef(null);
     const eventHandlers = useMemo(
