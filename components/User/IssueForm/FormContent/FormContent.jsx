@@ -27,11 +27,12 @@ export default function FormContent({
   const [locationType, setLocationType] = useState(null);
   const context = useContext(IssueContext);
 
-  const getUserCurrentLocation = () => {
+  const getUserCurrentLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
+
           context.setLatitude(latitude);
           context.setLongitude(longitude);
         },
@@ -39,7 +40,7 @@ export default function FormContent({
           setError(error.message);
         }
       );
-      context.setLoadingMap(false);
+      // context.setLoadingMap(false);
     } else {
       setError("Geolocation is not supported by this browser.");
     }
