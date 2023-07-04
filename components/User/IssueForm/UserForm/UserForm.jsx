@@ -25,6 +25,7 @@ const formSchema = z.object({
     .string()
     .min(8, "location must be at least 8 characters long")
     .max(255, "the provided location contains too much characters"),
+
   file: z
     .array(z.any())
     .max(3, "You can upload up to 3 images")
@@ -73,32 +74,6 @@ export default function UserForm() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         const { latitude, longitude } = position.coords;
-  //         context.setLatitude(latitude);
-  //         context.setLongitude(longitude);
-  //       },
-  //       (error) => {
-  //         setError(error.message);
-  //       }
-  //     );
-  //     context.setLoadingMap(false);
-  //   } else {
-  //     setError("Geolocation is not supported by this browser.");
-  //   }
-  // }, []);
-
-  // console.log(
-  //   "CONTEXTgeolocation",
-  //   "lat:",
-  //   context.latitude,
-  //   "log:",
-  //   context.longitude
-  // );
 
   const {
     formState: { errors },
@@ -184,9 +159,14 @@ export default function UserForm() {
   );
 
   const issueRequest = async (data) => {
+    console.log("DATA", data, "COORDINATES", context.latitude);
     try {
       setLoading(true);
-      const [error, _response] = await postIssue(data);
+      const [error, _response] = await postIssue({
+        ...data,
+        latitude: parseFloat(context.latitude),
+        longitude: parseFloat(context.longitude),
+      });
       if (error) {
         console.log("Failed to submit data");
         setErrorPosting(true);
@@ -219,6 +199,8 @@ export default function UserForm() {
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
               locationRegister={{ ...register("location") }}
+              latitudeRegister={{ ...register("latitude") }}
+              longitudeRegister={{ ...register("longitude") }}
               errors={errors}
               previewSources={previewSources}
               getRootProps={{ ...getRootProps() }}

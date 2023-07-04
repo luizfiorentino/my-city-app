@@ -18,6 +18,8 @@ export default function FormContent({
   userRegister,
   descriptionRegister,
   locationRegister,
+  latitudeRegister,
+  longitudeRegister,
   previewSources,
   getRootProps,
   getInputProps,
@@ -99,6 +101,7 @@ export default function FormContent({
         type="text"
         name="location"
       />
+
       <UserLocation locationType={locationType} />
       {locationType === null && locationType !== "current" && (
         <button
