@@ -1,4 +1,11 @@
-import { useContext, useState, useRef, useMemo, useCallback } from "react";
+import {
+  useContext,
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect,
+} from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -9,6 +16,7 @@ import IssueContext from "@/utils/IssueContext";
 import styles from "./UserLocation.module.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
+import { LatLng } from "leaflet";
 
 function UserLocation(props) {
   const context = useContext(IssueContext);
@@ -18,7 +26,13 @@ function UserLocation(props) {
   const markerPosition = props.admin
     ? [props.latitude, props.longitude]
     : [latitude, longitude];
-  const center = [52.3732, 4.8914];
+  // const center = [52.3732, 4.8914];
+  // const center =
+  //   props.locationType === "current" ? markerPosition : [latitude, longitude];
+  const center =
+    props.locationType === "current"
+      ? markerPosition
+      : [parseFloat(latitude), parseFloat(longitude)];
   console.log(
     "marker position",
     markerPosition,
@@ -29,14 +43,24 @@ function UserLocation(props) {
   function DraggableMarker() {
     const [draggable, setDraggable] = useState(false);
     //This saves coordinates in case of locationType === "map"
-    const [position, setPosition] = useState(center);
+    // const [position, setPosition] = useState(LatLng(center));
+    const context = useContext(IssueContext);
+
+    // useEffect(() => {
+    //   const { lat, lng } = position;
+    //   context.setLatitude(lat.toString());
+    //   context.setLongitude(lng.toString());
+    // }, [position, context]);
+
     const markerRef = useRef(null);
     const eventHandlers = useMemo(
       () => ({
         dragend() {
           const marker = markerRef.current;
           if (marker != null) {
-            setPosition(marker.getLatLng());
+            const { lat, lng } = marker.getLatLng();
+            context.setLatitude(lat.toString());
+            context.setLongitude(lng.toString());
           }
         },
       }),
@@ -48,13 +72,11 @@ function UserLocation(props) {
       setDraggable((d) => !d);
     }, []);
 
-    console.log("POSITION", position, "latitude cont", context.latitude);
-
     return (
       <Marker
         draggable={draggable}
         eventHandlers={eventHandlers}
-        position={position}
+        position={center}
         ref={markerRef}
       >
         <Popup minWidth={90}>
@@ -72,12 +94,20 @@ function UserLocation(props) {
     return null;
   }
 
+  console.log(
+    "MARKER CHANGES::::",
+    context.latitude,
+    "long",
+    context.longitude
+  );
+
   return (
     <div className={styles.mainContainer}>
       {context.latitude || props.latitude ? (
         <MapContainer
           // center={[latitude, longitude]}
-          center={props.locationType === "current" ? markerPosition : center}
+          // center={props.locationType === "current" ? markerPosition : center}
+          center={center}
           zoom={14}
           style={{ width: "100%", height: "180px" }}
           scrollWheelZoom={false}

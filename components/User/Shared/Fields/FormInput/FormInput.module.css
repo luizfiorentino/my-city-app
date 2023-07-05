@@ -14,6 +14,7 @@
   border: 1px solid #9699aa;
   border-radius: 4px;
   margin-bottom: 16px;
+  color: var(--color--denim);
 }
 
 .hidden {
