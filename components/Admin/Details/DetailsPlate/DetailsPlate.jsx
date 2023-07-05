@@ -4,7 +4,6 @@ import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import { dateFormat } from "@/utils/serialize";
-
 import { Pagination } from "@/utils/serialize";
 import StatusCard from "../../Details/StatusCard";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
@@ -26,8 +25,6 @@ export default function DetailsPlate({
   description,
   arrayChanges,
   images,
-  locationType,
-  admin,
   latitude,
   longitude,
 }) {
@@ -91,16 +88,18 @@ export default function DetailsPlate({
           <TextBold className={styles.largeSpacing}>{location}</TextBold>
         </div>
       </div>
-      <BackgroundCanvas variant="lighterCanvas">
-        {latitude ? (
-          <UserLocation
-            locationType="current"
-            admin="admin"
-            latitude={latitude}
-            longitude={longitude}
-          />
-        ) : undefined}
-      </BackgroundCanvas>
+      <div className={styles.location}>
+        <BackgroundCanvas variant="lighterCanvas">
+          {latitude ? (
+            <UserLocation
+              locationType="current"
+              admin="admin"
+              latitude={latitude}
+              longitude={longitude}
+            />
+          ) : undefined}
+        </BackgroundCanvas>
+      </div>
       <TextParagraph className={styles.smallerSpacing}>
         Current message
       </TextParagraph>

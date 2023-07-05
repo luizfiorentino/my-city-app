@@ -34,6 +34,24 @@
   background-color: var(--color--intense-purple);
 }
 
+.lightGrey {
+  border-radius: 4px;
+  border: 1px solid #9699aa;
+  font-size: 16px;
+  color: var(--color--denim);
+  font-weight: 400;
+  line-height: 14px;
+  margin-bottom: 24px;
+  background-color: white;
+  padding: 15px 16px;
+  margin-top: 16px;
+}
+
+.lightGrey:hover {
+  background-color: #9699aa;
+  color: white;
+}
+
 .dark {
   background-color: var(--color--bg-canvas-lighter);
 }
@@ -69,4 +87,10 @@
   /* background-color: var(--color--bg-light); */
   background-color: white;
   border-radius: 6px;
+}
+
+@media screen and (max-width: 444px) {
+  .lightGrey {
+    margin: 0;
+  }
 }

@@ -8,6 +8,7 @@ import ErrorMessage from "../../Shared/StatusMessage/StatusMessage";
 import dynamic from "next/dynamic";
 import { useContext, useState } from "react";
 import IssueContext from "@/utils/IssueContext";
+import Button from "@/components/Shared/Button/Button";
 
 const UserLocation = dynamic(() => import("../UserLoaction/UserLocation"), {
   ssr: false,
@@ -91,35 +92,44 @@ export default function FormContent({
         name="description"
       />
       <FormInput
-        label="Location"
+        variant="photos"
+        label="Choose a form of location"
         placeHolder="e.g. Dijkstraat 123. Amsterdam"
         error={errors.location}
         register={locationRegister}
         type="text"
         name="location"
       />
+      <div className={locationType !== null ? styles.location : styles.hidden}>
+        <UserLocation locationType={locationType} />
+      </div>
+      <div className={styles.locationButtons}>
+        {locationType === null && locationType !== "current" && (
+          <Button
+            variant="lightGrey"
+            onClick={(e) => locationChoice("current", e)}
+          >
+            Share current location
+          </Button>
+        )}
+        {locationType === null && locationType !== "map" && (
+          <Button variant="lightGrey" onClick={(e) => locationChoice("map", e)}>
+            Choose on the map
+          </Button>
+        )}
+        {(locationType !== null ||
+          locationType === "current" ||
+          locationType === "map") && (
+          <Button
+            variant="lightGrey"
+            onClick={(e) => backToLocationSelection(e)}
+          >
+            Back
+          </Button>
+        )}
+      </div>
 
-      <UserLocation locationType={locationType} />
-      {locationType === null && locationType !== "current" && (
-        <button
-          onClick={(e) => locationChoice("current", e)}
-          style={{ marginRight: "1rem" }}
-        >
-          Share my current location
-        </button>
-      )}
-      {locationType === null && locationType !== "map" && (
-        <button onClick={(e) => locationChoice("map", e)}>
-          Choose on the map
-        </button>
-      )}
-      {(locationType !== null ||
-        locationType === "current" ||
-        locationType === "map") && (
-        <button onClick={(e) => backToLocationSelection(e)}>Back</button>
-      )}
-
-      <FormInput label="Pictures (max. 3)" variant="photos" />
+      <FormInput label="Pictures (optional, max. 3)" variant="photos" />
       <div
         className={
           !previewSources.length ? styles.hiddenInput : styles.uploadImage

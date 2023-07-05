@@ -77,6 +77,27 @@
   margin-right: 1px;
 }
 
+.location {
+  margin-bottom: 24px;
+}
+
+.locationButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 444px) {
+  .locationButtons {
+    flex-direction: column;
+    margin-bottom: 16px;
+    gap: 16px;
+  }
+}
+
 @media screen and (max-width: 610px) {
   .imageArea {
     flex-direction: column;

@@ -13,7 +13,7 @@ export default function FormInput(props) {
         placeholder={props.placeHolder}
         className={`${
           props.variant === "photos" ? styles.hidden : styles.input
-        } ${ubuntu.className}`}
+        } ${ubuntu.className} ${styles["variant"]}`}
         {...props.register}
       />{" "}
       {props.error && <ErrorMessage>{props.error.message}</ErrorMessage>}

@@ -48,6 +48,10 @@
   margin-bottom: 2rem;
 }
 
+.location {
+  margin-bottom: 32px;
+}
+
 .pagination {
   background-color: #1e2139;
 }
