@@ -23,9 +23,7 @@ const formSchema = z.object({
     .max(255, "the provided description contains too much characters"),
   location: z
     .string()
-    .min(8, "location must be at least 8 characters long")
     .max(255, "the provided location contains too much characters"),
-
   file: z
     .array(z.any())
     .max(3, "You can upload up to 3 images")

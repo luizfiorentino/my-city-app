@@ -85,7 +85,9 @@ export default function DetailsPlate({
           >
             Location
           </TextParagraph>
-          <TextBold className={styles.largeSpacing}>{location}</TextBold>
+          <TextBold className={styles.largeSpacing}>
+            {`Lat. ${latitude.toFixed(5)}, Lon. ${longitude.toFixed(5)}`}
+          </TextBold>
         </div>
       </div>
       <div className={styles.location}>
