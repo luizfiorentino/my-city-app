@@ -18,8 +18,6 @@ export default function FormContent({
   userRegister,
   descriptionRegister,
   locationRegister,
-  latitudeRegister,
-  longitudeRegister,
   previewSources,
   getRootProps,
   getInputProps,
@@ -67,7 +65,6 @@ export default function FormContent({
     e.preventDefault();
     setLocationType(null);
   };
-  console.log("LOCATION TYPE", locationType);
 
   return (
     <div className={styles.formContent}>

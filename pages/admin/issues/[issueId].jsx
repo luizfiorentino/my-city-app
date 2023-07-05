@@ -15,6 +15,14 @@ import {
   sendSolvedUpdateRequest,
   sendUpdateIssueRequest,
 } from "@/services";
+import dynamic from "next/dynamic";
+
+const UserLocation = dynamic(
+  () => import("@/components/User/IssueForm/UserLoaction/UserLocation"),
+  {
+    ssr: false,
+  }
+);
 
 export default function IssueStatus({ issue }) {
   const router = useRouter();
@@ -104,7 +112,12 @@ export default function IssueStatus({ issue }) {
           description={issueDetails?.description}
           arrayChanges={issueDetails?.statusChange}
           images={issueDetails?.images}
+          locationType="current"
+          admin="admin"
+          latitude={issueDetails.latitude}
+          longitude={issueDetails.longitude}
         />
+
         <EditBar
           className={styles.footerBar}
           footer={true}

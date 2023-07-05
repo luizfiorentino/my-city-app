@@ -22,9 +22,16 @@ function UserLocation(props) {
   const latitude = context.latitude ? context.latitude : "52.3732";
   const longitude = context.longitude ? context.longitude : "4.8914";
 
-  const markerPosition = [latitude, longitude];
+  const markerPosition = props.admin
+    ? [props.latitude, props.longitude]
+    : [latitude, longitude];
   const center = [52.3732, 4.8914];
-  console.log("CONTEXT POSITIOBN:::", context.latitude);
+  console.log(
+    "marker position",
+    markerPosition,
+    "props.location type",
+    props.locationType
+  );
 
   function DraggableMarker() {
     const [draggable, setDraggable] = useState(false);
@@ -74,7 +81,7 @@ function UserLocation(props) {
 
   return (
     <div className={styles.mainContainer}>
-      {context.latitude ? (
+      {context.latitude || props.latitude ? (
         <MapContainer
           // center={[latitude, longitude]}
           center={props.locationType === "current" ? markerPosition : center}

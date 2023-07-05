@@ -71,9 +71,6 @@ export default function UserForm() {
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSources, setPreviewSources] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [error, setError] = useState(null);
 
   const {
     formState: { errors },
@@ -159,7 +156,6 @@ export default function UserForm() {
   );
 
   const issueRequest = async (data) => {
-    console.log("DATA", data, "COORDINATES", context.latitude);
     try {
       setLoading(true);
       const [error, _response] = await postIssue({
@@ -199,8 +195,6 @@ export default function UserForm() {
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
               locationRegister={{ ...register("location") }}
-              latitudeRegister={{ ...register("latitude") }}
-              longitudeRegister={{ ...register("longitude") }}
               errors={errors}
               previewSources={previewSources}
               getRootProps={{ ...getRootProps() }}

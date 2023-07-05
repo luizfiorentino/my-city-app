@@ -9,6 +9,14 @@ import { Pagination } from "@/utils/serialize";
 import StatusCard from "../../Details/StatusCard";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
 import IssueContext from "@/utils/IssueContext";
+import dynamic from "next/dynamic";
+
+const UserLocation = dynamic(
+  () => import("@/components/User/IssueForm/UserLoaction/UserLocation"),
+  {
+    ssr: false,
+  }
+);
 
 export default function DetailsPlate({
   id,
@@ -18,6 +26,10 @@ export default function DetailsPlate({
   description,
   arrayChanges,
   images,
+  locationType,
+  admin,
+  latitude,
+  longitude,
 }) {
   const context = useContext(IssueContext);
 
@@ -79,6 +91,16 @@ export default function DetailsPlate({
           <TextBold className={styles.largeSpacing}>{location}</TextBold>
         </div>
       </div>
+      <BackgroundCanvas variant="lighterCanvas">
+        {latitude ? (
+          <UserLocation
+            locationType="current"
+            admin="admin"
+            latitude={latitude}
+            longitude={longitude}
+          />
+        ) : undefined}
+      </BackgroundCanvas>
       <TextParagraph className={styles.smallerSpacing}>
         Current message
       </TextParagraph>

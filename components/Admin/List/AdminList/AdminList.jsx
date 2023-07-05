@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import styles from "./AdminList.module.css";
 import AdminTopBar from "../../Nav/AdminTopBar";
 import ReportsBar from "../ReportsBar";
@@ -7,7 +7,6 @@ import IssueContext from "@/utils/IssueContext";
 
 export default function AdminList(props) {
   const context = useContext(IssueContext);
-  const [status, setStatus] = useState("all");
 
   return (
     <div className={styles.main}>

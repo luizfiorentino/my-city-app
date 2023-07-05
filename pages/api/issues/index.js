@@ -15,7 +15,7 @@ export const config = {
 async function uploadSingleImage(path, folder) {
   try {
     const response = await cloudinary.uploader.upload(path, { folder: folder });
-    console.log("RES?", response);
+
     return [null, response];
   } catch (error) {
     console.log("ERROR?", error);
@@ -60,7 +60,6 @@ async function insertNewIssue(
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    console.log("REQ BODY", req.body);
     return new Promise((resolve, reject) => {
       processMultipartForm.array("file", 3)(req, res, async (multerError) => {
         if (multerError) {
@@ -89,8 +88,6 @@ export default function handler(req, res) {
           return { url: image.secure_url };
         });
 
-        console.log("URLS?", images);
-
         //remove symbolic links from file system
         req.files.forEach((file) => {
           const path = file.path;
@@ -100,7 +97,6 @@ export default function handler(req, res) {
         //This is after multer process
         const { userName, description, location, latitude, longitude } =
           req.body;
-        console.log("REQ BODY@", req.body);
 
         const [databaseError, newIssue] = await insertNewIssue(
           userName,

@@ -9,7 +9,6 @@ import IssueContext from "@/utils/IssueContext";
 
 export default function ReportsBar(props) {
   const context = useContext(IssueContext);
-  console.log("CONTEXT", context.filterIssuesByStatus);
   const [status, setStatus] = useState("all");
   const [showSelector, setShowSelector] = useState(false);
 

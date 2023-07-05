@@ -16,12 +16,13 @@ export async function postIssue({ file, ...data }) {
   }
 
   try {
+    console.log("what is formData?", formData);
     const response = await axios.postForm("/api/issues", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log("Service response", response);
+
     return [null, response];
   } catch (error) {
     console.log(error);
