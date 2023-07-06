@@ -11,6 +11,7 @@ export default function App({
 }) {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [buttonMode, setButtonMode] = useState("");
   const [filterIssuesByStatus, setFilterIssueByStatus] = useState("all");
   const [loadingMap, setLoadingMap] = useState(true);
   const [latitude, setLatitude] = useState(null);
@@ -24,6 +25,8 @@ export default function App({
           setLoading,
           openModal,
           setOpenModal,
+          buttonMode,
+          setButtonMode,
           filterIssuesByStatus,
           setFilterIssueByStatus,
           longitude,

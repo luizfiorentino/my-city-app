@@ -39,12 +39,12 @@
 .arrow {
   margin-right: 23px;
 }
-
+/* 
 .footer {
   padding: 22px 48px;
   border-radius: 0;
   display: flex;
-}
+} */
 
 .buttonsPannel {
   width: 100%;
@@ -81,21 +81,21 @@
     max-width: 60%;
   }
 
-  .footer {
+  /* .footer {
     justify-content: center;
-  }
+  } */
 }
 
 @media screen and (min-width: 640px) {
-  .footer {
+  /* .footer {
     padding: 24px 88px;
-  }
+  } */
 }
 
 @media screen and (min-width: 767px) {
-  .footer {
+  /* .footer {
     display: none;
-  }
+  } */
 
   .detailsMain {
     margin-bottom: 135px;

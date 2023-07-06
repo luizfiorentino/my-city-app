@@ -20,11 +20,10 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
     : null;
 
   const [message, setMessage] = useState("");
-  const [buttonMode, setButtonMode] = useState("");
   const [status, setStatus] = useState(lastSavedStatus);
 
   const submit = () => {
-    updateStatus(message, status, buttonMode);
+    updateStatus(message, status, context.buttonMode);
   };
 
   const buttonOptions = [
@@ -35,17 +34,17 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
   ];
 
   const clickDelete = () => {
-    setButtonMode("delete");
+    context.setButtonMode("delete");
     context.setOpenModal(true);
   };
 
   const clickEdit = () => {
-    setButtonMode("edit");
+    context.setButtonMode("edit");
     context.setOpenModal(true);
   };
 
   const clickSolved = () => {
-    setButtonMode("solved");
+    context.setButtonMode("solved");
     context.setOpenModal(true);
   };
 
@@ -97,10 +96,10 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
 
       <Modal>
         <TextBold className={styles.confirmationMessage}>
-          {modalMessages[buttonMode]}
+          {modalMessages[context.buttonMode]}
         </TextBold>
 
-        {buttonMode === "edit" && (
+        {context.buttonMode === "edit" && (
           <>
             <div className={styles.selector}>
               <select
@@ -132,7 +131,8 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
           <Button
             onClick={submit}
             disabled={
-              (buttonMode === "edit" && message.length <= 4) || context.loading
+              (context.buttonMode === "edit" && message.length <= 4) ||
+              context.loading
             }
             loading={context.loading}
           >
