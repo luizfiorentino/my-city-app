@@ -1,6 +1,6 @@
 .overlay {
   background-color: var(--color--bg-canvas);
-  opacity: 0.9;
+  opacity: 0.99;
   position: fixed;
   margin-top: -20rem;
 
@@ -25,9 +25,3 @@
   background-color: black;
   padding: 5rem 2rem;
 }
-
-/* @media screen and (max-width: 580px) {
-  .modalContainer {
-    width: 80%;
-  }
-} */

@@ -35,7 +35,8 @@
 }
 
 .confirmationMessage {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
   color: var(--color--intense-purple) !important;
   font-size: 18px !important;
   align-self: flex-start;
@@ -46,11 +47,12 @@
 }
 
 .selectorInner {
-  width: 100px;
+  width: 150px;
   padding: 14px 0 11px 0;
   text-align: center;
   align-self: flex-end;
   color: var(--color--orange);
+  font-weight: 700;
   border-radius: 6px;
 }
 
@@ -100,7 +102,8 @@
   }
 }
 
-@media screen and (max-width: 370px) {
+/* @media screen and (max-width: 370px) { */
+@media screen and (max-width: 582px) {
   .buttons {
     flex-direction: column;
   }
