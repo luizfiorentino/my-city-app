@@ -102,6 +102,13 @@
   }
 }
 
+@media screen and (max-width: 300px) {
+  .topCardInner {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
 /* @media screen and (max-width: 370px) { */
 @media screen and (max-width: 582px) {
   .buttons {

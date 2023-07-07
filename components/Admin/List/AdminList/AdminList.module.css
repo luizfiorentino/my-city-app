@@ -47,6 +47,7 @@
     padding: 0;
     margin: auto;
     margin-top: 78px;
+    max-width: 70%;
   }
   .issuesList {
     padding: 0;

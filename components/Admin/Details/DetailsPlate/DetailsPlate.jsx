@@ -31,7 +31,6 @@ export default function DetailsPlate({
   const context = useContext(IssueContext);
 
   const [openHistory, setOpenHistory] = useState(false);
-  console.log("ARRAY OF CHANGES:", arrayChanges.length);
 
   function close(e) {
     if (e.target.id === "overlay") {
