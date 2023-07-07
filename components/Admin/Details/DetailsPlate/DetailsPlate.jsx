@@ -31,6 +31,7 @@ export default function DetailsPlate({
   const context = useContext(IssueContext);
 
   const [openHistory, setOpenHistory] = useState(false);
+  console.log("ARRAY OF CHANGES:", arrayChanges.length);
 
   function close(e) {
     if (e.target.id === "overlay") {
@@ -86,7 +87,7 @@ export default function DetailsPlate({
             Location
           </TextParagraph>
           <TextBold className={styles.largeSpacing}>
-            {`Lat. ${latitude.toFixed(5)}, Lon. ${longitude.toFixed(5)}`}
+            {`Lat. ${latitude?.toFixed(5)}, Lon. ${longitude?.toFixed(5)}`}
           </TextBold>
         </div>
       </div>
@@ -149,7 +150,8 @@ export default function DetailsPlate({
         <div className={styles.historyAndUpdates}>
           <TextBold>History</TextBold>
           <TextParagraph className={styles.smallerSpacing}>
-            {arrayChanges.length} updates
+            {arrayChanges.length}{" "}
+            {arrayChanges.length === 1 ? "update" : "updates"}
           </TextParagraph>
         </div>
 
@@ -167,7 +169,13 @@ export default function DetailsPlate({
           />
         )}
       </div>
-      <div className={openHistory === false ? styles.hideHistory : ""}>
+      <div
+        className={
+          openHistory === false || arrayChanges.length === 1
+            ? styles.hideHistory
+            : ""
+        }
+      >
         <div className={styles.pagination}>
           {" "}
           <BackgroundCanvas
