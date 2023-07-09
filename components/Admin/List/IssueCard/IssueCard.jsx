@@ -21,7 +21,7 @@ export default function IssueCard(props) {
           <TextBold variant="hash" className={styles.hash}>
             #
           </TextBold>{" "}
-          {`AMS${props.id.substring(0, 10)}`}
+          {`AMS${props.id?.substring(0, 10)}`}
         </TextBold>
         <TextParagraph className={styles.posted}>
           {dateFormat(props.date)}
