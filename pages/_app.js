@@ -12,7 +12,7 @@ export default function App({
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [buttonMode, setButtonMode] = useState("");
-  const [filterIssuesByStatus, setFilterIssueByStatus] = useState("all");
+  const [filterIssuesByStatus, setFilterIssueByStatus] = useState("All");
   const [loadingMap, setLoadingMap] = useState(true);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);

@@ -8,7 +8,14 @@
   padding: 16px 20px;
   width: 100%;
   color: #022959;
-  border: 1px solid #9699aa;
+  border: 1px solid var(--color--bg-canvas-lighter);
   border-radius: 4px;
+  transition: 0.7s;
   /* margin-bottom: 16px; */
+}
+
+.mainContainer:hover {
+  border: 1px solid var(--color--intense-purple);
+  border-radius: 8px;
+  cursor: pointer;
 }

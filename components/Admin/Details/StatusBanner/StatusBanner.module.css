@@ -7,7 +7,14 @@
   border-radius: 6px;
   max-width: 172px;
   text-align: center;
+  transition: 0.3s;
 }
+
+/* .bannerMain:hover {
+  border: 1px solid var(--color--intense-purple);
+
+  cursor: pointer;
+} */
 
 .primary {
   background-color: rgba(255, 143, 0, 0.06);
@@ -21,3 +28,7 @@
   color: #33d69f;
   background-color: rgba(51, 214, 159, 0.06);
 }
+
+/* .bannerMain:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+} */

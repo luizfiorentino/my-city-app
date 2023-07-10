@@ -18,7 +18,7 @@ export default function AdminList(props) {
 
       .filter(
         (issue) =>
-          context.filterIssuesByStatus === "all" ||
+          context.filterIssuesByStatus === "All" ||
           issue.statusChange[0].status === context.filterIssuesByStatus
       )
       .slice()
