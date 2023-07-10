@@ -9,6 +9,7 @@ import TextBold from "../../Shared/Typography/TextBold/TextBold";
 
 export default function AdminList(props) {
   const context = useContext(IssueContext);
+  console.log("status", context.filterIssuesByStatus);
 
   let noIssue;
 
@@ -35,7 +36,6 @@ export default function AdminList(props) {
   }, []);
 
   const me = filterIssues();
-  console.log("FILTERED>", me);
 
   return (
     <div className={styles.main}>

@@ -13,6 +13,7 @@ export default function ReportsBar(props) {
   const [showSelector, setShowSelector] = useState(false);
 
   const issueStatusses = [
+    "...",
     "all",
     "Submitted",
     "On progress",
@@ -24,6 +25,7 @@ export default function ReportsBar(props) {
     const selectedStatus = e.target.value;
     setStatus(selectedStatus);
     context.setFilterIssueByStatus(selectedStatus);
+    setShowSelector(!showSelector);
   };
 
   const handleFilterClick = () => {
@@ -41,26 +43,30 @@ export default function ReportsBar(props) {
         </TextParagraph>
       </div>
       <div className={styles.filterAndEdit}>
-        <TextBold className={styles.filter}>
-          Filter{" "}
-          <span onClick={handleFilterClick} className={styles.filterExtraText}>
-            by status
-          </span>
-          <img
-            onClick={handleFilterClick}
-            className={styles.arrowIcon}
-            src={arrowIcon.src}
-            alt="arrow down icon"
-          />
-          {showSelector && (
-            <select onChange={handleStatusChange}>
-              {issueStatusses.map((status) => (
-                <option key={status}>{status}</option>
-              ))}
-            </select>
-          )}
-        </TextBold>
-
+        {!showSelector && (
+          <TextBold className={styles.filter}>
+            Filter{" "}
+            <span
+              onClick={handleFilterClick}
+              className={styles.filterExtraText}
+            >
+              by status
+            </span>
+            <img
+              onClick={handleFilterClick}
+              className={styles.arrowIcon}
+              src={arrowIcon.src}
+              alt="arrow down icon"
+            />
+          </TextBold>
+        )}
+        {showSelector && (
+          <select onChange={handleStatusChange}>
+            {issueStatusses.map((status) => (
+              <option key={status}>{status}</option>
+            ))}
+          </select>
+        )}
         <Link href="/">
           <button className={`${styles.newIssue} ${leagueSpartan.className}`}>
             <span className={styles.addIcon}>
