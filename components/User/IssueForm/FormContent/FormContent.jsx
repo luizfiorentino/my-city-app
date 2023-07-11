@@ -36,6 +36,7 @@ export default function FormContent({
 
           context.setLatitude(latitude);
           context.setLongitude(longitude);
+          geolocationApiCall(latitude, longitude);
         },
         (error) => {
           setError(error.message);
@@ -55,7 +56,7 @@ export default function FormContent({
     }
     if (choice === "map") {
       e.preventDefault();
-      //Set Amsterdam Dam city center as default
+      //Set Amsterdam Dam City Center as default
       context.setLatitude(52.3732);
       context.setLongitude(4.8914);
       setLocationType("map");
@@ -66,6 +67,31 @@ export default function FormContent({
     e.preventDefault();
     setLocationType(null);
   };
+
+  async function geolocationApiCall(latitude, longitude) {
+    const apiKey = "cb2e81c8ea3f4d6fb5ef22343b6e8542"; // Replace with your actual API key
+    // const apiKey = process.env.OPENCAGE_API_KEY;
+    console.log("KEY", apiKey);
+    // const lat = 52.3732; // Replace with the desired latitude
+    // const long = 4.8914; // Replace with the desired longitude
+
+    const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${latitude},${longitude}&pretty=1`;
+
+    // Make a GET request to the API
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.results.length > 0) {
+          const address = data.results[0].formatted;
+          context.setIssueAddress(address);
+        } else {
+          console.log("No address found for the given coordinates.");
+        }
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error);
+      });
+  }
 
   return (
     <div className={styles.formContent}>

@@ -160,6 +160,7 @@ export default function UserForm() {
         ...data,
         latitude: parseFloat(context.latitude),
         longitude: parseFloat(context.longitude),
+        location: context.issueAddress,
       });
       if (error) {
         console.log("Failed to submit data");
@@ -180,6 +181,8 @@ export default function UserForm() {
       setPreviewSources([]);
     }
   };
+
+  console.log("Context, issueAddress", context.issueAddress);
 
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>

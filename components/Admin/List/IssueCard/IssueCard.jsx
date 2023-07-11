@@ -27,7 +27,7 @@ export default function IssueCard(props) {
           {dateFormat(props.date)}
         </TextParagraph>
         <TextBold variant="higherLine" className={styles.location}>
-          {props.location}
+          {props.location.slice(0, 15)}
         </TextBold>
         <TextParagraph className={styles.userName}>
           {props.userName}

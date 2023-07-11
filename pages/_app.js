@@ -16,6 +16,7 @@ export default function App({
   const [loadingMap, setLoadingMap] = useState(true);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [issueAddress, setIssueAddress] = useState("Amsterdam");
 
   return (
     <SessionProvider session={session}>
@@ -35,6 +36,8 @@ export default function App({
           setLatitude,
           loadingMap,
           setLoadingMap,
+          issueAddress,
+          setIssueAddress,
         }}
       >
         {" "}

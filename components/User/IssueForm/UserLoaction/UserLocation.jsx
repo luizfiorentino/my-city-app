@@ -1,80 +1,33 @@
-import {
-  useContext,
-  useState,
-  useRef,
-  useMemo,
-  useCallback,
-  useEffect,
-} from "react";
+import { useContext, useState, useRef, useMemo, useCallback } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 import IssueContext from "@/utils/IssueContext";
-
 import styles from "./UserLocation.module.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
-import { LatLng } from "leaflet";
 
 function UserLocation(props) {
   const context = useContext(IssueContext);
   const latitude = context.latitude ? context.latitude : "52.3732";
   const longitude = context.longitude ? context.longitude : "4.8914";
 
-  //plumbering feolocation API call
-  const apiKey = "cb2e81c8ea3f4d6fb5ef22343b6e8542"; // Replace with your actual API key
-  const lat = 52.3732; // Replace with the desired latitude
-  const long = 4.8914; // Replace with the desired longitude
-
-  const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${lat},${long}&pretty=1`;
-
-  // Make a GET request to the API
-  fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.results.length > 0) {
-        const address = data.results[0].formatted;
-        console.log(address);
-      } else {
-        console.log("No address found for the given coordinates.");
-      }
-    })
-    .catch((error) => {
-      console.log("An error occurred:", error);
-    });
-
-  //up
-
   const markerPosition = props.admin
     ? [props.latitude, props.longitude]
     : [latitude, longitude];
-  // const center = [52.3732, 4.8914];
-  // const center =
-  //   props.locationType === "current" ? markerPosition : [latitude, longitude];
+
   const center =
     props.locationType === "current"
       ? markerPosition
       : [parseFloat(latitude), parseFloat(longitude)];
-  console.log(
-    "marker position",
-    markerPosition,
-    "props.location type",
-    props.locationType
-  );
 
   function DraggableMarker() {
     const [draggable, setDraggable] = useState(false);
     //This saves coordinates in case of locationType === "map"
-    // const [position, setPosition] = useState(LatLng(center));
-    const context = useContext(IssueContext);
 
-    // useEffect(() => {
-    //   const { lat, lng } = position;
-    //   context.setLatitude(lat.toString());
-    //   context.setLongitude(lng.toString());
-    // }, [position, context]);
+    const context = useContext(IssueContext);
 
     const markerRef = useRef(null);
     const eventHandlers = useMemo(
@@ -85,6 +38,7 @@ function UserLocation(props) {
             const { lat, lng } = marker.getLatLng();
             context.setLatitude(lat.toString());
             context.setLongitude(lng.toString());
+            geolocationApiCall(lat.toString(), lng.toString());
           }
         },
       }),
@@ -118,12 +72,30 @@ function UserLocation(props) {
     return null;
   }
 
-  console.log(
-    "MARKER CHANGES::::",
-    context.latitude,
-    "long",
-    context.longitude
-  );
+  async function geolocationApiCall(latitude, longitude) {
+    const apiKey = "cb2e81c8ea3f4d6fb5ef22343b6e8542"; // Replace with your actual API key
+    // const apiKey = process.env.OPENCAGE_API_KEY;
+    console.log("KEY", apiKey);
+    // const lat = 52.3732; // Replace with the desired latitude
+    // const long = 4.8914; // Replace with the desired longitude
+
+    const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${latitude},${longitude}&pretty=1`;
+
+    // Make a GET request to the API
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.results.length > 0) {
+          const address = data.results[0].formatted;
+          context.setIssueAddress(address);
+        } else {
+          console.log("No address found for the given coordinates.");
+        }
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error);
+      });
+  }
 
   return (
     <div className={styles.mainContainer}>
@@ -148,7 +120,7 @@ function UserLocation(props) {
         </MapContainer>
       ) : (
         <p>
-          Loading your location..
+          Loading your location...
           <LoaderSpinner />
         </p>
       )}
