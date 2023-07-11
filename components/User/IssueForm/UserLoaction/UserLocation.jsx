@@ -23,6 +23,30 @@ function UserLocation(props) {
   const latitude = context.latitude ? context.latitude : "52.3732";
   const longitude = context.longitude ? context.longitude : "4.8914";
 
+  //plumbering feolocation API call
+  const apiKey = "cb2e81c8ea3f4d6fb5ef22343b6e8542"; // Replace with your actual API key
+  const lat = 52.3732; // Replace with the desired latitude
+  const long = 4.8914; // Replace with the desired longitude
+
+  const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${lat},${long}&pretty=1`;
+
+  // Make a GET request to the API
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.results.length > 0) {
+        const address = data.results[0].formatted;
+        console.log(address);
+      } else {
+        console.log("No address found for the given coordinates.");
+      }
+    })
+    .catch((error) => {
+      console.log("An error occurred:", error);
+    });
+
+  //up
+
   const markerPosition = props.admin
     ? [props.latitude, props.longitude]
     : [latitude, longitude];
