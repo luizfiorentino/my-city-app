@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1e2139;
+  background-color: var(--color--bg-canvas);
   margin-bottom: 32px;
 }
 

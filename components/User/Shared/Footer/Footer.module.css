@@ -1,5 +1,5 @@
 .main {
-  background-color: #ffffff;
+  background-color: var(--color--white);
   display: flex;
   justify-content: right;
   padding: 16px;

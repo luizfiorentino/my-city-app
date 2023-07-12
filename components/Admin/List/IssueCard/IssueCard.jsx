@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import styles from "./IssueCard.module.css";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
-import Link from "next/link";
-import TextParagraph from "../../Shared/Typography/TextParagraph";
 import { dateFormat } from "@/utils/serialize";
-import TextBold from "../../Shared/Typography/TextBold";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
+import TextBold from "../../Shared/Typography/TextBold";
+import TextParagraph from "../../Shared/Typography/TextParagraph";
 import StatusBanner from "../../Details/StatusBanner/StatusBanner";
 
 export default function IssueCard(props) {
@@ -20,7 +20,7 @@ export default function IssueCard(props) {
         <TextBold className={styles.id}>
           <TextBold variant="hash" className={styles.hash}>
             #
-          </TextBold>{" "}
+          </TextBold>
           {`AMS${props.id?.substring(0, 10)}`}
         </TextBold>
         <TextParagraph className={styles.posted}>

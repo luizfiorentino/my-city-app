@@ -26,10 +26,9 @@ function UserLocation(props) {
   function DraggableMarker() {
     const [draggable, setDraggable] = useState(false);
     //This saves coordinates in case of locationType === "map"
-
     const context = useContext(IssueContext);
-
     const markerRef = useRef(null);
+
     const eventHandlers = useMemo(
       () => ({
         dragend() {
@@ -73,15 +72,10 @@ function UserLocation(props) {
   }
 
   async function geolocationApiCall(latitude, longitude) {
-    const apiKey = "cb2e81c8ea3f4d6fb5ef22343b6e8542"; // Replace with your actual API key
-    // const apiKey = process.env.OPENCAGE_API_KEY;
-    console.log("KEY", apiKey);
-    // const lat = 52.3732; // Replace with the desired latitude
-    // const long = 4.8914; // Replace with the desired longitude
-
+    const apiKey = "cb2e81c8ea3f4d6fb5ef22343b6e8542";
+    //const apiKey = process.env.OPENCAGE_API_KEY; -> not working
     const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${latitude},${longitude}&pretty=1`;
 
-    // Make a GET request to the API
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -101,8 +95,6 @@ function UserLocation(props) {
     <div className={styles.mainContainer}>
       {context.latitude || props.latitude ? (
         <MapContainer
-          // center={[latitude, longitude]}
-          // center={props.locationType === "current" ? markerPosition : center}
           center={center}
           zoom={14}
           style={{ width: "100%", height: "180px" }}

@@ -29,7 +29,7 @@
   width: 90px;
   height: 44px;
   padding: 6px 13px 6px 6px;
-  background-color: #7c5dfa;
+  background-color: var(--color--intense-purple);
   border-radius: 24px;
   display: flex;
   justify-content: space-between;
@@ -54,13 +54,13 @@
 }
 
 .addIcon {
-  color: #7c5dfa;
+  color: var(--color--intense-purple);
   font-size: 18px;
   font-weight: 700;
   height: 32px;
   width: 32px;
   border-radius: 999px;
-  background-color: #ffffff;
+  background-color: var(--color--white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,9 +109,6 @@
     left: 0%;
   }
 }
-
-/* --color--bg-canvas: #1e2139;
-  --color--bg-canvas-lighter: #252945; */
 
 .closeIcon {
   position: absolute;

@@ -56,17 +56,17 @@
 .editButton {
   padding: 18px 23px 15px 24px;
   border-radius: 24px;
-  background-color: #252945;
+  background-color: var(--color--bg-canvas-lighter);
 }
 
 .buttonEdit {
   border-style: none;
-  background-color: #252945;
+  background-color: var(--color--bg-canvas-lighter);
   border-radius: 24px;
 }
 
 .deleteButton {
-  background-color: #ec5757 !important;
+  background-color: var(--color--danger) !important;
 }
 
 .solvedButton {

@@ -1,7 +1,7 @@
 .label {
   display: block;
   font-size: 12px;
-  color: #022959;
+  color: var(--color--text-primary);
   font-weight: 400;
   line-height: 14px;
   margin-bottom: 3px;
@@ -10,11 +10,11 @@
 .input {
   padding: 12px 16px;
   width: 100%;
-  background-color: #ffffff;
+  background-color: var(--color--white);
   border: 1px solid #9699aa;
   border-radius: 4px;
   margin-bottom: 16px;
-  color: var(--color--denim);
+  color: var(--color--text-primary);
 }
 
 .hidden {

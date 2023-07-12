@@ -10,7 +10,6 @@ export default function TextParagraph({
 
   ...props
 }) {
-  //console.log("className ->", variant);
   return (
     <p
       {...props}

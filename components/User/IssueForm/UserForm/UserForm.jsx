@@ -182,8 +182,6 @@ export default function UserForm() {
     }
   };
 
-  console.log("Context, issueAddress", context.issueAddress);
-
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}></div>

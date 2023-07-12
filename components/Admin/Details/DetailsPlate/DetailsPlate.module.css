@@ -42,19 +42,19 @@
   margin-bottom: 5px;
 }
 
+.location {
+  margin-bottom: 32px;
+  z-index: 0;
+}
+
 .description {
   padding: 24px;
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.location {
-  margin-bottom: 32px;
-  z-index: 0;
-}
-
 .pagination {
-  background-color: #1e2139;
+  background-color: var(--color--bg-canvas);
 }
 
 .paginationInner {
@@ -85,10 +85,6 @@
   cursor: pointer;
 }
 
-.hideHistory {
-  display: none;
-}
-
 .imagesContainer {
   display: flex;
   padding: 24px;
@@ -104,7 +100,6 @@
   height: 150px;
   object-fit: scale-down;
   border: 1px solid var(--color--bg-canvas);
-
   border-radius: 4px;
   transition: 0.7s;
 }
@@ -115,20 +110,8 @@
   cursor: pointer;
 }
 
-.mainContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  height: 220px;
-
-  padding: 16px 20px;
-  width: 100%;
-  color: #022959;
-  border: 1px solid var(--color--bg-canvas-lighter);
-  border-radius: 4px;
-  transition: 0.7s;
-  /* margin-bottom: 16px; */
+.hideHistory {
+  display: none;
 }
 
 @media screen and (max-width: 340px) {
@@ -179,22 +162,10 @@
     align-items: center;
     text-align: justify;
   }
+
   .largeSpacing {
     margin-bottom: 0;
     text-align: right;
-  }
-}
-
-@media screen and (max-width: 421px) {
-  .footer {
-    justify-content: center;
-  }
-
-  .buttonsPannel {
-    flex-direction: column;
-    gap: 16px;
-    max-width: 50%;
-    justify-content: center;
   }
 }
 
