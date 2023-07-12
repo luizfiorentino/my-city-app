@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
+import Link from "next/link";
+import { leagueSpartan } from "@/styles/fonts";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 import styles from "./ReportsBar.module.css";
 import arrowIcon from "../../../../pages/assets/images/icon-arrow-down.svg";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
-import { leagueSpartan } from "@/styles/fonts";
-import Link from "next/link";
 import IssueContext from "@/utils/IssueContext";
 import StatusBanner from "../../Details/StatusBanner/StatusBanner";
-import { IoMdCloseCircleOutline } from "react-icons/io";
 
 export default function ReportsBar(props) {
   const context = useContext(IssueContext);
@@ -21,14 +21,6 @@ export default function ReportsBar(props) {
     "Information needed",
     "Solved",
   ];
-
-  const handleStatusChange = (e) => {
-    const selectedStatus = e.target.value;
-    //e.target.value = "Submited" etc.
-    setStatus(selectedStatus);
-    context.setFilterIssueByStatus(selectedStatus);
-    setShowSelector(!showSelector);
-  };
 
   const handleFilterClick = () => {
     setShowSelector(!showSelector);
@@ -46,14 +38,21 @@ export default function ReportsBar(props) {
         <TextBold variant="largeText" className={styles.issues}>
           Issues
         </TextBold>
-        <TextParagraph className={styles.total}>
-          Total: <span style={{ color: "white" }}>{props.issues.length}</span>
-        </TextParagraph>
+        {context.filterIssuesByStatus === "All" ? (
+          <TextParagraph className={styles.total}>
+            Total: <span style={{ color: "white" }}>{props.issues.length}</span>
+          </TextParagraph>
+        ) : (
+          <TextParagraph className={styles.total}>
+            {`${context.filterIssuesByStatus}: `}
+            <span style={{ color: "white" }}>{props.selectedItems}</span>
+          </TextParagraph>
+        )}
       </div>
       <div className={styles.filterAndEdit}>
         {!showSelector && (
           <TextBold className={styles.filter}>
-            Filter{" "}
+            Filter
             <span
               onClick={handleFilterClick}
               className={styles.filterExtraText}
@@ -68,13 +67,7 @@ export default function ReportsBar(props) {
             />
           </TextBold>
         )}
-        {/* {showSelector && (
-          <select onChange={handleStatusChange}>
-            {issueStatusses.map((status) => (
-              <option key={status}>{status}</option>
-            ))}
-          </select>
-        )} */}
+
         <div
           className={!showSelector ? styles.hidden : styles.dropdownContainer}
         >

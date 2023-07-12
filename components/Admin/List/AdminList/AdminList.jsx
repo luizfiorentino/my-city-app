@@ -9,13 +9,12 @@ import TextBold from "../../Shared/Typography/TextBold/TextBold";
 
 export default function AdminList(props) {
   const context = useContext(IssueContext);
-  console.log("status", context.filterIssuesByStatus);
+  const [issuesSelected, setIssuesSelected] = useState(0);
 
   let noIssue;
 
   const filterIssues = () => {
     const selectedIssues = props.data
-
       .filter(
         (issue) =>
           context.filterIssuesByStatus === "All" ||
@@ -26,23 +25,27 @@ export default function AdminList(props) {
 
     if (!selectedIssues.length) {
       noIssue = true;
+
       return noIssue;
     }
     return selectedIssues;
   };
 
-  useEffect(() => {
-    filterIssues();
-  }, []);
-
+  //Keep it otherwise filter is not functional
   const me = filterIssues();
+
+  useEffect(() => {
+    const selectedIssues = filterIssues();
+    setIssuesSelected(
+      selectedIssues.length === undefined ? 0 : selectedIssues.length
+    );
+  }, [filterIssues]);
 
   return (
     <div className={styles.main}>
       <AdminTopBar />
       <div className={styles.barAndCardList}>
-        <ReportsBar issues={props.data} />
-
+        <ReportsBar issues={props.data} selectedItems={issuesSelected} />
         <div className={styles.issuesList}>
           {!noIssue &&
             filterIssues(props.data).map((issue) => (

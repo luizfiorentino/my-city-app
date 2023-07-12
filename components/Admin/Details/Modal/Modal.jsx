@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Modal.module.css";
 import IssueContext from "@/utils/IssueContext";
 
-export default function StatusModal({ children, ...props }) {
+export default function Modal({ children, ...props }) {
   const { openModal, setOpenModal } = useContext(IssueContext);
 
   function close(e) {

@@ -1,18 +1,21 @@
 :root {
   --color--white: #ffffff;
+  --color--black: #000000;
   --color--bg-light: #eff5ff;
   --color--admin-main: #def3fa;
   --color--text-primary: #022959;
   --color--bg-submited: rgba(51, 214, 159, 0.06);
+  --color--bg-banner: rgba(255, 143, 0, 0.06);
   --color--bg-canvas: #1e2139;
+  --color-bg-intermediary: rgba(255, 255, 255, 0.5);
   --color--bg-canvas-lighter: #252945;
-  --color--bg-canvas: #1e2139;
   --color--hash: #7e88c3;
   --color--hover-grey: #888eb0;
   --color--pale-grey: #f2f2f2;
   --color--intense-purple: #7c5dfa;
   --color--orange: #ff8f00;
   --color--danger: #ec5757;
+  --color--green-button: #33d69f;
 
   /* --max-width: 1100px;
   --border-radius: 12px;

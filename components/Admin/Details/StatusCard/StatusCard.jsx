@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./StatusCard.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
-import TextBold from "../../Shared/Typography/TextBold";
-
 import { dateFormat } from "@/utils/serialize";
 import StatusBanner from "../StatusBanner/StatusBanner";
 
-export default function StatusCard({
-  arrayChanges,
-  issueStatus,
-  issueDate,
-  issueMessage,
-  isHistory,
-}) {
+export default function StatusCard({ issueStatus, issueDate, issueMessage }) {
   return (
     <BackgroundCanvas className={styles.statusCardContainer}>
       <div className={styles.topCard}>
@@ -27,9 +19,7 @@ export default function StatusCard({
         </div>
       </div>
       <div className={styles.bottomCard}>
-        <TextParagraph className={styles.date}>
-          {dateFormat(issueDate)}
-        </TextParagraph>
+        <TextParagraph>{dateFormat(issueDate)}</TextParagraph>
         <BackgroundCanvas
           variant="lighterCanvas"
           className={styles.messageCanvas}
@@ -39,6 +29,4 @@ export default function StatusCard({
       </div>
     </BackgroundCanvas>
   );
-}
-{
 }

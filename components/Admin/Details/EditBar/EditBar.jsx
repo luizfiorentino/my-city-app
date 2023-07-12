@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
+import dayjs from "dayjs";
 import styles from "./EditBar.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import Modal from "../Modal/Modal";
 import IssueContext from "@/utils/IssueContext";
-import dayjs from "dayjs";
 import Button from "@/components/Shared/Button/Button";
 import StatusBanner from "../StatusBanner/StatusBanner";
 
@@ -68,7 +68,7 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
         >
           <TextParagraph className={styles.status}>Status</TextParagraph>
 
-          <div className={styles.editStstusButton}>
+          <div>
             <StatusBanner
               variant={lastSavedStatus === "Solved" ? "solved" : "primary"}
               className={styles.pending}
@@ -118,7 +118,6 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
             >
               Enter a message related to it
             </TextBold>
-
             <textarea
               type="text"
               onChange={(e) => setMessage(e.target.value)}

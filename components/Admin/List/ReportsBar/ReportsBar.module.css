@@ -1,17 +1,12 @@
 .main {
-  padding: 0px 24px 32px;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 24px 32px;
 }
 
-.filter {
-  /* background-color: red; */
-  display: flex;
-  align-items: center;
-}
-
-.filter:hover {
-  cursor: pointer;
+.total {
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .filterAndEdit {
@@ -21,70 +16,29 @@
   gap: 18px;
 }
 
-.arrowIcon {
-  margin-left: 8px;
-}
-
-.newIssue {
-  width: 90px;
-  height: 44px;
-  padding: 6px 13px 6px 6px;
-  background-color: var(--color--intense-purple);
-  border-radius: 24px;
+.filter {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 15px;
-  line-height: 15px;
-  font-weight: 700;
-  letter-spacing: -0.25px;
-  border: none;
 }
 
-.newIssue:hover {
+.filter:hover {
   cursor: pointer;
-}
-
-.extraText {
-  display: none;
 }
 
 .filterExtraText {
   display: none;
 }
 
-.addIcon {
-  color: var(--color--intense-purple);
-  font-size: 18px;
-  font-weight: 700;
-  height: 32px;
-  width: 32px;
-  border-radius: 999px;
-  background-color: var(--color--white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.issues {
-  text-align: center !important;
-  margin-bottom: 5px !important;
-}
-
-.total {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-.plusSign {
-  margin-top: 2px;
-}
-
-.dropdownContainer {
-  position: relative;
+.arrowIcon {
+  margin-left: 8px;
 }
 
 .hidden {
   display: none;
+}
+
+.dropdownContainer {
+  position: relative;
 }
 
 .dropdown {
@@ -93,21 +47,11 @@
   left: -165px;
 
   padding: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--color-bg-intermediary);
   border-radius: 8px;
   z-index: 999;
   background: var(--color--bg-canvas);
   /* background: 979797; */
-}
-
-@media screen and (max-width: 454px) {
-  .dropdown {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 10%;
-    left: 0%;
-  }
 }
 
 .closeIcon {
@@ -130,7 +74,6 @@
   min-width: 10rem;
   border: 1px solid transparent;
   width: 100%;
-  /* padding: 25px 24px 22px; */
   position: relative;
   transition: 0.3s;
   margin-top: 1.2rem;
@@ -140,6 +83,62 @@
   border: 1px solid var(--color--intense-purple);
   border-radius: 8px;
   cursor: pointer;
+}
+
+.newIssue {
+  width: 90px;
+  height: 44px;
+  padding: 6px 13px 6px 6px;
+  background-color: var(--color--intense-purple);
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+  border: none;
+}
+
+.addIcon {
+  color: var(--color--intense-purple);
+  font-size: 18px;
+  font-weight: 700;
+  height: 32px;
+  width: 32px;
+  border-radius: 999px;
+  background-color: var(--color--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plusSign {
+  margin-top: 2px;
+}
+
+.newIssue:hover {
+  cursor: pointer;
+}
+
+.extraText {
+  display: none;
+}
+
+.issues {
+  text-align: center !important;
+  margin-bottom: 5px !important;
+}
+
+@media screen and (max-width: 454px) {
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 10%;
+    left: 0%;
+  }
 }
 
 @media screen and (min-width: 454px) {
