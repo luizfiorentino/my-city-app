@@ -6,13 +6,18 @@
   --color--text-primary: #022959;
   --color--bg-submited: rgba(51, 214, 159, 0.06);
   --color--bg-banner: rgba(255, 143, 0, 0.06);
+  --color--dark-bg: rgba(37, 41, 69, 0.9);
   --color--bg-canvas: #1e2139;
+  --color--dark-grey: #494e6e;
+  --color--regular-grey: #858bb2;
+  --color--soft-grey: #9699aa;
   --color-bg-intermediary: rgba(255, 255, 255, 0.5);
   --color--bg-canvas-lighter: #252945;
   --color--hash: #7e88c3;
   --color--hover-grey: #888eb0;
   --color--pale-grey: #f2f2f2;
   --color--intense-purple: #7c5dfa;
+  --color-opaque-purple: #9277ff;
   --color--orange: #ff8f00;
   --color--danger: #ec5757;
   --color--green-button: #33d69f;
