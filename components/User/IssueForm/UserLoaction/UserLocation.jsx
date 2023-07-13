@@ -2,11 +2,11 @@ import { useContext, useState, useRef, useMemo, useCallback } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
+import "maplibre-gl/dist/maplibre-gl.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 import IssueContext from "@/utils/IssueContext";
 import styles from "./UserLocation.module.css";
-import "maplibre-gl/dist/maplibre-gl.css";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 function UserLocation(props) {

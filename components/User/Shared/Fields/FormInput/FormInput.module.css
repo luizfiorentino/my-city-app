@@ -8,13 +8,13 @@
 }
 
 .input {
+  color: var(--color--text-primary);
+  background-color: var(--color--white);
+  border: 1px solid var(--color--soft-grey);
   padding: 12px 16px;
   width: 100%;
-  background-color: var(--color--white);
-  border: 1px solid #9699aa;
   border-radius: 4px;
   margin-bottom: 16px;
-  color: var(--color--text-primary);
 }
 
 .hidden {

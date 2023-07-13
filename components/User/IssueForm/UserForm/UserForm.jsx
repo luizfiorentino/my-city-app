@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useDropzone } from "react-dropzone";
+import { ubuntu } from "@/styles/fonts";
 import styles from "./UserForm.module.css";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import ConfirmationMessage from "../ConfirmationMessage";
-import { ubuntu } from "@/styles/fonts";
 import { postIssue } from "@/services";
-import { useDropzone } from "react-dropzone";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import IssueContext from "@/utils/IssueContext";
 
@@ -185,8 +185,6 @@ export default function UserForm() {
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}></div>
-      <div className={styles.map}></div>
-
       <div className={styles.form}>
         {successRequest === false ? (
           <form onSubmit={handleSubmit(issueRequest)}>
@@ -201,14 +199,12 @@ export default function UserForm() {
               isDragActive={isDragActive}
               removeFile={removeFile}
             />
-
             {errorPosting && (
               <p className={styles.errorMessage}>
                 An error occured when posting the issue. Please try again or
-                contact admin
+                contact admin.
               </p>
             )}
-
             <Footer className={styles.footer}>
               {successRequest === false ? "Post issue" : "Back"}
               {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
@@ -216,7 +212,8 @@ export default function UserForm() {
           </form>
         ) : (
           <ConfirmationMessage
-            className={styles.successMessage}
+            title="Thanks for submiting your issue!"
+            subtitle="Your report will make our city more awesome."
             onClick={returnFormPage}
           >
             Thanks for submitting your issue!

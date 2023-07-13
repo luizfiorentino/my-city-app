@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-// import LoaderImage from "../../../pages/assets/images/Iphone-spinner-2.gif";
+import React from "react";
 import LoaderImage from "../../../pages/assets/images/spinner.gif";
 import styles from "./LoaderSpinner.module.css";
 

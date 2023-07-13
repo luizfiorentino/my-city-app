@@ -1,10 +1,10 @@
 .textBoldRegular {
+  font-family: "League Spartan", sans-serif;
   font-weight: 700;
   font-size: 15px;
   line-height: 15px;
   letter-spacing: -0.25px;
-  color: white;
-  font-family: "League Spartan", sans-serif;
+  color: var(--color--white);
 }
 
 .higherLine {

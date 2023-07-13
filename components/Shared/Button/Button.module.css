@@ -47,20 +47,19 @@
 
 .lightGrey {
   border-radius: 4px;
-  border: 1px solid var(--color--pale-grey);
+  border: 1px solid var(--color--soft-grey);
   font-size: 16px;
   color: var(--color--text-primary);
   font-weight: 400;
   line-height: 14px;
   margin-bottom: 24px;
-  background-color: white;
+  background-color: var(--color--white);
   padding: 15px 16px;
   margin-top: 16px;
 }
 
 .lightGrey:hover {
   background-color: var(--color--pale-grey);
-  color: white;
 }
 
 .dark {

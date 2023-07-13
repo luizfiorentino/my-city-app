@@ -1,5 +1,5 @@
 .message {
-  color: #ee374a;
+  color: var(--color--danger);
   margin-bottom: 1rem;
   margin-left: 5px;
   text-align: right;
@@ -9,7 +9,7 @@
 }
 
 .sucess {
-  color: green;
+  color: var(--color--green-button);
   display: flex;
   justify-content: center;
 }

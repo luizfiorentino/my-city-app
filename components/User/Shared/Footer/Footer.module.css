@@ -1,9 +1,10 @@
 .main {
-  background-color: var(--color--white);
   display: flex;
   justify-content: right;
-  padding: 16px;
   position: fixed;
+
+  background-color: var(--color--white);
+  padding: 16px;
   bottom: 0;
   width: 100%;
 }

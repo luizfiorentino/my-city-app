@@ -6,7 +6,7 @@ import FormSubtitle from "../../Shared/Fields/FormSubtitle";
 import FormInput from "../../Shared/Fields/FormInput";
 import { AiOutlineUpload } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
-import ErrorMessage from "../../Shared/StatusMessage/StatusMessage";
+import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import IssueContext from "@/utils/IssueContext";
 import Button from "@/components/Shared/Button/Button";
 
@@ -30,6 +30,7 @@ export default function FormContent({
 
   const getUserCurrentLocation = async () => {
     if (navigator.geolocation) {
+      context.setLoading(true);
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
@@ -37,13 +38,17 @@ export default function FormContent({
           context.setLatitude(latitude);
           context.setLongitude(longitude);
           geolocationApiCall(latitude, longitude);
+          context.setLoading(false);
         },
+
         (error) => {
           setError(error.message);
+          context.setLoading(false);
         }
       );
     } else {
       setError("Geolocation is not supported by this browser.");
+      context.setLoading(false);
     }
   };
 
@@ -151,9 +156,7 @@ export default function FormContent({
 
       <FormInput label="Pictures (optional, max. 3)" variant="photos" />
       <div
-        className={
-          !previewSources.length ? styles.hiddenInput : styles.uploadImage
-        }
+        className={!previewSources.length ? styles.hidden : styles.uploadImage}
       >
         <div className={styles.imageArea}>
           {previewSources &&
@@ -175,7 +178,7 @@ export default function FormContent({
         </div>
       </div>
       <div>
-        {errors.file && <ErrorMessage>{errors.file.message}</ErrorMessage>}
+        {errors.file && <StatusMessage>{errors.file.message}</StatusMessage>}
       </div>
       <div
         className={styles.dropzone}
