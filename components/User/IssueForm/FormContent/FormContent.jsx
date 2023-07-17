@@ -10,7 +10,7 @@ import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import IssueContext from "@/utils/IssueContext";
 import Button from "@/components/Shared/Button/Button";
 
-const UserLocation = dynamic(() => import("../UserLoaction/UserLocation"), {
+const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
 });
 

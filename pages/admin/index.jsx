@@ -1,7 +1,7 @@
 import Head from "next/head";
+import prisma from "@/prisma/client";
 import { Inter } from "next/font/google";
 import AdminList from "@/components/Admin/List/AdminList";
-import prisma from "@/prisma/client";
 import serialize from "@/utils/serialize";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,6 +18,7 @@ export default function Home({ issues }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content="public/assets/userForm.png" />
       </Head>
       <main>
         <AdminList data={issues} />
@@ -31,7 +32,7 @@ export async function getServerSideProps() {
     const issues = await prisma.issue.findMany({
       include: {
         statusChange: {
-          // here, include only the last status
+          // here, includes only the last status
           orderBy: {
             createdAt: "desc",
           },

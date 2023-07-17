@@ -9,7 +9,7 @@ import StatusCard from "../../Details/StatusCard";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
 
 const UserLocation = dynamic(
-  () => import("@/components/User/IssueForm/UserLoaction/UserLocation"),
+  () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
   {
     ssr: false,
   }

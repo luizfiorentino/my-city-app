@@ -63,7 +63,7 @@ export default function IssueStatus({ issue }) {
 
   return (
     <div className={styles.container}>
-      <AdminTopBar className={styles.tb} />
+      <AdminTopBar />
       <div className={styles.detailsPageMain}>
         <Link
           href={`/admin/`}

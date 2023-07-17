@@ -23,6 +23,10 @@ function UserLocation(props) {
       ? markerPosition
       : [parseFloat(latitude), parseFloat(longitude)];
 
+  if (props.locationType === null) {
+    return null;
+  }
+
   function DraggableMarker() {
     const [draggable, setDraggable] = useState(false);
     //This saves coordinates in case of locationType === "map"
