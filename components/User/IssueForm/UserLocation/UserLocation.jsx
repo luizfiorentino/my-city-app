@@ -1,5 +1,12 @@
 import { useContext, useState, useRef, useMemo, useCallback } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+  getZoom,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -23,53 +30,49 @@ function UserLocation(props) {
       ? markerPosition
       : [parseFloat(latitude), parseFloat(longitude)];
 
-  if (props.locationType === null) {
-    return null;
-  }
+  // function DraggableMarker() {
+  //   const [draggable, setDraggable] = useState(false);
+  //   //This saves coordinates in case of locationType === "map"
+  //   const context = useContext(IssueContext);
+  //   const markerRef = useRef(null);
 
-  function DraggableMarker() {
-    const [draggable, setDraggable] = useState(false);
-    //This saves coordinates in case of locationType === "map"
-    const context = useContext(IssueContext);
-    const markerRef = useRef(null);
+  //   const eventHandlers = useMemo(
+  //     () => ({
+  //       dragend() {
+  //         const marker = markerRef.current;
+  //         if (marker != null) {
+  //           const { lat, lng } = marker.getLatLng();
+  //           context.setLatitude(lat.toString());
+  //           context.setLongitude(lng.toString());
+  //           geolocationApiCall(lat.toString(), lng.toString());
+  //         }
+  //       },
+  //     }),
 
-    const eventHandlers = useMemo(
-      () => ({
-        dragend() {
-          const marker = markerRef.current;
-          if (marker != null) {
-            const { lat, lng } = marker.getLatLng();
-            context.setLatitude(lat.toString());
-            context.setLongitude(lng.toString());
-            geolocationApiCall(lat.toString(), lng.toString());
-          }
-        },
-      }),
+  //     []
+  //   );
 
-      []
-    );
+  //   const toggleDraggable = useCallback(() => {
+  //     setDraggable((d) => !d);
+  //   }, []);
 
-    const toggleDraggable = useCallback(() => {
-      setDraggable((d) => !d);
-    }, []);
-
-    return (
-      <Marker
-        draggable={draggable}
-        eventHandlers={eventHandlers}
-        position={center}
-        ref={markerRef}
-      >
-        <Popup minWidth={90}>
-          <span onClick={toggleDraggable}>
-            {draggable
-              ? "Marker is draggable"
-              : "Click here to make marker draggable"}
-          </span>
-        </Popup>
-      </Marker>
-    );
-  }
+  //   return (
+  //     <Marker
+  //       draggable={draggable}
+  //       eventHandlers={eventHandlers}
+  //       position={center}
+  //       ref={markerRef}
+  //     >
+  //       <Popup minWidth={90}>
+  //         <span onClick={toggleDraggable}>
+  //           {draggable
+  //             ? "Marker is draggable"
+  //             : "Click here to make marker draggable"}
+  //         </span>
+  //       </Popup>
+  //     </Marker>
+  //   );
+  // }
 
   if (props.locationType === null) {
     return null;
@@ -95,6 +98,20 @@ function UserLocation(props) {
       });
   }
 
+  function LocationMarker() {
+    const map = useMapEvents({
+      click(e) {
+        const lat = e.latlng.lat;
+        const lng = e.latlng.lng;
+        context.setLatitude(lat.toString());
+        context.setLongitude(lng.toString());
+        map.flyTo(e.latlng, map.getZoom());
+        geolocationApiCall(lat.toString(), lng.toString());
+      },
+    });
+    return null;
+  }
+
   return (
     <div className={styles.mainContainer}>
       {context.latitude || props.latitude ? (
@@ -108,11 +125,9 @@ function UserLocation(props) {
             attribution={`&copy; MapTiler &copy; OpenStreetMap contributors`}
             url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=Zlvdjhx8LLJZkQKgusKO"
           />
-          {props.locationType === "current" ? (
-            <Marker position={markerPosition} />
-          ) : (
-            <DraggableMarker />
-          )}
+
+          <Marker position={markerPosition} />
+          <LocationMarker />
         </MapContainer>
       ) : (
         <p>
