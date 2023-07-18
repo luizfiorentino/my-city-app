@@ -1,11 +1,50 @@
 import fetch from "node-fetch";
 
 const apiKey = process.env.OPENCAGE_API_KEY;
+const rateLimitWindowMs = 60000;
+const maxRequestsPerWindow = 100;
+const rateLimits = new Map();
+const allowedDomains = ["http://localhost:3000", "subdomain.example.com"];
 
 export default async function handler(req, res) {
   const { latitude, longitude } = req.query;
 
   const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${latitude},${longitude}&pretty=1`;
+  const ipAddress =
+    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  const domain = req.headers["x-domain-header"];
+  console.log("domain?", domain);
+
+  // Check if the referer is in the allowed domains
+  if (!allowedDomains.includes(domain)) {
+    res.status(403).json({ error: "Access denied. Invalid domain." });
+    return;
+  }
+
+  // Check if the user has exceeded the maximum requests per window
+  const rateLimit = rateLimits.get(ipAddress) || {
+    requests: 0,
+    lastRequestTime: Date.now(),
+  };
+  const currentTime = Date.now();
+
+  if (
+    rateLimit.requests >= maxRequestsPerWindow &&
+    currentTime - rateLimit.lastRequestTime < rateLimitWindowMs
+  ) {
+    const timeLeft =
+      rateLimitWindowMs - (currentTime - rateLimit.lastRequestTime);
+    res
+      .status(429)
+      .json({ error: "Too many requests. Please try again later.", timeLeft });
+    return;
+  }
+
+  // Update the rate limit for the user
+  rateLimits.set(ipAddress, {
+    requests: rateLimit.requests + 1,
+    lastRequestTime: currentTime,
+  });
 
   try {
     const response = await fetch(apiUrl);

@@ -76,7 +76,12 @@ export default function FormContent({
     const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
 
     try {
-      const response = await fetch(apiUrl);
+      const domain = window.location.origin; // Get the current domain
+      const headers = {
+        "x-domain-header": domain, // Set the custom header with the domain
+      };
+      console.log("frontend:", headers);
+      const response = await fetch(apiUrl, { headers });
       const data = await response.json();
 
       if (response.ok) {
