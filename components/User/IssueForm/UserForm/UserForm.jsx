@@ -24,6 +24,11 @@ const formSchema = z.object({
   location: z
     .string()
     .max(255, "the provided location contains too much characters"),
+  email: z
+    .string()
+    .email("please provide a valid email address")
+    .max(255, "the provided email contains too many characters")
+    .optional(),
   file: z
     .array(z.any())
     .max(3, "You can upload up to 3 images")
@@ -154,6 +159,7 @@ export default function UserForm() {
   );
 
   const issueRequest = async (data) => {
+    console.log("data FE:", data);
     try {
       setLoading(true);
       const [error, _response] = await postIssue({
@@ -192,6 +198,7 @@ export default function UserForm() {
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
               locationRegister={{ ...register("location") }}
+              emailRegister={{ ...register("email") }}
               errors={errors}
               previewSources={previewSources}
               getRootProps={{ ...getRootProps() }}

@@ -19,6 +19,7 @@ export default function FormContent({
   userRegister,
   descriptionRegister,
   locationRegister,
+  emailRegister,
   previewSources,
   getRootProps,
   getInputProps,
@@ -101,7 +102,6 @@ export default function FormContent({
       <FormSubtitle>
         Please provide your name, description and location of the issue.
       </FormSubtitle>
-
       <FormInput
         label="Name"
         placeHolder="e.g. Mike Ness"
@@ -110,7 +110,14 @@ export default function FormContent({
         type="text"
         name="userName"
       />
-
+      <FormInput
+        label="Email (optional, to get folow ups)"
+        placeHolder="e.g. mike@ness.com"
+        error={errors.userName}
+        register={emailRegister}
+        type="text"
+        name="userName"
+      />
       <FormInput
         label="Description"
         placeHolder="e.g. there is something..."

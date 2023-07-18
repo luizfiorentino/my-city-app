@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     // });
 
     const mailOptions = {
-      from: "sender@example.com",
+      from: "my-city-app@update-user.com",
       to,
       subject,
       text,

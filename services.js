@@ -20,6 +20,7 @@ export async function sendEmail(to, subject, text, html) {
 }
 
 export async function postIssue({ file, ...data }) {
+  console.log("from postIssue, services", data);
   const formData = new FormData();
   // "in" return the keys
   for (let field in data) {

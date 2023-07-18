@@ -29,7 +29,8 @@ async function insertNewIssue(
   location,
   latitude,
   longitude,
-  images
+  images,
+  email
 ) {
   try {
     const newIssue = await prisma.issue.create({
@@ -39,6 +40,7 @@ async function insertNewIssue(
         location,
         latitude,
         longitude,
+
         statusChange: {
           create: [
             {
@@ -50,6 +52,7 @@ async function insertNewIssue(
         images: {
           create: images,
         },
+        email,
       },
     });
     return [null, newIssue];
@@ -95,7 +98,7 @@ export default function handler(req, res) {
         });
 
         //This is after multer process
-        const { userName, description, location, latitude, longitude } =
+        const { userName, description, location, latitude, longitude, email } =
           req.body;
 
         const [databaseError, newIssue] = await insertNewIssue(
@@ -104,7 +107,8 @@ export default function handler(req, res) {
           location,
           parseFloat(latitude),
           parseFloat(longitude),
-          images
+          images,
+          email
         );
 
         if (databaseError) {
