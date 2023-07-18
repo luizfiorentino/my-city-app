@@ -73,23 +73,21 @@ export default function FormContent({
   };
 
   async function geolocationApiCall(latitude, longitude) {
-    const apiKey = "cb2e81c8ea3f4d6fb5ef22343b6e8542";
-    //const apiKey = process.env.OPENCAGE_API_KEY; -> not working
-    const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${latitude},${longitude}&pretty=1`;
+    const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
 
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.results.length > 0) {
-          const address = data.results[0].formatted;
-          context.setIssueAddress(address);
-        } else {
-          console.log("No address found for the given coordinates.");
-        }
-      })
-      .catch((error) => {
-        console.log("An error occurred:", error);
-      });
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (response.ok) {
+        const { address } = data;
+        context.setIssueAddress(address);
+      } else {
+        console.log("No address found for the given coordinates.");
+      }
+    } catch (error) {
+      console.log("An error occurred:", error);
+    }
   }
 
   return (
