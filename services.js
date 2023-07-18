@@ -2,7 +2,6 @@ import axios from "axios";
 
 export async function sendEmail(to, subject, text, html) {
   const url = "/api/updateEmail";
-  console.log("from services sendEmail f:", "to:", to, "subject:", subject);
 
   const response = await fetch(url, {
     method: "POST",
@@ -20,7 +19,6 @@ export async function sendEmail(to, subject, text, html) {
 }
 
 export async function postIssue({ file, ...data }) {
-  console.log("from postIssue, services", data);
   const formData = new FormData();
   // "in" return the keys
   for (let field in data) {
@@ -36,7 +34,6 @@ export async function postIssue({ file, ...data }) {
   }
 
   try {
-    console.log("what is formData?", formData);
     const response = await axios.postForm("/api/issues", formData, {
       headers: {
         "Content-Type": "multipart/form-data",

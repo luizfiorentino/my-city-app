@@ -81,7 +81,7 @@ export default function FormContent({
       const headers = {
         "x-domain-header": domain, // Set the custom header with the domain
       };
-      console.log("frontend:", headers);
+
       const response = await fetch(apiUrl, { headers });
       const data = await response.json();
 

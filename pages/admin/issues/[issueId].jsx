@@ -22,6 +22,7 @@ export default function IssueStatus({ issue }) {
   const router = useRouter();
   const context = useContext(IssueContext);
   const [issueDetails, setIssueDetails] = useState(issue);
+  console.log("issue details page:", issue);
 
   const updateStatus = async (message, status, buttonMode) => {
     try {
@@ -36,10 +37,17 @@ export default function IssueStatus({ issue }) {
           addStatus(newStatus);
 
           sendEmail(
-            "lgfiorentino@gmail.com",
-            "Subject: testing functionality",
-            "Text body",
-            "<p>IS IT WORKING ???</p>"
+            issue.email,
+            "Subject: My City App Notification",
+            `Your Issue Status: ${issue.status}`,
+            `
+            <h2>Dear user</h2>
+            <h3>There is an update in your posted issue id AMS${issue.id}!</h3>
+            <h3>Current Status: ${status}</h3>
+            <h3>Message: ${message}</h3>
+           <p>Thanks for using My City App! </p>
+           <p>Please note this is a non-reply email.</p>
+          `
           );
 
           break;

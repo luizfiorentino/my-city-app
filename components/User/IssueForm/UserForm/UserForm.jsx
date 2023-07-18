@@ -159,7 +159,6 @@ export default function UserForm() {
   );
 
   const issueRequest = async (data) => {
-    console.log("data FE:", data);
     try {
       setLoading(true);
       const [error, _response] = await postIssue({
