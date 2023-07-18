@@ -11,7 +11,9 @@ import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 import IssueContext from "@/utils/IssueContext";
 import {
+  handleIssueUpdate,
   sendDeleteRequest,
+  sendEmail,
   sendSolvedUpdateRequest,
   sendUpdateIssueRequest,
 } from "@/services";
@@ -32,6 +34,14 @@ export default function IssueStatus({ issue }) {
             issue.id
           );
           addStatus(newStatus);
+
+          sendEmail(
+            "lgfiorentino@gmail.com",
+            "Subject: testing functionality",
+            "Text body",
+            "<p>IS IT WORKING ???</p>"
+          );
+
           break;
         }
         case "solved": {

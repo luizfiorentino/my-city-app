@@ -1,5 +1,24 @@
 import axios from "axios";
 
+export async function sendEmail(to, subject, text, html) {
+  const url = "/api/updateEmail";
+  console.log("from services sendEmail f:", "to:", to, "subject:", subject);
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ to, subject, text, html }),
+  });
+
+  if (response.ok) {
+    console.log("Email sent successfully");
+  } else {
+    console.error("Failed to send email");
+  }
+}
+
 export async function postIssue({ file, ...data }) {
   const formData = new FormData();
   // "in" return the keys
