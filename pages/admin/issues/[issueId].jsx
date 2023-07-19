@@ -38,7 +38,10 @@ export default function IssueStatus({ issue }) {
           break;
         }
         case "solved": {
-          const newStatus = await sendSolvedUpdateRequest(issue.id);
+          const newStatus = await sendSolvedUpdateRequest(
+            issue.id,
+            issue.email
+          );
           addStatus(newStatus);
 
           break;

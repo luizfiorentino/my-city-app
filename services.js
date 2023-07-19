@@ -64,12 +64,13 @@ export async function sendDeleteRequest(issueId) {
   return await axios.delete(`/api/issues/${issueId}`);
 }
 
-export async function sendSolvedUpdateRequest(issueId) {
+export async function sendSolvedUpdateRequest(issueId, email) {
   const response = await axios.post(`/api/statusChanges`, {
     statusChange: {
       status: "Solved",
       message: "Issue solved",
       issueId: issueId,
+      email: email,
     },
   });
 
