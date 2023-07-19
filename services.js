@@ -47,12 +47,13 @@ export async function postIssue({ file, ...data }) {
   }
 }
 
-export async function sendUpdateIssueRequest(status, message, issueId) {
+export async function sendUpdateIssueRequest(status, message, issueId, email) {
   const response = await axios.post(`/api/statusChanges`, {
     statusChange: {
       status: status,
       message: message,
       issueId: issueId,
+      email: email,
     },
   });
 

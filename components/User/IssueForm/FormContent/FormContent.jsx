@@ -9,7 +9,6 @@ import { BsTrash } from "react-icons/bs";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import IssueContext from "@/utils/IssueContext";
 import Button from "@/components/Shared/Button/Button";
-import { geolocationApiCall } from "@/services";
 
 const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
@@ -63,10 +62,8 @@ export default function FormContent({
         "An error occurred when fetching the address with the informed coordinates:"
       );
       context.setLoading(false);
-
       return;
     }
-
     context.setLoading(false);
   };
 
@@ -126,7 +123,7 @@ export default function FormContent({
       <FormInput
         label="Email (optional, to get folow ups)"
         placeHolder="e.g. mike@ness.com"
-        error={errors.userName}
+        error={errors.email}
         register={emailRegister}
         type="text"
         name="userName"

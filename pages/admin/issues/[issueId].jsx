@@ -30,23 +30,10 @@ export default function IssueStatus({ issue }) {
           const newStatus = await sendUpdateIssueRequest(
             status,
             message,
-            issue.id
+            issue.id,
+            issue.email
           );
           addStatus(newStatus);
-
-          sendEmail(
-            issue.email,
-            "Subject: My City App Notification",
-            `Your Issue Status: ${issue.status}`,
-            `
-            <h2>Dear user</h2>
-            <h3>There is an update in your posted issue id AMS${issue.id}!</h3>
-            <h3>Current Status: ${status}</h3>
-            <h3>Message: ${message}</h3>
-           <p>Thanks for using My City App! </p>
-           <p>Please note this is a non-reply email.</p>
-          `
-          );
 
           break;
         }

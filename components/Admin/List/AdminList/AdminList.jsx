@@ -48,21 +48,25 @@ export default function AdminList(props) {
         <ReportsBar issues={props.data} selectedItems={issuesSelected} />
         <div className={styles.issuesList}>
           {!noIssue &&
-            filterIssues(props.data).map((issue) => (
-              <IssueCard
-                key={issue.id}
-                id={issue.id}
-                date={issue.createdAt}
-                userName={issue.userName}
-                description={issue.description}
-                location={issue.location}
-                updates={issue.statusChange}
-              />
-            ))}
+            filterIssues(props.data)
+              .sort(
+                (issueA, issueB) =>
+                  new Date(issueB.createdAt) - new Date(issueA.createdAt)
+              )
+              .map((issue) => (
+                <IssueCard
+                  key={issue.id}
+                  id={issue.id}
+                  date={issue.createdAt}
+                  userName={issue.userName}
+                  description={issue.description}
+                  location={issue.location}
+                  updates={issue.statusChange}
+                />
+              ))}
           {noIssue === true && (
             <div className={styles.emptyResult}>
               <img className={styles.emptyImg} src={emptyImage.src} />
-
               <TextBold variant="largerFont">There is nothing here</TextBold>
             </div>
           )}

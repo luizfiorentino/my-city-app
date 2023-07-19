@@ -26,9 +26,12 @@ const formSchema = z.object({
     .max(255, "the provided location contains too much characters"),
   email: z
     .string()
-    .email("please provide a valid email address")
-    .max(255, "the provided email contains too many characters")
-    .optional(),
+    .refine(
+      (value) => value === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      {
+        message: "Please provide a valid email address or leave it empty",
+      }
+    ),
   file: z
     .array(z.any())
     .max(3, "You can upload up to 3 images")
