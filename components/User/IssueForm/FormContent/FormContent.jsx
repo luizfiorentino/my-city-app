@@ -9,6 +9,7 @@ import { BsTrash } from "react-icons/bs";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import IssueContext from "@/utils/IssueContext";
 import Button from "@/components/Shared/Button/Button";
+import { geolocationApiCall } from "@/services";
 
 const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
@@ -30,27 +31,43 @@ export default function FormContent({
   const context = useContext(IssueContext);
 
   const getUserCurrentLocation = async () => {
-    if (navigator.geolocation) {
-      context.setLoading(true);
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
+    context.setLoading(true);
 
-          context.setLatitude(latitude);
-          context.setLongitude(longitude);
-          geolocationApiCall(latitude, longitude);
-          context.setLoading(false);
-        },
-
-        (error) => {
-          setError(error.message);
-          context.setLoading(false);
-        }
-      );
-    } else {
-      setError("Geolocation is not supported by this browser.");
+    if (!navigator.geolocation) {
+      console.log("Geolocation is not supported by this browser.");
       context.setLoading(false);
+      return;
     }
+
+    const location = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (location) => resolve(location),
+        (error) => reject(error)
+      );
+    });
+
+    if (!location) {
+      console.log("Error when getting your geolocation");
+      context.setLoading(false);
+      return;
+    }
+    const { latitude, longitude } = location.coords;
+    context.setLatitude(latitude);
+    context.setLongitude(longitude);
+
+    const response = await geolocationApiCall(latitude, longitude);
+    const [error, _address] = response;
+
+    if (error) {
+      console.log(
+        "An error occurred when fetching the address with the informed coordinates:"
+      );
+      context.setLoading(false);
+
+      return;
+    }
+
+    context.setLoading(false);
   };
 
   const locationChoice = (choice, e) => {
@@ -73,28 +90,23 @@ export default function FormContent({
     setLocationType(null);
   };
 
-  async function geolocationApiCall(latitude, longitude) {
+  const geolocationApiCall = async (latitude, longitude) => {
     const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
+    const domain = window.location.origin;
+    const headers = {
+      "x-domain-header": domain,
+    };
+    const response = await fetch(apiUrl, { headers });
+    const data = await response.json();
 
-    try {
-      const domain = window.location.origin; // Get the current domain
-      const headers = {
-        "x-domain-header": domain, // Set the custom header with the domain
-      };
-
-      const response = await fetch(apiUrl, { headers });
-      const data = await response.json();
-
-      if (response.ok) {
-        const { address } = data;
-        context.setIssueAddress(address);
-      } else {
-        console.log("No address found for the given coordinates.");
-      }
-    } catch (error) {
-      console.log("An error occurred:", error);
+    if (!response.ok) {
+      console.log("No address found for the given coordinates.");
+      return ["No address found.", null];
     }
-  }
+    const { address } = data;
+    context.setIssueAddress(address);
+    return [null, address];
+  };
 
   return (
     <div className={styles.formContent}>
@@ -102,6 +114,7 @@ export default function FormContent({
       <FormSubtitle>
         Please provide your name, description and location of the issue.
       </FormSubtitle>
+
       <FormInput
         label="Name"
         placeHolder="e.g. Mike Ness"

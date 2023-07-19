@@ -68,6 +68,22 @@ const formSchema = z.object({
     ),
 });
 
+import { toDataURL } from "qrcode";
+
+// URL to be encoded in the QR code
+const url =
+  "https://my-city-app-git-main-luizfiorentino.vercel.app/?vercelToolbarCode=rgrbfhEizGUl1AP";
+
+// Generate the QR code as a data URL
+toDataURL(url, (err, dataUrl) => {
+  if (err) {
+    console.error("Error generating QR code:", err);
+    return;
+  }
+  console.log("QR code generated successfully.");
+  console.log("Data URL:", dataUrl);
+});
+
 export default function UserForm() {
   const context = useContext(IssueContext);
   const [successRequest, setSuccessRequest] = useState(false);

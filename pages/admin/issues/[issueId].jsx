@@ -11,7 +11,6 @@ import DetailsPlate from "@/components/Admin/Details/DetailsPlate";
 import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 import IssueContext from "@/utils/IssueContext";
 import {
-  handleIssueUpdate,
   sendDeleteRequest,
   sendEmail,
   sendSolvedUpdateRequest,
@@ -22,7 +21,6 @@ export default function IssueStatus({ issue }) {
   const router = useRouter();
   const context = useContext(IssueContext);
   const [issueDetails, setIssueDetails] = useState(issue);
-  console.log("issue details page:", issue);
 
   const updateStatus = async (message, status, buttonMode) => {
     try {
