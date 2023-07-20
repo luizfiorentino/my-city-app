@@ -6,7 +6,7 @@ const maxRequestsPerWindow = 100;
 const rateLimits = new Map();
 const allowedDomains = [
   "http://localhost:3000",
-  "https://my-city-app.vercel.app/",
+  "https://my-city-app.vercel.app",
 ];
 
 export default async function handler(req, res) {
