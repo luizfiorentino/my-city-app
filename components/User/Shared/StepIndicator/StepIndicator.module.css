@@ -6,7 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color--text-primary);
+  color: var(--color--white);
+  /* color: var(--color--text-primary); */
   font-family: "Ubuntu";
   font-size: 14px;
   font-weight: bold;
@@ -15,6 +16,26 @@
   width: 33px;
   height: 33px;
   border-radius: 999px;
+  border: 1px solid var(--color--white);
+  /* background-color: var(--color-sky-blue); */
+}
+
+.circleActive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* color: var(--color--text-primary); */
+  font-family: "Ubuntu";
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  width: 33px;
+  height: 33px;
+  border-radius: 999px;
+  border: 1px solid var(--color-sky-blue);
+  color: var(--color--text-primary);
   background-color: var(--color-sky-blue);
 }
 

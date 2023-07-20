@@ -13,6 +13,9 @@
 .stepIndicators {
   margin-top: 2.5rem;
   margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
 .form {

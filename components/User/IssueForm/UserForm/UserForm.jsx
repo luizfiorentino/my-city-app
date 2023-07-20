@@ -88,12 +88,16 @@ toDataURL(url, (err, dataUrl) => {
   console.log("Data URL:", dataUrl);
 });
 
+const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
+
 export default function UserForm() {
   const context = useContext(IssueContext);
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSources, setPreviewSources] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  console.log("index:", selectedIndex);
 
   const {
     formState: { errors },
@@ -211,7 +215,14 @@ export default function UserForm() {
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}>
         <div className={styles.stepIndicators}>
-          <StepIndicator number={1} description="ISSUE'S INFO" />
+          {formSteps.map((step, i) => (
+            <StepIndicator
+              number={i + 1}
+              description={step}
+              onClick={() => setSelectedIndex(i)}
+              selected={selectedIndex === i ? true : false}
+            />
+          ))}
         </div>
       </div>{" "}
       <div className={styles.form}>
