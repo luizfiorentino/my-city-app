@@ -1,6 +1,5 @@
 .primary {
   font-family: "League Spartan", sans-serif;
-
   line-height: 15px;
   font-weight: 500;
   letter-spacing: -0.1px;
@@ -16,7 +15,8 @@
 }
 
 .whiteText {
-  color: white;
+  color: var(--color--white);
   line-height: 18px;
   letter-spacing: 0.3px;
+  font-family: "League Spartan", sans-serif;
 }

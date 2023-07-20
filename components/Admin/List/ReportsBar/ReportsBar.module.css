@@ -1,17 +1,12 @@
 .main {
-  padding: 0px 24px 32px;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 24px 32px;
 }
 
-.filter {
-  /* background-color: red; */
-  display: flex;
-  align-items: center;
-}
-
-.filter:hover {
-  cursor: pointer;
+.total {
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .filterAndEdit {
@@ -21,15 +16,81 @@
   gap: 18px;
 }
 
+.filter {
+  display: flex;
+  align-items: center;
+}
+
+.filter:hover {
+  cursor: pointer;
+}
+
+.filterExtraText {
+  display: none;
+}
+
 .arrowIcon {
   margin-left: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+.dropdownContainer {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: -50px;
+  left: -165px;
+
+  padding: 8px;
+  border: 1px solid var(--color--bg-canvas-lighter);
+  box-shadow: 0px 0px 18px 0px var(--color--black);
+  border-radius: 8px;
+  z-index: 999;
+  background: var(--color--bg-canvas);
+  /* background: 979797; */
+}
+
+.closeIcon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  transition: 0.3s;
+}
+
+.closeIcon:hover {
+  cursor: pointer;
+  color: var(--color--intense-purple);
+  border-radius: 8px;
+}
+
+.lItems {
+  border-radius: 8px;
+  list-style: none;
+  margin: 15px 0;
+  min-width: 10rem;
+  border: 1px solid transparent;
+  width: 100%;
+  position: relative;
+  transition: 0.3s;
+  margin-top: 1.2rem;
+}
+
+.lItems:hover {
+  border: 1px solid var(--color--intense-purple);
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .newIssue {
   width: 90px;
   height: 44px;
   padding: 6px 13px 6px 6px;
-  background-color: #7c5dfa;
+  background-color: var(--color--intense-purple);
   border-radius: 24px;
   display: flex;
   justify-content: space-between;
@@ -41,6 +102,23 @@
   border: none;
 }
 
+.addIcon {
+  color: var(--color--intense-purple);
+  font-size: 18px;
+  font-weight: 700;
+  height: 32px;
+  width: 32px;
+  border-radius: 999px;
+  background-color: var(--color--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plusSign {
+  margin-top: 2px;
+}
+
 .newIssue:hover {
   cursor: pointer;
 }
@@ -49,37 +127,22 @@
   display: none;
 }
 
-.filterExtraText {
-  display: none;
-}
-
-.addIcon {
-  color: #7c5dfa;
-  font-size: 18px;
-  font-weight: 700;
-  height: 32px;
-  width: 32px;
-  border-radius: 999px;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .issues {
   text-align: center !important;
   margin-bottom: 5px !important;
 }
 
-.total {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-.plusSign {
-  margin-top: 2px;
+@media screen and (max-width: 454px) {
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 10%;
+    left: 0%;
+  }
 }
 
-@media screen and (min-width: 300px) {
+@media screen and (min-width: 454px) {
   .main {
     display: flex;
   }
@@ -144,5 +207,6 @@
 @media screen and (min-width: 1000px) {
   .main {
     padding: 30px 0px 55px;
+    min-width: 609px;
   }
 }

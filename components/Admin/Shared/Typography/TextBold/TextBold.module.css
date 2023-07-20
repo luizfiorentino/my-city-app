@@ -1,9 +1,10 @@
 .textBoldRegular {
+  font-family: "League Spartan", sans-serif;
   font-weight: 700;
   font-size: 15px;
   line-height: 15px;
   letter-spacing: -0.25px;
-  color: white;
+  color: var(--color--white);
 }
 
 .higherLine {
@@ -17,15 +18,25 @@
   letter-spacing: -0.75px;
 }
 
+.largerFont {
+  font-size: 24px;
+  line-height: 1.8rem;
+}
+
+.location {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hash {
+  color: var(--color--hash);
+  font-weight: 400;
+}
+
 @media screen and (min-width: 712px) {
   .largeText {
     font-size: 36px;
     line-height: 33px;
     letter-spacing: -1.13px;
   }
-}
-
-.hash {
-  color: var(--color--hash);
-  font-weight: 400;
 }

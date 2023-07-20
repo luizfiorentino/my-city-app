@@ -1,13 +1,12 @@
 .externalContainer {
-  background-color: #ffffff;
+  color: var(--color--text-primary);
+  background-color: var(--color--white);
   padding: 32px 24px;
   margin: 0px 16px 24px 16px;
   margin: 0 16px;
   border-radius: 10px;
   position: relative;
   bottom: 96px;
-
-  color: #022959;
 }
 
 .message {
@@ -18,7 +17,7 @@
 }
 
 .subtitle {
-  color: #9699aa;
+  color: var(--color--soft-grey);
   font-size: 16px;
   line-height: 25px;
   font-weight: 400;
@@ -33,7 +32,6 @@
   .externalContainer {
     bottom: 0;
     margin: 0 0 44px 0;
-
     padding: 16px 0 0 0;
   }
 }

@@ -1,5 +1,23 @@
 import axios from "axios";
 
+export async function sendEmail(to, subject, text, html) {
+  const url = "/api/updateEmail";
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ to, subject, text, html }),
+  });
+
+  if (response.ok) {
+    console.log("Email sent successfully");
+  } else {
+    console.error("Failed to send email");
+  }
+}
+
 export async function postIssue({ file, ...data }) {
   const formData = new FormData();
   // "in" return the keys
@@ -21,7 +39,7 @@ export async function postIssue({ file, ...data }) {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log("Service response", response);
+
     return [null, response];
   } catch (error) {
     console.log(error);
@@ -29,12 +47,13 @@ export async function postIssue({ file, ...data }) {
   }
 }
 
-export async function sendUpdateIssueRequest(status, message, issueId) {
+export async function sendUpdateIssueRequest(status, message, issueId, email) {
   const response = await axios.post(`/api/statusChanges`, {
     statusChange: {
       status: status,
       message: message,
       issueId: issueId,
+      email: email,
     },
   });
 
@@ -45,12 +64,13 @@ export async function sendDeleteRequest(issueId) {
   return await axios.delete(`/api/issues/${issueId}`);
 }
 
-export async function sendSolvedUpdateRequest(issueId) {
+export async function sendSolvedUpdateRequest(issueId, email) {
   const response = await axios.post(`/api/statusChanges`, {
     statusChange: {
       status: "Solved",
       message: "Issue solved",
       issueId: issueId,
+      email: email,
     },
   });
 

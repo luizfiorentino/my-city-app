@@ -7,12 +7,20 @@
   padding: 24px;
 }
 
+.hiddenBar {
+  padding: 24px 48px 27px;
+}
+
 .topCard {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.topCardHidden {
+  display: none;
 }
 
 .topCardInner {
@@ -22,20 +30,28 @@
   align-items: center;
 }
 
-.buttonsPannel {
-  display: none;
-}
-
 .status {
   color: var(--color--pale-grey);
+}
+
+.buttonsPannel {
+  display: none;
 }
 
 .pending {
   align-self: auto;
 }
 
+.buttonsPannelFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .confirmationMessage {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
   color: var(--color--intense-purple) !important;
   font-size: 18px !important;
   align-self: flex-start;
@@ -46,11 +62,12 @@
 }
 
 .selectorInner {
-  width: 100px;
+  width: 150px;
   padding: 14px 0 11px 0;
   text-align: center;
   align-self: flex-end;
   color: var(--color--orange);
+  font-weight: 700;
   border-radius: 6px;
 }
 
@@ -66,21 +83,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.buttonsPannelFooter {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.topCardHidden {
-  display: none;
-}
-
-.hiddenBar {
-  padding: 24px 48px 27px;
 }
 
 @media screen and (max-width: 240px) {
@@ -100,9 +102,10 @@
   }
 }
 
-@media screen and (max-width: 370px) {
-  .buttons {
+@media screen and (max-width: 300px) {
+  .topCardInner {
     flex-direction: column;
+    gap: 1rem;
   }
 }
 
@@ -110,6 +113,12 @@
   .buttonsPannelFooter {
     flex-direction: column;
     gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 582px) {
+  .buttons {
+    flex-direction: column;
   }
 }
 

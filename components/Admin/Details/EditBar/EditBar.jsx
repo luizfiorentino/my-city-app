@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
+import dayjs from "dayjs";
 import styles from "./EditBar.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
 import Modal from "../Modal/Modal";
 import IssueContext from "@/utils/IssueContext";
-import dayjs from "dayjs";
 import Button from "@/components/Shared/Button/Button";
 import StatusBanner from "../StatusBanner/StatusBanner";
 
@@ -20,11 +20,10 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
     : null;
 
   const [message, setMessage] = useState("");
-  const [buttonMode, setButtonMode] = useState("");
   const [status, setStatus] = useState(lastSavedStatus);
 
   const submit = () => {
-    updateStatus(message, status, buttonMode);
+    updateStatus(message, status, context.buttonMode);
   };
 
   const buttonOptions = [
@@ -35,17 +34,17 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
   ];
 
   const clickDelete = () => {
-    setButtonMode("delete");
+    context.setButtonMode("delete");
     context.setOpenModal(true);
   };
 
   const clickEdit = () => {
-    setButtonMode("edit");
+    context.setButtonMode("edit");
     context.setOpenModal(true);
   };
 
   const clickSolved = () => {
-    setButtonMode("solved");
+    context.setButtonMode("solved");
     context.setOpenModal(true);
   };
 
@@ -69,7 +68,7 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
         >
           <TextParagraph className={styles.status}>Status</TextParagraph>
 
-          <div className={styles.editStstusButton}>
+          <div>
             <StatusBanner
               variant={lastSavedStatus === "Solved" ? "solved" : "primary"}
               className={styles.pending}
@@ -97,10 +96,10 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
 
       <Modal>
         <TextBold className={styles.confirmationMessage}>
-          {modalMessages[buttonMode]}
+          {modalMessages[context.buttonMode]}
         </TextBold>
 
-        {buttonMode === "edit" && (
+        {context.buttonMode === "edit" && (
           <>
             <div className={styles.selector}>
               <select
@@ -119,7 +118,6 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
             >
               Enter a message related to it
             </TextBold>
-
             <textarea
               type="text"
               onChange={(e) => setMessage(e.target.value)}
@@ -132,7 +130,8 @@ export default function EditBar({ arrayChanges, updateStatus, footer }) {
           <Button
             onClick={submit}
             disabled={
-              (buttonMode === "edit" && message.length <= 4) || context.loading
+              (context.buttonMode === "edit" && message.length <= 4) ||
+              context.loading
             }
             loading={context.loading}
           >

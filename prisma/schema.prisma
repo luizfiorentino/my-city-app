@@ -12,15 +12,20 @@ datasource db {
 
 model Issue {
   id                String        @id @default(uuid())
-  // id String @id @default(auto()) @map("_id") @db.ObjectId
   userName          String        
   description       String?
-  location          String
+  location          String?
+  latitude          Float?
+  longitude         Float?
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
   statusChange      StatusChange[]
   images            Image[]
+  email             String?
 }
+
+
+
 
 model Image {
   id                String        @id @default(uuid())
@@ -77,6 +82,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  
 }
 
 model VerificationToken {
@@ -86,3 +92,17 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// Just to keep as reference (previous version)
+// model Issue {
+//   id                String        @id @default(uuid())
+//   // id String @id @default(auto()) @map("_id") @db.ObjectId
+//   userName          String        
+//   description       String?
+//   location          String
+//   createdAt         DateTime      @default(now())
+//   updatedAt         DateTime      @updatedAt
+//   statusChange      StatusChange[]
+//   images            Image[]
+// }
+

@@ -1,22 +1,30 @@
 import React from "react";
 import styles from "./FormInput.module.css";
-import ErrorMessage from "../../StatusMessage/StatusMessage";
+import StatusMessage from "../../StatusMessage/StatusMessage";
 import { ubuntu } from "@/styles/fonts";
 
-export default function FormInput(props) {
+export default function FormInput({
+  label,
+  type,
+  name,
+  placeHolder,
+  register,
+  variant,
+  error,
+}) {
   return (
     <>
-      <label className={styles.label}>{props.label}</label>{" "}
+      <label className={styles.label}>{label}</label>{" "}
       <input
-        type={props.type}
-        name={props.name}
-        placeholder={props.placeHolder}
-        className={`${
-          props.variant === "photos" ? styles.hidden : styles.input
-        } ${ubuntu.className}`}
-        {...props.register}
-      />{" "}
-      {props.error && <ErrorMessage>{props.error.message}</ErrorMessage>}
+        type={type}
+        name={name}
+        placeholder={placeHolder}
+        className={`${variant === "photos" ? styles.hidden : styles.input} ${
+          ubuntu.className
+        } ${styles["variant"]}`}
+        {...register}
+      />
+      {error && <StatusMessage>{error.message}</StatusMessage>}
     </>
   );
 }

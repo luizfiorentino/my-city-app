@@ -1,36 +1,22 @@
-@media screen and (max-width: 216px) {
-  .main {
-    width: 100% !important;
-  }
-  .screen {
-    width: 100% !important;
-  }
-}
-
 .main {
-  width: 72px;
-  height: 72px;
-  background-color: #7c5dfa;
-  border-radius: 0px 20px 20px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  width: 72px;
+  height: 72px;
+  background-color: var(--color--intense-purple);
+  border-radius: 0px 20px 20px 0px;
   overflow: hidden;
   position: relative;
 }
 
 .shapes {
-  border-top: 5px solid white;
-  border-bottom: 5px solid white;
-  border-left: 5px solid #7c5dfa;
-
+  border-top: 5px solid var(--color--white);
+  border-bottom: 5px solid var(--color--white);
+  border-left: 5px solid var(--color--intense-purple);
   border-width: 14px;
-
   width: 28px;
   height: 0;
-  /* margin: 20px; */
   border-radius: 999px;
   z-index: 15;
   rotate: 90deg;
@@ -46,14 +32,20 @@
   position: absolute;
   width: 72px;
   height: 72px;
-  /* left: calc(50% - 72px / 2 - 79.5px); */
-
   top: 36.35px;
   z-index: 10;
-
-  background: #9277ff;
+  background: var(--color-opaque-purple);
   border-radius: 0px 20px 20px 0px;
   transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+@media screen and (max-width: 216px) {
+  .main {
+    width: 100% !important;
+  }
+  .screen {
+    width: 100% !important;
+  }
 }
 
 @media screen and (min-width: 712px) {

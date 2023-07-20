@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./TextBold.module.css";
 import { leagueSpartan } from "@/styles/fonts";
+import styles from "./TextBold.module.css";
 
 export default function TextBold({
   variant = "normal",

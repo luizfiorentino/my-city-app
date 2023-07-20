@@ -7,59 +7,59 @@ export default function serialize(data) {
 
 export function dateFormat(createdAt) {
   let month;
-  if (createdAt.substring(5, 7) === "01") {
+  if (createdAt?.substring(5, 7) === "01") {
     month = "Jan";
   }
-  if (createdAt.substring(5, 7) === "02") {
+  if (createdAt?.substring(5, 7) === "02") {
     month = "Feb";
   }
-  if (createdAt.substring(5, 7) === "03") {
+  if (createdAt?.substring(5, 7) === "03") {
     month = "Mar";
   }
-  if (createdAt.substring(5, 7) === "04") {
+  if (createdAt?.substring(5, 7) === "04") {
     month = "Apr";
   }
-  if (createdAt.substring(5, 7) === "05") {
+  if (createdAt?.substring(5, 7) === "05") {
     month = "May";
   }
-  if (createdAt.substring(5, 7) === "06") {
+  if (createdAt?.substring(5, 7) === "06") {
     month = "Jun";
   }
-  if (createdAt.substring(5, 7) === "07") {
+  if (createdAt?.substring(5, 7) === "07") {
     month = "Jul";
   }
-  if (createdAt.substring(5, 7) === "08") {
+  if (createdAt?.substring(5, 7) === "08") {
     month = "Aug";
   }
-  if (createdAt.substring(5, 7) === "09") {
+  if (createdAt?.substring(5, 7) === "09") {
     month = "Sep";
   }
-  if (createdAt.substring(5, 7) === "10") {
+  if (createdAt?.substring(5, 7) === "10") {
     month = "Oct";
   }
-  if (createdAt.substring(5, 7) === "11") {
+  if (createdAt?.substring(5, 7) === "11") {
     month = "Nov";
   }
-  if (createdAt.substring(5, 7) === "12") {
+  if (createdAt?.substring(5, 7) === "12") {
     month = "Dec";
   }
 
   let prefix;
-  if (createdAt.substring(8, 10) === "1") {
+  if (createdAt?.substring(8, 10) === "1") {
     prefix = "st";
   }
-  if (createdAt.substring(8, 10) === "2") {
+  if (createdAt?.substring(8, 10) === "2") {
     prefix = "nd";
   }
-  if (createdAt.substring(8, 10) === "3") {
+  if (createdAt?.substring(8, 10) === "3") {
     prefix = "rd";
   } else {
     prefix = "th";
   }
-  return `${createdAt.substring(8, 10)}${prefix} ${month} ${createdAt.substring(
-    0,
-    4
-  )}`;
+  return `${createdAt?.substring(
+    8,
+    10
+  )}${prefix} ${month} ${createdAt?.substring(0, 4)}`;
 }
 
 export function Pagination({

@@ -1,22 +1,110 @@
+import { useContext, useState } from "react";
+import dynamic from "next/dynamic";
 import styles from "./FormContent.module.css";
 import FormHeader from "../../Shared/Fields/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle";
 import FormInput from "../../Shared/Fields/FormInput";
 import { AiOutlineUpload } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
-import ErrorMessage from "../../Shared/StatusMessage/StatusMessage";
+import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
+import IssueContext from "@/utils/IssueContext";
+import Button from "@/components/Shared/Button/Button";
+
+const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
+  ssr: false,
+});
 
 export default function FormContent({
   errors,
   userRegister,
   descriptionRegister,
   locationRegister,
+  emailRegister,
   previewSources,
   getRootProps,
   getInputProps,
   isDragActive,
   removeFile,
 }) {
+  const [locationType, setLocationType] = useState(null);
+  const context = useContext(IssueContext);
+
+  const getUserCurrentLocation = async () => {
+    context.setLoading(true);
+
+    if (!navigator.geolocation) {
+      console.log("Geolocation is not supported by this browser.");
+      context.setLoading(false);
+      return;
+    }
+
+    const location = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (location) => resolve(location),
+        (error) => reject(error)
+      );
+    });
+
+    if (!location) {
+      console.log("Error when getting your geolocation");
+      context.setLoading(false);
+      return;
+    }
+    const { latitude, longitude } = location.coords;
+    context.setLatitude(latitude);
+    context.setLongitude(longitude);
+
+    const response = await geolocationApiCall(latitude, longitude);
+    const [error, _address] = response;
+
+    if (error) {
+      console.log(
+        "An error occurred when fetching the address with the informed coordinates:"
+      );
+      context.setLoading(false);
+      return;
+    }
+    context.setLoading(false);
+  };
+
+  const locationChoice = (choice, e) => {
+    if (choice === "current") {
+      e.preventDefault();
+      getUserCurrentLocation();
+      setLocationType("current");
+    }
+    if (choice === "map") {
+      e.preventDefault();
+      //Set Amsterdam Dam City Center as default
+      context.setLatitude(52.3732);
+      context.setLongitude(4.8914);
+      setLocationType("map");
+    }
+  };
+
+  const backToLocationSelection = (e) => {
+    e.preventDefault();
+    setLocationType(null);
+  };
+
+  const geolocationApiCall = async (latitude, longitude) => {
+    const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
+    const domain = window.location.origin;
+    const headers = {
+      "x-domain-header": domain,
+    };
+    const response = await fetch(apiUrl, { headers });
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.log("No address found for the given coordinates.");
+      return ["No address found.", null];
+    }
+    const { address } = data;
+    context.setIssueAddress(address);
+    return [null, address];
+  };
+
   return (
     <div className={styles.formContent}>
       <FormHeader>Reports data</FormHeader>
@@ -33,6 +121,14 @@ export default function FormContent({
         name="userName"
       />
       <FormInput
+        label="Email (optional, to get folow ups)"
+        placeHolder="e.g. mike@ness.com"
+        error={errors.email}
+        register={emailRegister}
+        type="text"
+        name="userName"
+      />
+      <FormInput
         label="Description"
         placeHolder="e.g. there is something..."
         error={errors.description}
@@ -41,18 +137,46 @@ export default function FormContent({
         name="description"
       />
       <FormInput
-        label="Location"
+        variant="photos"
+        label="Choose a form of location"
         placeHolder="e.g. Dijkstraat 123. Amsterdam"
         error={errors.location}
         register={locationRegister}
         type="text"
         name="location"
       />
-      <FormInput label="Pictures (max. 3)" variant="photos" />
+      <div className={locationType !== null ? styles.location : styles.hidden}>
+        <UserLocation locationType={locationType} />
+      </div>
+      <div className={styles.locationButtons}>
+        {locationType === null && locationType !== "current" && (
+          <Button
+            variant="lightGrey"
+            onClick={(e) => locationChoice("current", e)}
+          >
+            Share current location
+          </Button>
+        )}
+        {locationType === null && locationType !== "map" && (
+          <Button variant="lightGrey" onClick={(e) => locationChoice("map", e)}>
+            Choose on the map
+          </Button>
+        )}
+        {(locationType !== null ||
+          locationType === "current" ||
+          locationType === "map") && (
+          <Button
+            variant="lightGrey"
+            onClick={(e) => backToLocationSelection(e)}
+          >
+            Back
+          </Button>
+        )}
+      </div>
+
+      <FormInput label="Pictures (optional, max. 3)" variant="photos" />
       <div
-        className={
-          !previewSources.length ? styles.hiddenInput : styles.uploadImage
-        }
+        className={!previewSources.length ? styles.hidden : styles.uploadImage}
       >
         <div className={styles.imageArea}>
           {previewSources &&
@@ -74,7 +198,7 @@ export default function FormContent({
         </div>
       </div>
       <div>
-        {errors.file && <ErrorMessage>{errors.file.message}</ErrorMessage>}
+        {errors.file && <StatusMessage>{errors.file.message}</StatusMessage>}
       </div>
       <div
         className={styles.dropzone}

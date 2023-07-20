@@ -1,14 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import styles from "./DetailsPlate.module.css";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas/BackgroundCanvas";
 import TextParagraph from "../../Shared/Typography/TextParagraph";
 import TextBold from "../../Shared/Typography/TextBold";
-import { dateFormat } from "@/utils/serialize";
-
-import { Pagination } from "@/utils/serialize";
+import { dateFormat, Pagination } from "@/utils/serialize";
 import StatusCard from "../../Details/StatusCard";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
-import IssueContext from "@/utils/IssueContext";
+
+const UserLocation = dynamic(
+  () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
+  {
+    ssr: false,
+  }
+);
 
 export default function DetailsPlate({
   id,
@@ -18,16 +23,10 @@ export default function DetailsPlate({
   description,
   arrayChanges,
   images,
+  latitude,
+  longitude,
 }) {
-  const context = useContext(IssueContext);
-
   const [openHistory, setOpenHistory] = useState(false);
-
-  function close(e) {
-    if (e.target.id === "overlay") {
-      context.setOpenModal(false);
-    }
-  }
 
   const arrayHistory = arrayChanges.filter(
     (change) => change !== arrayChanges[0]
@@ -35,9 +34,7 @@ export default function DetailsPlate({
 
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 3;
-
   const lastCardIndex = currentPage * cardsPerPage;
-
   const firstCardIndex = lastCardIndex - cardsPerPage;
   const currentCards = arrayHistory.slice(firstCardIndex, lastCardIndex);
   const totalCards = arrayChanges.length;
@@ -48,12 +45,10 @@ export default function DetailsPlate({
         <div className={styles.id}>
           <div className={`${styles.idInner} ${styles.idSpacing}`}>
             <TextBold variant="hash">#</TextBold>
-            <TextBold variant={styles.idLargeScreen}>id</TextBold>{" "}
+            <TextBold variant={styles.idLargeScreen}>id</TextBold>
           </div>
-
           <TextParagraph className={styles.header}>{id}</TextParagraph>
         </div>
-
         <div className={styles.sub}>
           <TextParagraph
             className={`${styles.defaultSpacing} ${styles.rightSide}`}
@@ -76,8 +71,22 @@ export default function DetailsPlate({
           >
             Location
           </TextParagraph>
-          <TextBold className={styles.largeSpacing}>{location}</TextBold>
+          <TextBold className={styles.largeSpacing}>
+            {location.replace("Netherlands", "").replace(/,/g, ".")}
+          </TextBold>
         </div>
+      </div>
+      <div className={styles.location}>
+        <BackgroundCanvas variant="lighterCanvas">
+          {latitude ? (
+            <UserLocation
+              locationType="current"
+              admin="admin"
+              latitude={latitude}
+              longitude={longitude}
+            />
+          ) : undefined}
+        </BackgroundCanvas>
       </div>
       <TextParagraph className={styles.smallerSpacing}>
         Current message
@@ -118,7 +127,6 @@ export default function DetailsPlate({
           ))
         )}
       </BackgroundCanvas>
-
       <div
         className={styles.historyOuter}
         onClick={() => setOpenHistory(!openHistory)}
@@ -126,7 +134,8 @@ export default function DetailsPlate({
         <div className={styles.historyAndUpdates}>
           <TextBold>History</TextBold>
           <TextParagraph className={styles.smallerSpacing}>
-            {arrayChanges.length} updates
+            {arrayChanges.length}{" "}
+            {arrayChanges.length === 1 ? "update" : "updates"}
           </TextParagraph>
         </div>
 
@@ -144,9 +153,14 @@ export default function DetailsPlate({
           />
         )}
       </div>
-      <div className={openHistory === false ? styles.hideHistory : ""}>
+      <div
+        className={
+          openHistory === false || arrayChanges.length === 1
+            ? styles.hideHistory
+            : ""
+        }
+      >
         <div className={styles.pagination}>
-          {" "}
           <BackgroundCanvas
             variant="lighterCanvas"
             className={styles.paginationInner}
@@ -156,7 +170,7 @@ export default function DetailsPlate({
               cardsPerPage={cardsPerPage}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
-            />{" "}
+            />
           </BackgroundCanvas>
         </div>
         {currentCards.map((change) => (
@@ -166,7 +180,7 @@ export default function DetailsPlate({
             issueMessage={change.message}
             issueDate={change.createdAt}
           />
-        ))}{" "}
+        ))}
       </div>
     </BackgroundCanvas>
   );

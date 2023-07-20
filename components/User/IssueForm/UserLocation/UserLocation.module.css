@@ -1,0 +1,21 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 220px;
+  padding: 16px 20px;
+  width: 100%;
+  color: var(--color--text-primary);
+  border: 1px solid var(--color--bg-canvas-lighter);
+  border-radius: 4px;
+  transition: 0.7s;
+}
+
+.mainContainer:hover {
+  border: 1px solid var(--color--intense-purple);
+  border-radius: 8px;
+  cursor: pointer;
+}

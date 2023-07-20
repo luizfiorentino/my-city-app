@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useDropzone } from "react-dropzone";
+import { ubuntu } from "@/styles/fonts";
 import styles from "./UserForm.module.css";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import ConfirmationMessage from "../ConfirmationMessage";
-import { ubuntu } from "@/styles/fonts";
 import { postIssue } from "@/services";
-import { useDropzone } from "react-dropzone";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
+import IssueContext from "@/utils/IssueContext";
 
 const formSchema = z.object({
   userName: z
@@ -22,8 +23,15 @@ const formSchema = z.object({
     .max(255, "the provided description contains too much characters"),
   location: z
     .string()
-    .min(8, "location must be at least 8 characters long")
     .max(255, "the provided location contains too much characters"),
+  email: z
+    .string()
+    .refine(
+      (value) => value === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      {
+        message: "Please provide a valid email address or leave it empty",
+      }
+    ),
   file: z
     .array(z.any())
     .max(3, "You can upload up to 3 images")
@@ -63,7 +71,24 @@ const formSchema = z.object({
     ),
 });
 
+import { toDataURL } from "qrcode";
+
+// URL to be encoded in the QR code
+const url =
+  "https://my-city-app-git-main-luizfiorentino.vercel.app/?vercelToolbarCode=rgrbfhEizGUl1AP";
+
+// Generate the QR code as a data URL
+toDataURL(url, (err, dataUrl) => {
+  if (err) {
+    console.error("Error generating QR code:", err);
+    return;
+  }
+  console.log("QR code generated successfully.");
+  console.log("Data URL:", dataUrl);
+});
+
 export default function UserForm() {
+  const context = useContext(IssueContext);
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSources, setPreviewSources] = useState([]);
@@ -155,7 +180,12 @@ export default function UserForm() {
   const issueRequest = async (data) => {
     try {
       setLoading(true);
-      const [error, _response] = await postIssue(data);
+      const [error, _response] = await postIssue({
+        ...data,
+        latitude: parseFloat(context.latitude),
+        longitude: parseFloat(context.longitude),
+        location: context.issueAddress,
+      });
       if (error) {
         console.log("Failed to submit data");
         setErrorPosting(true);
@@ -179,7 +209,6 @@ export default function UserForm() {
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}></div>
-
       <div className={styles.form}>
         {successRequest === false ? (
           <form onSubmit={handleSubmit(issueRequest)}>
@@ -187,6 +216,7 @@ export default function UserForm() {
               userRegister={{ ...register("userName") }}
               descriptionRegister={{ ...register("description") }}
               locationRegister={{ ...register("location") }}
+              emailRegister={{ ...register("email") }}
               errors={errors}
               previewSources={previewSources}
               getRootProps={{ ...getRootProps() }}
@@ -194,14 +224,12 @@ export default function UserForm() {
               isDragActive={isDragActive}
               removeFile={removeFile}
             />
-
             {errorPosting && (
               <p className={styles.errorMessage}>
                 An error occured when posting the issue. Please try again or
-                contact admin
+                contact admin.
               </p>
             )}
-
             <Footer className={styles.footer}>
               {successRequest === false ? "Post issue" : "Back"}
               {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
@@ -209,7 +237,8 @@ export default function UserForm() {
           </form>
         ) : (
           <ConfirmationMessage
-            className={styles.successMessage}
+            title="Thanks for submiting your issue!"
+            subtitle="Your report will make our city more awesome."
             onClick={returnFormPage}
           >
             Thanks for submitting your issue!

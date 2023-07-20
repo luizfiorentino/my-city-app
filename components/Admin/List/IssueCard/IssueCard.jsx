@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import styles from "./IssueCard.module.css";
 import arrowDown from "../../../../pages/assets/images/icon-arrow-down.svg";
-import Link from "next/link";
-import TextParagraph from "../../Shared/Typography/TextParagraph";
 import { dateFormat } from "@/utils/serialize";
-import TextBold from "../../Shared/Typography/TextBold";
 import BackgroundCanvas from "../../Shared/BackgroundCanvas";
+import TextBold from "../../Shared/Typography/TextBold";
+import TextParagraph from "../../Shared/Typography/TextParagraph";
 import StatusBanner from "../../Details/StatusBanner/StatusBanner";
 
 export default function IssueCard(props) {
   const [showDescription, setShowDescription] = useState(false);
+
+  const wholeAddress = props.location;
+  const location = wholeAddress
+    .split(" ")
+    .slice(0, 2)
+    .join(" ")
+    .replace(/,/g, "");
 
   return (
     <BackgroundCanvas>
@@ -20,14 +27,14 @@ export default function IssueCard(props) {
         <TextBold className={styles.id}>
           <TextBold variant="hash" className={styles.hash}>
             #
-          </TextBold>{" "}
-          {`AMS${props.id.substring(0, 10)}`}
+          </TextBold>
+          {`AMS${props.id?.substring(0, 10)}`}
         </TextBold>
         <TextParagraph className={styles.posted}>
           {dateFormat(props.date)}
         </TextParagraph>
-        <TextBold variant="higherLine" className={styles.location}>
-          {props.location}
+        <TextBold variant="location" className={styles.location}>
+          {location}
         </TextBold>
         <TextParagraph className={styles.userName}>
           {props.userName}

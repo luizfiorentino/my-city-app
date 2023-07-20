@@ -1,27 +1,56 @@
 # My City App
 
-Is there something in your living area that must be fixed or could be improved? Through `My-City-App` users can post such issues, by filling in a form with their names, a description, the location, and even posting pictures of it! The Municipality, on the other hand, can have access to these infos and edit them by changing their status, adding a follow-up message at each step on solving it, and being able to check out the history of the steps taken untill solving it.
-
-There is a `Form Page` for the user to post an issue, and get a feedback whether it was successfully posted or not.
-On the admin side, there is an `Admin List Page` where all issues are listed in cards summarizing each of them with an id, date of submission, address, current status, and an arrow facing down that when clicked drops down the description posted by the user.
-When the admin clicks on the status button, a Details Page opens with all information regarding it, including the photos uploaded by the user (optionally), and a History section comprising all update messages and statusses. In the `Edit Bar` there are three buttons:
-
-- "Edit": a different status can be selected, if necessary, and an update message can be written and added to the History section;
-- "Delete": all data from it will be removed from the database and the list; and
-- "Mark as solved": in this case the status is set to "solved" and a correspondent message is automatically generated.
-
-Both `Admin Pages` can only be accessed by authorized users, who receive a Magic Link in their email account to do so.
+Is there something in your city that needs to be fixed or could be improved? Through `My-City-App` users can connect with the Municipality, by filling in a form with their names, a description, the location, and even posting pictures of it! The Municipality, on the other hand, can have restricted access to these infos, add follow ups with status and message at each step until solving it, and to check out the history of all updates.
 
 # [My City App](https://my-city-app-git-main-luizfiorentino.vercel.app/)
+
+# [Demo Video: click here](https://share.getcloudapp.com/v1uWxA85#)
+
+### My City App website with `Next.js`, `Prisma`, `PostgreSQL`, `Cloudinary`, `Next-Auth`, `React Dropzone`, `React-hook-form`, `Zod Schema validation`, `Multer Middleware`,`Nodemailer`, `Magic Link`, and `Figma Design`.
+
+## Features
+
+
+### Issue Submission Form
 
 https://github.com/luizfiorentino/my-city-app/assets/96445830/34da685b-1c10-4186-a1f9-dd854c212777
 
 
-### My City App website with `Next.js`, `Prisma`, `PostgreSQL`, `Cloudinary`, `Next-Auth`, `React Dropzone`, `React-hook-form`, `Zod Schema validation`, `Multer Middleware`,`Nodemailer`, `Magic Link`, and `Figma Design`.
+
+- Built with `React-hook-form`
+- Users type in name, description of the issue, and the location
+- Related photos can be added (drag and drop) thanks to `React Dropzone`
+- All the above fields are validated with `Zod schema validation`, providing the user feedback
+- Image preview area with `base64` image previews
+- `Remove button` for each selected image
+
+### Admin Restricted Areas
+
+- Built with `Next-Auth`, `Nodemailer` and `Magic Link`
+- The access to `/admin` (list of submitted issues) and `/admin/issues/issueId` (Details Page) endpoints is only possible via login, entering an email address (that must be present in the database as admin)
+- The admin gets a feedback to either check the informed email account or in case something went wrong (e.g. in case an invalid email address is provided)
+- By opening the informed email account and clicking on the Magic Link, the admin is forwarded to the restricted area
+
+### Admin List
+
+- On the top of the page, the total amount of currently submitted issues is displayed, along with a `Filter by status` selector and an `Add New Issue` button
+- The issues are displayed in summarized individual cards comprising its generated id, date of submission, user name, location, status, and a down arrow that when clicked, drops down the description provided by the user
+- There is a Navbar with the App's icon, a `logout button` and the `admin's avatar`. It is placed on the very top of the screen in the mobile and tablet versions, and in the left side in the desktop one
+- Clicking on the `status` button leads the admin to the correspondent `Details Page`
+
+### Details Page
+
+- The Navbar is also displayed here, as described in the item above
+- There is a `Go back` button linking back to the `/admin` page (Admin List)
+- `Edit Bar`: it shows the issue's current status, and three buttons: `Edit`- the admin can enter an update message and select a new status if necessary; `Delete`- the issue and all related info will be deleted after a warning message is displayed; and `Mark as solved`- the status will be automatically be selected as solved, and a correspondent message will be generated
+- Only in the smaller screen version the Edit Bar is displayed underneath
+- `Details Area`: shows the issue's id, date of submission, user who posted, location, the most recent update message (from the admin), the description and related image(s)
+- `History Section`: informs the total of existing updates. Clicking the down arrow expands to display the past updates in cards, three at a time from newest to oldest, each containing the status, message, and date of the update
+- To navigate through the next (or previous) group of inserted updates, use the numbered buttons bar
 
 ## The Challenge and Learning Goals
 
-### How does this app works
+### How does this app work
 
 - User Form Page(`/`): the user fills in the form with his/her name, description and location of the issue, and can optionally upload photos using the drag and drop feature (`React Dropzone`). It uses `React-hook-form` with `Zod schema validation` that either displays an error message in case one or more fields are not found valid or displays a success message if the issue is successfully submitted;
 - An `image preview` feature displays the selected images, each of them with a button that removes it from both the preview and form ("file") arrays;
@@ -69,17 +98,19 @@ https://github.com/luizfiorentino/my-city-app/assets/96445830/34da685b-1c10-4186
 - [Prisma](https://www.prisma.io)
 - [PostgreSQL](https://www.postgresql.org)
 - [Next-Auth](https://next-auth.js.org)
-- [React-hook-form](https://react-hook-form.com), [Zod Validation Schema](https://zod.dev)
+- [React-hook-form](https://react-hook-form.com)
+- [Zod Validation Schema](https://zod.dev)
 - [React Dropzone](https://react-dropzone.js.org)
 - [Multer Middleware](https://expressjs.com/en/resources/middleware/multer.html)
 - [Nodemailer](https://nodemailer.com/about/)
 - [Magic Link](https://magic.link)
+- [Cloudinary](https://cloudinary.com/)
 - [Figma Design](https://www.figma.com)
 - [CSS Styling](https://developer.mozilla.org/en-US/docs/Web/CSS), and [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
-### Concepts and techniques applied
+### Highlights of the Concepts and Techniques Applied
 
-- Next.js: `getSserverSideProps()` function, `Next API Routes`, `NextAuth` with `PrismaClient` and `Email Provider`, `next/head` tag
+- Next.js: `getSserverSideProps()` function, `Next API Routes`, `NextAuth` combined with `PrismaClient` and `Email Provider`, `next/head` tag
 - React: `useState`, `useEffect`, `useContext` hooks, callback props, reusable components
 - Prisma: creating schema and migrations for a `PostgreSQL` databse
 - Cloudinary: uploading images to an assigned folder
@@ -87,21 +118,24 @@ https://github.com/luizfiorentino/my-city-app/assets/96445830/34da685b-1c10-4186
 
 ### How to use this Repo
 
-- create a local folder and inside it type the following command: `git clone git@github.com:luizfiorentino/my-city-app.git`
-- install dependencies with `npm install`
-- open another terminal screen to run the app: `npm run dev` (developers mode)
--
+- Create a local folder and inside it type the following command: `git clone git@github.com:luizfiorentino/my-city-app.git`
+- Install the dependencies with `npm install`
+- Open another terminal screen to run the app: `npm run dev` (developers mode)
+- Check out the `.env.example` file to accordingly setting up the database, cloudinary, Next-Auth, the SMTP, and Github
 
-### Conclusion
+## Conclusion
 
-Try the different screen versions (mobile, tablet, desktop) by expanding/shrinking your browser's screen, explore both user and admin interfaces, e.g. by posting new issues and dragging one or more photos for each of them. Try file extensions other than "jpeg", "jpg", "png", or files larger than 1MB, or uploading more than three files, and check the error messages for each of the cases.  
-In the admin interface, log in with an email address previously added to the database use the sent Magic Link to get access, then brouwse the list of issues and issue details, check the posted issues and try editing one or more of them by selecting a new status, and adding an update message.
-Use the "Delete" button, then look at the databse to verify that the issue and related updates have been actually deleted, and "Mark as solved" one, and the status and update message will be automatically generated.
-Add some update messages to a submitted issue and check the History section by expanding it. Each update will be shown in a card with status and message.
+- Try the different screen versions (mobile, tablet, desktop) by expanding/shrinking your browser's screen, explore both user and admin interfaces, e.g. by posting new issues and dragging one or more photos for each of them. Try file extensions other than ".jpeg", ".jpg", ".png", or files larger than 1MB, or uploading more than three files, and check the error messages for each of the cases
+- In the admin interface, log in with an email address previously added to the database, use the sent Magic Link to get access, verify all issues posted are listed there. Click on one specific issue status and be forwarded to the Details Page
+- In the Details Page, all user input (including uploaded photos) should be neatly displayed
+- Use all the Edit Bar buttons to edit (select a new status, enter an update message), mark an issue as solved, and delete it (you will be redirected to the admin list in the latter case)
+- Add several updates using the edit button and then explore the History Section by expanding it and clicking the numbered buttons bar to see all cards with status, message and date of insertion
+
+## Next.js Documentation:
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+### Getting Started
 
 First, run the development server:
 

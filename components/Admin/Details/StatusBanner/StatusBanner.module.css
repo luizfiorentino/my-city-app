@@ -1,23 +1,21 @@
 .bannerMain {
+  text-align: center;
+  max-width: 172px;
   font-size: 15px;
   line-height: 15px;
   font-weight: 700;
   letter-spacing: -0.25px;
   padding: 14px 19px 11px 18px;
   border-radius: 6px;
-  max-width: 172px;
-  text-align: center;
+  transition: 0.3s;
 }
 
 .primary {
-  background-color: rgba(255, 143, 0, 0.06);
-
-  /* text-align: center; */
-
   color: var(--color--orange);
+  background-color: var(--color--bg-banner);
 }
 
 .solved {
-  color: #33d69f;
-  background-color: rgba(51, 214, 159, 0.06);
+  color: var(--color--green-button);
+  background-color: var(--color--bg-submited);
 }

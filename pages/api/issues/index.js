@@ -4,7 +4,7 @@ import multer from "multer";
 import fs from "fs";
 import { cloudinary } from "../utils/cloudinary";
 
-const upload = multer({ dest: "/tmp" });
+const processMultipartForm = multer({ dest: "/tmp" });
 
 export const config = {
   api: {
@@ -15,7 +15,7 @@ export const config = {
 async function uploadSingleImage(path, folder) {
   try {
     const response = await cloudinary.uploader.upload(path, { folder: folder });
-    console.log("RES?", response);
+
     return [null, response];
   } catch (error) {
     console.log("ERROR?", error);
@@ -23,13 +23,24 @@ async function uploadSingleImage(path, folder) {
   }
 }
 
-async function insertNewIssue(userName, description, location, images) {
+async function insertNewIssue(
+  userName,
+  description,
+  location,
+  latitude,
+  longitude,
+  images,
+  email
+) {
   try {
     const newIssue = await prisma.issue.create({
       data: {
         userName,
         description,
         location,
+        latitude,
+        longitude,
+
         statusChange: {
           create: [
             {
@@ -41,6 +52,7 @@ async function insertNewIssue(userName, description, location, images) {
         images: {
           create: images,
         },
+        email,
       },
     });
     return [null, newIssue];
@@ -52,7 +64,7 @@ async function insertNewIssue(userName, description, location, images) {
 export default function handler(req, res) {
   if (req.method === "POST") {
     return new Promise((resolve, reject) => {
-      upload.array("file", 3)(req, res, async (multerError) => {
+      processMultipartForm.array("file", 3)(req, res, async (multerError) => {
         if (multerError) {
           console.error("Error uploading file with multer:", multerError);
           return reject(res.status(500).send("Error uploading file"));
@@ -79,21 +91,24 @@ export default function handler(req, res) {
           return { url: image.secure_url };
         });
 
-        console.log("URLS?", images);
-
         //remove symbolic links from file system
         req.files.forEach((file) => {
           const path = file.path;
           fs.unlinkSync(path);
         });
 
-        const { userName, description, location } = req.body;
+        //This is after multer process
+        const { userName, description, location, latitude, longitude, email } =
+          req.body;
 
         const [databaseError, newIssue] = await insertNewIssue(
           userName,
           description,
           location,
-          images
+          parseFloat(latitude),
+          parseFloat(longitude),
+          images,
+          email
         );
 
         if (databaseError) {

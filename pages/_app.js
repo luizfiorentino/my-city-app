@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+
 import { useState } from "react";
 import { SessionProvider } from "next-auth/react";
 
@@ -10,7 +11,12 @@ export default function App({
 }) {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [filterIssuesByStatus, setFilterIssueByStatus] = useState("all");
+  const [buttonMode, setButtonMode] = useState("");
+  const [filterIssuesByStatus, setFilterIssueByStatus] = useState("All");
+  const [loadingMap, setLoadingMap] = useState(true);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [issueAddress, setIssueAddress] = useState("Amsterdam");
 
   return (
     <SessionProvider session={session}>
@@ -20,8 +26,18 @@ export default function App({
           setLoading,
           openModal,
           setOpenModal,
+          buttonMode,
+          setButtonMode,
           filterIssuesByStatus,
           setFilterIssueByStatus,
+          longitude,
+          setLongitude,
+          latitude,
+          setLatitude,
+          loadingMap,
+          setLoadingMap,
+          issueAddress,
+          setIssueAddress,
         }}
       >
         {" "}

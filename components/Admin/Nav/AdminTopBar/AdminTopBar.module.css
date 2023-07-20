@@ -1,3 +1,36 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color--bg-canvas);
+  margin-bottom: 32px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.smallIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  margin-right: 20px;
+  background-color: var(--color--regular-grey);
+}
+
+.signOutIcon {
+  margin-top: 2.5px;
+  margin-left: 2.5px;
+}
+
+.signOutIcon:hover {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 216px) {
   .main {
     flex-direction: column;
@@ -10,45 +43,6 @@
   .smallIcon {
     margin: 0 !important;
   }
-}
-
-.main {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #1e2139;
-  margin-bottom: 32px;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-}
-
-.userEmail {
-  font-style: italic;
-  font-weight: 700;
-}
-
-.smallIcon {
-  background-color: #858bb2;
-
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  margin-right: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.signOutIcon {
-  margin-top: 2.5px;
-  margin-left: 2.5px;
-}
-
-.signOutIcon:hover {
-  cursor: pointer;
 }
 
 @media screen and (min-width: 1000px) {

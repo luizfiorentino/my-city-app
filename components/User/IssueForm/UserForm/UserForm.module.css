@@ -1,7 +1,13 @@
 .main {
   margin: auto;
-  /* width: 375px; */
   font-family: "Ubuntu", sans-serif;
+}
+
+.image {
+  min-height: 172px;
+  background-image: url("../../../../pages/assets/images/bg-sidebar-mobile.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .form {
@@ -10,25 +16,9 @@
   min-height: 80vh;
 }
 
-.image {
-  min-height: 172px;
-
-  background-image: url("../../../../pages/assets/images/bg-sidebar-mobile.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .errorMessage {
-  color: red;
+  color: var(--color--danger);
   margin: 5px;
-}
-
-.selectedImages {
-  height: 100px;
-  width: 100px;
-  object-fit: cover;
-  margin: 16px;
-  background-color: antiquewhite;
 }
 
 .footer {
@@ -42,8 +32,7 @@
     max-width: 1024px;
     display: flex;
     justify-content: flex-start;
-
-    background-color: white;
+    background-color: var(--color--white);
     padding: 16px;
   }
 
@@ -54,7 +43,7 @@
   }
 
   .form {
-    background-color: white;
+    background-color: var(--color--white);
     margin: auto;
   }
 }
