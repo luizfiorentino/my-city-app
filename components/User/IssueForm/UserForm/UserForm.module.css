@@ -10,6 +10,11 @@
   background-size: cover;
 }
 
+.stepIndicators {
+  margin-top: 2.5rem;
+  margin-left: 2rem;
+}
+
 .form {
   background-color: var(--color--bg-light);
   padding-top: 24px;

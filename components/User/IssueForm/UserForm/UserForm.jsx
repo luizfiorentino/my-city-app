@@ -11,6 +11,7 @@ import ConfirmationMessage from "../ConfirmationMessage";
 import { postIssue } from "@/services";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import IssueContext from "@/utils/IssueContext";
+import StepIndicator from "../../Shared/StepIndicator/StepIndicator";
 
 const formSchema = z.object({
   userName: z
@@ -208,7 +209,11 @@ export default function UserForm() {
 
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
-      <div className={styles.image}></div>
+      <div className={styles.image}>
+        <div className={styles.stepIndicators}>
+          <StepIndicator number={1} description="ISSUE'S INFO" />
+        </div>
+      </div>{" "}
       <div className={styles.form}>
         {successRequest === false ? (
           <form onSubmit={handleSubmit(issueRequest)}>

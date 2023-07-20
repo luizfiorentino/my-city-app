@@ -1,0 +1,36 @@
+.mainContainer {
+  display: flex;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color--text-primary);
+  font-family: "Ubuntu";
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  width: 33px;
+  height: 33px;
+  border-radius: 999px;
+  background-color: var(--color-sky-blue);
+}
+
+.innerContainer {
+  margin-left: 17px;
+}
+
+.stepNumber {
+  color: var(--color-light-blue);
+  font-size: 12px;
+  font-weight: 100;
+  margin-bottom: 3px;
+}
+
+.stepDescription {
+  color: var(--color--white);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
