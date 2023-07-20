@@ -73,6 +73,7 @@ const formSchema = z.object({
 });
 
 import { toDataURL } from "qrcode";
+import StepOneForm from "../StepOneForm/StepOneForm";
 
 // URL to be encoded in the QR code
 const url =
@@ -228,7 +229,8 @@ export default function UserForm() {
         </div>
       </div>{" "}
       <div className={styles.form}>
-        {successRequest === false ? (
+        <StepOneForm />
+        {/* {successRequest === false ? (
           <form onSubmit={handleSubmit(issueRequest)}>
             <FormContent
               userRegister={{ ...register("userName") }}
@@ -261,7 +263,7 @@ export default function UserForm() {
           >
             Thanks for submitting your issue!
           </ConfirmationMessage>
-        )}
+        )} */}
       </div>
     </div>
   );

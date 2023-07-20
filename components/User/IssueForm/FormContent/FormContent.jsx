@@ -136,7 +136,7 @@ export default function FormContent({
         type="text"
         name="description"
       />
-      <FormInput
+      {/* <FormInput
         variant="photos"
         label="Choose a form of location"
         placeHolder="e.g. Dijkstraat 123. Amsterdam"
@@ -144,11 +144,11 @@ export default function FormContent({
         register={locationRegister}
         type="text"
         name="location"
-      />
-      <div className={locationType !== null ? styles.location : styles.hidden}>
+      /> */}
+      {/* <div className={locationType !== null ? styles.location : styles.hidden}>
         <UserLocation locationType={locationType} />
-      </div>
-      <div className={styles.locationButtons}>
+      </div> */}
+      {/* <div className={styles.locationButtons}>
         {locationType === null && locationType !== "current" && (
           <Button
             variant="lightGrey"
@@ -172,10 +172,10 @@ export default function FormContent({
             Back
           </Button>
         )}
-      </div>
+      </div> */}
 
-      <FormInput label="Pictures (optional, max. 3)" variant="photos" />
-      <div
+      {/* <FormInput label="Pictures (optional, max. 3)" variant="photos" /> */}
+      {/* <div
         className={!previewSources.length ? styles.hidden : styles.uploadImage}
       >
         <div className={styles.imageArea}>
@@ -196,11 +196,11 @@ export default function FormContent({
               </div>
             ))}
         </div>
-      </div>
+      </div> */}
       <div>
         {errors.file && <StatusMessage>{errors.file.message}</StatusMessage>}
       </div>
-      <div
+      {/* <div
         className={styles.dropzone}
         {...getRootProps}
         style={{ color: "black" }}
@@ -214,7 +214,7 @@ export default function FormContent({
             <AiOutlineUpload className={styles.uploadIcon} />
           </FormSubtitle>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

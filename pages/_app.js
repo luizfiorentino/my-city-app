@@ -17,6 +17,11 @@ export default function App({
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [issueAddress, setIssueAddress] = useState("Amsterdam");
+  const [stepOneFormData, setStepOneFormData] = useState({
+    userName: "",
+    email: "",
+    description: "",
+  });
 
   return (
     <SessionProvider session={session}>
@@ -38,6 +43,8 @@ export default function App({
           setLoadingMap,
           issueAddress,
           setIssueAddress,
+          stepOneFormData,
+          setStepOneFormData,
         }}
       >
         {" "}
