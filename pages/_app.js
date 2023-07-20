@@ -17,11 +17,13 @@ export default function App({
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [issueAddress, setIssueAddress] = useState("Amsterdam");
+  const [selectedStepForm, setSelectedStepForm] = useState("INFOS");
   const [stepOneFormData, setStepOneFormData] = useState({
     userName: "",
     email: "",
     description: "",
   });
+  const [uploadedPictures, setUploadedPictures] = useState([]);
 
   return (
     <SessionProvider session={session}>
@@ -43,8 +45,12 @@ export default function App({
           setLoadingMap,
           issueAddress,
           setIssueAddress,
+          selectedStepForm,
+          setSelectedStepForm,
           stepOneFormData,
           setStepOneFormData,
+          uploadedPictures,
+          setUploadedPictures,
         }}
       >
         {" "}

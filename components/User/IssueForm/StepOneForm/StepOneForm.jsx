@@ -34,7 +34,8 @@ const formSchema = z.object({
 });
 
 export default function StepOneForm() {
-  const { stepOneFormData, setStepOneFormData } = useContext(IssueContext);
+  const { stepOneFormData, setStepOneFormData, setSelectedStepForm } =
+    useContext(IssueContext);
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,6 +66,7 @@ export default function StepOneForm() {
         email: data.email,
         description: data.description,
       });
+      setSelectedStepForm("location");
 
       if (error) {
         console.log("Failed to submit data");
@@ -82,6 +84,7 @@ export default function StepOneForm() {
       );
       setErrorPosting(true);
       setLoading(false);
+      setSelectedStepForm("LOCATION");
     }
   };
   console.log("context updated?", stepOneFormData);
@@ -109,7 +112,7 @@ export default function StepOneForm() {
                 </p>
               )}
               <Footer className={styles.footer}>
-                {successRequest === false ? "Post issue" : "Back"}
+                {"Next"}
                 {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
               </Footer>
             </form>

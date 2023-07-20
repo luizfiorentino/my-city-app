@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDropzone } from "react-dropzone";
 import { ubuntu } from "@/styles/fonts";
-import styles from "./UserForm.module.css";
+import styles from "./StepThreeForm.module.css";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
 import ConfirmationMessage from "../ConfirmationMessage";
@@ -14,28 +14,8 @@ import IssueContext from "@/utils/IssueContext";
 import StepIndicator from "../../Shared/StepIndicator/StepIndicator";
 import StepOneForm from "../StepOneForm/StepOneForm";
 import StepTwoForm from "../StepTwoForm/StepTwoForm";
-import StepThreeForm from "../StepThreeForm/StepThreeForm";
 
 const formSchema = z.object({
-  userName: z
-    .string()
-    .min(2, "user name must be at least 2 characters long")
-    .max(255, "the provided user name contains too much characters"),
-  description: z
-    .string()
-    .min(10, "description must be at least 10 characters long")
-    .max(255, "the provided description contains too much characters"),
-  location: z
-    .string()
-    .max(255, "the provided location contains too much characters"),
-  email: z
-    .string()
-    .refine(
-      (value) => value === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
-      {
-        message: "Please provide a valid email address or leave it empty",
-      }
-    ),
   file: z
     .array(z.any())
     .max(3, "You can upload up to 3 images")
@@ -75,23 +55,7 @@ const formSchema = z.object({
     ),
 });
 
-import { toDataURL } from "qrcode";
-
-// URL to be encoded in the QR code
-const url =
-  "https://my-city-app-git-main-luizfiorentino.vercel.app/?vercelToolbarCode=rgrbfhEizGUl1AP";
-
-// Generate the QR code as a data URL
-toDataURL(url, (err, dataUrl) => {
-  if (err) {
-    console.error("Error generating QR code:", err);
-    return;
-  }
-});
-
-const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
-
-export default function UserForm() {
+export default function StepThreeForm() {
   const context = useContext(IssueContext);
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
@@ -108,9 +72,6 @@ export default function UserForm() {
     watch,
   } = useForm({
     defaultValues: {
-      userName: "",
-      description: "",
-      location: "",
       file: [],
     },
     // mode: "all", --> don't use, it's users unfriendly
@@ -182,96 +143,65 @@ export default function UserForm() {
     [previewSources, setPreviewSources]
   );
 
-  const issueRequest = async (data) => {
+  const uploadPhotos = async (data) => {
+    if (!data.file) {
+      context.setSelectedStepForm("CONFIRM DATA");
+    }
+
     try {
       setLoading(true);
-      const [error, _response] = await postIssue({
-        ...data,
-        latitude: parseFloat(context.latitude),
-        longitude: parseFloat(context.longitude),
-        location: context.issueAddress,
-      });
-      if (error) {
-        console.log("Failed to submit data");
-        setErrorPosting(true);
-        return;
-      }
+
+      await data.file.map((file) => context.setUploadedPictures(file));
+
       reset();
       setSuccessRequest(true);
       setPreviewSources([]);
       setLoading(false);
+      context.setSelectedStepForm("CONFIRM DATA");
     } catch (error) {
       // Handle error
-      console.log(
-        "An error occurred while submitting form data:",
-        error.message
-      );
+      console.log("An error occurred while submitting form data:");
       setErrorPosting(true);
       setPreviewSources([]);
+      setLoading(false);
     }
   };
-  console.log("context.setpform", context.selectedStepForm);
+  console.log(
+    "Context",
+    context.stepOneFormData,
+    context.uploadedPictures,
+    "lat",
+    context.latitude,
+    "long",
+    context.longitude,
+    "files::",
+    context.uploadedPictures
+  );
 
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
-      <div className={styles.image}>
-        <div className={styles.stepIndicators}>
-          <div className={styles.indicators}>
-            {formSteps.map((step, i) => (
-              <StepIndicator
-                number={i + 1}
-                description={step}
-                onClick={() => setSelectedIndex(i)}
-                selected={context.selectedStepForm === step ? true : false}
-              />
-            ))}
-          </div>
-        </div>
-      </div>{" "}
       <div className={styles.form}>
-        {context.selectedStepForm === "INFOS" && <StepOneForm />}
-        {context.selectedStepForm === "LOCATION" && <StepTwoForm />}
-        {context.selectedStepForm === "PICTURES" && <StepThreeForm />}
-        {context.selectedStepForm === "CONFIRM DATA" && (
-          <ConfirmationMessage
-            title="Yep it's being hard work"
-            subtitle="Next step, the POST request using data from context :)"
+        <form onSubmit={handleSubmit(uploadPhotos)}>
+          <FormContent
+            errors={errors}
+            previewSources={previewSources}
+            getRootProps={{ ...getRootProps() }}
+            getInputProps={{ ...getInputProps() }}
+            isDragActive={isDragActive}
+            removeFile={removeFile}
           />
-        )}
-        {/* {successRequest === false ? (
-          <form onSubmit={handleSubmit(issueRequest)}>
-            <FormContent
-              userRegister={{ ...register("userName") }}
-              descriptionRegister={{ ...register("description") }}
-              locationRegister={{ ...register("location") }}
-              emailRegister={{ ...register("email") }}
-              errors={errors}
-              previewSources={previewSources}
-              getRootProps={{ ...getRootProps() }}
-              getInputProps={{ ...getInputProps() }}
-              isDragActive={isDragActive}
-              removeFile={removeFile}
-            />
-            {errorPosting && (
-              <p className={styles.errorMessage}>
-                An error occured when posting the issue. Please try again or
-                contact admin.
-              </p>
-            )}
-            <Footer className={styles.footer}>
-              {successRequest === false ? "Post issue" : "Back"}
-              {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
-            </Footer>
-          </form>
-        ) : (
-          <ConfirmationMessage
-            title="Thanks for submiting your issue!"
-            subtitle="Your report will make our city more awesome."
-            onClick={returnFormPage}
-          >
-            Thanks for submitting your issue!
-          </ConfirmationMessage>
-        )} */}
+          {errorPosting && (
+            <p className={styles.errorMessage}>
+              An error occured uploading the files. Please try again or contact
+              admin.
+            </p>
+          )}
+
+          <Footer className={styles.footer}>
+            {"Next"}
+            {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
+          </Footer>
+        </form>
       </div>
     </div>
   );
