@@ -10,7 +10,7 @@
   background-size: cover;
 }
 
-.stepIndicators {
+.indicators {
   margin-top: 2.5rem;
   margin-left: 2rem;
   display: flex;
@@ -53,5 +53,31 @@
   .form {
     background-color: var(--color--white);
     margin: auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .stepIndicators {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .indicators {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 17px;
+  }
+}
+
+@media screen and (max-width: 240px) {
+  .indicators {
+    flex-direction: column;
+    margin: 1rem 0;
+  }
+  .image {
+    min-height: 18rem;
   }
 }

@@ -215,14 +215,16 @@ export default function UserForm() {
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}>
         <div className={styles.stepIndicators}>
-          {formSteps.map((step, i) => (
-            <StepIndicator
-              number={i + 1}
-              description={step}
-              onClick={() => setSelectedIndex(i)}
-              selected={selectedIndex === i ? true : false}
-            />
-          ))}
+          <div className={styles.indicators}>
+            {formSteps.map((step, i) => (
+              <StepIndicator
+                number={i + 1}
+                description={step}
+                onClick={() => setSelectedIndex(i)}
+                selected={selectedIndex === i ? true : false}
+              />
+            ))}
+          </div>
         </div>
       </div>{" "}
       <div className={styles.form}>
