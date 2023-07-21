@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ConfirmationMessage.module.css";
 import Footer from "../../Shared/Footer";
+import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 export default function ConfirmationMessage(props) {
   return (
@@ -11,7 +12,10 @@ export default function ConfirmationMessage(props) {
         <div className={styles.summary}>{props.children}</div>
       </div>
 
-      <Footer className={styles.footer}>{props.footer}</Footer>
+      <Footer className={styles.footer}>
+        {props.footer}{" "}
+        {props.loading && <LoaderSpinner className={styles.spinner} />}
+      </Footer>
     </div>
   );
 }

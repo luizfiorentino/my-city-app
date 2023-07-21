@@ -62,6 +62,7 @@ export default function StepThreeForm() {
   const [previewSources, setPreviewSources] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  console.log("state previewSources", previewSources);
 
   const {
     formState: { errors },
@@ -150,6 +151,9 @@ export default function StepThreeForm() {
   );
 
   const uploadPhotos = async (data) => {
+    console.log("data.file??? from upload photos", data.file);
+    //Is correct!!
+
     if (!data.file) {
       context.setSelectedStepForm("CONFIRM DATA");
     }
@@ -157,11 +161,13 @@ export default function StepThreeForm() {
     try {
       setLoading(true);
 
-      await data.file.map((file) => context.setUploadedPictures(file));
+      // await data.file.map((file) => context.setUploadedPictures(file));
+      await context.setUploadedPictures(data.file);
 
       reset();
       setSuccessRequest(true);
       setPreviewSources([]);
+
       setLoading(false);
       context.setSelectedStepForm("CONFIRM DATA");
     } catch (error) {
@@ -169,22 +175,10 @@ export default function StepThreeForm() {
       console.log("An error occurred while submitting form data:");
       setErrorPosting(true);
       setPreviewSources([]);
+
       setLoading(false);
     }
   };
-  console.log(
-    "Context",
-    context.stepOneFormData,
-    context.uploadedPictures,
-    "lat",
-    context.latitude,
-    "long",
-    context.longitude,
-    "files::",
-    context.uploadedPictures,
-    "address",
-    context.issueAddress
-  );
 
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>

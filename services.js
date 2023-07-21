@@ -18,7 +18,28 @@ export async function sendEmail(to, subject, text, html) {
   }
 }
 
-export async function postIssue({ file, ...data }) {
+// export async function postIssue({ file, ...data }) {
+export async function postIssue({
+  userName,
+  description,
+  location,
+  email,
+  latitude,
+  longitude,
+  file,
+}) {
+  console.log(
+    "services POST ISSUE",
+    userName,
+    description,
+    location,
+    email,
+    latitude,
+    longitude,
+    file
+  );
+  const data = { userName, description, location, email, latitude, longitude };
+  console.log("from services, file and data", file, data);
   const formData = new FormData();
   // "in" return the keys
   for (let field in data) {

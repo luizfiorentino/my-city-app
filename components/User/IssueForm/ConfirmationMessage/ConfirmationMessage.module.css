@@ -29,6 +29,12 @@
   padding: 0;
 }
 
+.spinner {
+  position: absolute;
+  right: 8px;
+  top: 16px;
+}
+
 @media screen and (min-width: 800px) {
   .externalContainer {
     bottom: 0;

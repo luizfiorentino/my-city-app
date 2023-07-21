@@ -110,7 +110,7 @@ export default function handler(req, res) {
           images,
           email
         );
-
+        console.log("from api, newIssue", newIssue);
         if (databaseError) {
           console.log("Error during insertion into database:", databaseError);
           return reject(res.status(500).send("Error creating issue"));

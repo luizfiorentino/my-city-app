@@ -39,6 +39,7 @@ export default function StepOneForm() {
     formState: { errors },
     register,
     handleSubmit,
+
     reset,
   } = useForm({
     defaultValues: {
@@ -51,8 +52,8 @@ export default function StepOneForm() {
   });
 
   //remember to add or remove "async/await" statements if necessary later
-  const issueRequest = async (data) => {
-    console.log("data?", data);
+  const submitInfos = async (data) => {
+    console.log("STEP 1 : DATA", data);
     try {
       setLoading(true);
       const [error, _response] = await setStepOneFormData({
@@ -92,7 +93,7 @@ export default function StepOneForm() {
         </div>{" "}
         <div className={styles.form}>
           {successRequest === false ? (
-            <form onSubmit={handleSubmit(issueRequest)}>
+            <form onSubmit={handleSubmit(submitInfos)}>
               <FormContent
                 userRegister={{ ...register("userName") }}
                 descriptionRegister={{ ...register("description") }}

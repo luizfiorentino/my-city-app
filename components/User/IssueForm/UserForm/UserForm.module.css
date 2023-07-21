@@ -57,6 +57,10 @@
   justify-content: center;
 }
 
+.uploadImageBanner {
+  margin-bottom: 16px;
+}
+
 .uploadImage {
   display: flex;
   flex-direction: column;
@@ -94,6 +98,15 @@
   .summaryField {
     flex-direction: column;
   }
+  .uploadImage {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .imageArea {
+    flex-direction: column;
+  }
 }
 
 @media screen and (min-width: 800px) {
@@ -120,6 +133,12 @@
 @media screen and (max-width: 600px) {
   .summaryContainer {
     padding: 18px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .summaryContainer {
+    padding: 8px;
   }
 }
 
