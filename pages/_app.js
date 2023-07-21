@@ -24,6 +24,7 @@ export default function App({
     description: "",
   });
   const [uploadedPictures, setUploadedPictures] = useState([]);
+  const [previewSources, setPreviewSources] = useState([]);
 
   return (
     <SessionProvider session={session}>
@@ -51,6 +52,8 @@ export default function App({
           setStepOneFormData,
           uploadedPictures,
           setUploadedPictures,
+          previewSources,
+          setPreviewSources,
         }}
       >
         {" "}

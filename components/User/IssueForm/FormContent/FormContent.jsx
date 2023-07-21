@@ -142,14 +142,12 @@ export default function FormContent({
         </>
       )}
       {context.selectedStepForm === "LOCATION" && (
-        <FormInput
-          variant="photos"
-          label="Choose a form of location"
-          placeHolder="e.g. Dijkstraat 123. Amsterdam"
-          register={locationRegister}
-          type="text"
-          name="location"
-        />
+        <>
+          <FormHeader>Location</FormHeader>
+          <FormSubtitle>
+            Select an option to inform the location of the issue.
+          </FormSubtitle>
+        </>
       )}
       <div className={locationType !== null ? styles.location : styles.hidden}>
         <UserLocation locationType={locationType} />
@@ -188,7 +186,13 @@ export default function FormContent({
       )}
 
       {context.selectedStepForm === "PICTURES" && (
-        <FormInput label="Pictures (optional, max. 3)" variant="photos" />
+        <>
+          <FormHeader>Images</FormHeader>
+          <FormSubtitle>
+            Optionally you can upload photos of the issue!
+          </FormSubtitle>
+          <FormInput label="Max. 3 pictures/ 1MB each" variant="photos" />
+        </>
       )}
       {context.selectedStepForm === "PICTURES" && (
         <div

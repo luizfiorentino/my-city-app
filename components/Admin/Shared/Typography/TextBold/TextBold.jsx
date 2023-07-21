@@ -1,5 +1,5 @@
 import React from "react";
-import { leagueSpartan } from "@/styles/fonts";
+import { leagueSpartan, ubuntu } from "@/styles/fonts";
 import styles from "./TextBold.module.css";
 
 export default function TextBold({
@@ -14,7 +14,7 @@ export default function TextBold({
   return (
     <TextTag
       {...props}
-      className={`${styles.textBoldRegular} ${className} ${styles[variant]} ${leagueSpartan.className}`}
+      className={`${styles.textBoldRegular} ${className} ${styles[variant]} ${leagueSpartan.className} ${ubuntu.className}`}
     >
       {children}
     </TextTag>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import { useForm } from "react-hook-form";
+import dynamic from "next/dynamic";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDropzone } from "react-dropzone";
@@ -15,6 +16,16 @@ import StepIndicator from "../../Shared/StepIndicator/StepIndicator";
 import StepOneForm from "../StepOneForm/StepOneForm";
 import StepTwoForm from "../StepTwoForm/StepTwoForm";
 import StepThreeForm from "../StepThreeForm/StepThreeForm";
+import { toDataURL } from "qrcode";
+import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
+import TextBold from "@/components/Admin/Shared/Typography/TextBold/TextBold";
+
+const UserLocation = dynamic(
+  () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
+  {
+    ssr: false,
+  }
+);
 
 const formSchema = z.object({
   userName: z
@@ -74,8 +85,6 @@ const formSchema = z.object({
       }
     ),
 });
-
-import { toDataURL } from "qrcode";
 
 // URL to be encoded in the QR code
 const url =
@@ -227,17 +236,82 @@ export default function UserForm() {
             ))}
           </div>
         </div>
-      </div>{" "}
+      </div>
       <div className={styles.form}>
         {context.selectedStepForm === "INFOS" && <StepOneForm />}
         {context.selectedStepForm === "LOCATION" && <StepTwoForm />}
         {context.selectedStepForm === "PICTURES" && <StepThreeForm />}
         {context.selectedStepForm === "CONFIRM DATA" && (
-          <ConfirmationMessage
-            title="Yep it's being hard work"
-            subtitle="Next step, the POST request using data from context :)"
-          />
+          <>
+            <ConfirmationMessage
+              title="Finishing up"
+              subtitle="Please check if the information provided is correct before confirm."
+              footer="Confirm"
+            >
+              <div className={styles.externalCanvasSummary}>
+                <BackgroundCanvas variant="lightGrey">
+                  {" "}
+                  <div className={styles.summaryContainer}>
+                    <div className={styles.summaryField}>
+                      <TextBold variant="darkSummary">Name</TextBold>
+                      <TextBold variant="lightSummary">
+                        {context.stepOneFormData.userName}
+                      </TextBold>
+                    </div>
+                    <div className={styles.summaryField}>
+                      <TextBold variant="darkSummary">Email</TextBold>
+                      <TextBold variant="lightSummary">
+                        {context.stepOneFormData.email
+                          ? context.stepOneFormData.email
+                          : "not informed"}
+                      </TextBold>
+                    </div>
+                    <div className={styles.summaryFieldDescription}>
+                      <TextBold variant="darkSummary">Description</TextBold>
+                      <TextBold variant="lightSummaryDescription">
+                        {context.stepOneFormData.description}
+                      </TextBold>
+                    </div>{" "}
+                    <div className={styles.summaryFieldLocation}>
+                      <TextBold variant="darkSummary">Location</TextBold>
+                      <TextBold variant="lightSummaryDescription">
+                        {`${context.issueAddress}.`}
+                      </TextBold>
+                    </div>
+                    <div className={styles.summaryFieldDescription}>
+                      {context.latitude && (
+                        <UserLocation
+                          // locationType="current"
+                          // admin="admin"
+                          latitude={context.latitude}
+                          longitude={context.longitude}
+                        />
+                      )}
+                    </div>
+                    <div className={styles.uploadImage}>
+                      <div className={styles.imageArea}>
+                        {context.previewSources &&
+                          context.previewSources.map((src, index) => (
+                            <div
+                              key={index}
+                              className={styles.imagePreviewContainer}
+                            >
+                              <img
+                                className={styles.imagePreview}
+                                src={src}
+                                alt="chosen"
+                              />
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  </div>
+                </BackgroundCanvas>
+              </div>
+            </ConfirmationMessage>
+          </>
         )}
+
         {/* {successRequest === false ? (
           <form onSubmit={handleSubmit(issueRequest)}>
             <FormContent

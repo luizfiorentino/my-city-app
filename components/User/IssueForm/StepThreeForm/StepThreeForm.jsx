@@ -98,6 +98,11 @@ export default function StepThreeForm() {
       updatedSources.splice(index, 1);
       return updatedSources;
     });
+    context.setPreviewSources((prevSources) => {
+      const updatedSources = [...prevSources];
+      updatedSources.splice(index, 1);
+      return updatedSources;
+    });
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -135,6 +140,7 @@ export default function StepThreeForm() {
       Promise.all(promises)
         .then((results) => {
           setPreviewSources([...results]);
+          context.setPreviewSources([...results]);
         })
         .catch((error) => {
           console.log("Error generating previews:", error);
@@ -175,7 +181,9 @@ export default function StepThreeForm() {
     "long",
     context.longitude,
     "files::",
-    context.uploadedPictures
+    context.uploadedPictures,
+    "address",
+    context.issueAddress
   );
 
   return (

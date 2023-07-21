@@ -15,3 +15,8 @@
 .lighterCanvas {
   background-color: var(--color--bg-canvas-lighter);
 }
+
+.lightGrey {
+  background-color: var(--color--bg-summary);
+  border: none;
+}

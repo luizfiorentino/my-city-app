@@ -1,18 +1,14 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./StepOneForm.module.css";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useDropzone } from "react-dropzone";
 import { ubuntu } from "@/styles/fonts";
-
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
 import ConfirmationMessage from "../ConfirmationMessage";
-import { postIssue } from "@/services";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import IssueContext from "@/utils/IssueContext";
-import StepIndicator from "../../Shared/StepIndicator/StepIndicator";
 
 const formSchema = z.object({
   userName: z
@@ -43,9 +39,7 @@ export default function StepOneForm() {
     formState: { errors },
     register,
     handleSubmit,
-    setValue,
     reset,
-    watch,
   } = useForm({
     defaultValues: {
       userName: "",

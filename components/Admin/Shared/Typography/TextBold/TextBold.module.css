@@ -33,6 +33,34 @@
   font-weight: 400;
 }
 
+.darkSummary {
+  color: var(--color--text-primary);
+  font-size: 16px;
+  line-height: 18px;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.lightSummary {
+  color: var(--color--regular-grey);
+  font-weight: 100;
+}
+
+.lightSummaryDescription {
+  color: var(--color--regular-grey);
+  font-weight: 100;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 300px) {
+  .darkSummary {
+    margin-bottom: 1rem;
+  }
+
+  .lightSummaryDescription {
+    margin-top: 0;
+  }
+}
+
 @media screen and (min-width: 712px) {
   .largeText {
     font-size: 36px;
