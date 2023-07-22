@@ -24,6 +24,10 @@
   margin-bottom: 2rem;
 }
 
+.largeFont {
+  font-size: 32px;
+}
+
 .footer {
   margin: 0;
   padding: 0;

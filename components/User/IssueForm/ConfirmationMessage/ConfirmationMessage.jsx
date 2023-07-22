@@ -4,8 +4,14 @@ import Footer from "../../Shared/Footer";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 export default function ConfirmationMessage(props) {
+  console.log("props", props.variant);
   return (
-    <div {...props}>
+    <div
+      {...props}
+      className={
+        props.variant ? `${styles[props.variant]}` : `${styles.mainContainer}`
+      }
+    >
       <div className={styles.externalContainer}>
         <h2 className={styles.message}>{props.title}</h2>
         <h4 className={styles.subtitle}>{props.subtitle}</h4>
@@ -13,7 +19,7 @@ export default function ConfirmationMessage(props) {
       </div>
 
       <Footer className={styles.footer}>
-        {props.footer}{" "}
+        {props.footer}
         {props.loading && <LoaderSpinner className={styles.spinner} />}
       </Footer>
     </div>

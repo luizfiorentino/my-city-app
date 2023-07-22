@@ -72,6 +72,10 @@ export default function UserForm() {
     }
   };
 
+  const backToForm = () => {
+    context.setSelectedStepForm("INFOS");
+  };
+
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}>
@@ -100,6 +104,7 @@ export default function UserForm() {
               footer="Confirm"
               onClick={issueRequest}
               loading={loading}
+              variant="largeFont"
             >
               <div className={styles.externalCanvasSummary}>
                 <BackgroundCanvas variant="lightGrey">
@@ -176,7 +181,7 @@ export default function UserForm() {
             <FormSubtitle>
               Thanks for helping the City get awesome!
             </FormSubtitle>
-            <Footer>Back</Footer>
+            <Footer onClick={backToForm}>Back</Footer>
           </>
         )}
       </div>
