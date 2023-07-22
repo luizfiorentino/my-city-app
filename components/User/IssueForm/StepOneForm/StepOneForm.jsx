@@ -31,7 +31,6 @@ const formSchema = z.object({
 
 export default function StepOneForm() {
   const { setStepOneFormData, setSelectedStepForm } = useContext(IssueContext);
-  const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
   const [loading, setLoading] = useState(false);
   const {
@@ -57,7 +56,6 @@ export default function StepOneForm() {
       description: data.description,
     });
     reset();
-    setSuccessRequest(true);
     setSelectedStepForm("LOCATION");
   };
 
@@ -70,34 +68,21 @@ export default function StepOneForm() {
           </div>
         </div>{" "}
         <div className={styles.form}>
-          {successRequest === false ? (
-            <form onSubmit={handleSubmit(submitInfos)}>
-              <FormContent
-                userRegister={{ ...register("userName") }}
-                descriptionRegister={{ ...register("description") }}
-                emailRegister={{ ...register("email") }}
-                errors={errors}
-              />
-              {errorPosting && (
-                <p className={styles.errorMessage}>
-                  An error occured when posting the issue. Please try again or
-                  contact admin.
-                </p>
-              )}
-              <Footer className={styles.footer}>
-                {"Next"}
-                {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
-              </Footer>
-            </form>
-          ) : (
-            <ConfirmationMessage
-              title="Thanks for submiting your issue!"
-              subtitle="Your report will make our city more awesome."
-              onClick={returnFormPage}
-            >
-              Thanks for submitting your issue!
-            </ConfirmationMessage>
-          )}
+          <form onSubmit={handleSubmit(submitInfos)}>
+            <FormContent
+              userRegister={{ ...register("userName") }}
+              descriptionRegister={{ ...register("description") }}
+              emailRegister={{ ...register("email") }}
+              errors={errors}
+            />
+            {errorPosting && (
+              <p className={styles.errorMessage}>
+                An error occured when posting the issue. Please try again or
+                contact admin.
+              </p>
+            )}
+            <Footer className={styles.footer}>{"Next"}</Footer>
+          </form>
         </div>
       </div>
     </div>
