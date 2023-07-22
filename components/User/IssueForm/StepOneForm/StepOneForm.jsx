@@ -30,8 +30,7 @@ const formSchema = z.object({
 });
 
 export default function StepOneForm() {
-  const { stepOneFormData, setStepOneFormData, setSelectedStepForm } =
-    useContext(IssueContext);
+  const { setStepOneFormData, setSelectedStepForm } = useContext(IssueContext);
   const [successRequest, setSuccessRequest] = useState(false);
   const [errorPosting, setErrorPosting] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -51,38 +50,17 @@ export default function StepOneForm() {
     resolver: zodResolver(formSchema),
   });
 
-  //remember to add or remove "async/await" statements if necessary later
-  const submitInfos = async (data) => {
-    console.log("STEP 1 : DATA", data);
-    try {
-      setLoading(true);
-      const [error, _response] = await setStepOneFormData({
-        userName: data.userName,
-        email: data.email,
-        description: data.description,
-      });
-      setSelectedStepForm("location");
-
-      if (error) {
-        console.log("Failed to submit data");
-        setErrorPosting(true);
-        return;
-      }
-      reset();
-      setSuccessRequest(true);
-      setLoading(false);
-    } catch (error) {
-      // Handle error
-      console.log(
-        "An error occurred while submitting form data:",
-        error.message
-      );
-      setErrorPosting(true);
-      setLoading(false);
-      setSelectedStepForm("LOCATION");
-    }
+  const submitInfos = (data) => {
+    setStepOneFormData({
+      userName: data.userName,
+      email: data.email,
+      description: data.description,
+    });
+    reset();
+    setSuccessRequest(true);
+    setSelectedStepForm("LOCATION");
   };
-  console.log("context updated?", stepOneFormData);
+
   return (
     <div>
       <div className={`${styles.main} ${ubuntu.className}`}>
