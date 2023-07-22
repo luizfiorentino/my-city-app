@@ -6,8 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ubuntu } from "@/styles/fonts";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
-import ConfirmationMessage from "../ConfirmationMessage";
-import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import IssueContext from "@/utils/IssueContext";
 
 const formSchema = z.object({
@@ -31,13 +29,11 @@ const formSchema = z.object({
 
 export default function StepOneForm() {
   const { setStepOneFormData, setSelectedStepForm } = useContext(IssueContext);
-  const [errorPosting, setErrorPosting] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const {
     formState: { errors },
     register,
     handleSubmit,
-
     reset,
   } = useForm({
     defaultValues: {
@@ -62,11 +58,6 @@ export default function StepOneForm() {
   return (
     <div>
       <div className={`${styles.main} ${ubuntu.className}`}>
-        <div className={styles.image}>
-          <div className={styles.stepIndicators}>
-            <div className={styles.indicators}></div>
-          </div>
-        </div>{" "}
         <div className={styles.form}>
           <form onSubmit={handleSubmit(submitInfos)}>
             <FormContent
@@ -75,12 +66,6 @@ export default function StepOneForm() {
               emailRegister={{ ...register("email") }}
               errors={errors}
             />
-            {errorPosting && (
-              <p className={styles.errorMessage}>
-                An error occured when posting the issue. Please try again or
-                contact admin.
-              </p>
-            )}
             <Footer className={styles.footer}>{"Next"}</Footer>
           </form>
         </div>
