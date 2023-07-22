@@ -18,7 +18,6 @@ export default function FormContent({
   errors,
   userRegister,
   descriptionRegister,
-  locationRegister,
   emailRegister,
   previewSources,
   getRootProps,
@@ -28,7 +27,6 @@ export default function FormContent({
 }) {
   const [locationType, setLocationType] = useState(null);
   const context = useContext(IssueContext);
-  console.log("location", context.latitude, context.longitude);
 
   const getUserCurrentLocation = async () => {
     context.setLoading(true);
@@ -87,6 +85,7 @@ export default function FormContent({
   const backToLocationSelection = (e) => {
     e.preventDefault();
     setLocationType(null);
+    context.setButtonInactive(true);
   };
 
   const geolocationApiCall = async (latitude, longitude) => {
@@ -104,6 +103,8 @@ export default function FormContent({
     }
     const { address } = data;
     context.setIssueAddress(address);
+    context.setButtonInactive(false);
+
     return [null, address];
   };
 
@@ -150,40 +151,40 @@ export default function FormContent({
           </FormSubtitle>
         </>
       )}
-      <div className={locationType !== null ? styles.location : styles.hidden}>
-        <UserLocation locationType={locationType} />
-      </div>
       {context.selectedStepForm === "LOCATION" && (
-        <>
-          <div className={styles.locationButtons}>
-            {locationType === null && locationType !== "current" && (
-              <Button
-                variant="lightGrey"
-                onClick={(e) => locationChoice("current", e)}
-              >
-                Share current location
-              </Button>
-            )}
-            {locationType === null && locationType !== "map" && (
-              <Button
-                variant="lightGrey"
-                onClick={(e) => locationChoice("map", e)}
-              >
-                Choose on the map
-              </Button>
-            )}
-            {(locationType !== null ||
-              locationType === "current" ||
-              locationType === "map") && (
-              <Button
-                variant="lightGrey"
-                onClick={(e) => backToLocationSelection(e)}
-              >
-                Back
-              </Button>
-            )}
-          </div>
-        </>
+        <div>
+          <UserLocation locationType={locationType} />
+        </div>
+      )}
+      {context.selectedStepForm === "LOCATION" && (
+        <div className={styles.locationButtons}>
+          {locationType === null && locationType !== "current" && (
+            <Button
+              variant="lightGrey"
+              onClick={(e) => locationChoice("current", e)}
+            >
+              Share current location
+            </Button>
+          )}
+          {locationType === null && locationType !== "map" && (
+            <Button
+              variant="lightGrey"
+              onClick={(e) => locationChoice("map", e)}
+            >
+              Choose on the map
+            </Button>
+          )}
+          {(locationType !== null ||
+            locationType === "current" ||
+            locationType === "map") && (
+            <Button
+              variant="lightGrey"
+              onClick={(e) => backToLocationSelection(e)}
+            >
+              Back
+            </Button>
+          )}
+        </div>
       )}
 
       {context.selectedStepForm === "PICTURES" && (

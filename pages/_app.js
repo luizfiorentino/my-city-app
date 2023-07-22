@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 
 import issueContext from "../utils/IssueContext";
@@ -10,6 +10,7 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   const [loading, setLoading] = useState(false);
+  const [buttonInactive, setButtonInactive] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [buttonMode, setButtonMode] = useState("");
   const [filterIssuesByStatus, setFilterIssueByStatus] = useState("All");
@@ -54,6 +55,8 @@ export default function App({
           setUploadedPictures,
           previewSources,
           setPreviewSources,
+          buttonInactive,
+          setButtonInactive,
         }}
       >
         <Component {...pageProps} />

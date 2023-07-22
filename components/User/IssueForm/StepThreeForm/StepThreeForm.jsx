@@ -62,7 +62,13 @@ export default function StepThreeForm() {
   const [previewSources, setPreviewSources] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  console.log("state previewSources", previewSources);
+  console.log(
+    "state previewSources",
+    previewSources,
+    "address",
+    context.latitude,
+    context.issueAddress
+  );
 
   const {
     formState: { errors },

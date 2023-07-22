@@ -41,6 +41,7 @@ function UserLocation(props) {
       if (response.ok) {
         const { address } = data;
         context.setIssueAddress(address);
+        context.setButtonInactive(false);
       } else {
         console.log("No address found for the given coordinates.");
       }
