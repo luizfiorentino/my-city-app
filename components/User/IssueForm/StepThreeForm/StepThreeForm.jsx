@@ -56,6 +56,7 @@ export default function StepThreeForm() {
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSources, setPreviewSources] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const {
     formState: { errors },
