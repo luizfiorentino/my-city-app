@@ -95,6 +95,8 @@ export default function FormContent({
 
   const geolocationApiCall = async (latitude, longitude) => {
     const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
+    console.log("FromContent, geolocationApiCall- apiUrl", apiUrl);
+    console.log("FormContent, ");
     const domain = window.location.origin;
     const headers = {
       "x-domain-header": domain,
