@@ -83,6 +83,7 @@ export default function UserForm() {
           <div className={styles.indicators}>
             {formSteps.map((step, i) => (
               <StepIndicator
+                key={i}
                 number={i + 1}
                 description={step}
                 onClick={() => setSelectedIndex(i)}
