@@ -26,6 +26,9 @@
 
 .largeFont {
   font-size: 32px;
+  line-height: 28px;
+  font-weight: 700;
+  margin-bottom: 11px;
 }
 
 .footer {

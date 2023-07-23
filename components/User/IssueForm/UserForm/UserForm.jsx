@@ -181,7 +181,7 @@ export default function UserForm() {
             <FormSubtitle>
               Thanks for helping the City get awesome!
             </FormSubtitle>
-            <Footer onClick={backToForm}>Back</Footer>
+            <Footer onClick={backToForm}>New</Footer>
           </>
         )}
       </div>

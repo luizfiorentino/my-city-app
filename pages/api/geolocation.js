@@ -16,7 +16,6 @@ export default async function handler(req, res) {
   const ipAddress =
     req.headers["x-forwarded-for"] || req.connection.remoteAddress;
   const domain = req.headers["x-domain-header"];
-  console.log("domain?", domain);
 
   // Check if the referer is in the allowed domains
   if (!allowedDomains.includes(domain)) {
