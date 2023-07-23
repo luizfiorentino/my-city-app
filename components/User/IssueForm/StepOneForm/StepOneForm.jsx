@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import styles from "./StepOneForm.module.css";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,9 +28,7 @@ const formSchema = z.object({
 });
 
 export default function StepOneForm() {
-  const { stepOneFormData, setStepOneFormData, setSelectedStepForm, loading } =
-    useContext(IssueContext);
-  console.log("setp1", stepOneFormData, "loading?", loading);
+  const { setStepOneFormData, setSelectedStepForm } = useContext(IssueContext);
 
   const {
     formState: { errors },
