@@ -6,14 +6,10 @@ const rateLimitWindowMs = 60000;
 const maxRequestsPerWindow = 100;
 const rateLimits = new Map();
 const allowedDomains = [
-<<<<<<< HEAD
-  "http://localhost:3000",
   "https://my-city-app.vercel.app",
-=======
   "https://my-city-app-git-main-luizfiorentino.vercel.app",
   ,
   "http://localhost:3000",
->>>>>>> b85256f (Console.logs added in the geolocationApiCall and related function for debugging purposes.)
 ];
 
 export default async function handler(req, res) {
