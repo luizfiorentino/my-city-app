@@ -62,16 +62,6 @@ export default function StepThreeForm() {
   const [previewSources, setPreviewSources] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  console.log(
-    "state previewSources",
-    previewSources,
-    "address",
-    context.latitude,
-    context.issueAddress,
-    context.stepOneFormData,
-    "context.selectedStepForm === ",
-    context.selectedStepForm
-  );
 
   const {
     formState: { errors },
@@ -160,9 +150,6 @@ export default function StepThreeForm() {
   );
 
   const uploadPhotos = async (data) => {
-    console.log("data.file??? from upload photos", data.file);
-    //Is correct!!
-
     if (!data.file) {
       context.setSelectedStepForm("CONFIRM DATA");
     }
@@ -195,7 +182,6 @@ export default function StepThreeForm() {
 
     context.setSelectedStepForm("LOCATION");
     context.setButtonInactive(false);
-    console.log("kwak to location");
   };
 
   return (

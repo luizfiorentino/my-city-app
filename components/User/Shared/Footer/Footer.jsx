@@ -5,7 +5,6 @@ import IssueContext from "@/utils/IssueContext";
 
 export default function Footer(props) {
   const { loading, buttonInactive } = useContext(IssueContext);
-  console.log("footer variant", props.variant);
 
   return (
     <div

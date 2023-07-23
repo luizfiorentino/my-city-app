@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-
 const apiKey = process.env.OPENCAGE_API_KEY;
 
 const rateLimitWindowMs = 60000;
@@ -7,12 +6,10 @@ const maxRequestsPerWindow = 100;
 const rateLimits = new Map();
 const allowedDomains = [
   "https://my-city-app.vercel.app",
-
   "https://my-city-app-git-main-luizfiorentino.vercel.app",
   "my-city-b8wyox4gh-luizfiorentino.vercel.app",
   "my-city-app-git-main-luizfiorentino.vercel.app",
   "my-city-b8wyox4gh-luizfiorentino.vercel.app",
-
   "http://localhost:3000",
 ];
 

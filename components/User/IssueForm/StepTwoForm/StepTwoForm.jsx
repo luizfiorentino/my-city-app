@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./StepTwoForm.module.css";
 import { ubuntu } from "@/styles/fonts";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
 import IssueContext from "@/utils/IssueContext";
-import { Context } from "maplibre-gl";
 
 export default function StepTwoForm() {
   //const context = useContext(IssueContext);
@@ -17,14 +16,13 @@ export default function StepTwoForm() {
     longitude,
     setLongitude,
     setSelectedStepForm,
-    stepOneFormData,
     setStepOneFormData,
   } = useContext(IssueContext);
 
   useEffect(() => {
     setButtonInactive(true);
   }, []);
-  console.log("setp2", stepOneFormData);
+
   // eventually remove "async await" statements
   const submitCoordinates = async () => {
     setLoading(true);
@@ -49,7 +47,6 @@ export default function StepTwoForm() {
 
     setSelectedStepForm("INFOS");
     setButtonInactive(false);
-    console.log("kwak");
   };
 
   return (
