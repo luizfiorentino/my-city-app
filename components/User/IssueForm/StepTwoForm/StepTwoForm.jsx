@@ -16,6 +16,7 @@ export default function StepTwoForm() {
     longitude,
     setLongitude,
     setSelectedStepForm,
+    setStepOneFormData,
   } = useContext(IssueContext);
 
   useEffect(() => {
