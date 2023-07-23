@@ -97,9 +97,6 @@ export default function FormContent({
     console.log("FromContent, geolocationApiCall- apiUrl", apiUrl);
     console.log(
       "returned this: FromContent, geolocationApiCall- apiUrl /api/geolocation?latitude=52.3523277&longitude=4.7970255"
-      FromContent, geolocationApiCall- apiUrl /api/geolocation?latitude=52.3523304&longitude=4.797018
-      FromContent, geolocationApiCall- apiUrl /api/geolocation?latitude=52.3523277&longitude=4.7970255
-    
     );
     console.log("FormContent, ");
     const domain = window.location.origin;
