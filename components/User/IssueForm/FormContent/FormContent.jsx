@@ -53,13 +53,18 @@ export default function FormContent({
     const { latitude, longitude } = location.coords;
     context.setLatitude(latitude);
     context.setLongitude(longitude);
+    console.log(
+      "Form content, context.loaction",
+      context.latitude,
+      context.longitude
+    );
 
     const response = await geolocationApiCall(latitude, longitude);
     const [error, _address] = response;
 
     if (error) {
       console.log(
-        "An error occurred when fetching the address with the informed coordinates:"
+        "(FormContent getUserCurrentLocation (geolocationApiCall))- An error occurred when fetching the address with the informed coordinates"
       );
       context.setLoading(false);
       return;
@@ -89,19 +94,28 @@ export default function FormContent({
 
   const geolocationApiCall = async (latitude, longitude) => {
     const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
+    console.log("FromContent, geolocationApiCall- apiUrl", apiUrl);
+    console.log("FormContent, ");
     const domain = window.location.origin;
     const headers = {
       "x-domain-header": domain,
     };
     const response = await fetch(apiUrl, { headers });
     const data = await response.json();
+    console.log("FormContent geolocationApiCall, response?", response);
 
     if (!response.ok) {
-      console.log("No address found for the given coordinates.");
+      console.log(
+        "(FormContent- geolocationApiCall)No address found for the given coordinates."
+      );
       return ["No address found.", null];
     }
     const { address } = data;
     context.setIssueAddress(address);
+    console.log(
+      "FormContent geolocationApiCall, context.setIssueAddress?",
+      address
+    );
     return [null, address];
   };
 
