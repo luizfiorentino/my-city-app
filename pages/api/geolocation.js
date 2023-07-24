@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 const apiKey = process.env.OPENCAGE_API_KEY;
-console.log("API key?", apiKey);
+
 const rateLimitWindowMs = 60000;
 const maxRequestsPerWindow = 100;
 const rateLimits = new Map();
@@ -58,7 +58,6 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log("/api/geolocation handler, response", response);
 
     if (data.results.length > 0) {
       const address = data.results[0].formatted;
