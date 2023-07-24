@@ -28,7 +28,9 @@ const formSchema = z.object({
 });
 
 export default function StepOneForm() {
-  const { setStepOneFormData, setSelectedStepForm } = useContext(IssueContext);
+  const { stepOneFormData, setStepOneFormData, setSelectedStepForm, loading } =
+    useContext(IssueContext);
+  console.log("setp1", stepOneFormData, "loading?", loading);
 
   const {
     formState: { errors },
@@ -66,7 +68,7 @@ export default function StepOneForm() {
               emailRegister={{ ...register("email") }}
               errors={errors}
             />
-            <Footer className={styles.footer}>{"Next"}</Footer>
+            <Footer className={styles.footer}>{"Next"} </Footer>
           </form>
         </div>
       </div>

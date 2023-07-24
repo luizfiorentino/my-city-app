@@ -32,11 +32,6 @@ export default function ConfirmationMessage({
         <h4 className={styles.subtitle}>{subtitle}</h4>
         <div className={styles.summary}>{children}</div>
       </div>
-
-      <Footer className={styles.footer}>
-        {footer}
-        {loading && <LoaderSpinner className={styles.spinner} />}
-      </Footer>
     </div>
   );
 }

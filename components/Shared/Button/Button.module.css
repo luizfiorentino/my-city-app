@@ -31,6 +31,21 @@
   border-radius: 4px;
 }
 
+.goBack {
+  color: var(--color--soft-grey);
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: normal;
+  padding: 0;
+  position: relative;
+  background-color: var(--color--white);
+  border: none;
+}
+
 .loading {
   padding-right: 32px;
 }

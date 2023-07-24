@@ -7,11 +7,17 @@ export default function Footer(props) {
   const { loading, buttonInactive } = useContext(IssueContext);
 
   return (
-    <div className={styles.main}>
+    <div className={props.backButton === true ? styles.backBtn : styles.main}>
+      {props.backButton === true && (
+        <Button onClick={props.onClick2} variant="goBack" type="button">
+          Go back
+        </Button>
+      )}
       <Button
         onClick={props.onClick}
         disabled={loading || buttonInactive}
         variant="postIssue"
+        type="submit"
       >
         {props.children}
       </Button>

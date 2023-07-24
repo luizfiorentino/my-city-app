@@ -14,6 +14,7 @@ import TextBold from "@/components/Admin/Shared/Typography/TextBold/TextBold";
 import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import Footer from "../../Shared/Footer/Footer";
+import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 const UserLocation = dynamic(
   () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
@@ -76,6 +77,13 @@ export default function UserForm() {
     context.setSelectedStepForm("INFOS");
   };
 
+  const backStepThree = () => {
+    context.setUploadedPictures([]);
+
+    context.setSelectedStepForm("PICTURES");
+    context.setButtonInactive(false);
+  };
+
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}>
@@ -106,74 +114,84 @@ export default function UserForm() {
               onClick={issueRequest}
               loading={loading}
               variant="largeFont"
-            >
-              <div className={styles.externalCanvasSummary}>
-                <BackgroundCanvas variant="lightGrey">
-                  <div className={styles.summaryContainer}>
-                    <div className={styles.summaryField}>
-                      <TextBold variant="darkSummary">Name</TextBold>
-                      <TextBold variant="lightSummary">
-                        {context.stepOneFormData.userName}
-                      </TextBold>
-                    </div>
-                    <div className={styles.summaryField}>
-                      <TextBold variant="darkSummary">Email</TextBold>
-                      <TextBold variant="lightSummary">
-                        {context.stepOneFormData.email
-                          ? context.stepOneFormData.email
-                          : "not informed"}
-                      </TextBold>
-                    </div>
-                    <div className={styles.summaryFieldDescription}>
-                      <TextBold variant="darkSummary">Description</TextBold>
-                      <TextBold variant="lightSummaryDescription">
-                        {context.stepOneFormData.description}
-                      </TextBold>
-                    </div>{" "}
-                    <div className={styles.summaryFieldLocation}>
-                      <TextBold variant="darkSummary">Location</TextBold>
-                      <TextBold variant="lightSummaryDescription">
-                        {`${context.issueAddress}.`}
-                      </TextBold>
-                    </div>
-                    <div className={styles.summaryFieldDescription}>
-                      {context.latitude && (
-                        <UserLocation
-                          latitude={context.latitude}
-                          longitude={context.longitude}
-                        />
-                      )}
-                    </div>
-                    <div className={styles.uploadImageBanner}>
-                      <TextBold variant="darkSummary">Uploaded Images</TextBold>
-                    </div>
-                    {context.previewSources.length ? (
-                      <div className={styles.uploadImage}>
-                        <div className={styles.imageArea}>
-                          {context.previewSources &&
-                            context.previewSources.map((src, index) => (
-                              <div
-                                key={index}
-                                className={styles.imagePreviewContainer}
-                              >
-                                <img
-                                  className={styles.imagePreview}
-                                  src={src}
-                                  alt="chosen"
-                                />
-                              </div>
-                            ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <TextBold variant="lightSummaryDescription">
-                        No image uploaded.
-                      </TextBold>
+            ></ConfirmationMessage>
+            <div className={styles.externalCanvasSummary}>
+              <BackgroundCanvas variant="lightGrey">
+                <div className={styles.summaryContainer}>
+                  <div className={styles.summaryField}>
+                    <TextBold variant="darkSummary">Name</TextBold>
+                    <TextBold variant="lightSummary">
+                      {context.stepOneFormData.userName}
+                    </TextBold>
+                  </div>
+                  <div className={styles.summaryField}>
+                    <TextBold variant="darkSummary">Email</TextBold>
+                    <TextBold variant="lightSummary">
+                      {context.stepOneFormData.email
+                        ? context.stepOneFormData.email
+                        : "not informed"}
+                    </TextBold>
+                  </div>
+                  <div className={styles.summaryFieldDescription}>
+                    <TextBold variant="darkSummary">Description</TextBold>
+                    <TextBold variant="lightSummaryDescription">
+                      {context.stepOneFormData.description}
+                    </TextBold>
+                  </div>{" "}
+                  <div className={styles.summaryFieldLocation}>
+                    <TextBold variant="darkSummary">Location</TextBold>
+                    <TextBold variant="lightSummaryDescription">
+                      {`${context.issueAddress}.`}
+                    </TextBold>
+                  </div>
+                  <div className={styles.summaryFieldDescription}>
+                    {context.latitude && (
+                      <UserLocation
+                        latitude={context.latitude}
+                        longitude={context.longitude}
+                      />
                     )}
                   </div>
-                </BackgroundCanvas>
-              </div>
-            </ConfirmationMessage>
+                  <div className={styles.uploadImageBanner}>
+                    <TextBold variant="darkSummary">Uploaded Images</TextBold>
+                  </div>
+                  {context.previewSources.length ? (
+                    <div className={styles.uploadImage}>
+                      <div className={styles.imageArea}>
+                        {context.previewSources &&
+                          context.previewSources.map((src, index) => (
+                            <div
+                              key={index}
+                              className={styles.imagePreviewContainer}
+                            >
+                              <img
+                                className={styles.imagePreview}
+                                src={src}
+                                alt="chosen"
+                              />
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <TextBold variant="lightSummaryDescription">
+                      No image uploaded.
+                    </TextBold>
+                  )}
+                </div>
+              </BackgroundCanvas>
+
+              <Footer
+                onClick={issueRequest}
+                loading={loading}
+                variant="largeFont"
+                backButton={true}
+                onClick2={backStepThree}
+              >
+                Confirm{" "}
+                {loading && <LoaderSpinner className={styles.spinner} />}
+              </Footer>
+            </div>
           </>
         )}
         {context.selectedStepForm === "SUBMITTED" && (

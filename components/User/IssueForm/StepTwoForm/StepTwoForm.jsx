@@ -17,12 +17,14 @@ export default function StepTwoForm() {
     longitude,
     setLongitude,
     setSelectedStepForm,
+    stepOneFormData,
+    setStepOneFormData,
   } = useContext(IssueContext);
 
   useEffect(() => {
     setButtonInactive(true);
   }, []);
-
+  console.log("setp2", stepOneFormData);
   // eventually remove "async await" statements
   const submitCoordinates = async () => {
     setLoading(true);
@@ -38,13 +40,32 @@ export default function StepTwoForm() {
     }
   };
 
+  const backStepOne = () => {
+    setStepOneFormData({
+      userName: "",
+      email: "",
+      description: "",
+    });
+
+    setSelectedStepForm("INFOS");
+    setButtonInactive(false);
+    console.log("kwak");
+  };
+
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}></div>{" "}
       <div className={styles.form}>
         <FormContent />
-        <div onClick={() => submitCoordinates()}>
-          <Footer className={styles.footer}>{"Next"}</Footer>
+        <div>
+          <Footer
+            className={styles.footer}
+            onClick={() => submitCoordinates()}
+            onClick2={backStepOne}
+            backButton={true}
+          >
+            {"Next"}
+          </Footer>
         </div>
       </div>
     </div>

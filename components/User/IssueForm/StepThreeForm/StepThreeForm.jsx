@@ -67,7 +67,10 @@ export default function StepThreeForm() {
     previewSources,
     "address",
     context.latitude,
-    context.issueAddress
+    context.issueAddress,
+    context.stepOneFormData,
+    "context.selectedStepForm === ",
+    context.selectedStepForm
   );
 
   const {
@@ -186,6 +189,15 @@ export default function StepThreeForm() {
     }
   };
 
+  const backStepTwo = () => {
+    context.setLatitude(null);
+    context.setLongitude(null);
+
+    context.setSelectedStepForm("LOCATION");
+    context.setButtonInactive(false);
+    console.log("kwak to location");
+  };
+
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.form}>
@@ -205,7 +217,11 @@ export default function StepThreeForm() {
             </p>
           )}
 
-          <Footer className={styles.footer}>
+          <Footer
+            className={styles.footer}
+            backButton={true}
+            onClick2={backStepTwo}
+          >
             {"Next"}
             {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
           </Footer>
