@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "./Footer.module.css";
 import Button from "@/components/Shared/Button/Button";
 import IssueContext from "@/utils/IssueContext";
 
 export default function Footer(props) {
   const { loading, buttonInactive } = useContext(IssueContext);
+  console.log("footer variant", props.variant);
 
   return (
     <div
@@ -20,8 +21,9 @@ export default function Footer(props) {
       <Button
         onClick={props.onClick}
         disabled={loading || buttonInactive}
-        variant="postIssue"
+        variant={props.variant === "submitInfos" ? "purple" : "postIssue"}
         type="submit"
+        className={props.variant === "submitInfos" ? styles.purple : null}
       >
         {props.children}
       </Button>
