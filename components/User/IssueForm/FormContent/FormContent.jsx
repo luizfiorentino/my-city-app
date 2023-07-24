@@ -103,7 +103,9 @@ export default function FormContent({
     }
     const { address } = data;
     context.setIssueAddress(address);
+
     context.setButtonInactive(false);
+
 
     return [null, address];
   };
