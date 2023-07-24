@@ -95,6 +95,12 @@
   padding: 5px;
 }
 
+@media screen and (max-width: 268px) {
+  .imagePreview {
+    max-width: 100%;
+  }
+}
+
 @media screen and (max-width: 300px) {
   .summaryField {
     flex-direction: column;
@@ -156,9 +162,6 @@
     flex-direction: row;
     align-items: center;
     gap: 17px;
-  }
-  .externalCanvasSummary {
-    /* margin: 0 16px; */
   }
 }
 

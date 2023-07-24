@@ -1,7 +1,7 @@
 .externalContainer {
   color: var(--color--text-primary);
   background-color: var(--color--white);
-  padding: 32px 24px;
+  padding: 16px 24px;
 
   margin: 0 16px;
   border-radius: 10px;
@@ -21,7 +21,7 @@
   font-size: 16px;
   line-height: 25px;
   font-weight: 400;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .largeFont {
@@ -42,10 +42,19 @@
   top: 16px;
 }
 
+@media screen and (max-width: 418px) {
+  .externalContainer {
+    padding: 12px;
+  }
+  .largeFont {
+    font-size: 24px;
+  }
+}
+
 @media screen and (min-width: 800px) {
   .externalContainer {
     bottom: 0;
-    margin: 0 0 44px 0;
+    margin: 0 0 16px 0;
     padding: 16px 0 0 0;
   }
 }

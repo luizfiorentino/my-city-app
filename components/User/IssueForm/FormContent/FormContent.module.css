@@ -79,6 +79,12 @@
   margin-bottom: 4px;
 }
 
+@media screen and (max-width: 268px) {
+  .imagePreview {
+    max-width: 100%;
+  }
+}
+
 @media screen and (max-width: 444px) {
   .locationButtons {
     flex-direction: column;
@@ -87,9 +93,12 @@
   }
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 620px) {
   .imageArea {
     flex-direction: column;
+  }
+  .dropzone {
+    margin-bottom: 0;
   }
 }
 
