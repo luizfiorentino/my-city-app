@@ -12,7 +12,6 @@ import TextBold from "@/components/Admin/Shared/Typography/TextBold";
 import IssueContext from "@/utils/IssueContext";
 import {
   sendDeleteRequest,
-  sendEmail,
   sendSolvedUpdateRequest,
   sendUpdateIssueRequest,
 } from "@/services";

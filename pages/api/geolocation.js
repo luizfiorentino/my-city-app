@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 const apiKey = process.env.OPENCAGE_API_KEY;
-console.log("API key?", apiKey);
+
 const rateLimitWindowMs = 60000;
 const maxRequestsPerWindow = 100;
 const rateLimits = new Map();
@@ -23,7 +23,6 @@ export default async function handler(req, res) {
   const ipAddress =
     req.headers["x-forwarded-for"] || req.connection.remoteAddress;
   const domain = req.headers["x-domain-header"];
-  console.log("domain?", domain);
 
   // Check if the referer is in the allowed domains
   if (!allowedDomains.includes(domain)) {
@@ -59,7 +58,6 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log("/api/geolocation handler, response", response);
 
     if (data.results.length > 0) {
       const address = data.results[0].formatted;
