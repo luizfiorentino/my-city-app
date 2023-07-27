@@ -9,12 +9,10 @@ import StepIndicator from "../../Shared/StepIndicator/StepIndicator";
 import StepOneForm from "../StepOneForm/StepOneForm";
 import StepTwoForm from "../StepTwoForm/StepTwoForm";
 import StepThreeForm from "../StepThreeForm/StepThreeForm";
-import BackgroundCanvas from "@/components/Admin/Shared/BackgroundCanvas/BackgroundCanvas";
-import TextBold from "@/components/Admin/Shared/Typography/TextBold/TextBold";
 import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import Footer from "../../Shared/Footer/Footer";
-import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
+import StepFourForm from "../StepFourForm/StepFourForm";
 
 const UserLocation = dynamic(
   () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
@@ -27,7 +25,6 @@ const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 
 export default function UserForm() {
   const context = useContext(IssueContext);
-
   const [loading, setLoading] = useState(false);
 
   const issueRequest = async () => {
@@ -65,13 +62,6 @@ export default function UserForm() {
     context.setSelectedStepForm("INFOS");
   };
 
-  const backStepThree = () => {
-    context.setUploadedPictures([]);
-
-    context.setSelectedStepForm("PICTURES");
-    context.setButtonInactive(false);
-  };
-
   return (
     <div className={`${styles.main} ${ubuntu.className}`}>
       <div className={styles.image}>
@@ -93,94 +83,9 @@ export default function UserForm() {
         {context.selectedStepForm === "LOCATION" && <StepTwoForm />}
         {context.selectedStepForm === "PICTURES" && <StepThreeForm />}
         {context.selectedStepForm === "CONFIRM DATA" && (
-          <>
-            <ConfirmationMessage
-              title="Finishing up"
-              subtitle="Please check if the information provided is correct before confirm."
-              footer="Confirm"
-              onClick={issueRequest}
-              loading={loading}
-              variant="largeFont"
-            ></ConfirmationMessage>
-            <ConfirmationMessage>
-              <div className={styles.externalCanvasSummary}>
-                <BackgroundCanvas variant="lightGrey">
-                  <div className={styles.summaryContainer}>
-                    <div className={styles.summaryField}>
-                      <TextBold variant="darkSummary">Name</TextBold>
-                      <TextBold variant="lightSummary">
-                        {context.stepOneFormData.userName}
-                      </TextBold>
-                    </div>
-                    <div className={styles.summaryField}>
-                      <TextBold variant="darkSummary">Email</TextBold>
-                      <TextBold variant="lightSummary">
-                        {context.stepOneFormData.email
-                          ? context.stepOneFormData.email
-                          : "not informed"}
-                      </TextBold>
-                    </div>
-                    <div className={styles.summaryFieldDescription}>
-                      <TextBold variant="darkSummary">Description</TextBold>
-                      <TextBold variant="lightSummaryDescription">
-                        {context.stepOneFormData.description}
-                      </TextBold>
-                    </div>{" "}
-                    <div className={styles.summaryFieldLocation}>
-                      <TextBold variant="darkSummary">Location</TextBold>
-                      <TextBold variant="lightSummaryDescription">
-                        {`${context.issueAddress}.`}
-                      </TextBold>
-                    </div>
-                    <div className={styles.summaryFieldDescription}>
-                      {context.latitude && (
-                        <UserLocation
-                          latitude={context.latitude}
-                          longitude={context.longitude}
-                        />
-                      )}
-                    </div>
-                    <div className={styles.uploadImageBanner}>
-                      <TextBold variant="darkSummary">Uploaded Images</TextBold>
-                    </div>
-                    {context.previewSources.length ? (
-                      <div className={styles.uploadImage}>
-                        <div className={styles.imageArea}>
-                          {context.previewSources &&
-                            context.previewSources.map((src, index) => (
-                              <div
-                                key={index}
-                                className={styles.imagePreviewContainer}
-                              >
-                                <img
-                                  className={styles.imagePreview}
-                                  src={src}
-                                  alt="chosen"
-                                />
-                              </div>
-                            ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <TextBold variant="lightSummaryDescription">
-                        No image uploaded.
-                      </TextBold>
-                    )}
-                  </div>
-                </BackgroundCanvas>
-              </div>
-            </ConfirmationMessage>
-            <Footer
-              onClick={issueRequest}
-              loading={loading}
-              variant="submitInfos"
-              backButton={true}
-              onClick2={backStepThree}
-            >
-              Confirm {loading && <LoaderSpinner className={styles.spinner} />}
-            </Footer>
-          </>
-        )}{" "}
+          <StepFourForm issueRequest={issueRequest} loading={loading} />
+        )}
+
         {context.selectedStepForm === "SUBMITTED" && (
           <>
             <ConfirmationMessage>

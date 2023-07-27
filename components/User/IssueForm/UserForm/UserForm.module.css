@@ -24,29 +24,6 @@
   min-height: 80vh;
 }
 
-.summaryContainer {
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-.summaryField {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-}
-
-.summaryFieldDescription {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-}
-
-.summaryFieldLocation {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
 .errorMessage {
   color: var(--color--danger);
   margin: 5px;
@@ -56,64 +33,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.uploadImageBanner {
-  margin-bottom: 16px;
-}
-
-.uploadImage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  color: var(--color--black);
-  border: 1px solid var(--color--soft-grey);
-  border-radius: 4px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
-.imageArea {
-  display: flex;
-
-  gap: 1rem;
-}
-
-.imagePreviewContainer {
-  position: relative;
-}
-
-.imagePreview {
-  width: 150px;
-  height: 150px;
-  object-fit: scale-down;
-  border: 1px solid var(--color--pale-grey);
-  border-radius: 4px;
-  padding: 5px;
-}
-
-@media screen and (max-width: 268px) {
-  .imagePreview {
-    max-width: 100%;
-  }
-}
-
-@media screen and (max-width: 300px) {
-  .summaryField {
-    flex-direction: column;
-  }
-  .uploadImage {
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .imageArea {
-    flex-direction: column;
-  }
 }
 
 @media screen and (min-width: 800px) {
@@ -134,18 +53,6 @@
   .form {
     background-color: var(--color--white);
     margin: auto;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .summaryContainer {
-    padding: 18px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .summaryContainer {
-    padding: 8px;
   }
 }
 
@@ -172,11 +79,5 @@
   }
   .image {
     min-height: 18rem;
-  }
-}
-
-@media screen and (max-width: 488px) {
-  .imageArea {
-    flex-direction: column;
   }
 }
