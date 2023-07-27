@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import dynamic from "next/dynamic";
 import { ubuntu } from "@/styles/fonts";
 import styles from "./UserForm.module.css";
 import ConfirmationMessage from "../ConfirmationMessage";
@@ -13,13 +12,6 @@ import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import Footer from "../../Shared/Footer/Footer";
 import StepFourForm from "../StepFourForm/StepFourForm";
-
-const UserLocation = dynamic(
-  () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
-  {
-    ssr: false,
-  }
-);
 
 const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 
