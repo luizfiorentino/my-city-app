@@ -96,7 +96,7 @@ export default function UserForm() {
         {context.selectedStepForm === "LOCATION" && <StepTwoForm />}
         {context.selectedStepForm === "PICTURES" && <StepThreeForm />}
         {context.selectedStepForm === "CONFIRM DATA" && (
-          <StepFourForm issueRequest={issueRequest} />
+          <StepFourForm issueRequest={issueRequest} loading={loading} />
         )}
 
         {context.selectedStepForm === "SUBMITTED" && (
