@@ -28,11 +28,7 @@ const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 export default function UserForm() {
   const context = useContext(IssueContext);
 
-  const [successRequest, setSuccessRequest] = useState(false);
-  const [errorPosting, setErrorPosting] = useState(false);
-  const [previewSources, setPreviewSources] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const issueRequest = async () => {
     const { stepOneFormData, location } = context;
@@ -51,12 +47,10 @@ export default function UserForm() {
       });
       if (error) {
         console.log("Failed to submit data");
-        setErrorPosting(true);
+
         return;
       }
 
-      setSuccessRequest(true);
-      setPreviewSources([]);
       setLoading(false);
       context.setSelectedStepForm("SUBMITTED");
     } catch (error) {
@@ -64,8 +58,6 @@ export default function UserForm() {
         "An error occurred while submitting form data:",
         error.message
       );
-      setErrorPosting(true);
-      setPreviewSources([]);
     }
   };
 
@@ -90,7 +82,6 @@ export default function UserForm() {
                 key={i}
                 number={i + 1}
                 description={step}
-                onClick={() => setSelectedIndex(i)}
                 selected={context.selectedStepForm === step ? true : false}
               />
             ))}
