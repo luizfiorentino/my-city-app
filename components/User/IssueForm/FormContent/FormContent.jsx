@@ -106,7 +106,6 @@ export default function FormContent({
 
     context.setButtonInactive(false);
 
-
     return [null, address];
   };
 

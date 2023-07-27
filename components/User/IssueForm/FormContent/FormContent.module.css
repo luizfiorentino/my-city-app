@@ -67,9 +67,9 @@
 .dropzone {
   display: flex;
   justify-content: center;
-
+  width: 100%;
+  box-sizing: border-box;
   border: 2px dotted var(--color--regular-grey);
-  padding: 0 1rem;
   border-radius: 4px;
   margin-bottom: 44px;
 }
