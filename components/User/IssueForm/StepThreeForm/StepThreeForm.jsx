@@ -166,8 +166,8 @@ export default function StepThreeForm() {
   };
 
   const backStepTwo = () => {
-    // context.setLatitude(null);
-    // context.setLongitude(null);
+    context.setLatitude(null);
+    context.setLongitude(null);
     context.setSelectedStepForm("LOCATION");
     context.setButtonInactive(false);
   };

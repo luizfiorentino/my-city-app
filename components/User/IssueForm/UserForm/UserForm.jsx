@@ -13,13 +13,6 @@ import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import Footer from "../../Shared/Footer/Footer";
 import StepFourForm from "../StepFourForm/StepFourForm";
 
-const UserLocation = dynamic(
-  () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
-  {
-    ssr: false,
-  }
-);
-
 const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 
 export default function UserForm() {
