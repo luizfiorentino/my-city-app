@@ -94,7 +94,6 @@ export default function StepFourForm({ issueRequest, loading }) {
                             className={styles.imagePreview}
                             src={src}
                             alt="chosen"
-                            blurDataURL={src}
                           />
                         </div>
                       ))}
