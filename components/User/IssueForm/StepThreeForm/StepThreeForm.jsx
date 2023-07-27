@@ -52,15 +52,13 @@ const formSchema = z.object({
 
 export default function StepThreeForm() {
   const context = useContext(IssueContext);
-  const [successRequest, setSuccessRequest] = useState(false);
+
   const [errorPosting, setErrorPosting] = useState(false);
   const [previewSources, setPreviewSources] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const {
     formState: { errors },
-    register,
     handleSubmit,
     setValue,
     reset,
@@ -103,10 +101,6 @@ export default function StepThreeForm() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
   });
-
-  const returnFormPage = () => {
-    setSuccessRequest(false);
-  };
 
   const selectedFiles = watch("file");
 
@@ -156,7 +150,7 @@ export default function StepThreeForm() {
       await context.setUploadedPictures(data.file);
 
       reset();
-      setSuccessRequest(true);
+
       setPreviewSources([]);
 
       setLoading(false);
@@ -174,7 +168,6 @@ export default function StepThreeForm() {
   const backStepTwo = () => {
     context.setLatitude(null);
     context.setLongitude(null);
-
     context.setSelectedStepForm("LOCATION");
     context.setButtonInactive(false);
   };
