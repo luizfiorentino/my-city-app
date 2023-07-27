@@ -16,13 +16,12 @@ const UserLocation = dynamic(
   }
 );
 
-export default function StepFourForm({ issueRequest }) {
+export default function StepFourForm({ issueRequest, loading }) {
   const {
     stepOneFormData,
     issueAddress,
     latitude,
     longitude,
-    loading,
     previewSources,
     setUploadedPictures,
     setSelectedStepForm,
@@ -30,7 +29,7 @@ export default function StepFourForm({ issueRequest }) {
   } = useContext(IssueContext);
 
   const backStepThree = () => {
-    // setUploadedPictures([]);
+    setUploadedPictures([]);
     setSelectedStepForm("PICTURES");
     setButtonInactive(false);
   };
@@ -95,6 +94,7 @@ export default function StepFourForm({ issueRequest }) {
                             className={styles.imagePreview}
                             src={src}
                             alt="chosen"
+                            blurDataURL={src}
                           />
                         </div>
                       ))}

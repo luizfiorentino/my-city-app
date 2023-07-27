@@ -13,11 +13,17 @@ import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import Footer from "../../Shared/Footer/Footer";
 import StepFourForm from "../StepFourForm/StepFourForm";
 
+const UserLocation = dynamic(
+  () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
+  {
+    ssr: false,
+  }
+);
+
 const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 
 export default function UserForm() {
   const context = useContext(IssueContext);
-
   const [loading, setLoading] = useState(false);
 
   const issueRequest = async () => {
@@ -97,7 +103,7 @@ export default function UserForm() {
         {context.selectedStepForm === "LOCATION" && <StepTwoForm />}
         {context.selectedStepForm === "PICTURES" && <StepThreeForm />}
         {context.selectedStepForm === "CONFIRM DATA" && (
-          <StepFourForm issueRequest={issueRequest} />
+          <StepFourForm issueRequest={issueRequest} loading={loading} />
         )}
 
         {context.selectedStepForm === "SUBMITTED" && (
