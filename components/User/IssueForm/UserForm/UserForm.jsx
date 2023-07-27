@@ -17,6 +17,7 @@ const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 
 export default function UserForm() {
   const context = useContext(IssueContext);
+
   const [loading, setLoading] = useState(false);
 
   const issueRequest = async () => {
@@ -61,7 +62,7 @@ export default function UserForm() {
       context.setLatitude(null);
       context.setLongitude(null);
 
-      context.setLoading(false);
+      setLoading(false);
       context.setSelectedStepForm("SUBMITTED");
     } catch (error) {
       console.log(
