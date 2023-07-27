@@ -9,7 +9,6 @@ const allowedDomains = [
   "https://my-city-app-git-main-luizfiorentino.vercel.app",
   "my-city-b8wyox4gh-luizfiorentino.vercel.app",
   "my-city-app-git-main-luizfiorentino.vercel.app",
-  "my-city-b8wyox4gh-luizfiorentino.vercel.app",
   "http://localhost:3000",
 ];
 
