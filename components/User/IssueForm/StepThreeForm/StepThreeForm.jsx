@@ -7,13 +7,8 @@ import { ubuntu } from "@/styles/fonts";
 import styles from "./StepThreeForm.module.css";
 import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
-import ConfirmationMessage from "../ConfirmationMessage";
-import { postIssue } from "@/services";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import IssueContext from "@/utils/IssueContext";
-import StepIndicator from "../../Shared/StepIndicator/StepIndicator";
-import StepOneForm from "../StepOneForm/StepOneForm";
-import StepTwoForm from "../StepTwoForm/StepTwoForm";
 
 const formSchema = z.object({
   file: z
