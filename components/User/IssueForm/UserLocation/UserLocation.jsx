@@ -23,6 +23,10 @@ function UserLocation(props) {
       ? markerPosition
       : [parseFloat(latitude), parseFloat(longitude)];
 
+  // if (props.locationType === null) {
+  //   return null;
+  // }
+
   async function geolocationApiCall(latitude, longitude) {
     const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
 
