@@ -18,6 +18,7 @@ const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 export default function UserForm() {
   const context = useContext(IssueContext);
   const [loading, setLoading] = useState(false);
+  console.log("userform context", context);
 
   const issueRequest = async () => {
     const { stepOneFormData, location } = context;
