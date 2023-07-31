@@ -18,6 +18,7 @@ const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 export default function UserForm() {
   const context = useContext(IssueContext);
   const [loading, setLoading] = useState(false);
+  console.log("userform context", context);
 
   const issueRequest = async () => {
     const { stepOneFormData, location } = context;
@@ -36,9 +37,29 @@ export default function UserForm() {
       });
       if (error) {
         console.log("Failed to submit data");
+        context.stepOneFormData({
+          userName: "",
+          email: "",
+          description: "",
+        });
+        context.issueAddress("Amsterdam");
+        context.uploadedPictures([]);
+        context.previewSources([]);
+        context.latitude(null);
+        context.longitude(null);
 
         return;
       }
+      context.stepOneFormData({
+        userName: "",
+        email: "",
+        description: "",
+      });
+      context.issueAddress("Amsterdam");
+      context.uploadedPictures([]);
+      context.previewSources([]);
+      context.latitude(null);
+      context.longitude(null);
 
       setLoading(false);
       context.setSelectedStepForm("SUBMITTED");
