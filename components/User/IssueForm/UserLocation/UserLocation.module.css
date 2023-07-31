@@ -15,6 +15,10 @@
   transition: 0.7s;
 }
 
+.hidden {
+  display: none;
+}
+
 .mainContainer:hover {
   border: 1px solid var(--color--intense-purple);
   border-radius: 8px;

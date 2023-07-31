@@ -58,7 +58,7 @@ export async function postIssue({
   }
 }
 
-export async function sendUpdateIssueRequest(status, message, issueId, email) {
+export async function sendUpdate(status, message, issueId, email) {
   const response = await axios.post(`/api/statusChanges`, {
     statusChange: {
       status: status,

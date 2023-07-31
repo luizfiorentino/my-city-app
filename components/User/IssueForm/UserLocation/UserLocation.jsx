@@ -23,9 +23,9 @@ function UserLocation(props) {
       ? markerPosition
       : [parseFloat(latitude), parseFloat(longitude)];
 
-  if (props.locationType === null) {
-    return null;
-  }
+  // if (props.locationType === null) {
+  //   return null;
+  // }
 
   async function geolocationApiCall(latitude, longitude) {
     const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
@@ -65,7 +65,7 @@ function UserLocation(props) {
   }
 
   return (
-    <div className={styles.mainContainer}>
+    <div className={context.latitude ? styles.mainContainer : styles.hidden}>
       {context.latitude || props.latitude ? (
         <MapContainer
           center={center}

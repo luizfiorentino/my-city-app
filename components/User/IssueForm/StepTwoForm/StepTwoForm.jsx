@@ -16,9 +16,8 @@ export default function StepTwoForm() {
     longitude,
     setLongitude,
     setSelectedStepForm,
-    setStepOneFormData,
   } = useContext(IssueContext);
-
+  console.log("steptwoform", latitude);
   useEffect(() => {
     setButtonInactive(true);
   }, []);
@@ -38,12 +37,33 @@ export default function StepTwoForm() {
     }
   };
 
+  useEffect(() => {
+    if (latitude) {
+      const displayMap = async () => {
+        setLoading(true);
+        try {
+          await setLatitude(parseFloat(latitude));
+          await setLongitude(parseFloat(longitude));
+
+          setLoading(false);
+        } catch (error) {
+          console.log(
+            "An error occurred while submitting location",
+            error.message
+          );
+          setLoading(false);
+        }
+      };
+
+      displayMap();
+    }
+  }, [latitude]);
   const backStepOne = () => {
-    setStepOneFormData({
-      userName: "",
-      email: "",
-      description: "",
-    });
+    // setStepOneFormData({
+    //   userName: "",
+    //   email: "",
+    //   description: "",
+    // });
 
     setSelectedStepForm("INFOS");
     setButtonInactive(false);

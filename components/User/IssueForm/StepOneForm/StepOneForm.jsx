@@ -28,7 +28,8 @@ const formSchema = z.object({
 });
 
 export default function StepOneForm() {
-  const { setStepOneFormData, setSelectedStepForm } = useContext(IssueContext);
+  const { stepOneFormData, setStepOneFormData, setSelectedStepForm } =
+    useContext(IssueContext);
 
   const {
     formState: { errors },
@@ -37,9 +38,11 @@ export default function StepOneForm() {
     reset,
   } = useForm({
     defaultValues: {
-      userName: "",
-      email: "",
-      description: "",
+      userName: stepOneFormData.userName ? stepOneFormData.userName : "",
+      email: stepOneFormData.email ? stepOneFormData.email : "",
+      description: stepOneFormData.description
+        ? stepOneFormData.description
+        : "",
     },
     // mode: "all", --> don't use, it's users unfriendly
     resolver: zodResolver(formSchema),

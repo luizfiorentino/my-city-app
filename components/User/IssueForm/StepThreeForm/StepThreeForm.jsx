@@ -65,7 +65,7 @@ export default function StepThreeForm() {
     watch,
   } = useForm({
     defaultValues: {
-      file: [],
+      file: context.uploadedPictures ? context.uploadedPictures : [],
     },
     // mode: "all", --> don't use, it's users unfriendly
     resolver: zodResolver(formSchema),
@@ -166,8 +166,8 @@ export default function StepThreeForm() {
   };
 
   const backStepTwo = () => {
-    context.setLatitude(null);
-    context.setLongitude(null);
+    // context.setLatitude(null);
+    // context.setLongitude(null);
     context.setSelectedStepForm("LOCATION");
     context.setButtonInactive(false);
   };
