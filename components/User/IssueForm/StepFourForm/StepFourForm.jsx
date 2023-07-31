@@ -152,7 +152,7 @@ export default function StepFourForm({ issueRequest, loading }) {
   } = useContext(IssueContext);
 
   const backStepThree = () => {
-    setUploadedPictures([]);
+    // setUploadedPictures([]);
     setSelectedStepForm("PICTURES");
     setButtonInactive(false);
   };
