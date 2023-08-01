@@ -18,13 +18,12 @@ const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 export default function UserForm() {
   const context = useContext(IssueContext);
   const [loading, setLoading] = useState(false);
-  console.log("userform context", context);
 
   const issueRequest = async () => {
     const { stepOneFormData, location } = context;
 
     try {
-      setLoading(true);
+      context.setLoading(true);
       const [error, _response] = await postIssue({
         userName: stepOneFormData.userName,
         description: stepOneFormData.description,
@@ -37,31 +36,32 @@ export default function UserForm() {
       });
       if (error) {
         console.log("Failed to submit data");
-        context.stepOneFormData({
+        context.setStepOneFormData({
           userName: "",
           email: "",
           description: "",
         });
-        context.issueAddress("Amsterdam");
-        context.uploadedPictures([]);
-        context.previewSources([]);
-        context.latitude(null);
-        context.longitude(null);
+        context.setIssueAddress("Amsterdam");
+        context.setUploadedPictures([]);
+        context.setPreviewSources([]);
+        context.setLatitude(null);
+        context.setLongitude(null);
+        context.setLoading(false);
 
         return;
       }
-      context.stepOneFormData({
+      context.setStepOneFormData({
         userName: "",
         email: "",
         description: "",
       });
-      context.issueAddress("Amsterdam");
-      context.uploadedPictures([]);
-      context.previewSources([]);
-      context.latitude(null);
-      context.longitude(null);
+      context.setIssueAddress("Amsterdam");
+      context.setUploadedPictures([]);
+      context.setPreviewSources([]);
+      context.setLatitude(null);
+      context.setLongitude(null);
 
-      setLoading(false);
+      context.setLoading(false);
       context.setSelectedStepForm("SUBMITTED");
     } catch (error) {
       console.log(
@@ -96,7 +96,7 @@ export default function UserForm() {
         {context.selectedStepForm === "LOCATION" && <StepTwoForm />}
         {context.selectedStepForm === "PICTURES" && <StepThreeForm />}
         {context.selectedStepForm === "CONFIRM DATA" && (
-          <StepFourForm issueRequest={issueRequest} loading={loading} />
+          <StepFourForm issueRequest={issueRequest} />
         )}
 
         {context.selectedStepForm === "SUBMITTED" && (

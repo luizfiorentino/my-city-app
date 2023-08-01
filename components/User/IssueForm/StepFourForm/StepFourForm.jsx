@@ -16,12 +16,13 @@ const UserLocation = dynamic(
   }
 );
 
-export default function StepFourForm({ issueRequest, loading }) {
+export default function StepFourForm({ issueRequest }) {
   const {
     stepOneFormData,
     issueAddress,
     latitude,
     longitude,
+    loading,
     previewSources,
     setUploadedPictures,
     setSelectedStepForm,
