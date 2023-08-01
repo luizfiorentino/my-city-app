@@ -4,7 +4,7 @@ import Button from "@/components/Shared/Button/Button";
 import IssueContext from "@/utils/IssueContext";
 
 export default function Footer(props) {
-  const { loading, buttonInactive } = useContext(IssueContext);
+  const { loading, buttonInactive, latitude } = useContext(IssueContext);
 
   return (
     <div
@@ -19,7 +19,7 @@ export default function Footer(props) {
       )}
       <Button
         onClick={props.onClick}
-        disabled={loading || buttonInactive}
+        disabled={(loading || buttonInactive) && !latitude}
         variant={props.variant === "submitInfos" ? "purple" : "postIssue"}
         type="submit"
         className={props.variant === "submitInfos" ? styles.purple : null}
