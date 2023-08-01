@@ -63,7 +63,6 @@ export default function FormContent({
       context.setLoading(false);
       return;
     }
-
     context.setLoading(false);
   };
 
@@ -76,8 +75,8 @@ export default function FormContent({
     if (choice === "map") {
       e.preventDefault();
       //Set Amsterdam Dam City Center as default
-      context.setLatitude(52.3732);
-      context.setLongitude(4.8914);
+      context.setLatitude("52.3732");
+      context.setLongitude("4.8914");
       setLocationType("map");
     }
   };
@@ -85,7 +84,7 @@ export default function FormContent({
   const backToLocationSelection = (e) => {
     e.preventDefault();
     setLocationType(null);
-    context.setButtonInactive(true);
+    //context.setButtonInactive(true);
   };
 
   const geolocationApiCall = async (latitude, longitude) => {
@@ -103,7 +102,6 @@ export default function FormContent({
     }
     const { address } = data;
     context.setIssueAddress(address);
-
     context.setButtonInactive(false);
 
     return [null, address];
