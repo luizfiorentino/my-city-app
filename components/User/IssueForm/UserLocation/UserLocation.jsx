@@ -23,10 +23,6 @@ function UserLocation(props) {
       ? markerPosition
       : [parseFloat(latitude), parseFloat(longitude)];
 
-  // if (props.locationType === null) {
-  //   return null;
-  // }
-
   async function geolocationApiCall(latitude, longitude) {
     const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
 
@@ -82,7 +78,6 @@ function UserLocation(props) {
           <TileLayer
             attribution={`&copy; MapTiler &copy; OpenStreetMap contributors`}
             url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=Zlvdjhx8LLJZkQKgusKO"
-
             //Alternatively (also works!)
             // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
