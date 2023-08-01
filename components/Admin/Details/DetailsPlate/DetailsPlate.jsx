@@ -27,6 +27,7 @@ export default function DetailsPlate({
   longitude,
 }) {
   const [openHistory, setOpenHistory] = useState(false);
+  console.log("details plate", latitude, longitude);
 
   const arrayHistory = arrayChanges.filter(
     (change) => change !== arrayChanges[0]
@@ -65,6 +66,7 @@ export default function DetailsPlate({
           <TextParagraph className={styles.defaultSpacing}>By</TextParagraph>
           <TextBold className={styles.largeSpacing}>{userName}</TextBold>
         </div>
+
         <div className={styles.sub}>
           <TextParagraph
             className={`${styles.defaultSpacing} ${styles.rightSide}`}

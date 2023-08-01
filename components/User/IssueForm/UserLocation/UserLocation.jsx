@@ -65,7 +65,13 @@ function UserLocation(props) {
   }
 
   return (
-    <div className={context.latitude ? styles.mainContainer : styles.hidden}>
+    <div
+      className={
+        context.latitude || props.latitude
+          ? styles.mainContainer
+          : styles.hidden
+      }
+    >
       {context.latitude || props.latitude ? (
         <MapContainer
           center={center}
