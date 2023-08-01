@@ -72,7 +72,7 @@ function UserLocation(props) {
           : styles.hidden
       }
     >
-      {context.latitude || props.latitude ? (
+      {(context.latitude || props.latitude) && context.loading === false && (
         <MapContainer
           center={center}
           zoom={14}
@@ -87,10 +87,10 @@ function UserLocation(props) {
           <Marker position={markerPosition} />
           <LocationMarker />
         </MapContainer>
-      ) : (
+      )}
+      {context.loading && (
         <p>
-          Loading your location...
-          <LoaderSpinner />
+          Loading location... <LoaderSpinner />
         </p>
       )}
     </div>
