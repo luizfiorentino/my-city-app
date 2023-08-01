@@ -17,7 +17,7 @@ export default function StepTwoForm() {
     setLongitude,
     setSelectedStepForm,
   } = useContext(IssueContext);
-  console.log("steptwoform", latitude);
+
   useEffect(() => {
     setButtonInactive(true);
   }, []);
