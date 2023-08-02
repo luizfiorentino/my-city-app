@@ -33,7 +33,9 @@
 
 .imageArea {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  max-width: 482px;
 }
 
 .imagePreviewContainer {
