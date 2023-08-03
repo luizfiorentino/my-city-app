@@ -16,9 +16,7 @@ const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
 
 export default function FormContent({
   errors,
-  userRegister,
-  descriptionRegister,
-  emailRegister,
+
   previewSources,
   getRootProps,
   getInputProps,
