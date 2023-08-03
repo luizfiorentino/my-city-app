@@ -61,9 +61,7 @@ export default function UserForm() {
       context.setLatitude(null);
       context.setLongitude(null);
 
-      setSuccessRequest(true);
-      setPreviewSources([]);
-      setLoading(false);
+      context.setLoading(false);
       context.setSelectedStepForm("SUBMITTED");
     } catch (error) {
       console.log(
