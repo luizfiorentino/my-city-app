@@ -12,11 +12,6 @@
   display: none;
 }
 
-.locationButtons {
-  display: flex;
-  justify-content: space-around;
-}
-
 .uploadImage {
   display: flex;
   flex-direction: column;
@@ -84,14 +79,6 @@
 @media screen and (max-width: 268px) {
   .imagePreview {
     max-width: 100%;
-  }
-}
-
-@media screen and (max-width: 444px) {
-  .locationButtons {
-    flex-direction: column;
-    margin-bottom: 16px;
-    gap: 16px;
   }
 }
 

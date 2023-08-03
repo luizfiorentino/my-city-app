@@ -1,0 +1,12 @@
+.locationButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 444px) {
+  .locationButtons {
+    flex-direction: column;
+    margin-bottom: 16px;
+    gap: 16px;
+  }
+}

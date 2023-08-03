@@ -26,6 +26,7 @@ export default function App({
   });
   const [uploadedPictures, setUploadedPictures] = useState([]);
   const [previewSources, setPreviewSources] = useState([]);
+  const [locationType, setLocationType] = useState(null);
 
   return (
     <SessionProvider session={session}>
@@ -57,6 +58,8 @@ export default function App({
           setPreviewSources,
           buttonInactive,
           setButtonInactive,
+          locationType,
+          setLocationType,
         }}
       >
         <Component {...pageProps} />

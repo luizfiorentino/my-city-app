@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ubuntu } from "@/styles/fonts";
-import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
 import IssueContext from "@/utils/IssueContext";
 import FormWrapper from "../FormContent/FormWrapper";
