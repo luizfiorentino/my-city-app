@@ -64,14 +64,13 @@ export default function StepOneForm() {
   return (
     <div>
       <div className={`${styles.main} ${ubuntu.className}`}>
-        <div className={styles.form}>
+        <div className={`${styles.form} ${styles.formContent}`}>
           <form onSubmit={handleSubmit(submitInfos)}>
             <FormWrapper>
               <FormHeader>Reports data</FormHeader>
               <FormSubtitle>
                 Please provide your name, email and description of the issue.
               </FormSubtitle>
-
               <FormInput
                 label="Name"
                 placeHolder="e.g. Mike Ness"
@@ -95,10 +94,10 @@ export default function StepOneForm() {
                 register={{ ...register("description") }}
                 type="text"
                 name="description"
-              />
+              />{" "}
+              <Footer className={styles.footer}>{"Next"} </Footer>
             </FormWrapper>
-            <Footer className={styles.footer}>{"Next"} </Footer>
-          </form>
+          </form>{" "}
         </div>
       </div>
     </div>

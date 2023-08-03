@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import dynamic from "next/dynamic";
 import styles from "./StepTwoForm.module.css";
 import { ubuntu } from "@/styles/fonts";
@@ -8,6 +8,7 @@ import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import Button from "@/components/Shared/Button/Button";
+import FormWrapper from "../FormContent/FormWrapper";
 const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
 });
@@ -159,15 +160,14 @@ export default function StepTwoForm() {
   };
 
   return (
-    <div className={`${styles.main} ${ubuntu.className}`}>
-      <div className={styles.image}></div>{" "}
-      <div className={styles.form}>
+    <div className={` ${ubuntu.className}  ${styles.formContent}`}>
+      <FormWrapper>
         <FormHeader>Location</FormHeader>
         <FormSubtitle>
           Select an option to inform the location of the issue.
         </FormSubtitle>
         {loading ? (
-          <p style={{ color: "black" }}>
+          <p className={styles.loadingContainer}>
             Loading your location...
             <LoaderSpinner />
           </p>
@@ -176,6 +176,7 @@ export default function StepTwoForm() {
             <UserLocation locationType={locationType} />
           </div>
         )}
+
         <div className={styles.locationButtons}>
           {locationType === null && locationType !== "current" && (
             <Button
@@ -193,6 +194,7 @@ export default function StepTwoForm() {
               Choose on the map
             </Button>
           )}
+
           {(locationType !== null ||
             locationType === "current" ||
             locationType === "map") && (
@@ -204,6 +206,7 @@ export default function StepTwoForm() {
             </Button>
           )}
         </div>
+
         <div>
           <Footer
             className={styles.footer}
@@ -214,7 +217,7 @@ export default function StepTwoForm() {
             {"Next"}
           </Footer>
         </div>
-      </div>
+      </FormWrapper>
     </div>
   );
 }

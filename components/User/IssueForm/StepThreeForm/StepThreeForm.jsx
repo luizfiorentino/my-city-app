@@ -5,11 +5,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useDropzone } from "react-dropzone";
 import { ubuntu } from "@/styles/fonts";
 import styles from "./StepThreeForm.module.css";
-import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import IssueContext from "@/utils/IssueContext";
-
+import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
+import { BsTrash } from "react-icons/bs";
+import { AiOutlineUpload } from "react-icons/ai";
+import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
+import FormInput from "../../Shared/Fields/FormInput/FormInput";
+import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 const formSchema = z.object({
   file: z
     .array(z.any())
@@ -173,24 +177,78 @@ export default function StepThreeForm() {
   };
 
   return (
-    <div className={`${styles.main} ${ubuntu.className}`}>
+    <div className={` ${ubuntu.className} ${styles.formContent}`}>
       <div className={styles.form}>
         <form onSubmit={handleSubmit(uploadPhotos)}>
-          <FormContent
+          {/* <FormContent
             errors={errors}
             previewSources={previewSources}
             getRootProps={{ ...getRootProps() }}
             getInputProps={{ ...getInputProps() }}
             isDragActive={isDragActive}
             removeFile={removeFile}
-          />
+          /> */}
+          <FormHeader>Images</FormHeader>
+          <FormSubtitle>
+            Optionally you can upload photos of the issue!
+          </FormSubtitle>
+          <FormInput label="Max. 3 pictures/ 1MB each" variant="photos" />
+          <div
+            className={
+              !previewSources.length ? styles.hidden : styles.uploadImage
+            }
+          >
+            <div className={styles.imageArea}>
+              {previewSources &&
+                previewSources.map((src, index) => (
+                  <div key={index} className={styles.imagePreviewContainer}>
+                    <img
+                      className={styles.imagePreview}
+                      src={src}
+                      alt="chosen"
+                    />
+                    <button
+                      className={styles.removeButton}
+                      //preventDefault avoids submitting the form before clicking the button
+                      onClick={(event) => {
+                        event.preventDefault();
+                        removeFile(index);
+                      }}
+                    >
+                      <BsTrash className={styles.deleteIcon} />
+                    </button>
+                  </div>
+                ))}
+            </div>
+          </div>
+          <div>
+            {errors.file && (
+              <StatusMessage>{errors.file.message}</StatusMessage>
+            )}
+          </div>
+          <div>
+            <div
+              className={styles.dropzone}
+              {...getRootProps()}
+              style={{ color: "black" }}
+            >
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <FormSubtitle variant="dragDrop">Drop files here</FormSubtitle>
+              ) : (
+                <FormSubtitle variant="dragDrop">
+                  Drag and drop files or click here
+                  <AiOutlineUpload className={styles.uploadIcon} />
+                </FormSubtitle>
+              )}
+            </div>
+          </div>{" "}
           {errorPosting && (
             <p className={styles.errorMessage}>
               An error occured uploading the files. Please try again or contact
               admin.
             </p>
           )}
-
           <Footer
             className={styles.footer}
             backButton={true}
