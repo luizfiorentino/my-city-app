@@ -60,7 +60,7 @@ export default function UserForm() {
       context.setPreviewSources([]);
       context.setLatitude(null);
       context.setLongitude(null);
-
+      context.setButtonInactive(false);
       context.setLoading(false);
       context.setSelectedStepForm("SUBMITTED");
     } catch (error) {
