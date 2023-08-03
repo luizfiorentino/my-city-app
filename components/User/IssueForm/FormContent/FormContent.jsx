@@ -9,7 +9,7 @@ import { BsTrash } from "react-icons/bs";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import IssueContext from "@/utils/IssueContext";
 import Button from "@/components/Shared/Button/Button";
-
+import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
 });
@@ -27,6 +27,7 @@ export default function FormContent({
 }) {
   const [locationType, setLocationType] = useState(null);
   const context = useContext(IssueContext);
+  console.log("from formContent, context.loading", context.loading);
 
   const getUserCurrentLocation = async () => {
     context.setLoading(true);
@@ -109,7 +110,7 @@ export default function FormContent({
 
   return (
     <div className={styles.formContent}>
-      {context.selectedStepForm === "INFOS" && (
+      {/* {context.selectedStepForm === "INFOS" && (
         <>
           <FormHeader>Reports data</FormHeader>
           <FormSubtitle>
@@ -141,7 +142,7 @@ export default function FormContent({
             name="description"
           />
         </>
-      )}
+      )} */}
       {context.selectedStepForm === "LOCATION" && (
         <>
           <FormHeader>Location</FormHeader>
@@ -150,11 +151,17 @@ export default function FormContent({
           </FormSubtitle>
         </>
       )}
-      {context.selectedStepForm === "LOCATION" && (
-        <div>
-          <UserLocation locationType={locationType} />
-        </div>
-      )}
+      {context.selectedStepForm === "LOCATION" &&
+        (context.loading ? (
+          <p style={{ color: "black" }}>
+            Loading your location...
+            <LoaderSpinner />
+          </p>
+        ) : (
+          <div>
+            <UserLocation locationType={locationType} />
+          </div>
+        ))}
       {context.selectedStepForm === "LOCATION" && (
         <div className={styles.locationButtons}>
           {locationType === null && locationType !== "current" && (

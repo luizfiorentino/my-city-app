@@ -11,6 +11,7 @@ import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
 function UserLocation(props) {
   const context = useContext(IssueContext);
+  console.log("UserLocation, context.loading", context.loading);
   const latitude = context.latitude ? context.latitude : "52.3732";
   const longitude = context.longitude ? context.longitude : "4.8914";
 

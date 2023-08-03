@@ -68,11 +68,6 @@ export default function StepOneForm() {
         <div className={styles.form}>
           <form onSubmit={handleSubmit(submitInfos)}>
             <FormWrapper>
-              {/* // userRegister={{ ...register("userName") }}
-              // descriptionRegister={{ ...register("description") }}
-              // emailRegister={{ ...register("email") }}
-              // errors={errors} */}
-
               <FormHeader>Reports data</FormHeader>
               <FormSubtitle>
                 Please provide your name, email and description of the issue.
@@ -110,3 +105,9 @@ export default function StepOneForm() {
     </div>
   );
 }
+
+//Obs how to export the Zod register to another component:
+// userRegister={{ ...register("userName") }}
+// descriptionRegister={{ ...register("description") }}
+// emailRegister={{ ...register("email") }}
+// errors={errors} */}
