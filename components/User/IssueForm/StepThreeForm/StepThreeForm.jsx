@@ -14,6 +14,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormInput from "../../Shared/Fields/FormInput/FormInput";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
+import FormWrapper from "../FormContent/FormWrapper";
 const formSchema = z.object({
   file: z
     .array(z.any())
@@ -177,87 +178,83 @@ export default function StepThreeForm() {
   };
 
   return (
-    <div className={` ${ubuntu.className} ${styles.formContent}`}>
-      <div className={styles.form}>
-        <form onSubmit={handleSubmit(uploadPhotos)}>
-          {/* <FormContent
-            errors={errors}
-            previewSources={previewSources}
-            getRootProps={{ ...getRootProps() }}
-            getInputProps={{ ...getInputProps() }}
-            isDragActive={isDragActive}
-            removeFile={removeFile}
-          /> */}
-          <FormHeader>Images</FormHeader>
-          <FormSubtitle>
-            Optionally you can upload photos of the issue!
-          </FormSubtitle>
-          <FormInput label="Max. 3 pictures/ 1MB each" variant="photos" />
-          <div
-            className={
-              !previewSources.length ? styles.hidden : styles.uploadImage
-            }
-          >
-            <div className={styles.imageArea}>
-              {previewSources &&
-                previewSources.map((src, index) => (
-                  <div key={index} className={styles.imagePreviewContainer}>
-                    <img
-                      className={styles.imagePreview}
-                      src={src}
-                      alt="chosen"
-                    />
-                    <button
-                      className={styles.removeButton}
-                      //preventDefault avoids submitting the form before clicking the button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        removeFile(index);
-                      }}
-                    >
-                      <BsTrash className={styles.deleteIcon} />
-                    </button>
-                  </div>
-                ))}
-            </div>
-          </div>
-          <div>
-            {errors.file && (
-              <StatusMessage>{errors.file.message}</StatusMessage>
-            )}
-          </div>
-          <div>
+    <div>
+      <div className={` ${ubuntu.className} `}>
+        <div className={styles.formContent}>
+          <FormWrapper>
+            <FormHeader>Images</FormHeader>
+            <FormSubtitle>
+              Optionally you can upload photos of the issue!
+            </FormSubtitle>
+            <FormInput label="Max. 3 pictures/ 1MB each" variant="photos" />
             <div
-              className={styles.dropzone}
-              {...getRootProps()}
-              style={{ color: "black" }}
+              className={
+                !previewSources.length ? styles.hidden : styles.uploadImage
+              }
             >
-              <input {...getInputProps()} />
-              {isDragActive ? (
-                <FormSubtitle variant="dragDrop">Drop files here</FormSubtitle>
-              ) : (
-                <FormSubtitle variant="dragDrop">
-                  Drag and drop files or click here
-                  <AiOutlineUpload className={styles.uploadIcon} />
-                </FormSubtitle>
+              <div className={styles.imageArea}>
+                {previewSources &&
+                  previewSources.map((src, index) => (
+                    <div key={index} className={styles.imagePreviewContainer}>
+                      <img
+                        className={styles.imagePreview}
+                        src={src}
+                        alt="chosen"
+                      />
+                      <button
+                        className={styles.removeButton}
+                        //preventDefault avoids submitting the form before clicking the button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          removeFile(index);
+                        }}
+                      >
+                        <BsTrash className={styles.deleteIcon} />
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            <div>
+              {errors.file && (
+                <StatusMessage>{errors.file.message}</StatusMessage>
               )}
             </div>
-          </div>{" "}
-          {errorPosting && (
-            <p className={styles.errorMessage}>
-              An error occured uploading the files. Please try again or contact
-              admin.
-            </p>
-          )}
-          <Footer
-            className={styles.footer}
-            backButton={true}
-            onClick2={backStepTwo}
-          >
-            {"Next"}
-            {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
-          </Footer>
-        </form>
+            <div>
+              <div
+                className={styles.dropzone}
+                {...getRootProps()}
+                style={{ color: "black" }}
+              >
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <FormSubtitle variant="dragDrop">
+                    Drop files here
+                  </FormSubtitle>
+                ) : (
+                  <FormSubtitle variant="dragDrop">
+                    Drag and drop files or click here
+                    <AiOutlineUpload className={styles.uploadIcon} />
+                  </FormSubtitle>
+                )}
+              </div>
+            </div>
+            {errorPosting && (
+              <p className={styles.errorMessage}>
+                An error occured uploading the files. Please try again or
+                contact admin.
+              </p>
+            )}
+          </FormWrapper>
+        </div>
+        <Footer
+          onClick={handleSubmit(uploadPhotos)}
+          backButton={true}
+          onClick2={backStepTwo}
+        >
+          {"Next"}
+          {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
+        </Footer>
       </div>
     </div>
   );

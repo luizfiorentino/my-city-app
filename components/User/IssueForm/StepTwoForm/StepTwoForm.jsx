@@ -160,64 +160,64 @@ export default function StepTwoForm() {
   };
 
   return (
-    <div className={` ${ubuntu.className}  ${styles.formContent}`}>
-      <FormWrapper>
-        <FormHeader>Location</FormHeader>
-        <FormSubtitle>
-          Select an option to inform the location of the issue.
-        </FormSubtitle>
-        {loading ? (
-          <p className={styles.loadingContainer}>
-            Loading your location...
-            <LoaderSpinner />
-          </p>
-        ) : (
-          <div>
-            <UserLocation locationType={locationType} />
-          </div>
-        )}
+    <div>
+      <div className={` ${ubuntu.className} `}>
+        <div className={styles.formContent}>
+          <FormWrapper>
+            <FormHeader>Location</FormHeader>
+            <FormSubtitle>
+              Select an option to inform the location of the issue.
+            </FormSubtitle>
+            {loading ? (
+              <p className={styles.loadingContainer}>
+                Loading your location...
+                <LoaderSpinner />
+              </p>
+            ) : (
+              <div>
+                <UserLocation locationType={locationType} />
+              </div>
+            )}
+            <div className={styles.locationButtons}>
+              {locationType === null && locationType !== "current" && (
+                <Button
+                  variant="lightGrey"
+                  onClick={(e) => locationChoice("current", e)}
+                >
+                  Share current location
+                </Button>
+              )}
+              {locationType === null && locationType !== "map" && (
+                <Button
+                  variant="lightGrey"
+                  onClick={(e) => locationChoice("map", e)}
+                >
+                  Choose on the map
+                </Button>
+              )}
 
-        <div className={styles.locationButtons}>
-          {locationType === null && locationType !== "current" && (
-            <Button
-              variant="lightGrey"
-              onClick={(e) => locationChoice("current", e)}
-            >
-              Share current location
-            </Button>
-          )}
-          {locationType === null && locationType !== "map" && (
-            <Button
-              variant="lightGrey"
-              onClick={(e) => locationChoice("map", e)}
-            >
-              Choose on the map
-            </Button>
-          )}
-
-          {(locationType !== null ||
-            locationType === "current" ||
-            locationType === "map") && (
-            <Button
-              variant="lightGrey"
-              onClick={(e) => backToLocationSelection(e)}
-            >
-              Back
-            </Button>
-          )}
+              {(locationType !== null ||
+                locationType === "current" ||
+                locationType === "map") && (
+                <Button
+                  variant="lightGrey"
+                  onClick={(e) => backToLocationSelection(e)}
+                >
+                  Back
+                </Button>
+              )}
+            </div>
+          </FormWrapper>
         </div>
-
-        <div>
-          <Footer
-            className={styles.footer}
-            onClick={() => submitCoordinates()}
-            onClick2={backStepOne}
-            backButton={true}
-          >
-            {"Next"}
-          </Footer>
-        </div>
-      </FormWrapper>
+        <Footer
+          className={styles.footer}
+          onClick={() => submitCoordinates()}
+          onClick2={backStepOne}
+          backButton={true}
+        >
+          {"Next"}
+        </Footer>
+      </div>
     </div>
   );
 }

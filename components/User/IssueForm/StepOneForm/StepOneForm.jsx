@@ -63,48 +63,46 @@ export default function StepOneForm() {
 
   return (
     <div>
-      <div className={`${styles.main} ${ubuntu.className}`}>
-        <div className={`${styles.form} ${styles.formContent}`}>
-          <form onSubmit={handleSubmit(submitInfos)}>
-            <FormWrapper>
-              <FormHeader>Reports data</FormHeader>
-              <FormSubtitle>
-                Please provide your name, email and description of the issue.
-              </FormSubtitle>
-              <FormInput
-                label="Name"
-                placeHolder="e.g. Mike Ness"
-                error={errors.userName}
-                register={{ ...register("userName") }}
-                type="text"
-                name="userName"
-              />
-              <FormInput
-                label="Email (optional, to get folow ups)"
-                placeHolder="e.g. mike@ness.com"
-                error={errors.email}
-                register={{ ...register("email") }}
-                type="text"
-                name="userName"
-              />
-              <FormInput
-                label="Description"
-                placeHolder="e.g. there is something..."
-                error={errors.description}
-                register={{ ...register("description") }}
-                type="text"
-                name="description"
-              />{" "}
-              <Footer className={styles.footer}>{"Next"} </Footer>
-            </FormWrapper>
-          </form>{" "}
+      <div className={`${ubuntu.className}`}>
+        <div className={` ${styles.formContent}`}>
+          <FormWrapper>
+            <FormHeader>Reports data</FormHeader>
+            <FormSubtitle>
+              Please provide your name, email and description of the issue.
+            </FormSubtitle>
+            <FormInput
+              label="Name"
+              placeHolder="e.g. Mike Ness"
+              error={errors.userName}
+              register={{ ...register("userName") }}
+              type="text"
+              name="userName"
+            />
+            <FormInput
+              label="Email (optional, to get folow ups)"
+              placeHolder="e.g. mike@ness.com"
+              error={errors.email}
+              register={{ ...register("email") }}
+              type="text"
+              name="userName"
+            />
+            <FormInput
+              label="Description"
+              placeHolder="e.g. there is something..."
+              error={errors.description}
+              register={{ ...register("description") }}
+              type="text"
+              name="description"
+            />
+          </FormWrapper>
         </div>
+        <Footer onClick={handleSubmit(submitInfos)}>{"Next"} </Footer>
       </div>
     </div>
   );
 }
 
-//Obs how to export the Zod register to another component:
+//Obs. how to export the Zod register to another component:
 // userRegister={{ ...register("userName") }}
 // descriptionRegister={{ ...register("description") }}
 // emailRegister={{ ...register("email") }}
