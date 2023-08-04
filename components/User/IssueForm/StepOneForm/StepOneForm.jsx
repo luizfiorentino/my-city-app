@@ -96,7 +96,9 @@ export default function StepOneForm() {
             />
           </FormWrapper>
         </div>
-        <Footer onClick={handleSubmit(submitInfos)}>{"Next"} </Footer>
+        <Footer goBack={null} goForward={handleSubmit(submitInfos)}>
+          {"Next"}
+        </Footer>
       </div>
     </div>
   );

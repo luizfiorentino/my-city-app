@@ -247,11 +247,7 @@ export default function StepThreeForm() {
             )}
           </FormWrapper>
         </div>
-        <Footer
-          onClick={handleSubmit(uploadPhotos)}
-          backButton={true}
-          onClick2={backStepTwo}
-        >
+        <Footer goForward={handleSubmit(uploadPhotos)} goBack={backStepTwo}>
           {"Next"}
           {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
         </Footer>

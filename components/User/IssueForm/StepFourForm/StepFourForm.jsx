@@ -111,11 +111,11 @@ export default function StepFourForm({ issueRequest }) {
         </div>
       </ConfirmationMessage>
       <Footer
-        onClick={issueRequest}
+        goForward={issueRequest}
         loading={loading}
         variant="submitInfos"
         backButton={true}
-        onClick2={backStepThree}
+        goBack={backStepThree}
       >
         Confirm {loading && <LoaderSpinner className={styles.spinner} />}
       </Footer>

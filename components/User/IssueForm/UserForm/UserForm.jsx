@@ -107,7 +107,7 @@ export default function UserForm() {
                 Thanks for helping the City get awesome!
               </FormSubtitle>
             </ConfirmationMessage>{" "}
-            <Footer onClick={backToForm}>New</Footer>
+            <Footer goForward={backToForm}>New</Footer>
           </>
         )}
       </div>

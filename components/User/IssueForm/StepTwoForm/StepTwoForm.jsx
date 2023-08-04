@@ -211,9 +211,9 @@ export default function StepTwoForm() {
         </div>
         <Footer
           className={styles.footer}
-          onClick={() => submitCoordinates()}
-          onClick2={backStepOne}
-          backButton={true}
+          goForward={() => submitCoordinates()}
+          goBack={backStepOne}
+          // backButton={true}
         >
           {"Next"}
         </Footer>
