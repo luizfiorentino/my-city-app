@@ -10,7 +10,7 @@ import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import Button from "@/components/Shared/Button/Button";
 import FormWrapper from "../FormContent/FormWrapper";
 import { geolocationApiCall } from "@/services";
-import { useLoaction, userLocation } from "@/hooks/useLocation";
+import { userLocation } from "@/hooks/useLocation";
 const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
 });
