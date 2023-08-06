@@ -9,6 +9,8 @@ import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import Button from "@/components/Shared/Button/Button";
 import FormWrapper from "../FormContent/FormWrapper";
+import { geolocationApiCall } from "@/services";
+import { useLoaction, userLocation } from "@/hooks/useLocation";
 const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
 });
@@ -28,23 +30,10 @@ export default function StepTwoForm() {
     setLocationType,
   } = useContext(IssueContext);
 
-  useEffect(() => {
-    setButtonInactive(true);
-  }, []);
-
-  // eventually remove "async await" statements
-  const submitCoordinates = async () => {
-    setLoading(true);
-    try {
-      await setLatitude(parseFloat(latitude));
-      await setLongitude(parseFloat(longitude));
-
-      setSelectedStepForm("PICTURES");
-      setLoading(false);
-    } catch (error) {
-      console.log("An error occurred while submitting location", error.message);
-      setLoading(false);
-    }
+  const submitCoordinates = () => {
+    setLatitude(parseFloat(latitude));
+    setLongitude(parseFloat(longitude));
+    setSelectedStepForm("PICTURES");
   };
 
   useEffect(() => {
@@ -67,14 +56,8 @@ export default function StepTwoForm() {
 
       displayMap();
     }
-  }, [latitude]);
+  }, [latitude, longitude, setLatitude, setLongitude, setLoading]);
   const backStepOne = () => {
-    // setStepOneFormData({
-    //   userName: "",
-    //   email: "",
-    //   description: "",
-    // });
-
     setSelectedStepForm("INFOS");
     setButtonInactive(false);
   };
@@ -82,60 +65,26 @@ export default function StepTwoForm() {
   const getUserCurrentLocation = async () => {
     setLoading(true);
 
-    if (!navigator.geolocation) {
-      console.log("Geolocation is not supported by this browser.");
-      setLoading(false);
-      return;
-    }
-
-    const location = await new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        (location) => resolve(location),
-        (error) => reject(error)
-      );
-    });
-
-    if (!location) {
-      console.log("Error when getting your geolocation");
-      setLoading(false);
-      return;
-    }
-    const { latitude, longitude } = location.coords;
+    const [locationError, { latitude, longitude }] = await userLocation();
+    //to do error handling
     setLatitude(latitude);
     setLongitude(longitude);
 
     const response = await geolocationApiCall(latitude, longitude);
-    const [error, _address] = response;
-
-    if (error) {
-      console.log(
-        "An error occurred when fetching the address with the informed coordinates"
-      );
-      setLoading(false);
-      return;
-    }
+    const [error, address] = response;
+    //to do error handling
+    setIssueAddress(address);
     setLoading(false);
   };
 
-  const geolocationApiCall = async (latitude, longitude) => {
-    const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
-
-    const domain = window.location.origin;
-    const headers = {
-      "x-domain-header": domain,
-    };
-    const response = await fetch(apiUrl, { headers });
-    const data = await response.json();
-
-    if (!response.ok) {
-      return ["No address found.", null];
-    }
-    const { address } = data;
-    setIssueAddress(address);
-    setButtonInactive(false);
-
-    return [null, address];
+  const backToLocationSelection = (e) => {
+    e.preventDefault();
+    setLocationType(null);
+    setLatitude(null);
+    setLongitude(null);
+    //context.setButtonInactive(true);
   };
+
   const locationChoice = (choice, e) => {
     if (choice === "current") {
       e.preventDefault();
@@ -149,14 +98,6 @@ export default function StepTwoForm() {
       setLongitude("4.8914");
       setLocationType("map");
     }
-  };
-
-  const backToLocationSelection = (e) => {
-    e.preventDefault();
-    setLocationType(null);
-    setLatitude(null);
-    setLongitude(null);
-    //context.setButtonInactive(true);
   };
 
   return (

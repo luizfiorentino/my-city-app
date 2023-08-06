@@ -1,5 +1,31 @@
 import axios from "axios";
 
+export const geolocationApiCall = async (latitude, longitude) => {
+  const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
+
+  const domain = window.location.origin;
+  const headers = {
+    "x-domain-header": domain,
+  };
+
+  try {
+    const response = await fetch(apiUrl, { headers });
+    const data = await response.json();
+
+    if (!response.ok) {
+      return ["No address found.", null];
+    }
+    const { address } = data;
+
+    // setButtonInactive(false);
+
+    return [null, address];
+  } catch (error) {
+    console.log("error fetching geolocation");
+    return [error, null];
+  }
+};
+
 export async function sendEmail(to, subject, text, html) {
   const url = "/api/updateEmail";
 
