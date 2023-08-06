@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import dynamic from "next/dynamic";
+
 import styles from "./FormContent.module.css";
 import FormHeader from "../../Shared/Fields/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle";
@@ -8,184 +8,100 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import IssueContext from "@/utils/IssueContext";
-import Button from "@/components/Shared/Button/Button";
-
-const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
-  ssr: false,
-});
 
 export default function FormContent({
   errors,
-  userRegister,
-  descriptionRegister,
-  emailRegister,
+
   previewSources,
   getRootProps,
   getInputProps,
   isDragActive,
   removeFile,
 }) {
-  const [locationType, setLocationType] = useState(null);
   const context = useContext(IssueContext);
+  console.log("from formContent, context.loading", context.loading);
 
-  const getUserCurrentLocation = async () => {
-    context.setLoading(true);
+  // const getUserCurrentLocation = async () => {
+  //   context.setLoading(true);
 
-    if (!navigator.geolocation) {
-      console.log("Geolocation is not supported by this browser.");
-      context.setLoading(false);
-      return;
-    }
+  //   if (!navigator.geolocation) {
+  //     console.log("Geolocation is not supported by this browser.");
+  //     context.setLoading(false);
+  //     return;
+  //   }
 
-    const location = await new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        (location) => resolve(location),
-        (error) => reject(error)
-      );
-    });
+  //   const location = await new Promise((resolve, reject) => {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (location) => resolve(location),
+  //       (error) => reject(error)
+  //     );
+  //   });
 
-    if (!location) {
-      console.log("Error when getting your geolocation");
-      context.setLoading(false);
-      return;
-    }
-    const { latitude, longitude } = location.coords;
-    context.setLatitude(latitude);
-    context.setLongitude(longitude);
+  //   if (!location) {
+  //     console.log("Error when getting your geolocation");
+  //     context.setLoading(false);
+  //     return;
+  //   }
+  //   const { latitude, longitude } = location.coords;
+  //   context.setLatitude(latitude);
+  //   context.setLongitude(longitude);
 
-    const response = await geolocationApiCall(latitude, longitude);
-    const [error, _address] = response;
+  //   const response = await geolocationApiCall(latitude, longitude);
+  //   const [error, _address] = response;
 
-    if (error) {
-      console.log(
-        "An error occurred when fetching the address with the informed coordinates"
-      );
-      context.setLoading(false);
-      return;
-    }
-    context.setLoading(false);
-  };
+  //   if (error) {
+  //     console.log(
+  //       "An error occurred when fetching the address with the informed coordinates"
+  //     );
+  //     context.setLoading(false);
+  //     return;
+  //   }
+  //   context.setLoading(false);
+  // };
 
-  const locationChoice = (choice, e) => {
-    if (choice === "current") {
-      e.preventDefault();
-      getUserCurrentLocation();
-      setLocationType("current");
-    }
-    if (choice === "map") {
-      e.preventDefault();
-      //Set Amsterdam Dam City Center as default
-      context.setLatitude("52.3732");
-      context.setLongitude("4.8914");
-      setLocationType("map");
-    }
-  };
+  // const locationChoice = (choice, e) => {
+  //   if (choice === "current") {
+  //     e.preventDefault();
+  //     getUserCurrentLocation();
+  //     setLocationType("current");
+  //   }
+  //   if (choice === "map") {
+  //     e.preventDefault();
+  //     //Set Amsterdam Dam City Center as default
+  //     context.setLatitude("52.3732");
+  //     context.setLongitude("4.8914");
+  //     setLocationType("map");
+  //   }
+  // };
 
-  const backToLocationSelection = (e) => {
-    e.preventDefault();
-    setLocationType(null);
-    //context.setButtonInactive(true);
-  };
+  // const backToLocationSelection = (e) => {
+  //   e.preventDefault();
+  //   setLocationType(null);
+  //   //context.setButtonInactive(true);
+  // };
 
-  const geolocationApiCall = async (latitude, longitude) => {
-    const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
+  // const geolocationApiCall = async (latitude, longitude) => {
+  //   const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
 
-    const domain = window.location.origin;
-    const headers = {
-      "x-domain-header": domain,
-    };
-    const response = await fetch(apiUrl, { headers });
-    const data = await response.json();
+  //   const domain = window.location.origin;
+  //   const headers = {
+  //     "x-domain-header": domain,
+  //   };
+  //   const response = await fetch(apiUrl, { headers });
+  //   const data = await response.json();
 
-    if (!response.ok) {
-      return ["No address found.", null];
-    }
-    const { address } = data;
-    context.setIssueAddress(address);
-    context.setButtonInactive(false);
+  //   if (!response.ok) {
+  //     return ["No address found.", null];
+  //   }
+  //   const { address } = data;
+  //   context.setIssueAddress(address);
+  //   context.setButtonInactive(false);
 
-    return [null, address];
-  };
+  //   return [null, address];
+  // };
 
   return (
     <div className={styles.formContent}>
-      {context.selectedStepForm === "INFOS" && (
-        <>
-          <FormHeader>Reports data</FormHeader>
-          <FormSubtitle>
-            Please provide your name, email and description of the issue.
-          </FormSubtitle>
-
-          <FormInput
-            label="Name"
-            placeHolder="e.g. Mike Ness"
-            error={errors.userName}
-            register={userRegister}
-            type="text"
-            name="userName"
-          />
-          <FormInput
-            label="Email (optional, to get folow ups)"
-            placeHolder="e.g. mike@ness.com"
-            error={errors.email}
-            register={emailRegister}
-            type="text"
-            name="userName"
-          />
-          <FormInput
-            label="Description"
-            placeHolder="e.g. there is something..."
-            error={errors.description}
-            register={descriptionRegister}
-            type="text"
-            name="description"
-          />
-        </>
-      )}
-      {context.selectedStepForm === "LOCATION" && (
-        <>
-          <FormHeader>Location</FormHeader>
-          <FormSubtitle>
-            Select an option to inform the location of the issue.
-          </FormSubtitle>
-        </>
-      )}
-      {context.selectedStepForm === "LOCATION" && (
-        <div>
-          <UserLocation locationType={locationType} />
-        </div>
-      )}
-      {context.selectedStepForm === "LOCATION" && (
-        <div className={styles.locationButtons}>
-          {locationType === null && locationType !== "current" && (
-            <Button
-              variant="lightGrey"
-              onClick={(e) => locationChoice("current", e)}
-            >
-              Share current location
-            </Button>
-          )}
-          {locationType === null && locationType !== "map" && (
-            <Button
-              variant="lightGrey"
-              onClick={(e) => locationChoice("map", e)}
-            >
-              Choose on the map
-            </Button>
-          )}
-          {(locationType !== null ||
-            locationType === "current" ||
-            locationType === "map") && (
-            <Button
-              variant="lightGrey"
-              onClick={(e) => backToLocationSelection(e)}
-            >
-              Back
-            </Button>
-          )}
-        </div>
-      )}
-
       {context.selectedStepForm === "PICTURES" && (
         <>
           <FormHeader>Images</FormHeader>

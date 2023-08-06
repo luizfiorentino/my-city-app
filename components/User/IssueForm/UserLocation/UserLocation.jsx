@@ -8,9 +8,11 @@ import "leaflet-defaulticon-compatibility";
 import IssueContext from "@/utils/IssueContext";
 import styles from "./UserLocation.module.css";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
+import { geolocationApiCall } from "@/services";
 
 function UserLocation(props) {
   const context = useContext(IssueContext);
+
   const latitude = context.latitude ? context.latitude : "52.3732";
   const longitude = context.longitude ? context.longitude : "4.8914";
 
@@ -23,38 +25,19 @@ function UserLocation(props) {
       ? markerPosition
       : [parseFloat(latitude), parseFloat(longitude)];
 
-  async function geolocationApiCall(latitude, longitude) {
-    const apiUrl = `/api/geolocation?latitude=${latitude}&longitude=${longitude}`;
-
-    try {
-      const domain = window.location.origin; // Get the current domain
-      const headers = {
-        "x-domain-header": domain, // Set the custom header with the domain
-      };
-      const response = await fetch(apiUrl, { headers });
-      const data = await response.json();
-
-      if (response.ok) {
-        const { address } = data;
-        context.setIssueAddress(address);
-        context.setButtonInactive(false);
-      } else {
-        console.log("No address found for the given coordinates.");
-      }
-    } catch (error) {
-      console.log("An error occurred:", error);
-    }
-  }
-
   function LocationMarker() {
     const map = useMapEvents({
-      click(e) {
+      async click(e) {
         const lat = e.latlng.lat;
         const lng = e.latlng.lng;
         context.setLatitude(lat.toString());
         context.setLongitude(lng.toString());
         map.flyTo(e.latlng, map.getZoom());
-        geolocationApiCall(lat.toString(), lng.toString());
+        const [error, address] = await geolocationApiCall(
+          lat.toString(),
+          lng.toString()
+        );
+        context.setIssueAddress(address);
       },
     });
     return null;

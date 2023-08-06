@@ -8,6 +8,7 @@ import Footer from "../../Shared/Footer/Footer";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import { useContext } from "react";
 import IssueContext from "@/utils/IssueContext";
+console.log("new commit");
 
 const UserLocation = dynamic(
   () => import("@/components/User/IssueForm/UserLocation/UserLocation"),
@@ -110,11 +111,11 @@ export default function StepFourForm({ issueRequest }) {
         </div>
       </ConfirmationMessage>
       <Footer
-        onClick={issueRequest}
+        goForward={issueRequest}
         loading={loading}
         variant="submitInfos"
         backButton={true}
-        onClick2={backStepThree}
+        goBack={backStepThree}
       >
         Confirm {loading && <LoaderSpinner className={styles.spinner} />}
       </Footer>

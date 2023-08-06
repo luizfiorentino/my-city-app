@@ -1,0 +1,118 @@
+.formContent {
+  background-color: var(--color--white);
+  padding: 32px 24px;
+  margin: 0px 16px 24px 16px;
+  margin: 0 16px;
+  border-radius: 10px;
+  position: relative;
+  bottom: 96px;
+}
+.uploadImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  color: var(--color--black);
+  border: 1px solid var(--color--soft-grey);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dropzone {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px dotted var(--color--regular-grey);
+  border-radius: 4px;
+  margin-bottom: 44px;
+}
+
+.imageArea {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 482px;
+}
+
+.imagePreviewContainer {
+  position: relative;
+}
+
+.removeButton {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+.deleteIcon {
+  margin-top: 3px;
+  margin-right: 1px;
+}
+
+.uploadIcon {
+  margin-left: 8px;
+  margin-bottom: 4px;
+}
+
+.errorMessage {
+  color: var(--color--danger);
+  margin: 5px;
+}
+
+.hidden {
+  display: none;
+}
+/* 
+@media screen and (min-width: 800px) {
+  .formContent {
+    bottom: 0;
+    margin: 0;
+    padding: 16px 0 0 0;
+  }
+} */
+
+@media screen and (min-width: 800px) {
+  .formContent {
+    bottom: 0;
+    margin: 0;
+    padding: 16px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 268px) {
+  .imagePreview {
+    max-width: 100%;
+  }
+}
+
+.imagePreview {
+  width: 150px;
+  height: 150px;
+  object-fit: scale-down;
+  border: 1px solid var(--color--pale-grey);
+  border-radius: 4px;
+  padding: 5px;
+}
+
+@media screen and (max-width: 620px) {
+  .imageArea {
+    flex-direction: column;
+  }
+  .dropzone {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .uploadImage {
+    flex-direction: column;
+  }
+}

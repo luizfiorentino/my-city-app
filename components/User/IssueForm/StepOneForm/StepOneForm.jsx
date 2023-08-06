@@ -4,9 +4,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ubuntu } from "@/styles/fonts";
-import FormContent from "../FormContent";
 import Footer from "../../Shared/Footer";
 import IssueContext from "@/utils/IssueContext";
+import FormWrapper from "../FormContent/FormWrapper";
+import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
+import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
+import FormInput from "../../Shared/Fields/FormInput/FormInput";
 
 const formSchema = z.object({
   userName: z
@@ -60,19 +63,49 @@ export default function StepOneForm() {
 
   return (
     <div>
-      <div className={`${styles.main} ${ubuntu.className}`}>
-        <div className={styles.form}>
-          <form onSubmit={handleSubmit(submitInfos)}>
-            <FormContent
-              userRegister={{ ...register("userName") }}
-              descriptionRegister={{ ...register("description") }}
-              emailRegister={{ ...register("email") }}
-              errors={errors}
+      <div className={`${ubuntu.className}`}>
+        <div className={` ${styles.formContent}`}>
+          <FormWrapper>
+            <FormHeader>Reports data</FormHeader>
+            <FormSubtitle>
+              Please provide your name, email and description of the issue.
+            </FormSubtitle>
+            <FormInput
+              label="Name"
+              placeHolder="e.g. Mike Ness"
+              error={errors.userName}
+              register={{ ...register("userName") }}
+              type="text"
+              name="userName"
             />
-            <Footer className={styles.footer}>{"Next"} </Footer>
-          </form>
+            <FormInput
+              label="Email (optional, to get folow ups)"
+              placeHolder="e.g. mike@ness.com"
+              error={errors.email}
+              register={{ ...register("email") }}
+              type="text"
+              name="userName"
+            />
+            <FormInput
+              label="Description"
+              placeHolder="e.g. there is something..."
+              error={errors.description}
+              register={{ ...register("description") }}
+              type="text"
+              name="description"
+            />
+          </FormWrapper>
         </div>
+        <Footer goBack={null} goForward={handleSubmit(submitInfos)}>
+          {"Next"}
+        </Footer>
       </div>
     </div>
   );
 }
+
+//Obs. how to export the Zod register to another component:
+// userRegister={{ ...register("userName") }}
+// descriptionRegister={{ ...register("description") }}
+// emailRegister={{ ...register("email") }}
+// errors={errors} */}

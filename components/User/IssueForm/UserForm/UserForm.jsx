@@ -60,7 +60,7 @@ export default function UserForm() {
       context.setPreviewSources([]);
       context.setLatitude(null);
       context.setLongitude(null);
-
+      context.setButtonInactive(false);
       context.setLoading(false);
       context.setSelectedStepForm("SUBMITTED");
     } catch (error) {
@@ -107,7 +107,7 @@ export default function UserForm() {
                 Thanks for helping the City get awesome!
               </FormSubtitle>
             </ConfirmationMessage>{" "}
-            <Footer onClick={backToForm}>New</Footer>
+            <Footer goForward={backToForm}>New</Footer>
           </>
         )}
       </div>

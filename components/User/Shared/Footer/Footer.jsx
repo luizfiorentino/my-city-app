@@ -3,28 +3,34 @@ import styles from "./Footer.module.css";
 import Button from "@/components/Shared/Button/Button";
 import IssueContext from "@/utils/IssueContext";
 
-export default function Footer(props) {
-  const { loading, buttonInactive, latitude } = useContext(IssueContext);
+export default function Footer({
+  goBack,
+  goForward,
+  isGoForwardDisabled,
+  variant,
+  children,
+}) {
+  // const { loading, buttonInactive, latitude } = useContext(IssueContext);
 
   return (
     <div
-      className={`${props.backButton === true ? styles.backBtn : styles.main} ${
-        props.variant ? styles[props.variant] : null
+      className={`${goBack ? styles.backBtn : styles.main} ${
+        variant ? styles[variant] : null
       }`}
     >
-      {props.backButton === true && (
-        <Button onClick={props.onClick2} variant="goBack" type="button">
+      {goBack && (
+        <Button onClick={goBack} variant="goBack" type="button">
           Go back
         </Button>
       )}
       <Button
-        onClick={props.onClick}
-        disabled={(loading || buttonInactive) && !latitude}
-        variant={props.variant === "submitInfos" ? "purple" : "postIssue"}
+        onClick={goForward}
+        disabled={isGoForwardDisabled}
+        variant={variant === "submitInfos" ? "purple" : "postIssue"}
         type="submit"
-        className={props.variant === "submitInfos" ? styles.purple : null}
+        className={variant === "submitInfos" ? styles.purple : null}
       >
-        {props.children}
+        {children}
       </Button>
     </div>
   );
