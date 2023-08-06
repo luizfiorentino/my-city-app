@@ -27,12 +27,21 @@ export default function StepTwoForm() {
     loading,
     setSelectedStepForm,
     setIssueAddress,
+    issueAddress,
     // locationType,
     // setLocationType,
   } = useContext(IssueContext);
 
   const [locationType, setLocationType] = useState(null);
   const [userLocationError, setUserLocationError] = useState("");
+  console.log(
+    "stepTwoForm context.latitude",
+    latitude,
+    "loading?",
+    loading,
+    "address?",
+    issueAddress
+  );
 
   const submitCoordinates = () => {
     // setLatitude(parseFloat(latitude));
@@ -150,16 +159,16 @@ export default function StepTwoForm() {
                 <LoaderSpinner />
               </p>
             ) : (
-              <div>
-                <UserLocation
-                  locationType={locationType}
-                  updateLocation={updateLocation}
-                  latitude={latitude}
-                  longitude={longitude}
-                  loading={loading}
-                />
-              </div>
+              <UserLocation
+                locationType={locationType}
+                updateLocation={updateLocation}
+                latitude={latitude}
+                longitude={longitude}
+                loading={loading}
+              />
             )}
+            <div></div>
+
             <div className={styles.locationButtons}>
               {locationType === null && locationType !== "current" && (
                 <Button

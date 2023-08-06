@@ -15,7 +15,7 @@ function LocationMarker({ latitude, longitude, updateLocation }) {
     async click(e) {
       const lat = e.latlng.lat;
       const lng = e.latlng.lng;
-      updateLocation(lat, lgn);
+      updateLocation(lat, lng);
       // context.setLatitude(lat.toString());
       // context.setLongitude(lng.toString());
       // map.flyTo(e.latlng, map.getZoom());
@@ -29,7 +29,7 @@ function LocationMarker({ latitude, longitude, updateLocation }) {
   useEffect(() => {
     if (!latitude || !longitude) return;
 
-    map.flyTo({ lat: latitude, lgn: longitude }, map.getZoom());
+    map.flyTo({ lat: latitude, lng: longitude }, map.getZoom());
   }, [latitude, longitude, map]);
 
   return null;
@@ -38,7 +38,7 @@ function LocationMarker({ latitude, longitude, updateLocation }) {
 function UserLocation({ latitude, longitude, loading, updateLocation }) {
   const markerPosition = [latitude, longitude];
 
-  // const context = useContext(IssueContext);
+  const context = useContext(IssueContext);
 
   // const latitude = context.latitude ? context.latitude : "52.3732";
   // const longitude = context.longitude ? context.longitude : "4.8914";

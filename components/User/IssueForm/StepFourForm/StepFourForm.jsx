@@ -28,6 +28,8 @@ export default function StepFourForm({ issueRequest }) {
     setUploadedPictures,
     setSelectedStepForm,
     setButtonInactive,
+    locationType,
+    updateLocation,
   } = useContext(IssueContext);
 
   const backStepThree = () => {
@@ -77,7 +79,13 @@ export default function StepFourForm({ issueRequest }) {
               </div>
               <div className={styles.summaryFieldDescription}>
                 {latitude && (
-                  <UserLocation latitude={latitude} longitude={longitude} />
+                  <UserLocation
+                    locationType={locationType}
+                    updateLocation={updateLocation}
+                    latitude={latitude}
+                    longitude={longitude}
+                    loading={loading}
+                  />
                 )}
               </div>
               <div className={styles.uploadImageBanner}>
