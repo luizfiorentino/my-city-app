@@ -4,17 +4,19 @@ export async function userLocation() {
     return [{ message: "Geolocation is not supported by this browser." }, null];
   }
 
-  const location = await new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(
-      (location) => resolve(location),
-      (error) => reject(error)
-    );
-  });
+  try {
+    const location = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (location) => resolve(location),
+        (error) => reject(error)
+      );
+    });
 
-  if (!location) {
-    console.log("Error when getting your geolocation");
-
-    return [{ message: "Geolocation is not supported by this browser." }, null];
+    if (!location) {
+      return [{ message: "Geolocation not supported by this browser" }, null];
+    }
+    return [null, location.coords];
+  } catch (error) {
+    return [error, null];
   }
-  return [null, location.coords];
 }
