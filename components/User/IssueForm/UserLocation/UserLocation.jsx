@@ -8,7 +8,6 @@ import "leaflet-defaulticon-compatibility";
 import IssueContext from "@/utils/IssueContext";
 import styles from "./UserLocation.module.css";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
-import { geolocationApiCall } from "@/services";
 
 function LocationMarker({ latitude, longitude, updateLocation }) {
   const map = useMapEvents({
@@ -16,14 +15,6 @@ function LocationMarker({ latitude, longitude, updateLocation }) {
       const lat = e.latlng.lat;
       const lng = e.latlng.lng;
       updateLocation(lat, lng);
-      // context.setLatitude(lat.toString());
-      // context.setLongitude(lng.toString());
-      // map.flyTo(e.latlng, map.getZoom());
-      // const [error, address] = await geolocationApiCall(
-      //   lat.toString(),
-      //   lng.toString()
-      // );
-      // context.setIssueAddress(address);
     },
   });
   useEffect(() => {
@@ -39,14 +30,6 @@ function UserLocation({ latitude, longitude, loading, updateLocation }) {
   const markerPosition = [latitude, longitude];
 
   const context = useContext(IssueContext);
-
-  // const latitude = context.latitude ? context.latitude : "52.3732";
-  // const longitude = context.longitude ? context.longitude : "4.8914";
-
-  // const center =
-  //   props.locationType === "current"
-  //     ? markerPosition
-  //     : [parseFloat(latitude), parseFloat(longitude)];
 
   return (
     <div className={latitude || loading ? styles.mainContainer : styles.hidden}>

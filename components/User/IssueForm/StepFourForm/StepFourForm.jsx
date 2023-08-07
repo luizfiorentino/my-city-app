@@ -25,7 +25,6 @@ export default function StepFourForm({ issueRequest }) {
     longitude,
     loading,
     previewSources,
-    setUploadedPictures,
     setSelectedStepForm,
     setButtonInactive,
     locationType,
@@ -33,7 +32,6 @@ export default function StepFourForm({ issueRequest }) {
   } = useContext(IssueContext);
 
   const backStepThree = () => {
-    // setUploadedPictures([]);
     setSelectedStepForm("PICTURES");
     setButtonInactive(false);
   };

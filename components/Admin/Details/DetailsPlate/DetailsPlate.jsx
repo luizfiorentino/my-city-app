@@ -27,7 +27,6 @@ export default function DetailsPlate({
   longitude,
 }) {
   const [openHistory, setOpenHistory] = useState(false);
-  console.log("details plate", latitude, longitude);
 
   const arrayHistory = arrayChanges.filter(
     (change) => change !== arrayChanges[0]
@@ -82,8 +81,6 @@ export default function DetailsPlate({
         <BackgroundCanvas variant="lighterCanvas">
           {latitude ? (
             <UserLocation
-              // locationType="current"
-              // admin="admin"
               loading={false}
               latitude={latitude}
               longitude={longitude}

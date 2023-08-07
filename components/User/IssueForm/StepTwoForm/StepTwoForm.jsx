@@ -12,6 +12,7 @@ import FormWrapper from "../FormContent/FormWrapper";
 import { geolocationApiCall } from "@/services";
 import { userLocation } from "@/hooks/useLocation";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
+
 const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
 });
@@ -27,25 +28,12 @@ export default function StepTwoForm() {
     loading,
     setSelectedStepForm,
     setIssueAddress,
-    issueAddress,
-    // locationType,
-    // setLocationType,
   } = useContext(IssueContext);
 
   const [locationType, setLocationType] = useState(null);
   const [userLocationError, setUserLocationError] = useState("");
-  console.log(
-    "stepTwoForm context.latitude",
-    latitude,
-    "loading?",
-    loading,
-    "address?",
-    issueAddress
-  );
 
   const submitCoordinates = () => {
-    // setLatitude(parseFloat(latitude));
-    // setLongitude(parseFloat(longitude));
     setSelectedStepForm("PICTURES");
   };
 
@@ -58,9 +46,6 @@ export default function StepTwoForm() {
     e.preventDefault();
     setLocationType(null);
     setUserLocationError("");
-    // setLatitude(null);
-    // setLongitude(null);
-    //context.setButtonInactive(true);
   };
 
   const locationChoice = (choice, e) => {
@@ -74,8 +59,6 @@ export default function StepTwoForm() {
       e.preventDefault();
       //Set Amsterdam Dam City Center as default
       updateLocation(52.3732, 4.8914);
-      // setLatitude("52.3732");
-      // setLongitude("4.8914");
       setLocationType("map");
     }
   };
@@ -100,15 +83,6 @@ export default function StepTwoForm() {
     }
     const { latitude, longitude } = location;
     updateLocation(latitude, longitude);
-
-    //to do error handling
-    // setLatitude(latitude);
-    // setLongitude(longitude);
-    // const response = await geolocationApiCall(latitude, longitude);
-    // const [error, address] = response;
-    //to do error handling
-    // setIssueAddress(address);
-    // setLoading(false);
   };
 
   const updateLocation = (latitude, longitude) => {
@@ -116,28 +90,6 @@ export default function StepTwoForm() {
     setLongitude(longitude);
     updateAddress(latitude, longitude);
   };
-
-  useEffect(() => {
-    if (latitude) {
-      const displayMap = async () => {
-        setLoading(true);
-        try {
-          await setLatitude(parseFloat(latitude));
-          await setLongitude(parseFloat(longitude));
-
-          setLoading(false);
-        } catch (error) {
-          console.log(
-            "An error occurred while submitting location",
-            error.message
-          );
-          setLoading(false);
-        }
-      };
-
-      displayMap();
-    }
-  }, [latitude, longitude, setLatitude, setLongitude, setLoading]);
 
   return (
     <div>
