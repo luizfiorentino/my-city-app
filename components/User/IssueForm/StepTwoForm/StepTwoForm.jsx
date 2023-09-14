@@ -12,6 +12,7 @@ import FormWrapper from "../FormContent/FormWrapper";
 import { geolocationApiCall } from "@/services";
 import { userLocation } from "@/hooks/useLocation";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
+import ConfirmationMessage from "../ConfirmationMessage";
 
 const UserLocation = dynamic(() => import("../UserLocation/UserLocation"), {
   ssr: false,
@@ -94,12 +95,12 @@ export default function StepTwoForm() {
   return (
     <div>
       <div className={` ${ubuntu.className} `}>
+        <ConfirmationMessage
+          title="Location"
+          subtitle=" Select an option to inform the location of the issue."
+        ></ConfirmationMessage>
         <div className={styles.formContent}>
           <FormWrapper>
-            <FormHeader>Location</FormHeader>
-            <FormSubtitle>
-              Select an option to inform the location of the issue.
-            </FormSubtitle>
             <div>
               {userLocationError && (
                 <StatusMessage>{userLocationError}</StatusMessage>

@@ -15,6 +15,7 @@ import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormInput from "../../Shared/Fields/FormInput/FormInput";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import FormWrapper from "../FormContent/FormWrapper";
+import ConfirmationMessage from "../ConfirmationMessage";
 const formSchema = z.object({
   file: z
     .array(z.any())
@@ -180,12 +181,17 @@ export default function StepThreeForm() {
   return (
     <div>
       <div className={` ${ubuntu.className} `}>
+        <ConfirmationMessage
+          title="Images"
+          subtitle="              Optionally you can upload photos of the issue!
+            "
+        ></ConfirmationMessage>
         <div className={styles.formContent}>
           <FormWrapper>
-            <FormHeader>Images</FormHeader>
+            {/*<FormHeader>Images</FormHeader>
             <FormSubtitle>
               Optionally you can upload photos of the issue!
-            </FormSubtitle>
+            </FormSubtitle> */}
             <FormInput label="Max. 3 pictures/ 1MB each" variant="photos" />
             <div
               className={

@@ -10,6 +10,7 @@ import FormWrapper from "../FormContent/FormWrapper";
 import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import FormInput from "../../Shared/Fields/FormInput/FormInput";
+import ConfirmationMessage from "../ConfirmationMessage";
 
 const formSchema = z.object({
   userName: z
@@ -64,12 +65,13 @@ export default function StepOneForm() {
   return (
     <div>
       <div className={`${ubuntu.className}`}>
+        <ConfirmationMessage
+          title="Report's Data"
+          subtitle="              Please provide your name, email and description of the issue.
+"
+        ></ConfirmationMessage>
         <div className={` ${styles.formContent}`}>
           <FormWrapper>
-            <FormHeader>Reports data</FormHeader>
-            <FormSubtitle>
-              Please provide your name, email and description of the issue.
-            </FormSubtitle>
             <FormInput
               label="Name"
               placeHolder="e.g. Mike Ness"

@@ -1,8 +1,8 @@
 .formContent {
   background-color: var(--color--white);
   padding: 32px 24px;
-  margin: 0px 16px 24px 16px;
-  margin: 0 16px;
+  margin: 16px 16px 24px 16px;
+  /* margin: 0 16px; */
   border-radius: 10px;
   position: relative;
   bottom: 96px;
