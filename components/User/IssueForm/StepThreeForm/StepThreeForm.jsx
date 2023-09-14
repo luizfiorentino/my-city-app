@@ -11,7 +11,6 @@ import IssueContext from "@/utils/IssueContext";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineUpload } from "react-icons/ai";
-import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormInput from "../../Shared/Fields/FormInput/FormInput";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import FormWrapper from "../FormContent/FormWrapper";
@@ -188,10 +187,6 @@ export default function StepThreeForm() {
         ></ConfirmationMessage>
         <div className={styles.formContent}>
           <FormWrapper>
-            {/*<FormHeader>Images</FormHeader>
-            <FormSubtitle>
-              Optionally you can upload photos of the issue!
-            </FormSubtitle> */}
             <FormInput label="Max. 3 pictures/ 1MB each" variant="photos" />
             <div
               className={
