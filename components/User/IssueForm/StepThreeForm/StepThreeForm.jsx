@@ -161,7 +161,6 @@ export default function StepThreeForm() {
       setLoading(false);
       context.setSelectedStepForm("CONFIRM DATA");
     } catch (error) {
-      // Handle error
       console.log("An error occurred while submitting form data:");
       setErrorPosting(true);
       setPreviewSources([]);
@@ -170,9 +169,31 @@ export default function StepThreeForm() {
     }
   };
 
-  const backStepTwo = () => {
-    // context.setLatitude(null);
-    // context.setLongitude(null);
+  const backStepTwo = async (data) => {
+    try {
+      setLoading(true);
+
+      // await data.file.map((file) => context.setUploadedPictures(file));
+      await context.setUploadedPictures(data.file);
+      console.log(
+        "step 3 after await?",
+        "context.uploadedPics",
+        context.uploadedPictures
+      );
+
+      reset();
+
+      setPreviewSources([]);
+
+      setLoading(false);
+      context.setSelectedStepForm("CONFIRM DATA");
+    } catch (error) {
+      console.log("An error occurred while submitting form data:");
+      setErrorPosting(true);
+      setPreviewSources([]);
+
+      setLoading(false);
+    }
     context.setSelectedStepForm("LOCATION");
     context.setButtonInactive(false);
   };
@@ -182,8 +203,8 @@ export default function StepThreeForm() {
       <div className={` ${ubuntu.className} `}>
         <ConfirmationMessage
           title="Images"
-          subtitle="              Optionally you can upload photos of the issue!
-            "
+          subtitle="Optionally you can upload photos of the issue!
+"
         ></ConfirmationMessage>
         <div className={styles.formContent}>
           <FormWrapper>
@@ -248,7 +269,10 @@ export default function StepThreeForm() {
             )}
           </FormWrapper>
         </div>
-        <Footer goForward={handleSubmit(uploadPhotos)} goBack={backStepTwo}>
+        <Footer
+          goForward={handleSubmit(uploadPhotos)}
+          goBack={handleSubmit(backStepTwo)}
+        >
           {"Next"}
           {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
         </Footer>

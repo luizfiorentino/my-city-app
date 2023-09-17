@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import dynamic from "next/dynamic";
 import styles from "./StepTwoForm.module.css";
 import { ubuntu } from "@/styles/fonts";
 import Footer from "../../Shared/Footer";
 import IssueContext from "@/utils/IssueContext";
-import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
-import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 import Button from "@/components/Shared/Button/Button";
 import FormWrapper from "../FormContent/FormWrapper";

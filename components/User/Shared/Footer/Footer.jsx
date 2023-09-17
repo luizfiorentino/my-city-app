@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./Footer.module.css";
 import Button from "@/components/Shared/Button/Button";
-import IssueContext from "@/utils/IssueContext";
 
 export default function Footer({
   goBack,
@@ -10,8 +9,6 @@ export default function Footer({
   variant,
   children,
 }) {
-  // const { loading, buttonInactive, latitude } = useContext(IssueContext);
-
   return (
     <div
       className={`${goBack ? styles.backBtn : styles.main} ${
