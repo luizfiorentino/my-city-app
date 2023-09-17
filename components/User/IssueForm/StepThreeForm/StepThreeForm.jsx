@@ -194,7 +194,7 @@ export default function StepThreeForm() {
   };
 
   return (
-    <div>
+    <div className={styles.wrapperContainer}>
       <div className={` ${ubuntu.className} `}>
         <ConfirmationMessage
           title="Images"

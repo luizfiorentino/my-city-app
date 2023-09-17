@@ -18,6 +18,7 @@
   border: 1px solid var(--color--soft-grey);
   border-radius: 4px;
   padding: 1rem;
+
   margin-bottom: 1rem;
 }
 
@@ -33,6 +34,7 @@
 
 .imageArea {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
   max-width: 482px;
@@ -84,6 +86,9 @@
 } */
 
 @media screen and (min-width: 800px) {
+  .wrapperContainer {
+    margin: 0 2rem;
+  }
   .formContent {
     bottom: 0;
     margin: 0;
@@ -107,9 +112,6 @@
 }
 
 @media screen and (max-width: 620px) {
-  .imageArea {
-    flex-direction: column;
-  }
   .dropzone {
     margin-bottom: 0;
   }

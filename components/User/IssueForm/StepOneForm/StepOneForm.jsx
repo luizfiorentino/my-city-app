@@ -7,8 +7,6 @@ import { ubuntu } from "@/styles/fonts";
 import Footer from "../../Shared/Footer";
 import IssueContext from "@/utils/IssueContext";
 import FormWrapper from "../FormContent/FormWrapper";
-import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
-import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import FormInput from "../../Shared/Fields/FormInput/FormInput";
 import ConfirmationMessage from "../ConfirmationMessage";
 
@@ -63,11 +61,11 @@ export default function StepOneForm() {
   };
 
   return (
-    <div>
+    <div className={styles.formWrapper}>
       <div className={`${ubuntu.className}`}>
         <ConfirmationMessage
           title="Report's Data"
-          subtitle="              Please provide your name, email and description of the issue.
+          subtitle="Please provide your name, email and description of the issue.
 "
         ></ConfirmationMessage>
         <div className={` ${styles.formContent}`}>

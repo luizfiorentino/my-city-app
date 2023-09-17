@@ -36,7 +36,7 @@ export default function StepFourForm({ issueRequest }) {
     setButtonInactive(false);
   };
   return (
-    <>
+    <div className={styles.formWrapper}>
       <ConfirmationMessage
         title="Finishing up"
         subtitle="Please check if the information provided is correct before confirm."
@@ -125,6 +125,6 @@ export default function StepFourForm({ issueRequest }) {
       >
         Confirm {loading && <LoaderSpinner className={styles.spinner} />}
       </Footer>
-    </>
+    </div>
   );
 }

@@ -91,7 +91,7 @@ export default function StepTwoForm() {
   };
 
   return (
-    <div>
+    <div className={styles.formWrapper}>
       <div className={` ${ubuntu.className} `}>
         <ConfirmationMessage
           title="Location"
