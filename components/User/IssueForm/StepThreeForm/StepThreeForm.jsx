@@ -175,11 +175,6 @@ export default function StepThreeForm() {
 
       // await data.file.map((file) => context.setUploadedPictures(file));
       await context.setUploadedPictures(data.file);
-      console.log(
-        "step 3 after await?",
-        "context.uploadedPics",
-        context.uploadedPictures
-      );
 
       reset();
 

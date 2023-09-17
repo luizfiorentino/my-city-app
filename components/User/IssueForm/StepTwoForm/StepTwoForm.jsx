@@ -156,7 +156,6 @@ export default function StepTwoForm() {
           goForward={() => submitCoordinates()}
           isGoForwardDisabled={!latitude || !longitude}
           goBack={backStepOne}
-          // backButton={true}
         >
           {"Next"}
         </Footer>

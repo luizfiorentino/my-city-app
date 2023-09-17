@@ -58,6 +58,10 @@
   border: none;
 }
 
+.goBack:hover {
+  opacity: 0.5;
+}
+
 .loading {
   padding-right: 32px;
 }
