@@ -99,15 +99,16 @@ export default function UserForm() {
         )}
 
         {context.selectedStepForm === "SUBMITTED" && (
-          <>
+          <div className={styles.confirmationMessage}>
             <ConfirmationMessage>
               <FormHeader>Issue Submitted</FormHeader>
               <FormSubtitle>
                 Thanks for helping the City get awesome!
               </FormSubtitle>
-            </ConfirmationMessage>{" "}
+            </ConfirmationMessage>
+
             <Footer goForward={backToForm}>New</Footer>
-          </>
+          </div>
         )}
       </div>
     </div>
