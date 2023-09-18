@@ -59,7 +59,7 @@ function UserLocation({ latitude, longitude, loading, updateLocation }) {
           )}
         </MapContainer>
       )}
-      {context.loading && (
+      {loading && (
         <p>
           Loading location... <LoaderSpinner />
         </p>

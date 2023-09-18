@@ -24,6 +24,7 @@ export default function StepFourForm({ issueRequest }) {
     latitude,
     longitude,
     loading,
+    loadingMap,
     previewSources,
     setSelectedStepForm,
     setButtonInactive,
@@ -82,7 +83,7 @@ export default function StepFourForm({ issueRequest }) {
                     updateLocation={updateLocation}
                     latitude={latitude}
                     longitude={longitude}
-                    loading={loading}
+                    loading={loadingMap}
                   />
                 )}
               </div>
