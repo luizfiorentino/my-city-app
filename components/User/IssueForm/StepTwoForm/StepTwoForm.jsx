@@ -101,7 +101,9 @@ export default function StepTwoForm() {
           <FormWrapper>
             <div>
               {userLocationError && (
-                <StatusMessage>{userLocationError}</StatusMessage>
+                <StatusMessage variant="locationBlocked">
+                  {userLocationError}
+                </StatusMessage>
               )}
             </div>
             {loading ? (
@@ -118,7 +120,6 @@ export default function StepTwoForm() {
                 loading={loading}
               />
             )}
-            <div></div>
 
             <div className={styles.locationButtons}>
               {locationType === null && locationType !== "current" && (
