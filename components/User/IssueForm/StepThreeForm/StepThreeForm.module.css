@@ -87,12 +87,18 @@
 
 @media screen and (min-width: 800px) {
   .wrapperContainer {
-    margin: 0 2rem;
+    margin: 0 4rem;
   }
   .formContent {
     bottom: 0;
     margin: 0;
     padding: 16px 0 0 0;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .wrapperContainer {
+    margin: 0 6rem;
   }
 }
 

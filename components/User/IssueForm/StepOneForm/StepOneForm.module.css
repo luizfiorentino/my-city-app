@@ -19,3 +19,9 @@
     padding: 16px 0 0 0;
   }
 }
+
+@media screen and (min-width: 1000px) {
+  .formWrapper {
+    margin: 0 6rem;
+  }
+}

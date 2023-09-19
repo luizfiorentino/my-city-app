@@ -47,9 +47,9 @@
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1000px) {
   .formWrapper {
-    margin: 0 2rem;
+    margin: 0 6rem;
   }
 }
 

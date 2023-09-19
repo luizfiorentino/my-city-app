@@ -65,6 +65,12 @@
   }
 }
 
+@media screen and (min-width: 1000px) {
+  .formWrapper {
+    margin: 0 6rem;
+  }
+}
+
 @media screen and (max-width: 268px) {
   .imagePreview {
     max-width: 100%;

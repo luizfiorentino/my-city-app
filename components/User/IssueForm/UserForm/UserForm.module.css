@@ -66,6 +66,12 @@
   }
 }
 
+@media screen and (min-width: 1000px) {
+  .confirmationMessage {
+    margin: 0 6rem;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .stepIndicators {
     display: flex;
