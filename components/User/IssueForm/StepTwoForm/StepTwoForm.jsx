@@ -96,6 +96,7 @@ export default function StepTwoForm() {
         <ConfirmationMessage
           title="Location"
           subtitle=" Select an option to inform the location of the issue."
+          variant="largeFont"
         ></ConfirmationMessage>
         <div className={styles.formContent}>
           <FormWrapper>

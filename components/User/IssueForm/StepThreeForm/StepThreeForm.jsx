@@ -198,8 +198,8 @@ export default function StepThreeForm() {
       <div className={` ${ubuntu.className} `}>
         <ConfirmationMessage
           title="Images"
-          subtitle="Optionally you can upload photos of the issue!
-"
+          subtitle="Optionally you can upload photos of the issue!"
+          variant="largeFont"
         ></ConfirmationMessage>
         <div className={styles.formContent}>
           <FormWrapper>

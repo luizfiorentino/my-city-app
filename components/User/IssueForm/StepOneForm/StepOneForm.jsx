@@ -67,6 +67,7 @@ export default function StepOneForm() {
           title="Report's Data"
           subtitle="Please provide your name, email and description of the issue.
 "
+          variant="largeFont"
         ></ConfirmationMessage>
         <div className={` ${styles.formContent}`}>
           <FormWrapper>
