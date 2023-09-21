@@ -10,7 +10,7 @@ export default function Avatar() {
       <img
         className={styles.image}
         src={session?.user?.image}
-        alt="admin avatar"
+        alt="user avatar"
       />
     </div>
   );
