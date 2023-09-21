@@ -1,11 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
-import IssueContext from "@/utils/IssueContext";
 import styles from "./UserLocation.module.css";
 import LoaderSpinner from "@/components/Shared/LoaderSpinner/LoaderSpinner";
 
@@ -28,8 +27,6 @@ function LocationMarker({ latitude, longitude, updateLocation }) {
 
 function UserLocation({ latitude, longitude, loading, updateLocation }) {
   const markerPosition = [latitude, longitude];
-
-  const context = useContext(IssueContext);
 
   return (
     <div className={latitude || loading ? styles.mainContainer : styles.hidden}>
