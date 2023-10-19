@@ -9,7 +9,7 @@
   flex-direction: column;
   gap: 16px;
   margin-bottom: 105px;
-  padding: 0 12px;
+  padding: 1rem;
 }
 
 .emptyImg {
@@ -25,15 +25,15 @@
   margin-top: 2rem;
 }
 
-@media screen and (min-width: 712px) {
+@media screen and (min-width: 375px) {
   .issuesList {
-    margin-bottom: 173px;
+    padding: 1.5rem 2rem;
   }
 }
 
-@media screen and (min-width: 375px) {
-  .emptyImg {
-    padding: 24px 0;
+@media screen and (min-width: 712px) {
+  .issuesList {
+    margin-bottom: 173px;
   }
 }
 

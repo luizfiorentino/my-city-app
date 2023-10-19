@@ -2,7 +2,7 @@
   border-radius: 8px;
   background-color: var(--color--bg-canvas);
   border: 1px solid var(--color--bg-canvas);
-  transition: 0.7s;
+  transition: 1.5s;
   line-height: 1.3;
 }
 
