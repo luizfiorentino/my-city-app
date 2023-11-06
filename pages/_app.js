@@ -1,8 +1,6 @@
 import "@/styles/globals.css";
-
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { SessionProvider } from "next-auth/react";
-
 import issueContext from "../utils/IssueContext";
 
 export default function App({
@@ -14,7 +12,7 @@ export default function App({
   const [openModal, setOpenModal] = useState(false);
   const [buttonMode, setButtonMode] = useState("");
   const [filterIssuesByStatus, setFilterIssueByStatus] = useState("All");
-  const [loadingMap, setLoadingMap] = useState(true);
+  const [loadingMap, setLoadingMap] = useState(false);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [issueAddress, setIssueAddress] = useState("Amsterdam");

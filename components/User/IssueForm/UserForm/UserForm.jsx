@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ubuntu } from "@/styles/fonts";
 import styles from "./UserForm.module.css";
 import ConfirmationMessage from "../ConfirmationMessage";
@@ -17,7 +17,7 @@ const formSteps = ["INFOS", "LOCATION", "PICTURES", "CONFIRM DATA"];
 
 export default function UserForm() {
   const context = useContext(IssueContext);
-  const [loading, setLoading] = useState(false);
+  const [errorSubmitting, setErrorSubmitting] = useState(false);
 
   const issueRequest = async () => {
     const { stepOneFormData, location } = context;
@@ -47,6 +47,8 @@ export default function UserForm() {
         context.setLatitude(null);
         context.setLongitude(null);
         context.setLoading(false);
+        setErrorSubmitting(true);
+        context.setSelectedStepForm("SUBMITTED");
 
         return;
       }
@@ -72,6 +74,7 @@ export default function UserForm() {
   };
 
   const backToForm = () => {
+    setErrorSubmitting(false);
     context.setSelectedStepForm("INFOS");
   };
 
@@ -100,15 +103,22 @@ export default function UserForm() {
         )}
 
         {context.selectedStepForm === "SUBMITTED" && (
-          <>
+          <div className={styles.confirmationMessage}>
             <ConfirmationMessage>
-              <FormHeader>Issue Submitted</FormHeader>
+              <FormHeader>
+                {errorSubmitting ? "Error" : "Issue Submitted"}
+              </FormHeader>
               <FormSubtitle>
-                Thanks for helping the City get awesome!
+                {errorSubmitting
+                  ? "Something went wrong. Please try later or contact the admin."
+                  : "Thanks for helping the City get awesome!"}
               </FormSubtitle>
-            </ConfirmationMessage>{" "}
-            <Footer goForward={backToForm}>New</Footer>
-          </>
+            </ConfirmationMessage>
+
+            <Footer goForward={backToForm}>
+              {errorSubmitting ? "Back" : "New"}
+            </Footer>
+          </div>
         )}
       </div>
     </div>

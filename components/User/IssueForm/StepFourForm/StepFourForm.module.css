@@ -37,12 +37,20 @@
   border-radius: 4px;
   padding: 1rem;
   margin-bottom: 1rem;
+  transition: 0.7s;
 }
 
 .imageArea {
   display: flex;
-
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
+}
+
+.uploadImage:hover {
+  border: 1px solid var(--color--intense-purple);
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .imagePreviewContainer {
@@ -56,6 +64,19 @@
   border: 1px solid var(--color--pale-grey);
   border-radius: 4px;
   padding: 5px;
+}
+
+@media screen and (min-width: 800px) {
+  .formWrapper {
+    margin: 0 2rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .formWrapper {
+    margin: 0 6rem;
+  }
 }
 
 @media screen and (max-width: 268px) {

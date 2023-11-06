@@ -1,3 +1,7 @@
+.form {
+  width: 100%;
+}
+
 .main {
   margin: auto;
   font-family: "Ubuntu", sans-serif;
@@ -56,6 +60,18 @@
   }
 }
 
+@media screen and (min-width: 800px) {
+  .confirmationMessage {
+    margin: 0 5rem 0 2rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .confirmationMessage {
+    margin: 0 6rem;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .stepIndicators {
     display: flex;
@@ -73,11 +89,32 @@
 }
 
 @media screen and (max-width: 240px) {
-  .indicators {
-    flex-direction: column;
-    margin: 1rem 0;
-  }
   .image {
-    min-height: 18rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .stepIndicators {
+    display: flex;
+  }
+  .indicators {
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 32px 16px;
+  }
+}
+
+@media screen and (max-width: 193px) {
+  .indicators {
+    margin: 16px 50px 0;
+  }
+}
+
+@media screen and (max-width: 177px) {
+  .indicators {
+    margin: 16px 30px 0;
   }
 }

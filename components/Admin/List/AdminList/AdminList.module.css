@@ -8,13 +8,14 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-
   margin-bottom: 105px;
-  padding: 0 24px;
+  padding: 1rem;
 }
 
 .emptyImg {
-  margin-bottom: 3rem;
+  display: flex;
+  max-width: 90%;
+  margin-bottom: 10px;
 }
 
 .emptyResult {
@@ -22,6 +23,12 @@
   flex-direction: column;
   align-items: center;
   margin-top: 2rem;
+}
+
+@media screen and (min-width: 375px) {
+  .issuesList {
+    padding: 1.5rem 2rem;
+  }
 }
 
 @media screen and (min-width: 712px) {

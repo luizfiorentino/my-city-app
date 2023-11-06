@@ -11,10 +11,10 @@ import IssueContext from "@/utils/IssueContext";
 import FormSubtitle from "../../Shared/Fields/FormSubtitle/FormSubtitle";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineUpload } from "react-icons/ai";
-import FormHeader from "../../Shared/Fields/FormHeader/FormHeader";
 import FormInput from "../../Shared/Fields/FormInput/FormInput";
 import StatusMessage from "../../Shared/StatusMessage/StatusMessage";
 import FormWrapper from "../FormContent/FormWrapper";
+import ConfirmationMessage from "../ConfirmationMessage";
 const formSchema = z.object({
   file: z
     .array(z.any())
@@ -161,7 +161,6 @@ export default function StepThreeForm() {
       setLoading(false);
       context.setSelectedStepForm("CONFIRM DATA");
     } catch (error) {
-      // Handle error
       console.log("An error occurred while submitting form data:");
       setErrorPosting(true);
       setPreviewSources([]);
@@ -170,22 +169,40 @@ export default function StepThreeForm() {
     }
   };
 
-  const backStepTwo = () => {
-    // context.setLatitude(null);
-    // context.setLongitude(null);
+  const backStepTwo = async (data) => {
+    try {
+      setLoading(true);
+
+      // await data.file.map((file) => context.setUploadedPictures(file));
+      await context.setUploadedPictures(data.file);
+
+      reset();
+
+      setPreviewSources([]);
+
+      setLoading(false);
+      context.setSelectedStepForm("CONFIRM DATA");
+    } catch (error) {
+      console.log("An error occurred while submitting form data:");
+      setErrorPosting(true);
+      setPreviewSources([]);
+
+      setLoading(false);
+    }
     context.setSelectedStepForm("LOCATION");
     context.setButtonInactive(false);
   };
 
   return (
-    <div>
+    <div className={styles.wrapperContainer}>
       <div className={` ${ubuntu.className} `}>
+        <ConfirmationMessage
+          title="Images"
+          subtitle="Optionally you can upload photos of the issue!"
+          variant="largeFont"
+        ></ConfirmationMessage>
         <div className={styles.formContent}>
           <FormWrapper>
-            <FormHeader>Images</FormHeader>
-            <FormSubtitle>
-              Optionally you can upload photos of the issue!
-            </FormSubtitle>
             <FormInput label="Max. 3 pictures/ 1MB each" variant="photos" />
             <div
               className={
@@ -247,7 +264,10 @@ export default function StepThreeForm() {
             )}
           </FormWrapper>
         </div>
-        <Footer goForward={handleSubmit(uploadPhotos)} goBack={backStepTwo}>
+        <Footer
+          goForward={handleSubmit(uploadPhotos)}
+          goBack={handleSubmit(backStepTwo)}
+        >
           {"Next"}
           {loading ? <LoaderSpinner variant="submitBtn" /> : undefined}
         </Footer>

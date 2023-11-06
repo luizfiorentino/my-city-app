@@ -6,8 +6,10 @@
 
 .image {
   width: 32px;
+  max-height: 32px;
   border-radius: 999px;
   margin: 20px;
+  font-size: 10px;
 }
 
 @media screen and (max-width: 216px) {
@@ -37,5 +39,6 @@
   }
   .image {
     width: 40px;
+    max-height: 40px;
   }
 }

@@ -43,6 +43,10 @@
   border-radius: 4px;
 }
 
+.purple:hover {
+  opacity: 0.5;
+}
+
 .goBack {
   color: var(--color--soft-grey);
   font-size: 16px;
@@ -56,6 +60,10 @@
   position: relative;
   background-color: var(--color--white);
   border: none;
+}
+
+.goBack:hover {
+  opacity: 0.5;
 }
 
 .loading {

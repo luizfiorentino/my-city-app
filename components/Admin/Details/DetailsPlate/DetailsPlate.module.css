@@ -115,8 +115,8 @@
 }
 
 @media screen and (max-width: 340px) {
-  .description {
-    text-align: left;
+  .infos {
+    margin: 0;
   }
 }
 

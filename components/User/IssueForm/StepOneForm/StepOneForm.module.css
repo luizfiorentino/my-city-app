@@ -2,17 +2,26 @@
   background-color: var(--color--white);
 
   padding: 32px 24px;
-  margin: 0px 16px 24px 16px;
-  margin: 0 16px;
+  margin: 16px 16px 24px 16px;
+
   border-radius: 10px;
   position: relative;
   bottom: 96px;
 }
 
 @media screen and (min-width: 800px) {
+  .formWrapper {
+    margin: 0 2rem;
+  }
   .formContent {
     bottom: 0;
     margin: 0;
     padding: 16px 0 0 0;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .formWrapper {
+    margin: 0 6rem;
   }
 }

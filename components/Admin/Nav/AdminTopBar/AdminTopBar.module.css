@@ -4,6 +4,7 @@
   align-items: center;
   background-color: var(--color--bg-canvas);
   margin-bottom: 32px;
+  /* max-height: 72px; */
 }
 
 .profile {

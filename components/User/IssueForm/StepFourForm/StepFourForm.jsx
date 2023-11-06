@@ -24,19 +24,20 @@ export default function StepFourForm({ issueRequest }) {
     latitude,
     longitude,
     loading,
+    loadingMap,
     previewSources,
-    setUploadedPictures,
     setSelectedStepForm,
     setButtonInactive,
+    locationType,
+    updateLocation,
   } = useContext(IssueContext);
 
   const backStepThree = () => {
-    // setUploadedPictures([]);
     setSelectedStepForm("PICTURES");
     setButtonInactive(false);
   };
   return (
-    <>
+    <div className={styles.formWrapper}>
       <ConfirmationMessage
         title="Finishing up"
         subtitle="Please check if the information provided is correct before confirm."
@@ -77,7 +78,13 @@ export default function StepFourForm({ issueRequest }) {
               </div>
               <div className={styles.summaryFieldDescription}>
                 {latitude && (
-                  <UserLocation latitude={latitude} longitude={longitude} />
+                  <UserLocation
+                    locationType={locationType}
+                    updateLocation={updateLocation}
+                    latitude={latitude}
+                    longitude={longitude}
+                    loading={loadingMap}
+                  />
                 )}
               </div>
               <div className={styles.uploadImageBanner}>
@@ -119,6 +126,6 @@ export default function StepFourForm({ issueRequest }) {
       >
         Confirm {loading && <LoaderSpinner className={styles.spinner} />}
       </Footer>
-    </>
+    </div>
   );
 }

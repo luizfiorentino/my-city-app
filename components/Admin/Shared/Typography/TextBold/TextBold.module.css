@@ -20,8 +20,10 @@
 }
 
 .largerFont {
-  font-size: 24px;
+  text-align: center;
+  font-size: 18px;
   line-height: 1.8rem;
+  max-width: 90%;
 }
 
 .location {
@@ -59,6 +61,12 @@
 
   .lightSummaryDescription {
     margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .largerFont {
+    font-size: 22px;
   }
 }
 

@@ -1,19 +1,8 @@
-.main {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh; */
-}
-
-.externalContainer {
-}
-
 @media screen and (min-width: 800px) {
   .externalContainer {
     background-color: var(--color--bg-light);
     padding: 48px 0px;
+    min-height: 100vh;
   }
 }
 
